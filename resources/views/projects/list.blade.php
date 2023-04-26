@@ -16,10 +16,10 @@
     @else
       <div class="flex items-center justify-center relative">
         <div class="py-6">
-          <x-h1 :text="'There are no projects'"/>
+          <x-h1 :text="__('You have no projects')"/>
         </div>
         <div class="absolute right-0 top-0 p-4 pt-8">
-          <x-link.button :href="route('creator.project')" :name="'Create Project'"/>
+          <x-link.button :href="route('creator.project')" :name="__('Create Project')"/>
         </div>
       </div>
     @endif
