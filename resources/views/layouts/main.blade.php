@@ -7,6 +7,11 @@
   <title>{{ $title }}</title>
 </head>
 <body>
-  @yield('body')
+  <nav>
+    <x-sidebar/>
+  </nav>
+  <main>
+    @yield('body')
+  </main>
 </body>
 </html>
