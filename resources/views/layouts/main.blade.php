@@ -9,7 +9,7 @@
 </head>
 <body class='{{ $theme }}'>
   <nav class='h-screen w-36 border-r-2 border-black dark:border-white absolute left-0'>
-    <x-sidebar/>
+    <x-sidebar.index/>
   </nav>
   <main class='pl-36 h-screen w-full bg-white dark:bg-slate-800'>
     @yield('body')

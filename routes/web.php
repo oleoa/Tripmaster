@@ -33,7 +33,12 @@ Route::get('/projects', [ProjectsController::class, 'index'])->name('projects');
 
 Route::get('/stays', [StaysController::class, 'index'])->name('stays');
 
-Route::name('create.')->group(function(){
-  Route::get('/stays/create', [StaysController::class, 'creator'])->name('stays.create');
+Route::name('creator.')->group(function(){
+  Route::get('/stays/create', [StaysController::class, 'creator'])->name('stays');
   Route::get('/projects/create', [ProjectsController::class, 'creator'])->name('project');
+});
+
+Route::name('create.')->group(function(){
+  Route::post('/stays/create', [StaysController::class, 'create'])->name('stays');
+  Route::post('/projects/create', [ProjectsController::class, 'create'])->name('project');
 });

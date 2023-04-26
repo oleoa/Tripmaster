@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('country');
             $table->date('date');
-            $table->integer('persons');
+            $table->integer('headcount');
             $table->unsignedBigInteger('owner');
             $table->foreign('owner')->references('id')->on('users');
             $table->timestamps();

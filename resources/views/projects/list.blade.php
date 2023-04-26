@@ -19,7 +19,7 @@
           <x-h1 :text="'There are no projects'"/>
         </div>
         <div class="absolute right-0 top-0 p-4 pt-8">
-          <x-link.button :href="route('create.project')" :name="'Create Project'"/>
+          <x-link.button :href="route('creator.project')" :name="'Create Project'"/>
         </div>
       </div>
     @endif
