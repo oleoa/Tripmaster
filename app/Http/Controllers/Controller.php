@@ -18,4 +18,9 @@ class Controller extends BaseController
     $this->data = Data::getInstance();
   }
 
+  protected function view($page)
+  {
+    return view($page, $this->data->get());
+  }
+
 }
