@@ -4,13 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  @vite('resources/css/app.css')
   <title>{{ $title }}</title>
 </head>
 <body>
-  <nav>
+  <nav class='h-screen w-24 bg-blue-500 absolute left-0'>
     <x-sidebar/>
   </nav>
-  <main>
+  <main class='pl-28'>
     @yield('body')
   </main>
 </body>
