@@ -8,10 +8,10 @@
   <title>{{ $title }}</title>
 </head>
 <body class='{{ $theme }}'>
-  <nav class='h-screen w-24 bg-blue-500 absolute left-0'>
+  <nav class='h-screen w-32 border-r-2 border-black dark:border-white absolute left-0'>
     <x-sidebar/>
   </nav>
-  <main class='pl-24 h-screen w-full bg-white dark:bg-slate-800'>
+  <main class='pl-32 h-screen w-full bg-white dark:bg-slate-800'>
     @yield('body')
   </main>
 </body>
