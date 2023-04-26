@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Objects;
+namespace App\Classes;
 
 class Data
 {
@@ -45,5 +45,16 @@ class Data
   public function theme($theme): void
   {
     $this->fillable['theme'] = $theme;
+  }
+  
+  public function current($page)
+  {
+    $page = strtolower($page);
+    $this->fillable['current'] = $page;
+  }
+
+  public function set($key, $value)
+  {
+    $this->data[$key] = $value;
   }
 }

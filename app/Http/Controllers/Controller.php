@@ -6,7 +6,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Session;
-use App\Objects\Data;
+use App\Classes\Data;
 
 class Controller extends BaseController
 {
@@ -22,6 +22,7 @@ class Controller extends BaseController
   protected function view($page)
   {
     $this->data->theme(session('theme') ?? 'light');
+    $this->data->current($page);
     return view($page, $this->data->get());
   }
 
