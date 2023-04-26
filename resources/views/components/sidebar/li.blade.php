@@ -1,1 +1,1 @@
-<li class="py-1 @if(!$current) text-gray-400 @else text-white @endif hover:text-white"><a href="{{$href}}">{{$name}}</a></li>
+<li class="py-1 text-lg @if(!$current) text-gray-500 dark:text-gray-400 hover:text-black hover:underline dark:hover:text-white @else @endif"><a href="{{$href}}">{{$name}}</a></li>
