@@ -1,0 +1,9 @@
+@extends('layouts.main')
+@section('body')
+  <div>
+    User
+  </div>
+  <div>
+    Projects
+  </div>
+@endsection

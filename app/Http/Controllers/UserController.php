@@ -6,5 +6,9 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    //
+  public function index()
+  {
+    $this->data->title('User');
+    return $this->view('user');
+  }
 }
