@@ -14,7 +14,9 @@
         <x-project :data="$project"/>
       @endforeach
     @else
-      <h1>There are no projects</h1>
+      <div class="flex items-center justify-center">
+        <h1 class="text-4xl">There are no projects</h1>
+      </div>
     @endif
   </div>
 </div>
