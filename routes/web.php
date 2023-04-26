@@ -32,6 +32,15 @@ Route::get('/theme', function(){
   return redirect()->back();
 })->name('toggle-theme');
 
+Route::get('/locale/{locale}', function($locale){
+  if (! in_array($locale, ['en', 'pt'])) {
+    abort(400);
+  }
+  app()->setLocale($locale);
+  session(['locale' => $locale]);
+  return redirect()->back();
+})->name('language');
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::name('list.')->group(function(){
