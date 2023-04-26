@@ -6,14 +6,17 @@ class Data
 {
   // Singleton
   private static $instance;
-  private function __construct(){}
   public static function getInstance(): Data
   {
     if(empty(self::$instance)) {
       self::$instance = new Data();
     }
-
+    
     return self::$instance;
+  }
+  private function __construct()
+  {
+    $this->format();
   }
 
   private array $data;
@@ -26,14 +29,14 @@ class Data
 
   public function format(): void
   {
-    $this->data = null;
-    $this->fillable = null;
+    $this->data = array();
+    $this->fillable = array();
   }
 
   public function get(): array
   {
     $data = $this->data;
-    foreach($fillable as $key => $value)
+    foreach($this->fillable as $key => $value)
       $data[$key] = $value;
 
     return $data;
