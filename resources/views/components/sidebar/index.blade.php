@@ -6,12 +6,12 @@
     <div class="h-0.5 w-full dark:bg-white bg-black"></div>
   </div>
   <ul class="px-2 dark:text-white">
-    <x-sidebar.li :href="route('home')" :name="'Home'" :current="$current == 'home'"/>
-    <x-sidebar.li :href="route('list.stays')" :name="'Stays'" :current="$current == 'stays.index'"/>
+    <x-sidebar.li :href="route('home')" :name="'Home'" :current="$current['home']"/>
+    <x-sidebar.li :href="route('list.stays')" :name="'Stays'" :current="$current['stays']"/>
     <div class="py-4">
       <div class="h-0.5 w-full dark:bg-white bg-black"></div>
     </div>
-    <x-sidebar.li :href="route('my.projects')" :name="'Projects'" :current="$current == 'projects.list' || $current == 'projects.create'"/>
+    <x-sidebar.li :href="route('my.projects')" :name="'Projects'" :current="$current['projects']"/>
     <x-sidebar.li :href="route('toggle-theme')" :name="'Darkmode'" :current="false"/>
   </ul>
 </div>
