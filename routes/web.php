@@ -20,9 +20,9 @@ Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/theme', function(){
   if(session('theme') == 'dark')
-    session('theme', 'light');
+    session(['theme' => 'light']);
   else
-    session('theme', 'dark');
+    session(['theme' => 'dark']);
     
   return redirect()->back();
 })->name('toggle-theme');
