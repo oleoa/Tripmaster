@@ -1,1 +1,1 @@
-<a href="{{$href}}" class="text-lg p-4 border-2 rounded border-black dark:bg-slate-700 dark:text-white dark:border-white">{{$name}}</a>
+<a href="{{$href}}" class="p-4 border-2 rounded border-black dark:bg-slate-700 dark:text-white dark:border-white">{{$name}}</a>

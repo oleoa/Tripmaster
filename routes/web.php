@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\StaysController;
 
 /*
@@ -29,7 +29,11 @@ Route::get('/theme', function(){
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/user', [UserController::class, 'index'])->name('user');
+Route::get('/projects', [ProjectsController::class, 'index'])->name('projects');
 
 Route::get('/stays', [StaysController::class, 'index'])->name('stays');
-Route::get('/stays/create', [StaysController::class, 'creator'])->name('stays.create');
+
+Route::name('create.')->group(function(){
+  Route::get('/stays/create', [StaysController::class, 'creator'])->name('stays.create');
+  Route::get('/projects/create', [ProjectsController::class, 'creator'])->name('project');
+});
