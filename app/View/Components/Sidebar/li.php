@@ -10,13 +10,15 @@ class li extends Component
 {
   public $name;
   public $href;
+  public $current;
     /**
      * Create a new component instance.
      */
-    public function __construct($name, $href)
+    public function __construct($name, $href, $current)
     {
       $this->name = $name;
       $this->href = $href;
+      $this->current = $current;
     }
 
     /**
