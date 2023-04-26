@@ -1,11 +1,15 @@
 <div class="">
-  <div class="flex items-center justify-center pt-2 pb-4">
-    <x-basics.h2 :text="'Tripmaster'"/>
+  <div class="flex flex-col items-center justify-start pt-2 pb-4">
+    <div class="py-4">
+      <a href="https://www.booking.com/index.en-gb.html?aid=397594&label=gog235jc-1DCAEoggI46AdIM1gDaLsBiAEBmAEJuAEXyAEM2AED6AEBiAIBqAIDuALM-qWiBsACAdICJGZjZTFmYzQ5LTRiODItNDNmMi1hMjg5LWY5MGQ0OGFhZDIyNtgCBOACAQ&sid=976bbdb79e60801dd0ec93ca914b5599&keep_landing=1&sb_price_type=total&"><x-basics.h1 :text="'Tripmaster'"/></a>
+    </div>
+    <div class="h-0.5 w-full bg-white"></div>
   </div>
-  <ul class="list-disc px-8 dark:text-white">
+  <ul class="px-2 dark:text-white">
     <x-sidebar.li :href="route('home')" :name="'Home'" :current="$current == 'home'"/>
-    <x-sidebar.li :href="route('stays')" :name="'Stays'" :current="$current == 'stays.index'"/>
-    <x-sidebar.li :href="route('projects')" :name="'Projects'" :current="$current == 'projects.list' || $current == 'projects.create'"/>
+    <x-sidebar.li :href="route('list.stays')" :name="'Stays'" :current="$current == 'stays.index'"/>
+    <div class="h-0.5 w-full bg-white"></div>
+    <x-sidebar.li :href="route('my.projects')" :name="'Projects'" :current="$current == 'projects.list' || $current == 'projects.create'"/>
     <x-sidebar.li :href="route('toggle-theme')" :name="'Darkmode'" :current="false"/>
   </ul>
 </div>
