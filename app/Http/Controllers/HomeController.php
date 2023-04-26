@@ -10,11 +10,11 @@ class HomeController extends Controller
   {
     parent::__construct();
 
-    $this->setTitle('Home');
+    $this->data->title('Home');
   }
 
   public function index()
   {
-    return view('home', $this->getData());
+    return view('home', $this->data->get());
   }
 }

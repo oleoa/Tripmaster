@@ -11,20 +11,11 @@ class Controller extends BaseController
 {
   use AuthorizesRequests, ValidatesRequests;
 
-  protected $dataManager;
+  protected Data $data;
 
   public function __construct()
   {
-    $this->dataManager = new DataHelper();
+    $this->data = Data::getInstance();
   }
 
-  protected function setTitle($title)
-  {
-    $this->dataManager->setTitle($title);
-  }
-
-  protected function getData()
-  {
-    return $this->dataManager->getData();
-  }
 }
