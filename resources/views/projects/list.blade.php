@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('body')
 <div class="w-full grid justify-items-center p-4 gap-4">
-  <div class="w-full border-2 border-black dark:border-white rounded">
+  <div class="w-full border-2 border-slate-800 dark:border-slate-300 rounded">
     @if (isset($projects) && !empty($projects))
       <div class="grid grid-rows-2 gap-4 justify-items-start">
         <div class="w-full flex items-center justify-center">

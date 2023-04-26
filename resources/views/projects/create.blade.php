@@ -11,7 +11,7 @@
     <x-form.input :type="'date'" :name="'date'"/>    
     <x-basics.h2 :text="'How many people will join you in this adventure?'"/>
     <x-form.input :type="'integer'" :name="'headcount'"/>
-      
+
     <input type="submit" value="Create">
   </form>
 </div>
