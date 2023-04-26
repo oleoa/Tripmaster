@@ -3,9 +3,9 @@
     <x-basics.h2 :text="'Tripmaster'"/>
   </div>
   <ul class="list-disc px-8 dark:text-white">
-    <li><a href="{{route('home')}}">Home</a></li>
-    <li><a href="{{route('stays')}}">Stays</a></li>
-    <li><a href="{{route('projects')}}">Projects</a></li>
-    <li><a href="{{route('toggle-theme')}}">Darkmode</a></li>
+    <x-sidebar.li :href="route('home')" :name="'Home'"/>
+    <x-sidebar.li :href="route('stays')" :name="'Stays'"/>
+    <x-sidebar.li :href="route('projects')" :name="'Projects'"/>
+    <x-sidebar.li :href="route('toggle-theme')" :name="'Darkmode'"/>
   </ul>
 </div>
