@@ -9,4 +9,16 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
   use AuthorizesRequests, ValidatesRequests;
+
+  protected $data;
+
+  public function __construct()
+  {
+    
+  }
+
+  protected function setTitle($title)
+  {
+    $this->data['title'] = $title;
+  }
 }
