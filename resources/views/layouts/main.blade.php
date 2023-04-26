@@ -7,11 +7,11 @@
   @vite('resources/css/app.css')
   <title>{{ $title }}</title>
 </head>
-<body>
+<body class='{{ $theme }}'>
   <nav class='h-screen w-24 bg-blue-500 absolute left-0'>
     <x-sidebar/>
   </nav>
-  <main class='pl-28'>
+  <main class='pl-28 h-screen w-full bg-white dark:bg-slate-800'>
     @yield('body')
   </main>
 </body>

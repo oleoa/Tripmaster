@@ -41,4 +41,9 @@ class Data
 
     return $data;
   }
+
+  public function theme($theme): void
+  {
+    $this->fillable['theme'] = $theme;
+  }
 }

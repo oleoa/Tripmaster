@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,12 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [HomeController::class, 'index']);
+
+Route::get('/theme', function(){
+  if(session('theme') == 'dark')
+    session('theme', 'light');
+  else
+    session('theme', 'dark');
+    
+  return redirect()->back();
+})->name('toggle-theme');
