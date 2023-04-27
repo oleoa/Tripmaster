@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('stays_images', function (Blueprint $table) {
             $table->id();
-            $table->interger('stay');
+            $table->integer('stay');
             $table->string('image_path');
             $table->timestamps();
         });
