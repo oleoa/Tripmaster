@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\MyProjectsController;
@@ -42,6 +43,17 @@ Route::get('/locale/{locale}', function($locale){
 })->name('language');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::name('sign')->group(function(){
+
+  Route::get('/signin', [UserController::class, 'signin'])->name('in');
+  Route::get('/signout', [UserController::class, 'signout'])->name('out');
+  Route::get('/signup', [UserController::class, 'signup'])->name('up');
+
+  Route::post('/signin', [UserController::class, 'signing_in'])->name('ing-in');
+  Route::post('/signup', [UserController::class, 'signing_up'])->name('ing-up');
+
+});
 
 Route::name('list.')->group(function(){
   Route::get('/stays', [StaysController::class, 'index'])->name('stays');
