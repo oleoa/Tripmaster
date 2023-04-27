@@ -26,7 +26,9 @@ class SidebarCurrent
     'projects' => array(
       'projects.list',
       'projects.create',
-    )
+    ),
+    'signin' => 'sign.in',
+    'signup' => 'sign.up',
   );
 
   public function get($correctPage)
