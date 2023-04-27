@@ -11,7 +11,7 @@
   <nav class='h-screen w-48 border-r-2 border-slate-800 dark:border-slate-300 absolute left-0'>
     <x-sidebar.index :current="$current"/>
   </nav>
-  <main class='pl-48 h-screen w-full bg-slate-300 dark:bg-slate-800'>
+  <main class='pl-48 h-screen w-full bg-white dark:bg-slate-800'>
     @yield('body')
   </main>
 </body>
