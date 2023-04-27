@@ -6,6 +6,8 @@
         </div>
         <form action="{{route('signing-up')}}" method="post" class="grid grid-cols-1 gap-4 w-1/3">
             @csrf
+            <label for="name"><x-basics.h2 :text="__('Name').':'"/></label>
+            <x-form.input :type="'text'" :name="'name'" :id="'name'"/>
             <label for="email"><x-basics.h2 :text="__('Email').':'"/></label>
             <x-form.input :type="'text'" :name="'email'" :id="'email'"/>
             <label for="password"><x-basics.h2 :text="__('Password').':'"/></label>

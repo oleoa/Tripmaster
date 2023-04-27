@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {  
@@ -32,13 +34,13 @@ class UserController extends Controller
     ]);
     
     if(!Auth::attempt($validated))
-    return redirect()->route('signin');
+      return redirect()->route('signin');
     
     $request->session()->regenerate();
     return redirect()->route('home');
   }
   
-  public function signing_up()
+  public function signing_up(Request $request)
   {
     $validated = $request->validate([
       'name' => 'required',
@@ -48,8 +50,21 @@ class UserController extends Controller
 
     $pass_hash = Hash::make($validated['password']);
 
-    // Create User
+    $user = array(
+      'name' => $validated['name'],
+      'email' => $validated['email'],
+      'password' => $pass_hash
+    );
 
+    $info = User::create($user);
+    if(!$info){
+      $request->session()->flash('status', false);
+      $request->session()->flash('message', 'Something went wrong, please try again');
+      return redirect()->route('signup');
+    }
+    
+    $request->session()->flash('status', true);
+    $request->session()->flash('message', 'User created');
     return redirect()->route('home');
   }
 }
