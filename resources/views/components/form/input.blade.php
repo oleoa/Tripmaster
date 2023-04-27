@@ -1,1 +1,1 @@
-<input type="{{$type}}" name="{{$name}}" placeholder="{{$placeholder}}" id="{{$id}}" class="p-4 rounded bg-slate-400 dark:bg-slate-500 dark:text-white">
+<input type="{{$type}}" name="{{$name}}" placeholder="{{$placeholder}}" id="{{$id}}" class="p-4 rounded border-2 border-black dark:bg-slate-500 dark:text-white">
