@@ -13,7 +13,6 @@
     </div>
     <x-sidebar.li :href="route('my.projects')" :name="'Projects'" :current="$current['projects']"/>
     <x-sidebar.li :href="route('signin')" :name="'Signin'" :current="$current['signin']"/>
-    <x-sidebar.li :href="route('signup')" :name="'Signup'" :current="$current['signup']"/>
     <x-sidebar.li :href="route('toggle-theme')" :name="'Darkmode'" :current="false"/>
   </ul>
 </div>

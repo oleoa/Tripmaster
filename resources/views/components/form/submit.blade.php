@@ -1,1 +1,1 @@
-<input type="submit" value="{{$value}}" class="bg-green-600 p-4 rounded text-white">
+<input type="submit" value="{{$value}}" class="bg-turquoise-300 p-4 rounded text-white">
