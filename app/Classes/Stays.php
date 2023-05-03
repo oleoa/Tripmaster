@@ -2,7 +2,9 @@
 
 namespace App\Stays;
 
-class Stays
+use App\Stays\Table;
+
+class Stays extends Table
 {
   private $id;
   private $owner;
@@ -11,11 +13,6 @@ class Stays
   private $capacity;
   private $bedrooms;
   private $locale;
-
-  public function __construct()
-  {
-    $this->format();
-  }
 
   public function format(): void
   {
@@ -26,14 +23,6 @@ class Stays
     $this->capacity = null;
     $this->bedrooms = null;
     $this->locale = null;
-  }
-
-  public function setAndGet($attr, $name)
-  {
-    if($attr === null)
-      return $this->{$name};
-    $this->{$name} = $attr;
-    return true;
   }
 
   public function owner($owner = null) { return $this->setAndGet($owner, "owner"); }
