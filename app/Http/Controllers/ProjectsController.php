@@ -34,6 +34,7 @@ class ProjectsController extends Controller
     $project->country($valideted['country']);
     $project->date($valideted['date']);
     $project->headcount($valideted['headcount']);
+    $project->image($this->getFlag($valideted['country']));
     $project->owner(Auth::id());
     $info = ProjectModel::create($project->get());
     
@@ -62,6 +63,7 @@ class ProjectsController extends Controller
       $project->title($project_data['title']);
       $project->country($project_data['country']);
       $project->date($project_data['date']);
+      $project->image($project_data['image']);
       $project->headcount($project_data['headcount']);
       $projects[] = $project;
     }
@@ -70,8 +72,26 @@ class ProjectsController extends Controller
 
     return $this->view('projects.list');
   }
+
+  private function getFlag($country): string
+  {
+    if(!in_array($country, $this->getCountries()))
+      return "";
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $this->REST_Countries);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+    $response = curl_exec($curl);
+    curl_close($curl);
+    $data = json_decode($response, true);
+    $countries_names = array();
+    foreach($data as $name)
+      $countries_names[] = $name['name']['common'];
+    sort($countries_names);
+    return $countries_names;
+  }
   
-  private function getCountries()
+  private function getCountries(): void
   {
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $this->REST_Countries);
