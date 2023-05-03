@@ -13,7 +13,7 @@
       <x-form.submit :value="__('Sign in')"/>
     </form>
     <div class="p-4">
-      <h2 class="text-2xl">Don't have an account? <x-link.a :href="route('signup')" :text="__('Create one!')"/></h2>
+      <h2 class="text-2xl dark:text-white">Don't have an account? <x-link.a :href="route('signup')" :text="__('Create one!')"/></h2>
     </div>
   </div>
 @endsection

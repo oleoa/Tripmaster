@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -23,6 +24,7 @@ class UserController extends Controller
   
   public function signout()
   {
+    Session::flush();
     return redirect()->route('home');
   }
   
@@ -62,7 +64,7 @@ class UserController extends Controller
       $request->session()->flash('message', 'Something went wrong, please try again');
       return redirect()->route('signup');
     }
-    
+
     $request->session()->flash('status', true);
     $request->session()->flash('message', 'User created');
     return redirect()->route('home');
