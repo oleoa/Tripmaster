@@ -6,7 +6,8 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\UserModel;
+use App\Classes\User;
 
 class UserController extends Controller
 {  
@@ -34,8 +35,11 @@ class UserController extends Controller
       'email' => 'required|email',
       'password' => 'required'
     ]);
+
+    $this->messages("Email or password incorrect");
     
-    if(!Auth::attempt($validated))
+    $this->attempt(Auth::attempt($validated), $request);
+    if(!$this->status)
       return redirect()->route('signin');
     
     $request->session()->regenerate();
@@ -52,21 +56,20 @@ class UserController extends Controller
 
     $pass_hash = Hash::make($validated['password']);
 
-    $user = array(
-      'name' => $validated['name'],
-      'email' => $validated['email'],
-      'password' => $pass_hash
-    );
+    $user = new User();
+    $user->name($validated['name']);
+    $user->email($validated['email']);
+    $user->password($validated['password']);
 
-    $info = User::create($user);
-    if(!$info){
-      $request->session()->flash('status', false);
-      $request->session()->flash('message', 'Something went wrong, please try again');
+    $info = UserModel::create($user->get());
+
+    $this->messages("Something went wrong, please try again");
+    $this->attempt($info == false, $request);
+    if(!$this->status)
       return redirect()->route('signup');
-    }
 
-    $request->session()->flash('status', true);
-    $request->session()->flash('message', 'User created');
+    Auth::attempt($user->get());
+
     return redirect()->route('home');
   }
 }

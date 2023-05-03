@@ -4,9 +4,9 @@ namespace App\Classes;
 
 use App\Classes\Table;
 
-class Project extends Table
+class User extends Table
 {
-  protected $datas = array('id', 'owner', 'title', 'country', 'date', 'headcount');
+  protected $datas = array('id', 'name', 'email', 'password');
   protected $data;
 
   public function format(): void

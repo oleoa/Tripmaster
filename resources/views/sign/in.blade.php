@@ -15,5 +15,8 @@
     <div class="p-4">
       <h2 class="text-2xl dark:text-white">Don't have an account? <x-link.a :href="route('signup')" :text="__('Create one!')"/></h2>
     </div>
+    <div>
+      <h1 class="text-xl text-white">{{session('message')}}</h1>
+    </div>
   </div>
 @endsection

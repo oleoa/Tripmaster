@@ -10,12 +10,24 @@ abstract class Table
   }
 
   abstract public function format(): void;
+  abstract public function get(): array;
 
-  protected function setAndGet($attr, $name)
+  public function __get($name)
   {
-    if($attr === null)
-      return $this->{$name};
-    $this->{$name} = $attr;
-    return true;
+    return $this->data[$name];
+  }
+
+  public function __set($name, $value)
+  {
+    if(!in_array($name, $this->datas))
+      return;
+    $this->data[$name] = $value;
+  }
+
+  public function __call($name, $arguments)
+  {
+    if(!$arguments)
+      return $this->data[$name];
+    $this->__set($name, $arguments[0]);
   }
 }
