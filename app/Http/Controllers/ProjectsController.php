@@ -91,7 +91,7 @@ class ProjectsController extends Controller
     return $countries_names;
   }
   
-  private function getCountries(): void
+  private function getCountries(): array
   {
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $this->REST_Countries);
