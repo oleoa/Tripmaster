@@ -8,9 +8,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\UserController;
 
-use App\Http\Controllers\ProjectsController;
-use App\Http\Controllers\MyProjectsController;
 
+use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\StaysController;
 use App\Http\Controllers\MyStaysController;
 
