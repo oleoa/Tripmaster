@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('country');
+            $table->string('image');
             $table->date('date');
             $table->integer('headcount');
             $table->unsignedBigInteger('owner');

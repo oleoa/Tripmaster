@@ -17,6 +17,7 @@ class Project extends Model
     'title',
     'country',
     'date',
+    'image',
     'headcount'
   ];
 }
