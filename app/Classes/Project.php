@@ -6,12 +6,12 @@ use App\Classes\Table;
 
 class Project extends Table
 {
-  private $id;
-  private $owner;
-  private $title;
-  private $country;
-  private $date;
-  private $headcount;
+  protected $id;
+  protected $owner;
+  protected $title;
+  protected $country;
+  protected $date;
+  protected $headcount;
 
   public function format(): void
   {
@@ -21,6 +21,18 @@ class Project extends Table
     $this->country = null;
     $this->date = null;
     $this->headcount = null;
+  }
+
+  public function get()
+  {
+    return array(
+      'id' => $this->id,
+      'owner' => $this->owner,
+      'title' => $this->title,
+      'country' => $this->country,
+      'date' => $this->date,
+      'headcount' => $this->headcount
+    );
   }
 
   public function owner($owner = null) { return $this->setAndGet($owner, "owner"); }

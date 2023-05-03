@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Classes\Project;
+use App\Models\Project as ProjectModel;
 
 class ProjectsController extends Controller
 {
@@ -27,8 +29,23 @@ class ProjectsController extends Controller
       'headcount' => 'required',
     ]);
 
-    dd($valideted);
+    $project = new Project();
+    $project->title($valideted['title']);
+    $project->country($valideted['country']);
+    $project->date($valideted['date']);
+    $project->headcount($valideted['headcount']);
+    $project->owner(Auth::id());
+    $info = ProjectModel::create($project->get());
+    
+    if(!$info){
+      $request->session()->flash('status', false);
+      $request->session()->flash('message', 'Something went wrong, please try again');
+      return redirect()->route('creator.project');
+    }
 
+    $request->session()->flash('status', true);
+    $request->session()->flash('message', 'Project created');
+    return redirect()->route('my.projects');
   }
   
   public function index()
