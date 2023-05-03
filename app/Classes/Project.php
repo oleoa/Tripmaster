@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Stays;
+namespace App\Classes;
 
-use App\Stays\Table;
+use App\Classes\Table;
 
 class Project extends Table
 {

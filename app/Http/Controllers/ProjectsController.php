@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\
 
 class ProjectsController extends Controller
 {
@@ -15,6 +16,17 @@ class ProjectsController extends Controller
     $this->data->set('countries', $countries);
     $this->data->title('Create Project');
     return $this->view('projects.create');
+  }
+
+  public function create(Request $request)
+  {
+    $valideted = $request->validate([
+      'title' => 'required',
+      'title' => 'required',
+      'title' => 'required',
+      'title' => 'required',
+      'title' => 'required',
+    ]);
   }
   
   public function index()
