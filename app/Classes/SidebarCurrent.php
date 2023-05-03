@@ -28,6 +28,7 @@ class SidebarCurrent
       'projects.create',
     ),
     'signin' => 'sign.in',
+    'account' => 'account',
   );
 
   public function get($correctPage)

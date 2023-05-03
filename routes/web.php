@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\UserController;
 
 use App\Http\Controllers\ProjectsController;
@@ -70,6 +71,7 @@ Route::name('create.')->group(function(){
 });
 
 Route::name('my.')->group(function(){
+  Route::get('/my/account', [AccountController::class, 'index'])->name('account');
   Route::get('/my/projects', [ProjectsController::class, 'index'])->name('projects');
-  Route::get('/my/stays', [ProjectsController::class, 'index'])->name('stays');
+  Route::get('/my/stays', [StaysController::class, 'index'])->name('stays');
 });

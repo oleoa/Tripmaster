@@ -9,12 +9,14 @@ use Illuminate\View\Component;
 class Sidebar extends Component
 {
   public $current;
+  public $logged;
     /**
      * Create a new component instance.
      */
-    public function __construct($current)
+    public function __construct($current, $logged)
     {
       $this->current = $current;
+      $this->logged = $logged;
     }
 
     /**

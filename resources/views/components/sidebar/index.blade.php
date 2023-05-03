@@ -12,7 +12,11 @@
       <div class="h-0.5 w-full dark:bg-slate-300 bg-slate-800"></div>
     </div>
     <x-sidebar.li :href="route('my.projects')" :name="'Projects'" :current="$current['projects']"/>
-    <x-sidebar.li :href="route('signin')" :name="'Signin'" :current="$current['signin']"/>
+    @if(!$logged)
+      <x-sidebar.li :href="route('signin')" :name="'Signin'" :current="$current['signin']"/>
+    @else
+      <x-sidebar.li :href="route('my.account')" :name="'Account'" :current="$current['account']"/>
+    @endif
     <x-sidebar.li :href="route('toggle-theme')" :name="'Darkmode'" :current="false"/>
   </ul>
 </div>
