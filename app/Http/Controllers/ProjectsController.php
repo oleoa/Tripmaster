@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\
+use App\Classes\Project;
 
 class ProjectsController extends Controller
 {
@@ -22,11 +22,13 @@ class ProjectsController extends Controller
   {
     $valideted = $request->validate([
       'title' => 'required',
-      'title' => 'required',
-      'title' => 'required',
-      'title' => 'required',
-      'title' => 'required',
+      'country' => 'required',
+      'date' => 'required',
+      'headcount' => 'required',
     ]);
+
+    dd($valideted);
+
   }
   
   public function index()
