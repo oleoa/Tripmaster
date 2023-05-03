@@ -34,7 +34,7 @@ class ProjectsController extends Controller
     $project->country($valideted['country']);
     $project->date($valideted['date']);
     $project->headcount($valideted['headcount']);
-    $project->image($this->getFlag($valideted['country']));
+    $project->image($this->getPicture($valideted['country']));
     $project->owner(Auth::id());
     $info = ProjectModel::create($project->get());
     
@@ -73,22 +73,13 @@ class ProjectsController extends Controller
     return $this->view('projects.list');
   }
 
-  private function getFlag($country): string
+  private function getPicture($country): string
   {
-    if(!in_array($country, $this->getCountries()))
-      return "";
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, $this->REST_Countries);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-    $response = curl_exec($curl);
-    curl_close($curl);
-    $data = json_decode($response, true);
-    $countries_names = array();
-    foreach($data as $name)
-      $countries_names[] = $name['name']['common'];
-    sort($countries_names);
-    return $countries_names;
+    $key = "b13237d9f16ceb792ec1c4efd5d2d6fa";
+    $url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=$key&text=$country&accuracy=-11&per_page=1&sort=relevance&format=json&nojsoncallback=1";
+    //{"photos":{"page":1,"pages":326923,"perpage":1,"total":326923,"photo":[{"id":"28178098362","owner":"61308696@N00","secret":"67f1df22e3","server":"8831","farm":9,"title":"Uganda","ispublic":1,"isfriend":0,"isfamily":0}]},"stat":"ok"}
+    "https://farm9.staticflickr.com/8831/28178098362_67f1df22e3.jpg";
+    dd($url);
   }
   
   private function getCountries(): array
