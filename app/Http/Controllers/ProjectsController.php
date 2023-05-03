@@ -10,6 +10,21 @@ class ProjectsController extends Controller
 
   public function creator()
   {
+    $countries = $this->getCountries();
+    
+    $this->data->set('countries', $countries);
+    $this->data->title('Create Project');
+    return $this->view('projects.create');
+  }
+  
+  public function index()
+  {
+    $this->data->title('Projects List');
+    return $this->view('projects.list');
+  }
+  
+  private function getCountries()
+  {
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $this->REST_Countries);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -21,15 +36,6 @@ class ProjectsController extends Controller
     foreach($data as $name)
       $countries_names[] = $name['name']['common'];
     sort($countries_names);
-    
-    $this->data->set('countries', $countries_names);
-    $this->data->title('Create Project');
-    return $this->view('projects.create');
-  }
-  
-  public function index()
-  {
-    $this->data->title('Projects List');
-    return $this->view('projects.list');
+    return $countries_names;
   }
 }
