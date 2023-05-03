@@ -51,6 +51,18 @@ class ProjectsController extends Controller
   public function index()
   {
     $this->data->title('Projects List');
+
+    $user_projects = ProjectModel::where('owner', Auth::id())->get();
+
+    $projects = array();
+
+    foreach($user_projects as $project)
+    {
+      $projects[] = $project;
+    }
+
+    $this->data->set('projects', $projects);
+
     return $this->view('projects.list');
   }
   
