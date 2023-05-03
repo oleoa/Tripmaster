@@ -56,8 +56,13 @@ class ProjectsController extends Controller
 
     $projects = array();
 
-    foreach($user_projects as $project)
+    foreach($user_projects as $project_data)
     {
+      $project = new Project();
+      $project->title($project_data['title']);
+      $project->country($project_data['country']);
+      $project->date($project_data['date']);
+      $project->headcount($project_data['headcount']);
       $projects[] = $project;
     }
 

@@ -8,13 +8,13 @@ use Illuminate\View\Component;
 
 class project extends Component
 {
-  public $data;
+  public $project;
     /**
      * Create a new component instance.
      */
-    public function __construct($data)
+    public function __construct($project)
     {
-      $this->data = $data;
+      $this->project = $project;
     }
 
     /**
