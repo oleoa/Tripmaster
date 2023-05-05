@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Models\UserModel;
+use App\Models\User as UserModel;
 use App\Classes\User;
 
 class UserController extends Controller
