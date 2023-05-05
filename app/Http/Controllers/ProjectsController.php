@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Classes\Project;
-use App\Models\Project as ProjectModel;
+use App\Models\Project;
 
 class ProjectsController extends Controller
 {
@@ -14,10 +13,13 @@ class ProjectsController extends Controller
 
   public function creator()
   {
+    $this->data->title('Create Project');
+
     $countries = $this->getCountries();
     
+    $this->data->set('selected', "France");
     $this->data->set('countries', $countries);
-    $this->data->title('Create Project');
+
     return $this->view('projects.create');
   }
 
@@ -26,18 +28,25 @@ class ProjectsController extends Controller
     $valideted = $request->validate([
       'title' => 'required',
       'country' => 'required',
-      'date' => 'required',
-      'headcount' => 'required',
+      'start' => 'required',
+      'end' => 'required',
+      'adults' => 'required',
+      'children' => 'required',
     ]);
 
-    $project = new Project();
-    $project->title($valideted['title']);
-    $project->country($valideted['country']);
-    $project->date($valideted['date']);
-    $project->headcount($valideted['headcount']);
-    $project->image($this->getFlag($valideted['country']));
-    $project->owner(Auth::id());
-    $info = ProjectModel::create($project->get());
+    $project = array(
+      'title' => $valideted['title'],
+      'country' => $valideted['country'],
+      'start' => $valideted['start'],
+      'end' => $valideted['end'],
+      'adults' => $valideted['adults'],
+      'children' => $valideted['children'],
+      'headcount' => $valideted['adults'] + $valideted['children'],
+      'image' => $valideted['country'],
+      'isFlag' => true,
+      'owner' => Auth::id()
+    );
+    $info = Project::create($project);
     
     if(!$info){
       $request->session()->flash('status', false);

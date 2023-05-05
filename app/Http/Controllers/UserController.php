@@ -6,8 +6,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Models\User as UserModel;
-use App\Classes\User;
+use App\Models\User;
 
 class UserController extends Controller
 {  
@@ -56,19 +55,20 @@ class UserController extends Controller
 
     $pass_hash = Hash::make($validated['password']);
 
-    $user = new User();
-    $user->name($validated['name']);
-    $user->email($validated['email']);
-    $user->password($validated['password']);
+    $user = array(
+      'name' => $validated['name'],
+      'email' => $validated['email'],
+      'password' => $validated['password']
+    );
 
-    $info = UserModel::create($user->get());
+    $info = User::create($user);
 
     $this->messages("Something went wrong, please try again");
     $this->attempt($info == false, $request);
     if(!$this->status)
       return redirect()->route('signup');
 
-    Auth::attempt($user->get());
+    Auth::attempt($user);
 
     return redirect()->route('home');
   }
