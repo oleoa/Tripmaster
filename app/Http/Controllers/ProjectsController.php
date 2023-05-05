@@ -26,7 +26,6 @@ class ProjectsController extends Controller
   public function create(Request $request)
   {
     $valideted = $request->validate([
-      'title' => 'required',
       'country' => 'required',
       'start' => 'required',
       'end' => 'required',
@@ -35,17 +34,17 @@ class ProjectsController extends Controller
     ]);
 
     $project = array(
-      'title' => $valideted['title'],
       'country' => $valideted['country'],
       'start' => $valideted['start'],
       'end' => $valideted['end'],
       'adults' => $valideted['adults'],
       'children' => $valideted['children'],
       'headcount' => $valideted['adults'] + $valideted['children'],
-      'image' => $valideted['country'],
+      'image' => $this->getFlag($valideted['country']),
       'isFlag' => true,
       'owner' => Auth::id()
     );
+    
     $info = Project::create($project);
     
     if(!$info){
@@ -63,18 +62,19 @@ class ProjectsController extends Controller
   {
     $this->data->title('Projects List');
 
-    $user_projects = ProjectModel::where('owner', Auth::id())->get();
+    $user_projects = Project::where('owner', Auth::id())->get();
 
     $projects = array();
 
     foreach($user_projects as $project_data)
     {
-      $project = new Project();
-      $project->title($project_data['title']);
-      $project->country($project_data['country']);
-      $project->date($project_data['date']);
-      $project->image($project_data['image']);
-      $project->headcount($project_data['headcount']);
+      $project = array(
+        'country' => $project_data['country'],
+        'start' => $project_data['start'],
+        'end' => $project_data['end'],
+        'image' => $project_data['image'],
+        'headcount' => $project_data['headcount'],
+      );
       $projects[] = $project;
     }
 

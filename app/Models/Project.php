@@ -14,10 +14,13 @@ class Project extends Model
   protected $fillable = [
     'id',
     'owner',
-    'title',
     'country',
-    'date',
+    'start',
+    'end',
+    'isFlag',
     'image',
-    'headcount'
+    'headcount',
+    'adults',
+    'children'
   ];
 }
