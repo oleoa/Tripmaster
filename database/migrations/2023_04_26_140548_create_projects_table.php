@@ -13,11 +13,14 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('country');
-            $table->string('image');
-            $table->date('date');
-            $table->integer('headcount');
+            $table->string('country')->nullable();
+            $table->string('image')->nullable();
+            $table->boolean('isFlag')->nullable();
+            $table->date('start')->nullable();
+            $table->date('end')->nullable();
+            $table->integer('headcount')->nullable();
+            $table->integer('adults')->nullable();
+            $table->integer('children')->nullable();
             $table->unsignedBigInteger('owner');
             $table->foreign('owner')->references('id')->on('users');
             $table->timestamps();
