@@ -5,6 +5,6 @@
     <x-h2 :text="$project->headcount.' '.__('people')"/>
   </div>
   <div class="flex items-end justify-end">
-    <img src="{{$project->image}}" alt="Country Picture" class="rounded">
+    <img src="{{$project->image}}" alt="Country Picture" class="rounded h-full w-full">
   </div>
 </div>
