@@ -78,6 +78,8 @@ class ProjectsController extends Controller
       $projects[] = $project;
     }
 
+    $this->data->set('people', count($projects) == 1 ? 'person' : 'people');
+
     $this->data->set('projects', $projects);
 
     return $this->view('projects.list');

@@ -14,7 +14,7 @@
         </div>
         <div class="grid gap-4 justify-items-start grid-cols-3">
           @foreach ($projects as $project)
-            <x-project :project="$project"/>
+            <x-project :project="$project" :people="$people"/>
           @endforeach
         </div>
       </div>
