@@ -74,11 +74,10 @@ class ProjectsController extends Controller
         'end' => $project_data['end'],
         'image' => $project_data['image'],
         'headcount' => $project_data['headcount'],
+        'people' => $project_data['headcount'] == 1 ? 'person' : 'people',
       );
       $projects[] = $project;
     }
-
-    $this->data->set('people', count($projects) == 1 ? 'person' : 'people');
 
     $this->data->set('projects', $projects);
 

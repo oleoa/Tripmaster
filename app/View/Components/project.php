@@ -9,14 +9,12 @@ use Illuminate\View\Component;
 class project extends Component
 {
   public $project;
-  public $people;
     /**
      * Create a new component instance.
      */
-    public function __construct($project, $people)
+    public function __construct($project)
     {
       $this->project = $project;
-      $this->people = $people;
     }
 
     /**
