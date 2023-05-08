@@ -66,12 +66,13 @@ class ProjectsController extends Controller
 
     $projects = array();
 
+    
     foreach($user_projects as $project_data)
     {
       $project = array(
         'country' => $project_data['country'],
-        'start' => $project_data['start'],
-        'end' => $project_data['end'],
+        'start' => date("F", mktime(0, 0, 0, explode('-', $project_data['start'])[1], 1)).' '.explode('-', $project_data['start'])[2],
+        'end' => date("F", mktime(0, 0, 0, explode('-', $project_data['end'])[1], 1)).' '.explode('-', $project_data['end'])[2],
         'image' => $project_data['image'],
         'headcount' => $project_data['headcount'],
         'people' => $project_data['headcount'] == 1 ? 'person' : 'people',
@@ -86,10 +87,17 @@ class ProjectsController extends Controller
 
   private function getFlag($country): string
   {
-    $flag = "https://restcountries.com/v3.1/name/$country?fields=flags";
-    $data = $this->doCurlURL($flag);
-    $svg = $data[0]['flags']['svg'];
-    return $svg;
+    $country = str_replace(' ', '%20', $country);
+    $get_code = "https://restcountries.com/v3.1/name/$country?fields=cca2";
+    $data = $this->doCurlURL($get_code);
+
+    $code = $data[0]['cca2'];
+    $swaps = array('UM' => 'US');
+    foreach($swaps as $key => $value)
+      $code = str_replace($key, $value, $code);
+      
+    $url = "https://flagsapi.com/$code/flat/64.png";
+    return $url;
   }
 
   private function doCurlURL($url)
