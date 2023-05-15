@@ -60,12 +60,12 @@ Route::name('list.')->group(function(){
 });
 
 Route::name('creator.')->group(function(){
-  Route::get('/stays/create', [StaysController::class, 'creator'])->name('stays');
+  Route::get('/stays/create', [StaysController::class, 'creator'])->name('stay');
   Route::get('/projects/create', [ProjectsController::class, 'creator'])->name('project');
 });
 
 Route::name('create.')->group(function(){
-  Route::post('/stays/create', [StaysController::class, 'create'])->name('stays');
+  Route::post('/stays/create', [StaysController::class, 'create'])->name('stay');
   Route::post('/projects/create', [ProjectsController::class, 'create'])->name('project');
 });
 
