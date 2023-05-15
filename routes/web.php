@@ -24,35 +24,41 @@ use App\Http\Controllers\MyStaysController;
 |
 */
 
+// ------------------------------ THEME ------------------------------
 Route::get('/theme', function(){
+
   if(session('theme') == 'light')
     session(['theme' => 'dark']);
   else
     session(['theme' => 'light']);
-    
+  
   return redirect()->back();
-})->name('toggle-theme');
 
+})->name('toggle-theme');
+// ------------------------------ THEME ------------------------------
+
+// ------------------------------ LOCALE ------------------------------
 Route::get('/locale/{locale}', function($locale){
-  if (! in_array($locale, ['en', 'pt'])) {
+  if (! in_array($locale, ['en', 'pt']))
     abort(400);
-  }
   app()->setLocale($locale);
   session(['locale' => $locale]);
   return redirect()->back();
 })->name('language');
+// ------------------------------ LOCALE ------------------------------
 
+// ------------------------------ ROUTES ------------------------------
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::name('sign')->group(function(){
-
+  
   Route::get('/signin', [UserController::class, 'signin'])->name('in');
   Route::get('/signout', [UserController::class, 'signout'])->name('out');
   Route::get('/signup', [UserController::class, 'signup'])->name('up');
-
+  
   Route::post('/signin', [UserController::class, 'signing_in'])->name('ing-in');
   Route::post('/signup', [UserController::class, 'signing_up'])->name('ing-up');
-
+  
 });
 
 Route::name('list.')->group(function(){
