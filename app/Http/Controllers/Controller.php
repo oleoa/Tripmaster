@@ -21,8 +21,10 @@ class Controller extends BaseController
   
   protected function view($page)
   {
-    $this->data->theme(session('theme') ?? 'light');
+    $this->data->theme(session('theme') ?? 'dark');
     $this->data->current($page);
+    $this->data->current($page);
+    
     return view($page, $this->data->get());
   }
 
