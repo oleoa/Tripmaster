@@ -7,9 +7,9 @@
       </div>
       <div class="grid grid-cols-2 p-4">
         <x-h1 :text="'Name:'"/>
-        <x-h1 :text="'User Name'"/>
+        <x-h1 :text="$name"/>
         <x-h2 :text="'Email:'"/>
-        <x-h2 :text="'User Email'"/>
+        <x-h2 :text="$email"/>
         <x-h2 :text="'Tempo como user:'"/>
         <x-h2 :text="'User Tempo como user'"/>
         <x-h2 :text="'Número de projetos:'"/>

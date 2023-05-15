@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class AccountController extends Controller
 {
-  public function index()
+  public function index(Request $request)
   {
     $this->data->title('Account');
 
@@ -40,6 +41,11 @@ class AccountController extends Controller
 
     $this->data->set('stays', $stays);
     $this->data->set('cars', $cars);
+    
+    $u = Auth::user();
+    $this->data->set('id', $u->id);
+    $this->data->set('name', $u->name);
+    $this->data->set('email', $u->email);
 
     return $this->view('account');
   }
