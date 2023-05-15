@@ -64,11 +64,12 @@ class UserController extends Controller
     $info = User::create($user);
 
     $this->messages("Something went wrong, please try again");
-    $this->attempt($info == false, $request);
+    $this->attempt($info != false, $request);
     if(!$this->status)
       return redirect()->route('signup');
-
+    
     Auth::attempt($user);
+    $request->session()->regenerate();
 
     return redirect()->route('home');
   }

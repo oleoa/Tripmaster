@@ -13,7 +13,7 @@
     </div>
     <x-sidebar.li :href="route('my.projects')" :name="'Projects'" :current="$current['projects']"/>
     @if(!$logged)
-      <x-sidebar.li :href="route('signin')" :name="'Signin'" :current="$current['signin']"/>
+      <x-sidebar.li :href="route('signin')" :name="'Sign in'" :current="$current['signin']"/>
     @else
       <x-sidebar.li :href="route('my.account')" :name="'Account'" :current="$current['account']"/>
       <x-sidebar.li :href="route('signout')" :name="'Sign out'"/>
