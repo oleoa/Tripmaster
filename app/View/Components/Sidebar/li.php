@@ -14,7 +14,7 @@ class li extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct($name, $href, $current)
+    public function __construct($name, $href, $current = null)
     {
       $this->name = $name;
       $this->href = $href;

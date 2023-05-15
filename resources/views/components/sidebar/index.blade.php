@@ -16,6 +16,7 @@
       <x-sidebar.li :href="route('signin')" :name="'Signin'" :current="$current['signin']"/>
     @else
       <x-sidebar.li :href="route('my.account')" :name="'Account'" :current="$current['account']"/>
+      <x-sidebar.li :href="route('signout')" :name="'Sign out'"/>
     @endif
     <x-sidebar.li :href="route('toggle-theme')" :name="'Darkmode'" :current="false"/>
   </ul>
