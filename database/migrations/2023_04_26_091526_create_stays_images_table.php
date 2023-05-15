@@ -12,10 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('stays_images', function (Blueprint $table) {
-            $table->id();
-            $table->integer('stay');
-            $table->string('image_path');
-            $table->timestamps();
+          $table->id();
+          $table->unsignedBigInteger('stay');
+          $table->foreign('stay')->references('id')->on('stays');
+          $table->string('image_path');
+          $table->timestamps();
         });
     }
 

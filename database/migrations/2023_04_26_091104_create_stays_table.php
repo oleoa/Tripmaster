@@ -12,15 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('stays', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('owner');
-            $table->foreign('owner')->references('id')->on('users');
-            $table->string('title');
-            $table->text('description');
-            $table->integer('capacity');
-            $table->integer('bedrooms');
-            $table->string('locale');
-            $table->timestamps();
+          $table->id();
+          $table->unsignedBigInteger('owner');
+          $table->foreign('owner')->references('id')->on('users');
+          $table->string('title');
+          $table->text('description');
+          $table->integer('capacity');
+          $table->integer('bedrooms');
+          $table->float('price');
+          $table->string('country');
+          $table->string('city');
+          $table->double('lat', 16, 14);
+          $table->double('lon', 17, 14);
+          $table->timestamps();
         });
     }
 
