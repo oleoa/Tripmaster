@@ -26,15 +26,15 @@ class AccountController extends Controller
     );
 
     $cars = array(
-      'title' => 'Stays',
-      'howMany' => 'You have x stays',
-      'beingUsed' => 'X stays are being used',
+      'title' => 'Cars',
+      'howMany' => 'You have x cars',
+      'beingUsed' => 'X cars are being used',
       'add' => array(
-        'text' => 'Add Stay',
+        'text' => 'Add Car',
         'href' => route('creator.stay')
       ),
       'list' => array(
-        'text' => 'List Stays',
+        'text' => 'List Cars',
         'href' => route('my.stays')
       )
     );
