@@ -22,8 +22,8 @@ return new class extends Migration
           $table->float('price');
           $table->string('country');
           $table->string('city');
-          $table->double('lat', 16, 14);
-          $table->double('lon', 17, 14);
+          $table->double('lat', 16, 14)->nullable();
+          $table->double('lon', 17, 14)->nullable();
           $table->timestamps();
         });
     }
