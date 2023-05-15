@@ -9,6 +9,11 @@ if [ "$1" = "--init" ]; then
     php artisan migrate:fresh --seed
 fi
 
+if [ "$1" = "--db" ]; then
+    git pull
+    php artisan migrate:fresh --seed
+fi
+
 stop_commands() {
   kill %1 %2
 }
