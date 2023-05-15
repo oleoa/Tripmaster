@@ -65,18 +65,25 @@ Route::name('list.')->group(function(){
   Route::get('/stays', [StaysController::class, 'index'])->name('stays');
 });
 
-Route::name('creator.')->group(function(){
-  Route::get('/stays/create', [StaysController::class, 'creator'])->name('stay');
-  Route::get('/projects/create', [ProjectsController::class, 'creator'])->name('project');
-});
+Route::prefix('/my')->group(function(){
+  Route::name('my.')->group(function(){
+    
+    Route::get('/account', [AccountController::class, 'index'])->name('account');
 
-Route::name('create.')->group(function(){
-  Route::post('/stays/create', [StaysController::class, 'create'])->name('stay');
-  Route::post('/projects/create', [ProjectsController::class, 'create'])->name('project');
-});
+    Route::name('creator.')->group(function(){
+      Route::get('/stays/create', [MyStaysController::class, 'creator'])->name('stay');
+      Route::get('/projects/create', [ProjectsController::class, 'creator'])->name('project');
+    });
+    
+    Route::name('create.')->group(function(){
+      Route::post('/stays/create', [MyStaysController::class, 'create'])->name('stay');
+      Route::post('/projects/create', [ProjectsController::class, 'create'])->name('project');
+    });
 
-Route::name('my.')->group(function(){
-  Route::get('/my/account', [AccountController::class, 'index'])->name('account');
-  Route::get('/my/projects', [ProjectsController::class, 'index'])->name('projects');
-  Route::get('/my/stays', [StaysController::class, 'index'])->name('stays');
+    Route::name('list.')->group(function(){
+      Route::get('/projects', [ProjectsController::class, 'index'])->name('projects');
+      Route::get('/stays', [MyStaysController::class, 'index'])->name('stays');
+    });
+
+  });
 });

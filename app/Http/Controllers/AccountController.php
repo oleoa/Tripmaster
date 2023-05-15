@@ -17,11 +17,11 @@ class AccountController extends Controller
       'beingUsed' => 'X stays are being used',
       'add' => array(
         'text' => 'Add Stay',
-        'href' => route('creator.stay')
+        'href' => route('my.creator.stay')
       ),
       'list' => array(
         'text' => 'List Stays',
-        'href' => route('my.stays')
+        'href' => route('my.list.stays')
       )
     );
 
@@ -31,11 +31,11 @@ class AccountController extends Controller
       'beingUsed' => 'X cars are being used',
       'add' => array(
         'text' => 'Add Car',
-        'href' => route('creator.stay')
+        'href' => route('my.creator.stay')
       ),
       'list' => array(
         'text' => 'List Cars',
-        'href' => route('my.stays')
+        'href' => route('my.list.stays')
       )
     );
 

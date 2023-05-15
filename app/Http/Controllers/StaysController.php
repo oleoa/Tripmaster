@@ -12,9 +12,4 @@ class StaysController extends Controller
     return $this->view('stays.index');
   }
 
-  public function creator()
-  {
-    $this->data->title('Create Stay');
-    return $this->view('stays.create');
-  }
 }
