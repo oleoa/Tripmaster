@@ -58,7 +58,7 @@ class UserController extends Controller
     $user = array(
       'name' => $validated['name'],
       'email' => $validated['email'],
-      'password' => $validated['password']
+      'password' => $pass_hash
     );
 
     $info = User::create($user);
