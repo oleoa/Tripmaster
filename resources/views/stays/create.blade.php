@@ -11,7 +11,7 @@
       </div>
       <div>
         <x-h2 :text="'Capacity'"/>
-        <x-form.input :type="'text'" :name="'capacity'"/>
+        <x-form.input :type="'number'" :name="'capacity'"/>
       </div>
       <div class="col-span-2">
         <x-h2 :text="'Description'"/>
@@ -19,11 +19,11 @@
       </div>
       <div>
         <x-h2 :text="'Bedrooms'"/>
-        <x-form.input :type="'text'" :name="'bedrooms'"/>
+        <x-form.input :type="'number'" :name="'bedrooms'"/>
       </div>
       <div>
         <x-h2 :text="'Price per month'"/>
-        <x-form.input :type="'text'" :name="'price'"/>
+        <x-form.input :type="'number'" :name="'price'"/>
       </div>
       <div>
         <x-h2 :text="'Country'"/>

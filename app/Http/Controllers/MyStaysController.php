@@ -33,6 +33,20 @@ class MyStaysController extends Controller
       'city' => 'required'
     ]);
 
+    $stay = Stays::create($validated);
+
+    $images = $request->file('images');
+    $images_model = array();
+    foreach($images as $img){
+      $image_path = $img->store(/*Store place*/);
+      $images_model[] = array(
+        'image_path' => $image_path,
+        'stay' => $stay['id']
+      );
+    }
+
+    dd($validated);
+
     return redirect()->back();
   }
 }
