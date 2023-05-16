@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Stays_Images;
 use App\Models\Stays;
 
 class MyStaysController extends Controller
@@ -10,6 +11,10 @@ class MyStaysController extends Controller
   public function index()
   {
     $this->data->title('Listing my Stays');
+
+    $stays = Stays::where('owner', '=', 1)->get()->toArray();
+    $this->data->set('stays', $stays);
+
     return $this->view('my.stays.list');
   }
   
@@ -36,17 +41,15 @@ class MyStaysController extends Controller
     $stay = Stays::create($validated);
 
     $images = $request->file('images');
-    $images_model = array();
     foreach($images as $img){
-      $image_path = $img->store(/*Store place*/);
-      $images_model[] = array(
+      $image_path = explode("/", $img->store('stays', 'public'))[1];
+      $image = array(
         'image_path' => $image_path,
         'stay' => $stay['id']
       );
+      Stays_Images::create($image);
     }
 
-    dd($validated);
-
-    return redirect()->back();
+    return redirect()->route('my.list.stays');
   }
 }
