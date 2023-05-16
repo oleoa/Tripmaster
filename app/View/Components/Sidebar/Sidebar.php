@@ -10,13 +10,15 @@ class Sidebar extends Component
 {
   public $current;
   public $logged;
+  public $inverseTheme;
     /**
      * Create a new component instance.
      */
-    public function __construct($current, $logged)
+    public function __construct($current, $logged, $inverseTheme)
     {
       $this->current = $current;
       $this->logged = $logged;
+      $this->inverseTheme = $inverseTheme;
     }
 
     /**

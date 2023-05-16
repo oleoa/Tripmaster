@@ -14,14 +14,13 @@
     <div class="grid gap-4">
       <x-sidebar.li :href="route('my.list.projects')" :name="'Projects'" :current="$current['projects']"/>
       @if(!$logged)
-        <x-link.button :href="route('signin')" :name="'Sign in'"/>
         <x-sidebar.li :href="route('signin')" :name="'Sign in'" :current="$current['signin']"/>
         <x-sidebar.li :href="route('signup')" :name="'Sign up'" :current="$current['signup']"/>
       @else
         <x-sidebar.li :href="route('my.account')" :name="'Account'" :current="$current['account']"/>
         <x-link.button :href="route('signout')" :name="'Sign out'"/>
       @endif
-      <x-link.button :href="route('toggle-theme')" :name="'Darkmode'"/>
+      <x-link.button :href="route('toggle-theme')" :name="$inverseTheme"/>
     </div>
   </ul>
 </div>

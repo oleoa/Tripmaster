@@ -21,8 +21,8 @@ class Controller extends BaseController
   
   protected function view($page)
   {
+    $this->data->inverseTheme(session('theme') == 'dark' ? 'Lightmode' : 'Darkmode');
     $this->data->theme(session('theme') ?? 'dark');
-    $this->data->current($page);
     $this->data->current($page);
     
     return view($page, $this->data->get());

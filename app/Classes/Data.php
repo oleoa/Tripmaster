@@ -51,6 +51,11 @@ class Data
   {
     $this->fillable['theme'] = $theme;
   }
+
+  public function inverseTheme($inverseTheme): void
+  {
+    $this->fillable['inverseTheme'] = $inverseTheme;
+  }
   
   public function current($page)
   {
