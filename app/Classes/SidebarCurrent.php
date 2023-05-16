@@ -24,12 +24,12 @@ class SidebarCurrent
     'home' => 'home',
     'stays' => 'stays.index',
     'projects' => array(
-      'projects.list',
-      'projects.create',
+      'my.projects.list',
+      'my.projects.create',
     ),
     'signin' => 'sign.in',
     'signup' => 'sign.up',
-    'account' => 'account',
+    'account' => 'my.account',
     'myStays' => 'my.stays',
   );
 

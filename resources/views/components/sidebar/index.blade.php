@@ -13,7 +13,7 @@
       @else
         <x-sidebar.li :href="route('my.account')" :name="'Account'" :current="$current['account']"/>
         <x-sidebar.li :href="route('my.list.projects')" :name="'Projects'" :current="$current['projects']"/>
-        <x-sidebar.li :href="route('my.list.projects')" :name="'My stays'" :current="$current['projects']"/>
+        <x-sidebar.li :href="route('my.list.stays')" :name="'My stays'" :current="$current['myStays']"/>
         <x-link.button :href="route('signout')" :name="'Sign out'"/>
       @endif
       <x-link.button :href="route('toggle-theme')" :name="$inverseTheme"/>
