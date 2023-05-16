@@ -4,7 +4,7 @@
   <div class="py-8">
     <x-h1 :text="__('Create Project')"/>
   </div>
-  <form action="{{route('create.project')}}" method="POST" class="grid grid-cols-2 gap-4">
+  <form action="{{route('my.create.project')}}" method="POST" class="grid grid-cols-2 gap-4">
     @csrf
     <div class="grid grid-rows-1 gap-4">
       <x-h2 :text="__('Start')"/>

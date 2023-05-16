@@ -55,7 +55,7 @@ class ProjectsController extends Controller
 
     $request->session()->flash('status', true);
     $request->session()->flash('message', 'Project created');
-    return redirect()->route('my.projects');
+    return redirect()->route('my.list.projects');
   }
   
   public function index()

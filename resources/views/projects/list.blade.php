@@ -9,7 +9,7 @@
             <x-h1 :text="__('Projects')"/>
           </div>
           <div class="absolute right-0 top-0 p-4 pt-8">
-            <x-link.button :href="route('creator.project')" :name="__('Create Project')"/>
+            <x-link.button :href="route('my.creator.project')" :name="__('Create Project')"/>
           </div>
         </div>
         <div class="grid gap-4 justify-items-start grid-cols-3">
@@ -24,7 +24,7 @@
           <x-h1 :text="__('You have no projects')"/>
         </div>
         <div class="absolute right-0 top-0 p-4 pt-8">
-          <x-link.button :href="route('creator.project')" :name="__('Create Project')"/>
+          <x-link.button :href="route('my.creator.project')" :name="__('Create Project')"/>
         </div>
       </div>
     @endif
