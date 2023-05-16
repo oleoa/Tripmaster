@@ -30,6 +30,7 @@ class SidebarCurrent
     'signin' => 'sign.in',
     'signup' => 'sign.up',
     'account' => 'account',
+    'myStays' => 'my.stays',
   );
 
   public function get($correctPage)

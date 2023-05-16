@@ -20,7 +20,7 @@ class ProjectsController extends Controller
     $this->data->set('selected', "France");
     $this->data->set('countries', $countries);
 
-    return $this->view('projects.create');
+    return $this->view('my.projects.create');
   }
 
   public function create(Request $request)
@@ -82,7 +82,7 @@ class ProjectsController extends Controller
 
     $this->data->set('projects', $projects);
 
-    return $this->view('projects.list');
+    return $this->view('my.projects.list');
   }
 
   private function getFlag($country): string

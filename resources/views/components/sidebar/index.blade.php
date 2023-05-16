@@ -6,18 +6,14 @@
     <div class="h-0.5 w-full dark:bg-slate-300 bg-slate-800"></div>
   </div>
   <ul class="px-2 dark:text-white">
-    <x-sidebar.li :href="route('home')" :name="'Home'" :current="$current['home']"/>
-    <x-sidebar.li :href="route('list.stays')" :name="'Stays'" :current="$current['stays']"/>
-    <div class="py-4">
-      <div class="h-0.5 w-full dark:bg-slate-300 bg-slate-800"></div>
-    </div>
     <div class="grid gap-4">
-      <x-sidebar.li :href="route('my.list.projects')" :name="'Projects'" :current="$current['projects']"/>
       @if(!$logged)
         <x-sidebar.li :href="route('signin')" :name="'Sign in'" :current="$current['signin']"/>
         <x-sidebar.li :href="route('signup')" :name="'Sign up'" :current="$current['signup']"/>
       @else
         <x-sidebar.li :href="route('my.account')" :name="'Account'" :current="$current['account']"/>
+        <x-sidebar.li :href="route('my.list.projects')" :name="'Projects'" :current="$current['projects']"/>
+        <x-sidebar.li :href="route('my.list.projects')" :name="'My stays'" :current="$current['projects']"/>
         <x-link.button :href="route('signout')" :name="'Sign out'"/>
       @endif
       <x-link.button :href="route('toggle-theme')" :name="$inverseTheme"/>

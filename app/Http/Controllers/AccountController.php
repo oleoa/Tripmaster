@@ -47,6 +47,6 @@ class AccountController extends Controller
     $this->data->set('name', $u->name);
     $this->data->set('email', $u->email);
 
-    return $this->view('account');
+    return $this->view('my.account');
   }
 }

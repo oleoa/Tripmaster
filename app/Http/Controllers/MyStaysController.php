@@ -10,14 +10,14 @@ class MyStaysController extends Controller
   public function index()
   {
     $this->data->title('Listing my Stays');
-    return $this->view('stays.create');
+    return $this->view('my.stays.list');
   }
   
   public function creator()
   {
     $this->data->title('Create Stay');
     $this->data->set('owner', 1);
-    return $this->view('stays.create');
+    return $this->view('my.stays.create');
   }
   
   public function create(Request $request)
