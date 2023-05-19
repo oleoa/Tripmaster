@@ -56,6 +56,11 @@ class Data
   {
     $this->fillable['inverseTheme'] = $inverseTheme;
   }
+
+  public function isLogged($isLogged): void
+  {
+    $this->fillable['isLogged'] = $isLogged;
+  }
   
   public function current($page)
   {

@@ -10,10 +10,10 @@
       <input type="text" name="email" id="email"/>
       <label for="password"><h2>@lang('Password')</h2></label>
       <input type="password" name="password" id="password"/>
-      <x-form.submit :value="__('Sign in')"/>
+      <input type="submit" value="@lang('Sign in')"/>
     </form>
     <div class="p-4">
-      <h2 class="text-2xl dark:text-white">Don't have an account? <x-link.a :href="route('signup')" :text="__('Create one!')"/></h2>
+      <h2 class="text-2xl dark:text-white">@lang("Don't have an account?") <a href="{{route('signup')}}">@lang('Create one!')</a></h2>
     </div>
     <div>
       <h1 class="text-xl text-white">{{session('message')}}</h1>

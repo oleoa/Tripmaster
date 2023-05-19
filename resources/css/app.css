@@ -20,8 +20,7 @@
   }
 
   a {
-    @apply hover:underline;
-    @apply cursor-pointer;
+    @apply cursor-pointer underline text-turquoise-100;
   }
 
   img {

@@ -14,10 +14,10 @@
       <input type="password" name="password" id="password"/>
       <label for="password_confirmation"><h2>@lang('Confirm Password')</h2></label>
       <input type="password" name="password_confirmation" id="password_confirmation"/>
-      <x-form.submit :value="__('Sign up')"/>
+      <input type="submit" value="@lang('Sign up')"/>
     </form>
     <div class="p-4">
-      <h2 class="text-2xl">Have an account? <x-link.a :href="route('signin')" :text="__('Sign in!')"/></h2>
+      <h2 class="text-2xl">@lang('Have an account?') <a href="{{route('signin')}}">@lang('Sign in!')</a></h2>
     </div>
     <x-validate-errors :errors="$errors"/>
   </div>

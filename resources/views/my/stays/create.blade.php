@@ -38,7 +38,7 @@
         <input type="file" name="images[]" placeholder="Images" multiple="TRUE"/>
       </div>
       <div class="col-span-2">
-        <x-form.submit :value="'Create'"/>
+        <input type="submit" value="@lang('Create')"/>
       </div>
     </form>
     <x-validate-errors :errors="$errors"/>

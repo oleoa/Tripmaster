@@ -3,7 +3,7 @@
   <div class="p-4">
     <div class="flex flex-col items-center justify-center">
       <div class="w-24">
-        <x-profile-image :src="'https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg'" :alt="'User Image'" />
+        <img src="https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg" alt="User Image" class="rounded-full"/>
       </div>
       <div class="grid grid-cols-2 p-4 py-8 gap-4">
         <h1>@lang('Name')</h1>
