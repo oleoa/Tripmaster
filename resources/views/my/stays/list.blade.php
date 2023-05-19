@@ -6,7 +6,7 @@
       <div class="flex flex-col p-4">
         <div class="flex items-center justify-center relative">
           <div class="py-6">
-            <x-h1 :text="__('Stays')"/>
+            <h1>@lang('Stays')</h1>
           </div>
           <div class="absolute right-0 top-0 p-4 pt-8">
             <x-link.button :href="route('my.creator.stay')" :name="__('Create Stay')"/>
@@ -21,7 +21,7 @@
     @else
       <div class="flex items-center justify-center relative">
         <div class="py-6">
-          <x-h1 :text="__('You have no stays')"/>
+          <h1>@lang('You have no stays')</h1>
         </div>
         <div class="absolute right-0 top-0 p-4 pt-8">
           <x-link.button :href="route('my.creator.stay')" :name="__('Create Stay')"/>
