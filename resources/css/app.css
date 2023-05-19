@@ -3,24 +3,29 @@
 @tailwind utilities;
 
 @layer base {
+
   h1 {
     @apply text-4xl text-black dark:text-white;
   }
+
   h2 {
     @apply text-3xl text-black dark:text-white;
   }
+
   h3 {
     @apply text-2xl text-black dark:text-white;
   }
+
   h4 {
     @apply text-xl text-black dark:text-white;
   }
+
   h5 {
     @apply text-lg text-black dark:text-white;
   }
 
   a {
-    @apply cursor-pointer underline text-turquoise-100;
+    @apply cursor-pointer hover:underline text-white;
   }
 
   img {
@@ -30,4 +35,5 @@
   input {
     @apply p-4 rounded w-full border-2 border-black dark:border-0 dark:bg-slate-500 dark:text-white;
   }
+  
 }
