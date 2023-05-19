@@ -17,7 +17,7 @@ namespace App\Classes;
  * It is used to compare the current page and
  * highlight it on the sidebar.
  */
-class SidebarCurrent
+class Current
 {
   // li name => view path
   private $links = array(

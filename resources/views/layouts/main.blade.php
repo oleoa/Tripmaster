@@ -2,6 +2,7 @@
 <html lang="en">
 <x-head :title="$title"/>
 <body class='{{$theme}}'>
+
   <nav class='h-full w-48 border-r-2 border-turquoise-200 dark:border-slate-300 fixed left-0'>
     <div class="">
       <div class="flex flex-col items-center justify-start pt-2 pb-4">
@@ -13,19 +14,20 @@
       <ul class="px-2 dark:text-white">
         <div class="grid gap-4">
           @if(!$isLogged)
-            <x-sidebar.li :href="route('signin')" :name="'Sign in'" :current="$current['signin']"/>
-            <x-sidebar.li :href="route('signup')" :name="'Sign up'" :current="$current['signup']"/>
+            <a href="{{route('signin')}}">@lang('Sign in')</a>
+            <a href="{{route('signup')}}">@lang('Sign up')</a>
           @else
-            <x-sidebar.li :href="route('my.account')" :name="'Account'" :current="$current['account']"/>
-            <x-sidebar.li :href="route('my.list.projects')" :name="'Projects'" :current="$current['projects']"/>
-            <x-sidebar.li :href="route('my.list.stays')" :name="'My stays'" :current="$current['myStays']"/>
-            <x-link.button :href="route('signout')" :name="'Sign out'"/>
+            <a href="{{route('my.account')}}">@lang('Account')</a>
+            <a href="{{route('my.list.projects')}}">@lang('Projects')</a>
+            <a href="{{route('my.list.stays')}}">@lang('My stays')</a>
+            <a href="{{route('signout')}}">@lang('Sign out')</a>
           @endif
-          <x-link.button :href="route('toggle-theme')" :name="$inverseTheme"/>
+          <a href="{{route('toggle-theme')}}">{{$inverseTheme}}</a>
         </div>
       </ul>
     </div>
   </nav>
+
   <main class='pl-48 min-h-screen w-full bg-white dark:bg-slate-800'>
     @yield('body')
   </main>

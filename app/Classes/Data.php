@@ -2,7 +2,7 @@
 
 namespace App\Classes;
 
-use App\Classes\SidebarCurrent;
+use App\Classes\Current;
 
 class Data
 {
@@ -19,13 +19,13 @@ class Data
   private function __construct()
   {
     $this->format();
-    $this->sidebarCurrent = new SidebarCurrent();
+    $this->current = new Current();
   }
 
   private array $data;
   private array $fillable;
 
-  private $sidebarCurrent;
+  private $current;
 
   public function title($title): void
   {
@@ -64,7 +64,7 @@ class Data
   
   public function current($page)
   {
-    $this->fillable['current'] = $this->sidebarCurrent->get($page);
+    $this->fillable['current'] = $this->current->get($page);
   }
 
   public function set($key, $value)

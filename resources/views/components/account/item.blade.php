@@ -3,7 +3,7 @@
   <h2>{{$itemData['howMany']}}</h2>
   <h2>{{$itemData['beingUsed']}}</h2>
   <div class="flex space-x-4 p-4">
-    <x-link.button :name="$itemData['add']['text']" :href="$itemData['add']['href']"/>
-    <x-link.button :name="$itemData['list']['text']" :href="$itemData['list']['href']"/>
+    <a href="{{$itemData['add']['href']}}">{{$itemData['add']['text']}}</a>
+    <a href="{{$itemData['list']['href']}}">{{$itemData['list']['text']}}</a>
   </div>
 </div>
