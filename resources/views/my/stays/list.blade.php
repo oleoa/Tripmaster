@@ -9,7 +9,7 @@
             <h1>@lang('Stays')</h1>
           </div>
           <div class="absolute right-0 top-0 p-4 pt-8">
-            <a href="{{route('my.creator.stay')}}">@lang('Create Stay')</a>
+            <a href="{{route('my.creator.stay')}}" class="btn">@lang('Create Stay')</a>
           </div>
         </div>
         <div class="grid gap-4 justify-items-start grid-cols-3">
@@ -24,7 +24,7 @@
           <h1>@lang('You have no stays')</h1>
         </div>
         <div class="absolute right-0 top-0 p-4 pt-8">
-          <a href="{{route('my.creator.stay')}}">@lang('Create Stay')</a>
+          <a href="{{route('my.creator.stay')}}" class="btn">@lang('Create Stay')</a>
         </div>
       </div>
     @endif
