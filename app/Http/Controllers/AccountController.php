@@ -11,7 +11,8 @@ class AccountController extends Controller
   public function index(Request $request)
   {
     $this->data->title('Account');
-    $stays = Stays::where("owner", 1)->get()->toArray();
+    
+    $stays = Stays::where("owner", Auth::id())->get()->toArray();
 
     $stays = array(
       'title' => 'Stays',

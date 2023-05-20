@@ -12,7 +12,7 @@ class MyStaysController extends Controller
   {
     $this->data->title('Listing my Stays');
 
-    $stays = Stays::where('owner', '=', 1)->get()->toArray();
+    $stays = Stays::where('owner', '=', Auth::id())->get()->toArray();
     $this->data->set('stays', $stays);
 
     return $this->view('my.stays.list');
@@ -21,7 +21,7 @@ class MyStaysController extends Controller
   public function creator()
   {
     $this->data->title('Create Stay');
-    $this->data->set('owner', 1);
+    $this->data->set('owner', Auth::id());
     return $this->view('my.stays.create');
   }
   
