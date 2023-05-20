@@ -34,5 +34,22 @@
     @yield('body')
   </main>
   
+  @if ($errors->any())
+    <div class="fixed top-0 w-full h-full bg-black/70 flex items-start justify-center p-6" id="errors">
+      <div class="bg-slate-700 py-4 px-8 rounded text-red-500 [&>ul>li]:py-2 ">
+        <h1>@lang('Errors:')</h1>
+        <ul>
+          @foreach ($errors->all() as $error)
+            <li class="text-2xl">@lang($error)</li>
+          @endforeach
+        </ul>
+        <button class="px-6 py-4 bg-slate-600 rounded hover:bg-slate-500 text-white">Okay</button>
+      </div>
+    </div>
+    <script>
+      document.querySelector("#errors").onclick = function(){this.style.display = "none"};
+    </script>
+  @endif
+
 </body>
 </html>

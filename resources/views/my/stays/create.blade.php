@@ -41,6 +41,5 @@
         <input type="submit" value="@lang('Create')"/>
       </div>
     </form>
-    <x-validate-errors :errors="$errors"/>
   </div>
 @endsection
