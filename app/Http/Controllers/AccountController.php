@@ -4,16 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\Stays;
 
 class AccountController extends Controller
 {
   public function index(Request $request)
   {
     $this->data->title('Account');
+    $stays = Stays::where("owner", 1)->get()->toArray();
 
     $stays = array(
       'title' => 'Stays',
-      'howMany' => 'You have x stays',
+      'howMany' => 'You have '.count($stays).' stays',
       'beingUsed' => 'X stays are being used',
       'add' => array(
         'text' => 'Add Stay',

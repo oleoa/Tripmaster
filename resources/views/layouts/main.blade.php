@@ -12,19 +12,19 @@
         <div class="h-0.5 w-full dark:bg-slate-300 bg-slate-800"></div>
       </div>
       <div class="px-4 grid gap-6 [&>a]:text-2xl">
-        @if(!$isLogged)
-          <a href="{{route('signin')}}" class="@if($current['signin']) underline @endif">@lang('Sign in')</a>
-          <a href="{{route('signup')}}" class="@if($current['signup']) underline @endif">@lang('Sign up')</a>
-        @else
+        @if($isLogged)
           <a href="{{route('my.account')}}" class="@if($current['account']) underline @endif">@lang('Account')</a>
           <a href="{{route('my.list.projects')}}" class="@if($current['projects']) underline @endif">@lang('Projects')</a>
-          <a href="{{route('my.list.stays')}}" class="@if($current['stays']) underline @endif">@lang('My stays')</a>
+          <a href="{{route('my.list.stays')}}" class="@if($current['myStays']) underline @endif">@lang('My stays')</a>
         @endif
       </div>
     </div>
     <div class="px-4 flex flex-col justify-end [&>a]:text-2xl space-y-6 py-6">
       @if ($isLogged)
-        <a href="{{route('signout')}}" class="@if($current['myStays']) underline @endif">@lang('Sign out')</a>
+        <a href="{{route('signout')}}">@lang('Sign out')</a>
+      @else
+        <a href="{{route('signin')}}" class="@if($current['signin']) underline @endif">@lang('Sign in')</a>
+        <a href="{{route('signup')}}" class="@if($current['signup']) underline @endif">@lang('Sign up')</a>
       @endif
       <a href="{{route('toggle-theme')}}">{{$inverseTheme}}</a>
     </div>
