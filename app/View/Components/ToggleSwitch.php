@@ -8,12 +8,15 @@ use Illuminate\View\Component;
 
 class ToggleSwitch extends Component
 {
+  public $name;
+  public $isChecked;
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct($name, $isChecked = true)
     {
-        //
+      $this->name = $name;
+      $this->isChecked = $isChecked;
     }
 
     /**
