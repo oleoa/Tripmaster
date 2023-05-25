@@ -32,6 +32,5 @@
     </div>
     <input type="submit" value="@lang('Create')" class="bg-green-600 col-span-2 p-4 rounded text-white">
   </form>
-  <x-validateErrors :errors="$errors"/>
 </div>
 @endsection

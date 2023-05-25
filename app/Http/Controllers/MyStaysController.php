@@ -18,6 +18,13 @@ class MyStaysController extends Controller
 
     return $this->view('my.stays.list');
   }
+
+  public function delete($id)
+  {
+    // Verificar se apenas o dono ou um admin está a deletar essa stay
+    Stays::destroy($id);
+    return redirect()->back();
+  }
   
   public function creator()
   {

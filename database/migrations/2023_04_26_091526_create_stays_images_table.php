@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('stays_images', function (Blueprint $table) {
           $table->id();
           $table->unsignedBigInteger('stay');
-          $table->foreign('stay')->references('id')->on('stays');
+          $table->foreign('stay')->references('id')->on('stays')->onDelete('cascade');
           $table->string('image_path');
           $table->timestamps();
         });
