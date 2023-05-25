@@ -21,7 +21,13 @@ class MyStaysController extends Controller
 
   public function delete($id)
   {
-    // Verificar se apenas o dono ou um admin está a deletar essa stay
+    $id = intval($id);
+    $user_id = Auth::id();
+
+    $belongs = Stays::find($id)->toArray()['owner'] == $user_id;
+    if(!$belongs)
+      return redirect()->back();
+
     Stays::destroy($id);
     return redirect()->back();
   }
@@ -31,14 +37,14 @@ class MyStaysController extends Controller
     /**
      * Verify:
      * If the stay exists
-     * If you are the owner of the stay or an admin
+     * If you are the owner of the stay
      */
 
     $this->data->title('Edit Stay');
 
     $this->data->set('owner', Auth::id());
 
-    $stay = Stays::find($id)->first()->toArray();
+    $stay = Stays::find($id)->toArray();
 
     $this->data->set('page_title', 'Edit Stay');
     $this->data->set('submit_button', 'Update');

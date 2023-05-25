@@ -19,6 +19,5 @@
     <div class="p-4">
       <h2 class="text-2xl">@lang('Have an account?') <a href="{{route('signin')}}">@lang('Sign in!')</a></h2>
     </div>
-    <x-validate-errors :errors="$errors"/>
   </div>
 @endsection
