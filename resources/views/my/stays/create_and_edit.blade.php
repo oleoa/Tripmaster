@@ -16,7 +16,7 @@
       </div>
       <div class="col-span-2">
         <h2>@lang('Description')</h2>
-        <textarea name="description" rows="3" class="bg-slate-500 rounded w-full text-white p-2">{{$editing_case ? $stay['description'] : null}}</textarea>
+        <textarea name="description" rows="3" class="bg-slate-600 rounded w-full text-white p-2">{{$editing_case ? $stay['description'] : null}}</textarea>
       </div>
       <div>
         <h2>@lang('Bedrooms')</h2>
@@ -41,7 +41,7 @@
         </div>
       @endif
       <div class="col-span-2">
-        <input type="submit" value="@lang($submit_button)"/>
+        <input type="submit" value="@lang($submit_button)" class="hover:bg-slate-500"/>
       </div>
     </form>
   </div>

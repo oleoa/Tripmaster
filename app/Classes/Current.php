@@ -32,7 +32,7 @@ class Current
     'account' => 'my.account',
     'myStays' => array(
       'my.stays.list',
-      'my.stays.create',
+      'my.stays.create_and_edit',
     ),
   );
 
