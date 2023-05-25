@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Stays;
@@ -49,6 +50,11 @@ class AccountController extends Controller
     $this->data->set('id', $u->id);
     $this->data->set('name', $u->name);
     $this->data->set('email', $u->email);
+
+    $created_at_date_time = Carbon::parse($u->created_at);
+    $current_date_time = Carbon::now();
+    $diff = $created_at_date_time->diff($current_date_time);
+    $this->data->set('user_time_since_created', "$diff->i minutes");
 
     return $this->view('my.account');
   }

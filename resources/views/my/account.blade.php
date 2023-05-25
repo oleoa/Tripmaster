@@ -11,7 +11,7 @@
         <h2>@lang('Email:')</h2>
         <h2>{{$email}}</h2>
         <h2>@lang('Tempo como user:')</h2>
-        <h2>@lang('User Tempo como user')</h2>
+        <h2>@lang($user_time_since_created)</h2>
         <h2>@lang('Número de projetos:')</h2>
         <h2>@lang('User Número de projetos')</h2>
       </div>
