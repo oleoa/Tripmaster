@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('body')
-<div class="w-full grid justify-items-center p-4 gap-4">
+<div class="p-4">
   <div class="w-full border-2 border-slate-800 dark:border-slate-300 rounded">
     @if (isset($stays) && !empty($stays))
       <div class="flex flex-col p-4">
