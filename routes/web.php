@@ -62,6 +62,16 @@ Route::prefix('/my')->group(function(){
       Route::get('/stay/delete/{id}', [MyStaysController::class, 'delete'])->name('stay');
     });
 
+    Route::name('editor.')->group(function(){
+      Route::get('/stays/edit/{id}', [MyStaysController::class, 'editor'])->name('stay');
+      Route::get('/projects/edit/{id}', [ProjectsController::class, 'editor'])->name('project');
+    });
+
+    Route::name('edit.')->group(function(){
+      Route::put('/stays/edit/{id}', [MyStaysController::class, 'edit'])->name('stay');
+      Route::put('/projects/edit/{id}', [ProjectsController::class, 'edit'])->name('project');
+    });
+
     Route::name('creator.')->group(function(){
       Route::get('/stays/create', [MyStaysController::class, 'creator'])->name('stay');
       Route::get('/projects/create', [ProjectsController::class, 'creator'])->name('project');

@@ -26,11 +26,26 @@ class MyStaysController extends Controller
     return redirect()->back();
   }
   
-  public function editor()
+  public function editor($id)
   {
+    /**
+     * Verify:
+     * If the stay exists
+     * If you are the owner of the stay or an admin
+     */
+
     $this->data->title('Edit Stay');
+
     $this->data->set('owner', Auth::id());
+
+    $stay = Stays::find($id)->first()->toArray();
+
     $this->data->set('page_title', 'Edit Stay');
+    $this->data->set('submit_button', 'Update');
+    $this->data->set('form_route', route('my.edit.stay', ['id' => $id]));
+    $this->data->set('editing_case', true);
+    $this->data->set('stay', $stay);
+
     return $this->view('my.stays.create_and_edit');
   }
   
@@ -38,8 +53,29 @@ class MyStaysController extends Controller
   {
     $this->data->title('Create Stay');
     $this->data->set('owner', Auth::id());
+    $this->data->set('editing_case', false);
+    $this->data->set('form_route', route('my.create.stay'));
+    $this->data->set('submit_button', 'Create');
     $this->data->set('page_title', 'Create Stay');
     return $this->view('my.stays.create_and_edit');
+  }
+  
+  public function edit(Request $request, $id)
+  {
+    $validated = $request->validate([
+      'owner' => 'required',
+      'title' => 'required',
+      'description' => 'required',
+      'capacity' => 'required',
+      'bedrooms' => 'required',
+      'price' => 'required',
+      'country' => 'required',
+      'city' => 'required'
+    ]);
+
+    $saved_stay = Stays::where('id', $id)->update($validated);
+
+    return redirect()->route('my.list.stays');
   }
   
   public function create(Request $request)
