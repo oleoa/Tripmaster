@@ -54,7 +54,7 @@ class AccountController extends Controller
     $created_at_date_time = Carbon::parse($u->created_at);
     $current_date_time = Carbon::now();
     $diff = $created_at_date_time->diff($current_date_time);
-    $this->data->set('user_time_since_created', "$diff->i minutes");
+    $this->data->set('user_time_since_created', "$diff->h hour $diff->i minutes");
 
     return $this->view('my.account');
   }
