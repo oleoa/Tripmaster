@@ -26,7 +26,7 @@
         <a href="{{route('signin')}}" class="col-span-3 @if($current['signin']) underline @endif">@lang('Sign in')</a>
         <a href="{{route('signup')}}" class="col-span-2 @if($current['signup']) underline @endif">@lang('Sign up')</a>
       @endif
-      <button class="w-8" onclick="document.querySelector('body').classList.toggle('dark')"><img src="{{asset('images/darkmode.svg')}}" alt="Darkmode"></button>
+      <button class="w-8" onclick="//document.querySelector('body').classList.toggle('dark')"><img src="{{asset('images/darkmode.svg')}}" alt="Darkmode"></button>
     </div>
   </nav>
 
