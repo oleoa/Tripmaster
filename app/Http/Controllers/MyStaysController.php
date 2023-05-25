@@ -26,11 +26,20 @@ class MyStaysController extends Controller
     return redirect()->back();
   }
   
+  public function editor()
+  {
+    $this->data->title('Edit Stay');
+    $this->data->set('owner', Auth::id());
+    $this->data->set('page_title', 'Edit Stay');
+    return $this->view('my.stays.create_and_edit');
+  }
+  
   public function creator()
   {
     $this->data->title('Create Stay');
     $this->data->set('owner', Auth::id());
-    return $this->view('my.stays.create');
+    $this->data->set('page_title', 'Create Stay');
+    return $this->view('my.stays.create_and_edit');
   }
   
   public function create(Request $request)

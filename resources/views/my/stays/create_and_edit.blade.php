@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('body')
   <div class="px-24 flex flex-col items-center justify-center py-4 space-y-4">
-    <h1>@lang('Create Stay')</h1>
+    <h1>@lang($page_title)</h1>
     <form action="{{route('my.create.stay')}}" method="POST" enctype="multipart/form-data" class="grid grid-cols-2 gap-4">
       @csrf
       <input type="hidden" value="{{$owner}}" name="owner">
