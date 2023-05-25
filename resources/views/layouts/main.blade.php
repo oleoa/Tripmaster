@@ -54,9 +54,9 @@
   @if (session('alert'))
     <dialog class="bg-slate-700 px-8 rounded text-red-500 [&>*]:py-4" id="errors" open>
       <h1>@lang('Alert'):</h1>
-      <p class="text-xl"><strong><code>{{session("alert")}}<code><strong></p>
+      <p class="text-xl"><strong><code>@lang(session("alert"))<code><strong></p>
       <form method="dialog">
-        <button class="px-6 py-4 bg-slate-600 hover:bg-slate-500 text-white rounded">Okay</button>
+        <button class="px-6 py-4 bg-slate-600 hover:bg-slate-500 text-white rounded">@lang('Okay')</button>
       </form>
     </dialog>
     <script>

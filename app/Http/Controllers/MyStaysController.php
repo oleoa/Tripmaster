@@ -9,6 +9,9 @@ use App\Models\Stays;
 
 class MyStaysController extends Controller
 {
+  private $you_are_not_the_owner = "You are not the owner of that stay";
+  private $not_found = "Stay not found";
+
   public function index()
   {
     $this->data->title('Listing my Stays');
@@ -21,36 +24,28 @@ class MyStaysController extends Controller
 
   public function delete(Request $request, $id)
   {
-    $belongs = Stays::find($id)->toArray()['owner'] == Auth::id();
-    if(!$belongs){
-      $request->session()->flash('alert', "You are not the owner of this stay");
-      return redirect()->back();
-    }
+    $attempt = $this->stay_exists_and_ur_the_owner($request, $id);
+    if(!is_array($attempt))
+      return $attempt;
 
     Stays::destroy($id);
     return redirect()->back();
   }
   
-  public function editor($id)
+  public function editor(Request $request, $id)
   {
-    /**
-     * Verify:
-     * If the stay exists
-     * If you are the owner of the stay
-     */
-
+    $stay = $this->stay_exists_and_ur_the_owner($request, $id);
+    if(!is_array($stay))
+      return $stay;
+    
     $this->data->title('Edit Stay');
-
     $this->data->set('owner', Auth::id());
-
-    $stay = Stays::find($id)->toArray();
-
     $this->data->set('page_title', 'Edit Stay');
     $this->data->set('submit_button', 'Update');
     $this->data->set('form_route', route('my.edit.stay', ['id' => $id]));
     $this->data->set('editing_case', true);
     $this->data->set('stay', $stay);
-
+    
     return $this->view('my.stays.create_and_edit');
   }
   
@@ -77,9 +72,9 @@ class MyStaysController extends Controller
       'country' => 'required',
       'city' => 'required'
     ]);
-
+    
     $saved_stay = Stays::where('id', $id)->update($validated);
-
+    
     return redirect()->route('my.list.stays');
   }
   
@@ -95,9 +90,9 @@ class MyStaysController extends Controller
       'country' => 'required',
       'city' => 'required'
     ]);
-
+    
     $stay = Stays::create($validated);
-
+    
     $images = $request->file('images');
     foreach($images as $img){
       $image_path = explode("/", $img->store('stays', 'public'))[1];
@@ -107,7 +102,33 @@ class MyStaysController extends Controller
       );
       Stays_Images::create($image);
     }
-
+    
     return redirect()->route('my.list.stays');
+  }
+
+  /**
+   * It verifies if the stay searched does
+   * exists and if the person who is trying to 
+   * edit/delete it is the owner.
+   * 
+   * This funcion only exists to save code.
+   */
+  private function stay_exists_and_ur_the_owner($request, $id)
+  {
+    $stay_exists = Stays::find($id);
+    if(!$stay_exists){
+      $request->session()->flash('alert', $this->not_found);
+      return redirect()->back();    
+    }
+    
+    $stay = $stay_exists->toArray();
+    
+    $belongs = $stay['owner'] == Auth::id();
+    if(!$belongs){
+      $request->session()->flash('alert', $this->you_are_not_the_owner);
+      return redirect()->back();      
+    }
+
+    return $stay;
   }
 }
