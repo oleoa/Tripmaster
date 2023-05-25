@@ -34,7 +34,7 @@
     @yield('body')
   </main>
   
-  @if ($errors->any())
+  @if($errors->any())
     <div class="fixed top-0 w-full h-full bg-black/70 flex items-start justify-center p-6" id="errors">
       <div class="bg-slate-700 py-4 px-8 rounded text-red-500 [&>ul>li]:py-2 ">
         <h1>@lang('Errors:')</h1>
@@ -48,6 +48,20 @@
     </div>
     <script>
       document.querySelector("#errors").onclick = function(){this.style.display = "none"};
+    </script>
+  @endif
+
+  @if (session('alert'))
+    <dialog class="bg-slate-700 px-8 rounded text-red-500 [&>*]:py-4" id="errors" open>
+      <h1>@lang('Alert'):</h1>
+      <p class="text-xl"><strong><code>{{session("alert")}}<code><strong></p>
+      <form method="dialog">
+        <button class="px-6 py-4 bg-slate-600 hover:bg-slate-500 text-white rounded">Okay</button>
+      </form>
+    </dialog>
+    <script>
+      document.querySelector("#errors")?.close();
+      document.querySelector("#errors")?.showModal();
     </script>
   @endif
 

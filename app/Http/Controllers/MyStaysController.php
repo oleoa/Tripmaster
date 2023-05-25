@@ -19,14 +19,13 @@ class MyStaysController extends Controller
     return $this->view('my.stays.list');
   }
 
-  public function delete($id)
+  public function delete(Request $request, $id)
   {
-    $id = intval($id);
-    $user_id = Auth::id();
-
-    $belongs = Stays::find($id)->toArray()['owner'] == $user_id;
-    if(!$belongs)
+    $belongs = Stays::find($id)->toArray()['owner'] == Auth::id();
+    if(!$belongs){
+      $request->session()->flash('alert', "You are not the owner of this stay");
       return redirect()->back();
+    }
 
     Stays::destroy($id);
     return redirect()->back();
