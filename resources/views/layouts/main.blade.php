@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <x-head :title="$title"/>
-<body class='{{$theme}}'>
+<body class="dark">
 
   <nav class='h-full w-48 border-r-2 border-turquoise-200 dark:border-slate-300 fixed left-0 flex flex-col justify-between'>
     <div>
@@ -19,14 +19,14 @@
         @endif
       </div>
     </div>
-    <div class="px-4 flex flex-col justify-end [&>a]:text-2xl space-y-6 py-6">
+    <div class="px-4 grid grid-cols-3 [&>a]:text-2xl space-y-6 py-6">
       @if ($isLogged)
-        <a href="{{route('signout')}}">@lang('Sign out')</a>
+        <a class="col-span-2 flex items-end justify-start" href="{{route('signout')}}">@lang('Sign out')</a>
       @else
-        <a href="{{route('signin')}}" class="@if($current['signin']) underline @endif">@lang('Sign in')</a>
-        <a href="{{route('signup')}}" class="@if($current['signup']) underline @endif">@lang('Sign up')</a>
+        <a href="{{route('signin')}}" class="col-span-3 @if($current['signin']) underline @endif">@lang('Sign in')</a>
+        <a href="{{route('signup')}}" class="col-span-2 @if($current['signup']) underline @endif">@lang('Sign up')</a>
       @endif
-      <a href="{{route('toggle-theme')}}">{{$inverseTheme}}</a>
+      <button class="w-8" onclick="document.querySelector('body').classList.toggle('dark')"><img src="{{asset('images/darkmode.svg')}}" alt="Darkmode"></button>
     </div>
   </nav>
 

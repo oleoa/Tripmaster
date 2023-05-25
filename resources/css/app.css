@@ -27,7 +27,7 @@
   }
 
   a {
-    @apply cursor-pointer hover:underline text-white;
+    @apply cursor-pointer hover:underline dark:text-white;
   }
 
   img {

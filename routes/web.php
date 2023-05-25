@@ -24,19 +24,6 @@ use App\Http\Controllers\MyStaysController;
 |
 */
 
-// ------------------------------ THEME ------------------------------
-Route::get('/theme', function(){
-
-  if(session('theme') == 'light')
-    session(['theme' => 'dark']);
-  else
-    session(['theme' => 'light']);
-  
-  return redirect()->back();
-
-})->name('toggle-theme');
-// ------------------------------ THEME ------------------------------
-
 // ------------------------------ LOCALE ------------------------------
 Route::get('/locale/{locale}', function($locale){
   if (! in_array($locale, ['en', 'pt']))
