@@ -94,14 +94,15 @@ class MyStaysController extends Controller
     $stay = Stays::create($validated);
     
     $images = $request->file('images');
-    foreach($images as $img){
-      $image_path = explode("/", $img->store('stays', 'public'))[1];
-      $image = array(
-        'image_path' => $image_path,
-        'stay' => $stay['id']
-      );
-      Stays_Images::create($image);
-    }
+    if($images)
+      foreach($images as $img){
+        $image_path = explode("/", $img->store('stays', 'public'))[1];
+        $image = array(
+          'image_path' => $image_path,
+          'stay' => $stay['id']
+        );
+        Stays_Images::create($image);
+      }
     
     return redirect()->route('my.list.stays');
   }
