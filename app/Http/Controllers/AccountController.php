@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\Project;
 use App\Models\Stays;
 
 class AccountController extends Controller
@@ -14,7 +15,7 @@ class AccountController extends Controller
     $this->data->title('Account');
     
     $stays = Stays::where("owner", Auth::id())->get()->toArray();
-
+    
     $stays = array(
       'title' => 'Stays',
       'howMany' => 'You have '.count($stays).' stays',
@@ -50,6 +51,8 @@ class AccountController extends Controller
     $this->data->set('id', $u->id);
     $this->data->set('name', $u->name);
     $this->data->set('email', $u->email);
+    $projects_count = Project::where('owner', Auth::id())->count();
+    $this->data->set('projects_count', "You have ".$projects_count." projects");
 
     $created_at_date_time = Carbon::parse($u->created_at);
     $current_date_time = Carbon::now();

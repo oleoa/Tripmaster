@@ -13,7 +13,7 @@
         <h2>@lang('Tempo como user:')</h2>
         <h2>@lang($user_time_since_created)</h2>
         <h2>@lang('Número de projetos:')</h2>
-        <h2>@lang('User Número de projetos')</h2>
+        <h2>@lang($projects_count)</h2>
       </div>
     </div>
     <div class="grid grid-cols-3 gap-4 px-24 py-4">
