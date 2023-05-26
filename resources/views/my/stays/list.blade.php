@@ -12,18 +12,20 @@
             <a href="{{route('my.creator.stay')}}" class="btn">@lang('Create Stay')</a>
           </div>
         </div>
-        <div class="grid grid-cols-4 w-full bg-slate-600 p-4 rounded-t">
+        <div class="grid grid-cols-5 w-full bg-slate-600 p-4 rounded-t">
           <h2>Name</h2>
           <h2>Capacity</h2>
           <h2>Price</h2>
+          <h2>City</h2>
           <h2 class="text-end">Actions</h2>
         </div>
         <div class="grid grid-cols-1">
           @foreach ($stays as $stay)
-            <div class="dark:bg-slate-700 bg-turquoise-100 text-white p-4 grid grid-cols-4 w-full @if($loop->last) rounded-b @else border-b-2 @endif">
+            <div class="dark:bg-slate-700 bg-turquoise-100 [&>h1]:flex [&>h1]:items-center text-white p-4 grid grid-cols-5 w-full @if($loop->last) rounded-b @else border-b-2 @endif">
               <h1>{{$stay['title']}}</h1>
               <h1>{{$stay['capacity']}}</h1>
               <h1>{{$stay['price']}}</h1>
+              <h1>{{$stay['city']}}</h1>
               <div class="flex items-center justify-end space-x-4">
                 <a class="px-6 py-4 bg-green-600 hover:bg-green-500 hover:no-underline rounded" href="">@lang('View')</a>
                 <a class="px-6 py-4 bg-blue-600 hover:bg-blue-500 hover:no-underline rounded" href="{{route('my.editor.stay', ['id' => $stay['id']])}}">@lang('Edit')</a>
