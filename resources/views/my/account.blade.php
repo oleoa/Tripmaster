@@ -16,9 +16,5 @@
         <h2>@lang($projects_count)</h2>
       </div>
     </div>
-    <div class="grid grid-cols-3 gap-4 px-24 py-4">
-      <x-account.item :itemData="$stays"/>
-      <x-account.item :itemData="$cars"/>
-    </div>
   </div>
 @endsection

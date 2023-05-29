@@ -16,37 +16,6 @@ class AccountController extends Controller
     
     $stays = Stays::where("owner", Auth::id())->get()->toArray();
     
-    $stays = array(
-      'title' => 'Stays',
-      'howMany' => 'You have '.count($stays).' stays',
-      'beingUsed' => 'X stays are being used',
-      'add' => array(
-        'text' => 'Add Stay',
-        'href' => route('my.creator.stay')
-      ),
-      'list' => array(
-        'text' => 'List Stays',
-        'href' => route('my.list.stays')
-      )
-    );
-
-    $cars = array(
-      'title' => 'Cars',
-      'howMany' => 'You have x cars',
-      'beingUsed' => 'X cars are being used',
-      'add' => array(
-        'text' => 'Add Car',
-        'href' => route('my.creator.stay')
-      ),
-      'list' => array(
-        'text' => 'List Cars',
-        'href' => route('my.list.stays')
-      )
-    );
-
-    $this->data->set('stays', $stays);
-    $this->data->set('cars', $cars);
-    
     $u = Auth::user();
     $this->data->set('id', $u->id);
     $this->data->set('name', $u->name);
