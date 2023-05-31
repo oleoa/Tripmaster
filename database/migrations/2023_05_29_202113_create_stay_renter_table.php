@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stay_render', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('stay_renter', function (Blueprint $table) {
+          $table->id();
+          $table->unsignedBigInteger('stay');
+          $table->foreign('stay')->references('id')->on('stays')->onDelete('cascade');
+          $table->date('start');
+          $table->date('end');
+          $table->timestamps();
         });
     }
 
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('stay_render');
+        Schema::dropIfExists('stay_renter');
     }
 };
