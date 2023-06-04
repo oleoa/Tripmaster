@@ -65,11 +65,11 @@ class ProjectsController extends Controller
     $user_projects = Project::where('owner', Auth::id())->get();
 
     $projects = array();
-
     
     foreach($user_projects as $project_data)
     {
       $project = array(
+        'id' => $project_data['id'],
         'country' => $project_data['country'],
         'start' => date("F", mktime(0, 0, 0, explode('-', $project_data['start'])[1], 1)).' '.explode('-', $project_data['start'])[2],
         'end' => date("F", mktime(0, 0, 0, explode('-', $project_data['end'])[1], 1)).' '.explode('-', $project_data['end'])[2],
