@@ -87,6 +87,13 @@ class ProjectsController extends Controller
     return $this->view('my.projects.list');
   }
 
+  public function set($id)
+  {
+    $project = Project::find($id);
+    session()->put("project", $project);
+    return redirect()->route("home");
+  }
+
   
   public function delete(Request $request, $id)
   {

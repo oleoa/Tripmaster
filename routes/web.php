@@ -56,6 +56,7 @@ Route::prefix('/my')->group(function(){
   Route::name('my.')->group(function(){
     
     Route::get('/account', [AccountController::class, 'index'])->name('account');
+    Route::get('/set/project/{id}', [ProjectsController::class, 'set'])->name('set.project');
 
     Route::name('delete.')->group(function(){
       Route::get('/project/delete/{id}', [ProjectsController::class, 'delete'])->name('project');
