@@ -18,7 +18,7 @@ class MyStaysController extends Controller
 
     $stays = Stays::where('owner', '=', Auth::id())->get()->toArray();
     $this->data->set('stays', $stays);
-
+    
     return $this->view('my.stays.list');
   }
 
@@ -37,7 +37,7 @@ class MyStaysController extends Controller
     $stay = $this->stay_exists_and_ur_the_owner($request, $id);
     if(!is_array($stay))
       return $stay;
-    
+      
     $this->data->title('Edit Stay');
     $this->data->set('owner', Auth::id());
     $this->data->set('page_title', 'Edit Stay');

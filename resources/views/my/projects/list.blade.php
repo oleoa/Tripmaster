@@ -12,18 +12,23 @@
             <a href="{{route('my.creator.project')}}" class="btn">@lang('Create Project')</a>
           </div>
         </div>
-        <div class="grid gap-4">
+        <div class="grid gap-4 grid-cols-2">
           @foreach ($projects as $project)
-            <div class="dark:bg-slate-700 bg-turquoise-100 [&>h1]:flex [&>h1]:items-center text-white p-4 grid grid-cols-5 w-full @if($loop->last) rounded-b @else border-b-2 @endif">
-              <h1>{{$project['country']}}</h1>
-              <h1>{{$project['start']}}</h1>
-              <h1>{{$project['end']}}</h1>
-              <div class="flex items-center justify-end space-x-4">
-                <a class="px-6 py-4 bg-green-600 hover:bg-green-500 hover:no-underline rounded" href="">@lang('View')</a>
-                <a class="px-6 py-4 bg-blue-600 hover:bg-blue-500 hover:no-underline rounded" href="{{route('my.editor.project', ['id' => $project['id']])}}">@lang('Edit')</a>
-                <a class="px-6 py-4 bg-red-600 hover:bg-red-500 hover:no-underline rounded" href="{{route('my.delete.project', ['id' => $project['id']])}}">@lang('Delete')</a>
+            <article class="grid bg-slate-700 rounded p-4 space-y-4">
+              <div class="grid grid-cols-2">
+                <h1 class="py-4">{{$project['country']}}</h1>
+                <div class="w-full flex justify-end">
+                  <img src="{{$project['image']}}" alt="Country flag" class="w-24">
+                </div>
               </div>
-            </div>
+              <h2>{{$project['headcount']}} @lang($project['people']) goes</h2>
+              <h2>@lang('Start at') {{$project['start']}}</h2>
+              <h2>@lang('Ends at') {{$project['end']}}</h2>
+              <div class="w-full flex justify-end space-x-4">
+                <a href="{{route('home')}}" class="hover:no-underline p-4 rounded bg-red-500 text-white">Delete</a>
+                <a href="{{route('home')}}" class="hover:no-underline p-4 rounded bg-green-500 text-white">Check</a>
+              </div>
+            </article>
           @endforeach
         </div>
       </div>
