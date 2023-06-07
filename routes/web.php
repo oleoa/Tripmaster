@@ -58,7 +58,7 @@ Route::prefix('/my')->group(function(){
     Route::get('/account', [AccountController::class, 'index'])->name('account');
 
     Route::name('delete.')->group(function(){
-      Route::get('/project/delete/{id}', [ProjectsController::class, 'index'])->name('project');
+      Route::get('/project/delete/{id}', [ProjectsController::class, 'delete'])->name('project');
       Route::get('/stay/delete/{id}', [MyStaysController::class, 'delete'])->name('stay');
     });
 

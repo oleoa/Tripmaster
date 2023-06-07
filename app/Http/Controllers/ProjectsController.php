@@ -9,7 +9,9 @@ use App\Models\Project;
 
 class ProjectsController extends Controller
 {
-  private $REST_Countries = 'https://restcountries.com/v3.1/all?fields=name';
+  private $REST_Countries = 'https://restcountries.com/v3.1/all?fields=name';  
+  private $you_are_not_the_owner = "You are not the owner of that project";
+  private $not_found = "Project not found";
 
   public function creator()
   {
@@ -85,6 +87,17 @@ class ProjectsController extends Controller
     return $this->view('my.projects.list');
   }
 
+  
+  public function delete(Request $request, $id)
+  {
+    $attempt = $this->project_exists_and_ur_the_owner($request, $id);
+    if(!is_array($attempt))
+      return $attempt;
+
+    Project::destroy($id);
+    return redirect()->back();
+  }
+
   private function getFlag($country): string
   {
     $country = str_replace(' ', '%20', $country);
@@ -120,5 +133,24 @@ class ProjectsController extends Controller
       $countries_names[] = $name['name']['common'];
     sort($countries_names);
     return $countries_names;
+  }
+
+  private function project_exists_and_ur_the_owner($request, $id)
+  {
+    $project_exists = Project::find($id);
+    if(!$project_exists){
+      $request->session()->flash('alert', $this->not_found);
+      return redirect()->back();    
+    }
+    
+    $project = $project_exists->toArray();
+    
+    $belongs = $project['owner'] == Auth::id();
+    if(!$belongs){
+      $request->session()->flash('alert', $this->you_are_not_the_owner);
+      return redirect()->back();
+    }
+
+    return $project;
   }
 }

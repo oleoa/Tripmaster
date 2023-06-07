@@ -25,7 +25,7 @@
               <h2>@lang('Start at') {{$project['start']}}</h2>
               <h2>@lang('Ends at') {{$project['end']}}</h2>
               <div class="w-full flex justify-end space-x-4">
-                <a href="{{route('home')}}" class="hover:no-underline p-4 rounded bg-red-500 text-white">Delete</a>
+                <a href="{{route('my.delete.project', ['id' => $project['id']])}}" class="hover:no-underline p-4 rounded bg-red-500 text-white">Delete</a>
                 <a href="{{route('home')}}" class="hover:no-underline p-4 rounded bg-green-500 text-white">Check</a>
               </div>
             </article>
