@@ -16,8 +16,10 @@ class HomeController extends Controller
 
   public function index()
   {
+    /*
     if(!session()->get('project'))
       return redirect()->back();
+    */
     
     $this->data->set("p", session()->get("project"));
 

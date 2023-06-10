@@ -4,10 +4,11 @@ use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\Session;
 
+use App\Http\Controllers\MainController;
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\UserController;
-
 
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\StaysController;
@@ -35,7 +36,8 @@ Route::get('/locale/{locale}', function($locale){
 // ------------------------------ LOCALE ------------------------------
 
 // ------------------------------ ROUTES ------------------------------
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [MainController::class, 'index'])->name('main');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::name('sign')->group(function(){
   

@@ -91,7 +91,7 @@ class ProjectsController extends Controller
   {
     $project = Project::find($id);
     session()->put("project", $project);
-    return redirect()->route("home");
+    return redirect()->route("main");
   }
 
   
