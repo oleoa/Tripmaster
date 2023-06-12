@@ -43,5 +43,18 @@ class DatabaseSeeder extends Seeder
         DB::table("users")->where("id", "1")->update([
           "lastProjectOpened" => "1"
         ]);
+
+        DB::table("stays")->insert([
+          'id' => "1",
+          'owner' => "1",
+          'title' => "Estadia com vista a torre",
+          'description' => "Apartamento completo com vista à torre",
+          'capacity' => "2",
+          'bedrooms' => "1",
+          'price' => "20000",
+          'country' => "France",
+          'city' => "Paris",
+          'beingUsed' => "false"
+        ]);
     }
 }
