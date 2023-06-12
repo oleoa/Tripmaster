@@ -11,7 +11,12 @@
         </div>
         <div class="h-0.5 w-full dark:bg-slate-300 bg-slate-800"></div>
       </div>
-      <div class="px-4 grid gap-6 [&>a]:text-2xl">
+      <div class="grid gap-6 px-4 pb-6 justify-items-start [&>a]:text-2xl">
+        <a href="{{route('main')}}" class="@if($current['main']) underline @endif">@lang('Main')</a>
+        <a href="{{route('list.stays')}}" class="@if($current['stays']) underline @endif">@lang('Stays')</a>
+      </div>
+      <div class="h-0.5 w-full dark:bg-slate-300 bg-slate-800"></div>
+      <div class="px-4 py-6 grid gap-6 [&>a]:text-2xl">
         @if($isLogged)
           <a href="{{route('my.account')}}" class="@if($current['account']) underline @endif">@lang('Account')</a>
           <a href="{{route('my.list.projects')}}" class="@if($current['projects']) underline @endif">@lang('Projects')</a>

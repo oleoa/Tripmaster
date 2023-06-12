@@ -21,7 +21,7 @@ class Current
 {
   // li name => view path
   private $links = array(
-    'home' => 'home',
+    'main' => 'main',
     'stays' => 'stays.index',
     'projects' => array(
       'my.projects.list',
