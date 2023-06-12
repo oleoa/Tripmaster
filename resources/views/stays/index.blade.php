@@ -10,7 +10,7 @@
             <h1 class="text-2xl font-semibold">{{$stay->title}}</h1>
             <p class="mt-2 text-white">{{$stay->description}}</p>
             <div class="flex justify-between items-center mt-4">
-              <a href="{{route('show.stay', $stay->id)}}" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded">View</a>
+              <a href="{{route('show.stay', $stay->id)}}" class="bg-blue-500 hover:bg-blue-600 btn">View</a>
               <span class="font-semibold text-xl text-white">{{$stay->price}}€</span>
             </div>
           </div>

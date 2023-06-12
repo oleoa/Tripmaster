@@ -46,7 +46,7 @@ class StaysController extends Controller
     $stays_images = Stays_Images::where("stay", $stay->id)->get();
 
     $this->data->set('stay', $stay);
-    $this->data->set('stays_images', $stays_images);
+    $this->data->set('images', $stays_images);
 
     return $this->view('stays.stay');
   }
