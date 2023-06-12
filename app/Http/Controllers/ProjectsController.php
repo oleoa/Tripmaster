@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\User;
 
 class ProjectsController extends Controller
 {
@@ -89,7 +90,9 @@ class ProjectsController extends Controller
   public function set($id)
   {
     $project = Project::find($id);
-    session()->put("project", $project);
+    if(!$project)
+      return redirect()->route('my.list.projects');
+    User::where("id", Auth::id())->update(['lastProjectOpened' => $id]);
     return redirect()->route("main");
   }
 

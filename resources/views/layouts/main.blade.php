@@ -19,21 +19,24 @@
       <div class="px-4 py-6 grid gap-6 [&>a]:text-2xl">
         @if($isLogged)
           <a href="{{route('my.account')}}" class="@if($current['account']) underline @endif">@lang('Account')</a>
-          <a href="{{route('my.list.projects')}}" class="@if($current['projects']) underline @endif">@lang('Projects')</a>
+          <a href="{{route('my.list.projects')}}" class="@if($current['projects']) underline @endif">@lang('My Projects')</a>
           <a href="{{route('my.list.stays')}}" class="@if($current['myStays']) underline @endif">@lang('My stays')</a>
         @endif
       </div>
     </div>
-    <div class="px-4 grid grid-cols-3 [&>a]:text-2xl space-y-6 py-6">
-      @if ($isLogged)
-        <a class="col-span-2 flex items-end justify-start" href="{{route('signout')}}">@lang('Sign out')</a>
-      @else
-        <a href="{{route('signin')}}" class="col-span-3 @if($current['signin']) underline @endif">@lang('Sign in')</a>
-        <a href="{{route('signup')}}" class="col-span-2 @if($current['signup']) underline @endif">@lang('Sign up')</a>
-      @endif
-      @if(false)
-        <button class="w-8" onclick="//document.querySelector('body').classList.toggle('dark')"><img src="{{asset('images/darkmode.svg')}}" alt="Darkmode"></button>
-      @endif
+    <div>
+      <div class="h-0.5 w-full dark:bg-slate-300 bg-slate-800"></div>
+      <div class="px-4 grid grid-cols-3 [&>a]:text-2xl space-y-6 py-6">
+        @if ($isLogged)
+          <a class="col-span-2 flex items-end justify-start" href="{{route('signout')}}">@lang('Sign out')</a>
+        @else
+          <a href="{{route('signin')}}" class="col-span-3 @if($current['signin']) underline @endif">@lang('Sign in')</a>
+          <a href="{{route('signup')}}" class="col-span-2 @if($current['signup']) underline @endif">@lang('Sign up')</a>
+        @endif
+        @if(false)
+          <button class="w-8" onclick="//document.querySelector('body').classList.toggle('dark')"><img src="{{asset('images/darkmode.svg')}}" alt="Darkmode"></button>
+        @endif
+      </div>
     </div>
   </nav>
 

@@ -13,9 +13,6 @@ class MainController extends Controller
   {
     $this->data->title('Project');
 
-    if(!Auth::check())
-      return redirect()->route('signin');
-
     $lastProjectOpened = User::where("id", Auth::id())->first()->lastProjectOpened ?? false;
     if(!$lastProjectOpened)
       return redirect()->route('my.creator.project');
