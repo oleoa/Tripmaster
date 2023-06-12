@@ -22,7 +22,10 @@ class Current
   // li name => view path
   private $links = array(
     'main' => 'main',
-    'stays' => 'stays.index',
+    'stays' => array(
+      'stays.index',
+      'stays.stay',
+    ),
     'projects' => array(
       'my.projects.list',
       'my.projects.create',
