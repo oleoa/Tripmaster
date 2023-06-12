@@ -25,7 +25,7 @@ class UserController extends Controller
   public function signout()
   {
     Session::flush();
-    return redirect()->route('main');
+    return redirect()->route('signin');
   }
   
   public function signing_in(Request $request)

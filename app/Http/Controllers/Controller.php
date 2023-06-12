@@ -19,9 +19,6 @@ class Controller extends BaseController
   public function __construct()
   {
     $this->data = Data::getInstance();
-    $currentRouteName = Route::currentRouteName();
-    if($currentRouteName != "signin" && $currentRouteName != "signup" && $currentRouteName != "signout" && $currentRouteName != "signing_in" && $currentRouteName != "signing_up" && !Auth::check())
-      return redirect()->route('signin');
   }
   
   protected function view($page)
