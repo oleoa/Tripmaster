@@ -39,5 +39,9 @@ class DatabaseSeeder extends Seeder
           "children" => "0",
           "owner" => "1"
         ]);
+
+        DB::table("users")->where("id", "1")->update([
+          "lastProjectOpened" => "1"
+        ]);
     }
 }

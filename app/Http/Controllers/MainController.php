@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\Project;
+use App\Models\User;
 
 class MainController extends Controller
 {
@@ -10,10 +13,18 @@ class MainController extends Controller
   {
     $this->data->title('Project');
 
-    if(!session()->get('project'))
-      return redirect()->route('home');
+    if(!Auth::check())
+      return redirect()->route('signin');
+
+    $lastProjectOpened = User::where("id", Auth::id())->first()->lastProjectOpened ?? false;
+    if(!$lastProjectOpened)
+      return redirect()->route('my.creator.project');
     
-    $this->data->set("p", session()->get("project"));
+    $project = Project::where("id", $lastProjectOpened)->first() ?? false;
+    if(!$project)
+      return redirect()->route('my.creator.project');
+      
+    $this->data->set("p", $project);
 
     return $this->view('main');
   }

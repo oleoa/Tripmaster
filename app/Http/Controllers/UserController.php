@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 
 class UserController extends Controller
-{  
+{
   public function signin()
   {
     $this->data->title('Signin');
@@ -25,7 +25,7 @@ class UserController extends Controller
   public function signout()
   {
     Session::flush();
-    return redirect()->route('home');
+    return redirect()->route('main');
   }
   
   public function signing_in(Request $request)
@@ -42,7 +42,7 @@ class UserController extends Controller
       return redirect()->route('signin');
     
     $request->session()->regenerate();
-    return redirect()->route('home');
+    return redirect()->route('main');
   }
   
   public function signing_up(Request $request)
@@ -71,6 +71,6 @@ class UserController extends Controller
     Auth::attempt($user);
     $request->session()->regenerate();
 
-    return redirect()->route('home');
+    return redirect()->route('signin');
   }
 }
