@@ -19,7 +19,7 @@
     </div>
     <div class="flex justify-end w-full p-6 space-x-4">
       <a href="{{route('list.stays')}}" class="btn">@lang('Back')</a>
-      <a href="{{route('list.stays')}}" class="btn bg-green-500">@lang('Buy')</a>
+      <a href="{{route('rent.stay', ["id" => $stay['id']])}}" class="btn bg-green-500">@lang('Rent')</a>
     </div>
   </div>
 @endsection

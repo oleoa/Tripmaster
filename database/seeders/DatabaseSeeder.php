@@ -54,7 +54,7 @@ class DatabaseSeeder extends Seeder
           'price' => "20000",
           'country' => "France",
           'city' => "Paris",
-          'beingUsed' => "0"
+          'rented' => "0"
         ]);
         
         DB::table("stays_images")->insert([

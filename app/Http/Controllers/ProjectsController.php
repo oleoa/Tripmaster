@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\Stays;
 use App\Models\User;
 
 class ProjectsController extends Controller
@@ -105,6 +106,30 @@ class ProjectsController extends Controller
 
     Project::destroy($id);
     return redirect()->back();
+  }
+
+  public function rentStay(Request $request, $id)
+  {
+    $lastProjectOpened = User::where("id", Auth::id())->first()->lastProjectOpened ?? false;
+    if(!$lastProjectOpened)
+      return redirect()->route('list.stays');
+
+    $project = Project::where("id", $lastProjectOpened)->first();
+    if(!$project)
+      return redirect()->route('list.stays');
+
+    $attempt = $this->project_exists_and_ur_the_owner($request, $project->id);
+    if(!is_array($attempt))
+      return $attempt;
+
+    $stay = Stays::find($id);
+    $stay->rented = true;
+    $stay->save();
+
+    $project->stay = $stay->id;
+    $project->save();
+
+    return redirect()->route("main");
   }
 
   private function getFlag($country): string

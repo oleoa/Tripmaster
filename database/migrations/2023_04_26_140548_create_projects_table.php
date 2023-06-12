@@ -20,6 +20,7 @@ return new class extends Migration
           $table->integer('headcount')->nullable();
           $table->integer('adults')->nullable();
           $table->integer('children')->nullable();
+          $table->integer('stay')->nullable();
           $table->unsignedBigInteger('owner');
           $table->foreign('owner')->references('id')->on('users');
           $table->timestamps();
