@@ -56,5 +56,23 @@ class DatabaseSeeder extends Seeder
           'city' => "Paris",
           'beingUsed' => "false"
         ]);
+
+        DB::table("stays_images")->insert([
+          'id' => "1",
+          'stay' => "1",
+          'image_path' => "TteZDZ9OnxhGliSsmQrfFxR2zwSjRB8XfwbCsx4y.jpg"
+        ]);
+
+        DB::table("stays_images")->insert([
+          'id' => "1",
+          'stay' => "1",
+          'image_path' => "Dx1sR29Q6KJWT2XfIWkon5VOmIdYXzwR5COD3MTy.jpg"
+        ]);
+
+        DB::table("stays_images")->insert([
+          'id' => "1",
+          'stay' => "1",
+          'image_path' => "xqKFcuGTGSpoHfsjpBQgH4n9O2mkrJ4K2XotcUrl.jpg"
+        ]);
     }
 }
