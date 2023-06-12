@@ -6,6 +6,10 @@
       <h2>@lang('Start at') {{$p['start']}}</h2>
       <h2>@lang('Ends at') {{$p['end']}}</h2>
     </div>
-    <h2 class="text-center">Unselected stay</h2>
+    @if ($p['stay'])
+      <h2 class="text-center">{{$s['title']}}</h2>
+    @else
+      <h2 class="text-center">Unselected stay</h2>  
+    @endif
   </div>
 @endsection
