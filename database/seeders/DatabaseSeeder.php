@@ -27,5 +27,17 @@ class DatabaseSeeder extends Seeder
           "email" => "admin@tripmaster",
           "password" => Hash::make("admin123"),
         ]);
+
+        DB::table("projects")->insert([
+          "id" => 1,
+          "country" => "France",
+          "image" => "https://flagsapi.com/FR/flat/64.png",
+          "start" => "2023-06-07",
+          "end" => "2023-06-021",
+          "headcount" => "1",
+          "adults" => "1",
+          "children" => "0",
+          "owner" => "1"
+        ]);
     }
 }

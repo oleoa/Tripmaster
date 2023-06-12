@@ -43,7 +43,6 @@ class ProjectsController extends Controller
       'children' => $valideted['children'],
       'headcount' => $valideted['adults'] + $valideted['children'],
       'image' => $this->getFlag($valideted['country']),
-      'isFlag' => true,
       'owner' => Auth::id()
     );
     
