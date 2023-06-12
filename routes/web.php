@@ -53,6 +53,10 @@ Route::name('list.')->group(function(){
   Route::get('/stays', [StaysController::class, 'index'])->name('stays');
 });
 
+Route::name('show.')->group(function(){
+  Route::get('/stay/{id}', [StaysController::class, 'show'])->name('stay');
+});
+
 Route::prefix('/my')->group(function(){
   Route::name('my.')->group(function(){
     

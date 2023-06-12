@@ -34,4 +34,20 @@ class StaysController extends Controller
 
     return $this->view('stays.index');
   }
+
+  public function show($id)
+  {
+    $this->data->title('Stay');
+
+    $stay = Stays::where("id", $id)->first() ?? false;
+    if(!$stay)
+      return redirect()->route('list.stays');
+
+    $stays_images = Stays_Images::where("stay", $stay->id)->get();
+
+    $this->data->set('stay', $stay);
+    $this->data->set('stays_images', $stays_images);
+
+    return $this->view('stays.stay');
+  }
 }

@@ -30,6 +30,10 @@
     @apply cursor-pointer hover:underline dark:text-white;
   }
 
+  p {
+    @apply dark:text-white;
+  }
+
   img {
     @apply rounded w-full h-full;
   }
