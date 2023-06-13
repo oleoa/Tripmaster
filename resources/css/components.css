@@ -11,5 +11,13 @@
 }
 
 .btn-good {
-  @apply bg-green-600 hover:bg-green-500 font-semibold px-4 py-2 rounded hover:no-underline !important;
+  @apply bg-green-600 hover:bg-green-500 font-semibold px-4 py-2 rounded hover:no-underline !important;  
+}
+
+.all-center {
+  @apply flex flex-row items-center justify-center !important;
+}
+
+main {
+  @apply w-full p-4 gap-4 border-2 border-slate-800 dark:border-slate-300 rounded;
 }

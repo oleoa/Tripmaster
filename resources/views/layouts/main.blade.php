@@ -42,9 +42,9 @@
     </div>
   </nav>
 
-  <main class='pl-48 min-h-screen w-full bg-white dark:bg-slate-800'>
+  <div class='pl-52 p-4 min-h-screen w-full bg-white dark:bg-slate-800'>
     @yield('body')
-  </main>
+  </div>
   
   @if($errors->any())
     <div class="fixed top-0 w-full h-full bg-black/70 flex items-start justify-center p-6" id="errors">
