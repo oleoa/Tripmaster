@@ -57,6 +57,8 @@ class MyStaysController extends Controller
     $this->data->set('form_route', route('my.create.stay'));
     $this->data->set('submit_button', 'Create');
     $this->data->set('page_title', 'Create Stay');
+    $countries = $this->countries->getAll();
+    $this->data->set('possible_countries', $countries);
     return $this->view('my.stays.create_and_edit');
   }
   

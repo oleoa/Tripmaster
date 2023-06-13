@@ -8,17 +8,20 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Classes\Data;
+use App\Helpers\Countries;
+use App\Helpers\Data;
 
 class Controller extends BaseController
 {
   use AuthorizesRequests, ValidatesRequests;
 
   protected Data $data;
+  protected Countries $countries;
 
   public function __construct()
   {
     $this->data = Data::getInstance();
+    $this->countries = Countries::getInstance();
   }
   
   protected function view($page)

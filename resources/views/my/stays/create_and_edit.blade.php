@@ -38,18 +38,25 @@
 
     <div>
       <h2>@lang('Country')</h2>
-      <input type="text" name="country" value="{{$editing_case ? $stay['country'] : old('country')}}"/>
+      <select name="country" class="p-4">
+        @foreach($possible_countries as $country)
+          <option value="{{$country}}" {{$editing_case && ($stay['country'] == $country) || $country == 'France' ? 'selected' : ''}}>{{$country}}</option>
+        @endforeach
+      </select>
     </div>
+
     <div>
       <h2>@lang('City')</h2>
       <input type="text" name="city" value="{{$editing_case ? $stay['city'] : old('city')}}"/>
     </div>
+
     @if(!$editing_case)
       <div>
         <h2>@lang('Images')</h2>
         <input type="file" name="images[]" placeholder="Images" multiple="TRUE"/>
       </div>
     @endif
+
     <div class="col-span-3">
       <input type="submit" value="@lang($submit_button)" class="btn-good"/>
     </div>

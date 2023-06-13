@@ -11,7 +11,6 @@ use App\Models\User;
 
 class ProjectsController extends Controller
 {
-  private $REST_Countries = 'https://restcountries.com/v3.1/all?fields=name';  
   private $you_are_not_the_owner = "You are not the owner of that project";
   private $not_found = "Project not found";
 
@@ -19,7 +18,7 @@ class ProjectsController extends Controller
   {
     $this->data->title('Create Project');
 
-    $countries = $this->getCountries();
+    $countries = $this->countries->getAll();
     
     $this->data->set('selected', "France");
     $this->data->set('countries', $countries);
@@ -44,7 +43,7 @@ class ProjectsController extends Controller
       'adults' => $valideted['adults'],
       'children' => $valideted['children'],
       'headcount' => $valideted['adults'] + $valideted['children'],
-      'image' => $this->getFlag($valideted['country']),
+      'image' => $this->contries->getFlag($valideted['country']),
       'owner' => Auth::id()
     );
     
@@ -96,7 +95,6 @@ class ProjectsController extends Controller
     User::where("id", Auth::id())->update(['lastProjectOpened' => $id]);
     return redirect()->route("main");
   }
-
   
   public function delete(Request $request, $id)
   {
@@ -130,46 +128,6 @@ class ProjectsController extends Controller
     $project->save();
 
     return redirect()->route("main");
-  }
-
-  private function getFlag($country): string
-  {
-    $country = str_replace(' ', '%20', $country);
-    $get_code = "https://restcountries.com/v3.1/name/$country?fields=cca2";
-    $data = $this->doCurlURL($get_code);
-
-    $code = $data[0]['cca2'];
-    $swaps = array('UM' => 'US');
-    foreach($swaps as $key => $value)
-      $code = str_replace($key, $value, $code);
-      
-    $url = "https://flagsapi.com/$code/flat/64.png";
-    return $url;
-  }
-
-  private function doCurlURL($url)
-  {
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, $url);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-    $response = curl_exec($curl);
-    curl_close($curl);
-    $data = json_decode($response, true);
-    return $data;
-  }
-  
-  private function getCountries(): array
-  {
-    $data = $this->doCurlURL($this->REST_Countries);
-    if(!$data)
-      return array();
-      
-    $countries_names = array();
-    foreach($data as $name)
-      $countries_names[] = $name['name']['common'];
-    sort($countries_names);
-    return $countries_names;
   }
 
   private function project_exists_and_ur_the_owner($request, $id)

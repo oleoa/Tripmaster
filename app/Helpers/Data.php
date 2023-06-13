@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Classes;
+namespace App\Helpers;
 
-use App\Classes\Current;
+use App\Helpers\Current;
 
 class Data
 {
