@@ -21,12 +21,12 @@ class MainController extends Controller
     $project = Project::where("id", $lastProjectOpened)->first() ?? false;
     if(!$project)
       return redirect()->route('my.creator.project');
-      
-    $this->data->set("p", $project);
 
     $stay = Stays::where("id", $lastProjectOpened)->first() ?? false;
     if($stay)
-      $this->data->set("s", $stay);
+      $project['stay'] = $stay;
+
+    $this->data->set("p", $project);
 
     return $this->view('main');
   }
