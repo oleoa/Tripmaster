@@ -10,10 +10,8 @@
         <h1>{{$name}}</h1>
         <h2>@lang('Email:')</h2>
         <h2>{{$email}}</h2>
-        <h2>@lang('Tempo como user:')</h2>
-        <h2>@lang($user_time_since_created)</h2>
-        <h2>@lang('Número de projetos:')</h2>
-        <h2>@lang($projects_count)</h2>
+        <a href="{{route('my.list.projects')}}" class="btn-okay">@lang('My Projects')</a>
+        <a href="{{route('my.list.stays')}}" class="btn-okay">@lang('My stays')</a>
       </div>
     </div>
   </div>

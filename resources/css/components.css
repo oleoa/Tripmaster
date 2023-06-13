@@ -15,9 +15,9 @@
 }
 
 .all-center {
-  @apply flex flex-row items-center justify-center !important;
+  @apply flex flex-col items-center justify-center !important;
 }
 
 main {
-  @apply w-full p-4 gap-4 border-2 border-slate-800 dark:border-slate-300 rounded;
+  @apply w-full p-4 gap-4 rounded;
 }
