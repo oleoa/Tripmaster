@@ -18,8 +18,8 @@
       <p class="text-2xl">@lang('Country'): {{$stay['country']}}</p>
     </div>
     <div class="flex justify-end w-full p-6 space-x-4">
-      <a href="{{route('list.stays')}}" class="btn">@lang('Back')</a>
-      <a href="{{route('rent.stay', ["id" => $stay['id']])}}" class="btn bg-green-500">@lang('Rent')</a>
+      <a href="{{$backHref}}" class="btn">@lang('Back')</a>
+      <a href="{{route('rent.stay', ["id" => $stay['id']])}}" class="btn-good">@lang('Rent')</a>
     </div>
   </div>
 @endsection

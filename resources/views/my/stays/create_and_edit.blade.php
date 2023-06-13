@@ -4,7 +4,7 @@
   <div class="flex flex-col items-center justify-center p-4 space-y-4 border-2 rounded">
     <div class="relative w-full flex justify-center">
       <div class="absolute right-0 top-0 py-8 px-4">
-        <a href="{{route('my.list.stays')}}" class="btn">@lang('List Stay')</a>
+        <a href="{{route('my.list.stays')}}" class="btn-okay">@lang('List Stay')</a>
       </div>
       <h1 class="py-6">@lang($page_title)</h1>
     </div>
@@ -51,7 +51,7 @@
         </div>
       @endif
       <div class="col-span-3">
-        <input type="submit" value="@lang($submit_button)" class="hover:bg-slate-500"/>
+        <input type="submit" value="@lang($submit_button)" class="btn-good"/>
       </div>
     </form>
   </div>

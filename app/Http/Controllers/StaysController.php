@@ -48,6 +48,8 @@ class StaysController extends Controller
     $this->data->set('stay', $stay);
     $this->data->set('images', $stays_images);
 
+    $this->data->set('backHref', url()->previous());
+
     return $this->view('stays.stay');
   }
 }

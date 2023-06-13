@@ -1,8 +1,11 @@
 @extends('layouts.main')
 @section('body')
 <div class="w-full flex flex-col justify-center items-center p-4">
-  <div class="py-8">
+  <div class="py-8 relative w-full flex items-center justify-center border-2 rounded p-4">
     <h1>@lang('Create Project')</h1>
+    <div class="absolute right-0 p-8">
+      <a href="{{route("my.list.projects")}}" class="btn-okay">@lang("List Projects")</a>
+    </div>
   </div>
   <form action="{{route('my.create.project')}}" method="POST" class="grid grid-cols-2 gap-4">
     @csrf
@@ -30,7 +33,7 @@
         @endforeach
       </select>
     </div>
-    <input type="submit" value="@lang('Create')" class="bg-green-600 col-span-2 p-4 rounded text-white">
+    <input type="submit" value="@lang('Create')" class="col-span-2 btn-good">
   </form>
 </div>
 @endsection

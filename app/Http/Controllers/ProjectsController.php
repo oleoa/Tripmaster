@@ -162,6 +162,9 @@ class ProjectsController extends Controller
   private function getCountries(): array
   {
     $data = $this->doCurlURL($this->REST_Countries);
+    if(!$data)
+      return array();
+      
     $countries_names = array();
     foreach($data as $name)
       $countries_names[] = $name['name']['common'];
