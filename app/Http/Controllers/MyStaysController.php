@@ -18,8 +18,28 @@ class MyStaysController extends Controller
 
     $stays = Stays::where('owner', '=', Auth::id())->get()->toArray();
     $this->data->set('stays', $stays);
-    
+
     return $this->view('my.stays.list');
+  }
+
+  public function enable(Request $request, $id)
+  {
+    $attempt = $this->stay_exists_and_ur_the_owner($request, $id);
+    if(!is_array($attempt))
+      return $attempt;
+
+    Stays::where("id", $id)->update(["status" => "available"]);
+    return redirect()->back();
+  }
+
+  public function disable(Request $request, $id)
+  {
+    $attempt = $this->stay_exists_and_ur_the_owner($request, $id);
+    if(!is_array($attempt))
+      return $attempt;
+
+    Stays::where("id", $id)->update(["status" => "disabled"]);
+    return redirect()->back();
   }
 
   public function delete(Request $request, $id)

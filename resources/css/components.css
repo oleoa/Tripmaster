@@ -6,6 +6,10 @@
   @apply bg-red-600 hover:bg-red-500 font-semibold px-4 py-2 rounded hover:no-underline select-none !important;
 }
 
+.btn-alert {
+  @apply bg-orange-600 hover:bg-orange-500 font-semibold px-4 py-2 rounded hover:no-underline select-none !important;
+}
+
 .btn-okay {
   @apply bg-blue-600 hover:bg-blue-500 font-semibold px-4 py-2 rounded hover:no-underline select-none !important;
 }

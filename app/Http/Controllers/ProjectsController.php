@@ -121,7 +121,7 @@ class ProjectsController extends Controller
       return $attempt;
 
     $stay = Stays::find($id);
-    $stay->rented = true;
+    $stay->status = 'rented';
     $stay->save();
 
     $project->stay = $stay->id;
@@ -148,10 +148,10 @@ class ProjectsController extends Controller
     if(!$stay)
       return redirect()->route('main');
     
-    if(!$stay->rented)
+    if($stay->status != 'rented')
       return redirect()->route('main');
 
-    $stay->rented = false;
+    $stay->status = 'available';
     $stay->save();
 
     $project->stay = 0;

@@ -74,8 +74,15 @@ Route::prefix('/my')->group(function(){
     });
 
     Route::name('remove.')->group(function(){
-      //Route::get('/project/delete/{id}', [ProjectsController::class, 'delete'])->name('project');
       Route::get('/project/remove/stay/{id}', [ProjectsController::class, 'removeStay'])->name('stay');
+    });
+
+    Route::name('disable.')->group(function(){
+      Route::get('/my/stays/disable/{id}', [MyStaysController::class, 'disable'])->name('stay');
+    });
+
+    Route::name('enable.')->group(function(){
+      Route::get('/my/stays/enable/{id}', [MyStaysController::class, 'enable'])->name('stay');
     });
 
     Route::name('editor.')->group(function(){

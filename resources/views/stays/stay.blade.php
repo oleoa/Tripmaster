@@ -20,10 +20,10 @@
     </div>
     <div class="flex justify-end w-full p-6 space-x-4">
       <a href="{{$backHref}}" class="btn-okay">@lang('Back')</a>
-      @if ($stay['rented'])
+      @if ($stay['status'] == 'rented')
         <a class="btn-disabled">@lang('Rent')</a>
       @else
-        <a href="{{route('rent.stay', ["id" => $stay['id']])}}" class="btn-good">@lang('Rent')</a>  
+        <a href="{{route('rent.stay', ["id" => $stay['id']])}}" class="btn-good">@lang('Rent')</a>
       @endif
     </div>
   </div>

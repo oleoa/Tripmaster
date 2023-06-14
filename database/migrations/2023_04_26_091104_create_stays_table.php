@@ -24,7 +24,7 @@ return new class extends Migration
           $table->string('city');
           $table->double('lat', 16, 14)->nullable();
           $table->double('lon', 17, 14)->nullable();
-          $table->boolean('rented')->default(false);
+          $table->string('status')->default('available');
           $table->timestamps();
         });
     }

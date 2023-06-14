@@ -24,14 +24,19 @@
       <div class="grid grid-cols-1">
         @foreach ($stays as $stay)
           <div class="dark:bg-slate-700 bg-turquoise-100 [&>h3]:flex [&>h3]:items-center text-white p-4 grid grid-cols-6 w-full @if($loop->last) rounded-b @else border-b-2 @endif">
-            <h3>{{$stay['title']}}</h3>
-            <h3>{{$stay['rented']?'Rented':'Not rented'}}</h3>
+            <h3 class="pr-8">{{$stay['title']}}</h3>
+            <h3>{{$stay['status']}}</h3>
             <h3>{{$stay['capacity']}}</h3>
             <h3>{{$stay['price']}}</h3>
             <h3>{{$stay['city']}}</h3>
             <div class="flex items-center justify-end space-x-4">
               <a class="btn" href="{{route("show.stay", ['id' => $stay['id']])}}">@lang('View')</a>
               <a class="btn-okay" href="{{route('my.editor.stay', ['id' => $stay['id']])}}">@lang('Edit')</a>
+              @if ($stay['status'] == 'available')
+                <a class="btn-alert" href="{{route('my.disable.stay', ['id' => $stay['id']])}}">@lang('Disable')</a>
+              @else
+                <a class="btn-good" href="{{route('my.enable.stay', ['id' => $stay['id']])}}">@lang('Enable')</a>  
+              @endif
               <a class="btn-danger" href="{{route('my.delete.stay', ['id' => $stay['id']])}}">@lang('Delete')</a>
             </div>
           </div>

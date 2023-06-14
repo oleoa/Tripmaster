@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
           "headcount" => "1",
           "adults" => "1",
           "children" => "0",
-          "owner" => "1"
+          "owner" => "1",
         ]);
 
         DB::table("users")->where("id", "1")->update([
@@ -54,7 +54,7 @@ class DatabaseSeeder extends Seeder
           'price' => "20000",
           'country' => "France",
           'city' => "Paris",
-          'rented' => "0"
+          "status" => "available"
         ]);
         
         DB::table("stays_images")->insert([
