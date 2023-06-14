@@ -2,11 +2,12 @@
 @section('body')
   <div class="p-6 grid">
     <h1 class="text-center">{{$stay['title']}}</h1>
-    <div class="grid grid-cols-3 py-6">
+    <div class="grid grid-cols-2 gap-4 py-6">
       @foreach ($images as $image)
-        <div class="flex justify-center p-6">
-          <img src="{{asset('storage/stays/'.$image['image_path'])}}" alt="{{$stay['title']}}" class="w-full h-full">
-        </div>
+        <? // temporário ?>
+        @if($loop->index < 2)
+          <img src="{{asset('storage/stays/'.$image['image_path'])}}" alt="{{$stay['title']}}">
+        @endif
       @endforeach
     </div>
     <div class="grid grid-cols-2 px-6 space-y-4">

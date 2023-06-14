@@ -35,7 +35,7 @@
   }
 
   img {
-    @apply rounded w-full h-full;
+    @apply rounded max-w-full h-auto !important;
   }
 
   input {
