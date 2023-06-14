@@ -19,7 +19,7 @@
 }
 
 main {
-  @apply w-full p-4 gap-4 rounded;
+  @apply w-full grid p-4 gap-4 rounded;
 }
 
 select {
