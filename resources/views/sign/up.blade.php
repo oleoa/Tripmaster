@@ -14,10 +14,10 @@
       <input type="password" name="password" id="password"/>
       <label for="password_confirmation"><h2>@lang('Confirm Password')</h2></label>
       <input type="password" name="password_confirmation" id="password_confirmation"/>
-      <input type="submit" value="@lang('Sign up')"/>
+      <input type="submit" class="btn-good" value="@lang('Sign up')"/>
     </form>
     <div class="p-4">
-      <h2 class="text-2xl">@lang('Have an account?') <a href="{{route('signin')}}">@lang('Sign in!')</a></h2>
+      <h2 class="text-2xl">@lang('Have an account?') <a class="dark:text-blue-500" href="{{route('signin')}}">@lang('Sign in')</a>!</h2>
     </div>
   </div>
 @endsection
