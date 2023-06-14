@@ -13,7 +13,7 @@
       @foreach ($stays as $stay)
         @if ($stay->status != 'disabled')
           <div class="bg-slate-700 rounded-lg shadow-lg overflow-hidden">
-            <img class="w-full h-56 object-cover object-center" src="{{asset('storage/stays/'.$stay->image)}}" alt="{{$stay->title}}">
+            <img class="w-full h-56 object-cover object-center" src="{{$stay->image}}" alt="{{$stay->title}}">
             <div class="p-4">
               <h1 class="text-2xl font-semibold">{{$stay->title}}</h1>
               <p class="mt-2 text-white">{{$stay->description}}</p>

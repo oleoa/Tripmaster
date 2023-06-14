@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Project;
@@ -11,6 +12,8 @@ use App\Models\User;
 
 class StaysController extends Controller
 {
+  const NO_IMAGE = "https://pumpkin.pt/wp-content/uploads/anexos/Hellokitty2.jpg";
+
   public function index()
   {
     $this->data->title('Stays');
@@ -28,7 +31,11 @@ class StaysController extends Controller
     $stays = Stays::where("country", $project->country)->get();
     for($i = 0; $i < count($stays); $i++)
     {
-      $stays[$i]->image = Stays_Images::where("stay", $stays[$i]->id)->first()->image_path ?? false;
+      $img_path = Stays_Images::where("stay", $stays[$i]->id)->first()->image_path ?? false;
+      if(Storage::disk('public')->exists('stays/'.$img_path))
+        $stays[$i]->image =  asset('storage/stays/'.$img_path);
+      else
+        $stays[$i]->image =  $this::NO_IMAGE;
     }
 
     $this->data->set('staySelected', $project->stay);
