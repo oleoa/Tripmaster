@@ -27,7 +27,7 @@
     </div>
     <div class="grid grid-rows-1 gap-4 col-span-2">
       <h2>@lang('Country')</h2>
-      <select name="country" style="border-right-width: 1rem;">
+      <select name="country" class="p-4" style="border-right-width: 1rem;">
         @foreach($countries as $country)
           <option value="{{$country}}" @if($country == $selected) selected @endif>{{$country}}</option>
         @endforeach
