@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\Rents;
 use App\Models\Stays;
 use App\Models\User;
 
@@ -108,6 +109,12 @@ class ProjectsController extends Controller
 
   public function rentStay(Request $request, $id)
   {
+    $valideted = $request->validate([
+      'start_date' => 'required',
+      'end_date' => 'required',
+      'headcount' => 'required',
+    ]);
+
     $lastProjectOpened = User::where("id", Auth::id())->first()->lastProjectOpened ?? false;
     if(!$lastProjectOpened)
       return redirect()->route('list.stays');
@@ -132,6 +139,16 @@ class ProjectsController extends Controller
 
     $project->stay = $stay->id;
     $project->save();
+    
+    $rent = array(
+      'project' => $project->id,
+      'stay' => $stay->id,
+      'user' => Auth::id(),
+      'start_date' => $valideted['start_date'],
+      'end_date' => $valideted['end_date'],
+      'headcount' => $valideted['headcount']
+    );
+    $rent = Rents::create($rent);
 
     return redirect()->route("main");
   }

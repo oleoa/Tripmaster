@@ -67,4 +67,27 @@ class StaysController extends Controller
 
     return $this->view('stays.stay');
   }
+  
+  public function rent($id)
+  {
+    $stay = Stays::where("id", $id)->first() ?? false;
+    if(!$stay)
+      return redirect()->route('list.stays');
+
+    $lastProjectOpened = User::where("id", Auth::id())->first()->lastProjectOpened ?? false;
+    if(!$lastProjectOpened)
+      return redirect()->route('my.creator.project');
+    
+    $project = Project::where("id", $lastProjectOpened)->first() ?? false;
+    if(!$project)
+      return redirect()->route('my.creator.project');
+
+    $this->data->title('Rent');
+    $this->data->set("stay", $stay);
+    $this->data->set("minDate", $project->start);
+    $this->data->set("maxDate", $project->end);
+    $this->data->set("maxHeadcount", $project->headcount);
+
+    return $this->view('stays.rent');
+  }
 }

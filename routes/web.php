@@ -58,8 +58,11 @@ Route::name('show.')->group(function(){
 });
 
 Route::name('rent.')->group(function(){
-  //Route::get('/projects', [ProjectsController::class, 'index'])->name('projects');
-  Route::get('/rent/stay/{id}', [ProjectsController::class, 'rentStay'])->name('stay');
+  Route::get('/rent/stay/{id}', [StaysController::class, 'rent'])->name('stay');
+});
+
+Route::name('renting.')->group(function(){
+  Route::get('/renting/stay/{id}', [ProjectsController::class, 'rentStay'])->name('stay');
 });
 
 Route::prefix('/my')->group(function(){

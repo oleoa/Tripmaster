@@ -19,13 +19,15 @@ return new class extends Migration
     {
       Schema::create('rents', function (Blueprint $table) {
         $table->id();
+        $table->unsignedBigInteger('project');
+        $table->foreign('project')->references('id')->on('projects')->onDelete('cascade');
         $table->unsignedBigInteger('stay');
         $table->foreign('stay')->references('id')->on('stays')->onDelete('cascade');
         $table->unsignedBigInteger('user');
         $table->foreign('user')->references('id')->on('users')->onDelete('no action');
         $table->date('start_date');
         $table->date('end_date');
-        $table->integer('headcountUsed');
+        $table->integer('headcount');
         $table->timestamps();
       });
     }
