@@ -136,9 +136,10 @@ class ProjectsController extends Controller
     if(!$lastProjectOpened)
       return redirect()->route('main');
 
+      
     $project = Project::where("id", $lastProjectOpened)->first();
     if(!$project)
-      return redirect()->route('my.list.projects');
+      return redirect()->route('main');
 
     $attempt = $this->project_exists_and_ur_the_owner($request, $project->id);
     if(!is_array($attempt))
@@ -146,10 +147,10 @@ class ProjectsController extends Controller
 
     $stay = Stays::find($id);
     if(!$stay)
-      return redirect()->route('my.list.projects');
+      return redirect()->route('main');
     
     if(!$stay->rented)
-      return redirect()->route('my.list.projects');
+      return redirect()->route('main');
 
     $stay->rented = false;
     $stay->save();
