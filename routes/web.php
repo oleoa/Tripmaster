@@ -73,6 +73,11 @@ Route::prefix('/my')->group(function(){
       Route::get('/stay/delete/{id}', [MyStaysController::class, 'delete'])->name('stay');
     });
 
+    Route::name('remove.')->group(function(){
+      //Route::get('/project/delete/{id}', [ProjectsController::class, 'delete'])->name('project');
+      Route::get('/project/remove/stay/{id}', [ProjectsController::class, 'removeStay'])->name('stay');
+    });
+
     Route::name('editor.')->group(function(){
       Route::get('/stays/edit/{id}', [MyStaysController::class, 'editor'])->name('stay');
       Route::get('/projects/edit/{id}', [ProjectsController::class, 'editor'])->name('project');

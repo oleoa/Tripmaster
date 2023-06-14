@@ -130,6 +130,36 @@ class ProjectsController extends Controller
     return redirect()->route("main");
   }
 
+  public function removeStay(Request $request, $id)
+  {
+    $lastProjectOpened = User::where("id", Auth::id())->first()->lastProjectOpened ?? false;
+    if(!$lastProjectOpened)
+      return redirect()->route('main');
+
+    $project = Project::where("id", $lastProjectOpened)->first();
+    if(!$project)
+      return redirect()->route('my.list.projects');
+
+    $attempt = $this->project_exists_and_ur_the_owner($request, $project->id);
+    if(!is_array($attempt))
+      return $attempt;
+
+    $stay = Stays::find($id);
+    if(!$stay)
+      return redirect()->route('my.list.projects');
+    
+    if(!$stay->rented)
+      return redirect()->route('my.list.projects');
+
+    $stay->rented = false;
+    $stay->save();
+
+    $project->stay = 0;
+    $project->save();
+
+    return redirect()->route("main");
+  }
+
   private function project_exists_and_ur_the_owner($request, $id)
   {
     $project_exists = Project::find($id);

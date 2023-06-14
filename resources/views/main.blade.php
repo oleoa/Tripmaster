@@ -21,9 +21,10 @@
           <div class="px-4">
             <h1 class="text-2xl font-semibold">{{$stay->title}}</h1>
             <p class="mt-2 text-white">{{$stay->description}}</p>
+            <span class="font-semibold text-white">{{$stay->price}}€</span>
             <div class="flex justify-between items-center mt-4">
               <a href="{{route('show.stay', $stay->id)}}" class="btn-okay">View</a>
-              <span class="font-semibold text-xl text-white">{{$stay->price}}€</span>
+              <a href="{{route('my.remove.stay', $stay->id)}}" class="btn-danger">Remove</a>
             </div>
           </div>
         </div>
