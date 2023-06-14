@@ -55,6 +55,10 @@ class StaysController extends Controller
       foreach($images_path as $image)
         $images[] = $this->image->get('stays/'.$image['image_path']);
       $stay->images = $images;
+    } else {
+      $images = array();
+      $images[] = $this->image->default();
+      $stay->images = $images;
     }
 
     $this->data->set('stay', $stay);

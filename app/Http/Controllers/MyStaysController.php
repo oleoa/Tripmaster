@@ -121,7 +121,7 @@ class MyStaysController extends Controller
     if($images)
       foreach($images as $img) {
         $image = array(
-          'image_path' => $$this->image->set('stays', $img),
+          'image_path' => $this->image->set('stays', $img),
           'stay' => $stay['id']
         );
         Stays_Images::create($image);

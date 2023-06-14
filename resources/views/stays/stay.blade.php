@@ -2,17 +2,14 @@
 @section('body')
   <div class="p-6 grid">
     <h1 class="text-center">{{$stay['title']}}</h1>
-    @if ($stay['images'] && count($stay['images']) > 1)
+    @if ($stay->images && count($stay->images) > 1)
       <div class="grid grid-cols-2 gap-4 py-6">        
     @else  
-      <div class="grid gap-4 py-6">
+      <div class="grid gap-4 py-6 justify-items-center">
     @endif
-      @if ($stay['images'])
-        @foreach ($stay['images'] as $image)
-          <? // temporário ?>
-          @if($loop->index < 2)
-            <img src="{{$image}}" alt="{{$stay['title']}}">
-          @endif
+      @if ($stay->images)
+        @foreach ($stay->images as $image)
+          <img src="{{$image}}" alt="{{$stay['title']}}">
         @endforeach
       @endif
     </div>

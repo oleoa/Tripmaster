@@ -41,6 +41,11 @@ class Image
     return explode('/', $response)[$pathCount];
   }
 
+  public function default()
+  {
+    return $this::NO_IMAGE;
+  }
+
   private function format($path)
   {
     return str_replace('storage/', '', $path);
