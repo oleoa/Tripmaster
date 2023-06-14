@@ -121,6 +121,12 @@ class ProjectsController extends Controller
       return $attempt;
 
     $stay = Stays::find($id);
+    if(!$stay)
+      return redirect()->route('list.stays');
+
+    if($stay->status != 'available')
+      return redirect()->route('list.stays');
+      
     $stay->status = 'rented';
     $stay->save();
 
