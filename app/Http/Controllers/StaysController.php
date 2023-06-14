@@ -30,6 +30,9 @@ class StaysController extends Controller
     {
       $stays[$i]->image = Stays_Images::where("stay", $stays[$i]->id)->first()->image_path ?? false;
     }
+
+    $this->data->set('staySelected', $project->stay);
+
     $this->data->set('stays', $stays);
 
     return $this->view('stays.index');

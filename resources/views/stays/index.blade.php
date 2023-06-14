@@ -1,8 +1,15 @@
 @extends('layouts.main')
 @section('body')
   <div class="p-6 grid">
-    <h1 class="text-center">Stays for {{$country}}</h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-6">
+    <div class="all-center relative">
+      @if($staySelected)
+        <div class="absolute left-0 p-4">
+          <p class="dark:text-red-500">@lang('You have already selected a stay')</p>
+        </div>
+      @endif
+      <h1 class="text-center">Stays for {{$country}}</h1>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
       @foreach ($stays as $stay)
         <div class="bg-slate-700 rounded-lg shadow-lg overflow-hidden">
           <img class="w-full h-56 object-cover object-center" src="{{asset('storage/stays/'.$stay->image)}}" alt="{{$stay->title}}">
