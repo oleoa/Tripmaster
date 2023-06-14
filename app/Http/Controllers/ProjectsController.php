@@ -135,7 +135,6 @@ class ProjectsController extends Controller
     $lastProjectOpened = User::where("id", Auth::id())->first()->lastProjectOpened ?? false;
     if(!$lastProjectOpened)
       return redirect()->route('main');
-
       
     $project = Project::where("id", $lastProjectOpened)->first();
     if(!$project)

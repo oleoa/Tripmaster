@@ -26,6 +26,10 @@
     @apply text-lg text-black dark:text-white;
   }
 
+  h6 {
+    @apply text-base text-black dark:text-white;
+  }
+
   a {
     @apply cursor-pointer hover:underline dark:text-white;
   }

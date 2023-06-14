@@ -22,14 +22,14 @@
             <h1 class="text-2xl font-semibold">{{$stay->title}}</h1>
             <p class="mt-2 text-white">{{$stay->description}}</p>
             <span class="font-semibold text-white">{{$stay->price}}€</span>
-            <div class="flex justify-between items-center mt-4">
+            <div class="flex justify-start space-x-4 items-center mt-4">
               <a href="{{route('show.stay', $stay->id)}}" class="btn-okay">View</a>
               <a href="{{route('my.remove.stay', $stay->id)}}" class="btn-danger">Remove</a>
             </div>
           </div>
         </div>
       @else
-        <h3 class="text-start">@lang('You have not selected a stay')</h3>
+        <h3 class="text-start">@lang('You have not selected a stay'). <a href="{{route("list.stays")}}" class="dark:text-blue-500">@lang('Select one')</a>!</h3>
       @endif
     </div>
   </main>
