@@ -20,24 +20,29 @@ class Image
 
   const NO_IMAGE = "https://climate.onep.go.th/wp-content/uploads/2020/01/default-image.jpg";
   
-  public static function get($path, $default = false)
+  public function get($path, $default = false)
   {
-    $path = str_replace('storage/', '', $path);
+    $path = $this->format($path);
     if(Storage::disk('public')->exists($path))
       return asset('storage/'.$path);
     else
       return $default ? $defualt : Image::NO_IMAGE;
   }
 
-  public static function set($path, $file)
+  public function set($path, $file)
   {
-    $path = str_replace('storage/', '', $path);
-    $path = 'storage/'.$path;
+    $path = $this->format($path);
+    $pathCount = count(explode('/', $path));
     try {
       $response = Storage::disk('public')->put($path, $file);
     } catch (\Throwable $th) {
       return false;
     }
-    return $response;
+    return explode('/', $response)[$pathCount];
+  }
+
+  private function format($path)
+  {
+    return str_replace('storage/', '', $path);
   }
 }

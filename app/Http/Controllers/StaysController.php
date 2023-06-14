@@ -32,7 +32,7 @@ class StaysController extends Controller
       $img_path = Stays_Images::where("stay", $stays[$i]->id)->first()->image_path ?? false;
       $stays[$i]->image = $this->image->get('stays/'.$img_path);
     }
-
+    
     $this->data->set('staySelected', $project->stay);
 
     $this->data->set('stays', $stays);
@@ -47,11 +47,17 @@ class StaysController extends Controller
     $stay = Stays::where("id", $id)->first() ?? false;
     if(!$stay)
       return redirect()->route('list.stays');
-
-    $stays_images = Stays_Images::where("stay", $stay->id)->get();
+    $stay->images = array();
+    
+    $images_path = Stays_Images::where("stay", $stay->id)->get()->toArray() ?? false;
+    if($images_path) {
+      $images = array();
+      foreach($images_path as $image)
+        $images[] = $this->image->get('stays/'.$image['image_path']);
+      $stay->images = $images;
+    }
 
     $this->data->set('stay', $stay);
-    $this->data->set('images', $stays_images);
 
     $this->data->set('backHref', url()->previous());
 

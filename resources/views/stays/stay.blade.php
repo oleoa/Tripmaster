@@ -2,13 +2,19 @@
 @section('body')
   <div class="p-6 grid">
     <h1 class="text-center">{{$stay['title']}}</h1>
-    <div class="grid grid-cols-2 gap-4 py-6">
-      @foreach ($images as $image)
-        <? // temporário ?>
-        @if($loop->index < 2)
-          <img src="{{asset('storage/stays/'.$image['image_path'])}}" alt="{{$stay['title']}}">
-        @endif
-      @endforeach
+    @if ($stay['images'] && count($stay['images']) > 1)
+      <div class="grid grid-cols-2 gap-4 py-6">        
+    @else  
+      <div class="grid gap-4 py-6">
+    @endif
+      @if ($stay['images'])
+        @foreach ($stay['images'] as $image)
+          <? // temporário ?>
+          @if($loop->index < 2)
+            <img src="{{$image}}" alt="{{$stay['title']}}">
+          @endif
+        @endforeach
+      @endif
     </div>
     <div class="grid grid-cols-2 px-6 space-y-4">
       <p class="text-2xl">{{$stay['description']}}</p>

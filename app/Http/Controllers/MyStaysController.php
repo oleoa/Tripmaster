@@ -116,13 +116,12 @@ class MyStaysController extends Controller
     ]);
     
     $stay = Stays::create($validated);
-    
+
     $images = $request->file('images');
     if($images)
-      foreach($images as $img){
-        $image_path = explode("/", $img->store('stays', 'public'))[1];
+      foreach($images as $img) {
         $image = array(
-          'image_path' => $image_path,
+          'image_path' => $$this->image->set('stays', $img),
           'stay' => $stay['id']
         );
         Stays_Images::create($image);
