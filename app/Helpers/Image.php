@@ -23,7 +23,7 @@ class Image
   public function get($path, $default = false)
   {
     $path = $this->format($path);
-    if(Storage::disk('public')->exists($path))
+    if(Storage::disk('public')->exists($path) && $path[strlen($path)-1] != '/')
       return asset('storage/'.$path);
     else
       return $default ? $defualt : Image::NO_IMAGE;
