@@ -22,7 +22,7 @@ class MainController extends Controller
     if(!$project)
       return redirect()->route('my.creator.project');
 
-    $stay = Stays::where("id", $lastProjectOpened)->first() ?? false;
+    $stay = Stays::where("id", $project->stay)->first() ?? false;
     if($stay)
       $project['stay'] = $stay;
 
