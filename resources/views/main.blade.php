@@ -32,5 +32,6 @@
         <h3 class="text-start">@lang('You have not selected a stay'). <a href="{{route("list.stays")}}" class="dark:text-blue-500">@lang('Select one')</a>!</h3>
       @endif
     </div>
+    
   </main>
 @endsection
