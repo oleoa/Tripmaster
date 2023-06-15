@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use App\Mail\VerificationEmail;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -66,22 +69,27 @@ class UserController extends Controller
     ]);
 
     $pass_hash = Hash::make($validated['password']);
-
-    $user = array(
+    $verificationToken = Str::random(40);
+    
+    $new_user = array(
       'name' => $validated['name'],
       'email' => $validated['email'],
-      'password' => $pass_hash
+      'password' => $pass_hash,
+      'verification_token' => $verificationToken,
     );
 
-    $info = User::create($user);
+    $info = User::create($new_user);
 
-    $login_user = $user;
+    $login_user = $new_user;
     $login_user['password'] = $validated['password'];
 
     $this->messages("Something went wrong, please try again");
     $this->attempt($info != false, $request);
     if(!$this->status)
       return redirect()->route('signup');
+    
+    $verificationLink = route('verify', ['token' => $verificationToken]);
+    Mail::to($request->email)->send(new VerificationEmail($verificationLink));
     
     Auth::attempt($login_user);
     $request->session()->regenerate();
