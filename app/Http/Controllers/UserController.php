@@ -75,14 +75,17 @@ class UserController extends Controller
 
     $info = User::create($user);
 
+    $login_user = $user;
+    $login_user['password'] = $validated['password'];
+
     $this->messages("Something went wrong, please try again");
     $this->attempt($info != false, $request);
     if(!$this->status)
       return redirect()->route('signup');
     
-    Auth::attempt($user);
+    Auth::attempt($login_user);
     $request->session()->regenerate();
 
-    return redirect()->route('signin');
+    return redirect()->route('main');
   }
 }
