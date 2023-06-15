@@ -69,6 +69,7 @@ Route::name('renting.')->group(function(){
 Route::prefix('/my')->group(function(){
   Route::name('my.')->group(function(){
     
+    Route::get('/account/recover/password', [AccountController::class, 'recover'])->name('password.recover');
     Route::get('/account', [AccountController::class, 'index'])->name('account');
     Route::get('/set/project/{id}', [ProjectsController::class, 'set'])->name('set.project');
 

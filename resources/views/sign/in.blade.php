@@ -13,7 +13,7 @@
       <input type="submit" class="btn-good" value="@lang('Sign in')"/>
     </form>
     <div class="p-4">
-      <h2 class="text-2xl dark:text-white">@lang("Don't have an account?") <a href="{{route('signup')}}" class="dark:text-blue-500">@lang('Create one')</a>!</h2>
+      <h2 class="text-2xl dark:text-white">@lang("Don't have an account")? <a href="{{route('signup')}}" class="dark:text-blue-500">@lang('Create one')</a>!</h2>
     </div>
     <div>
       <h1 class="text-xl text-white">{{session('message')}}</h1>

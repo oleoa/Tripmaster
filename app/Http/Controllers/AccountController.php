@@ -82,4 +82,10 @@ class AccountController extends Controller
 
     return redirect()->route('my.account');
   }
+
+  public function recover()
+  {
+    // Method to recover the password
+    return redirect()->route('my.account');
+  }
 }

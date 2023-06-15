@@ -16,6 +16,9 @@
       <input type="password" name="password" id="password" minlength="{{$password_min_length}}" maxlength="{{$password_max_length}}"/>
       <input type="submit" class="btn-good" value="@lang('Edit')"/>
     </form>
+    <div class="p-4">
+      <h2 class="text-2xl dark:text-white">@lang("Forgot your password")? <a href="{{route('my.password.recover')}}" class="dark:text-blue-500">@lang('Recover it')</a>!</h2>
+    </div>
     <div>
       <h1 class="text-xl text-white">{{session('message')}}</h1>
     </div>
