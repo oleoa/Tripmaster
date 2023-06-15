@@ -7,10 +7,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Stays;
+use App\Models\User;
 
 class AccountController extends Controller
 {
-  public function index(Request $request)
+  public function index()
   {
     $this->data->title('Account');
     
@@ -31,6 +32,54 @@ class AccountController extends Controller
       $this->data->set('utsc', $diff);
     */
 
-    return $this->view('my.account');
+    return $this->view('my.account.show');
+  }
+  
+  public function editor()
+  {
+    $this->data->title('Edit account');
+    $this->data->set("password_min_length", env('PASSWORD_MIN_LENGTH'));
+    $this->data->set("password_max_length", env('PASSWORD_MAX_LENGTH'));
+
+    $user = Auth::user();
+    if(!$user)
+      return redirect()->route('home');
+
+    $this->data->set("user", $user);
+    return $this->view('my.account.edit');
+  }
+
+  public function edit(Request $request)
+  {
+    $user = Auth::user();
+    if(!$user)
+      return redirect()->route('home');
+  
+    $validated = $request->validate([
+      'name' => 'required|string|max:255',
+      'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
+      'password' => 'nullable|string|min:'.env('PASSWORD_MIN_LENGTH').'|max:'.env('PASSWORD_MAX_LENGTH'),
+    ]);
+    
+    if($user->id != $request->input('id'))
+      return redirect()->route('home');
+
+    $user = User::where("id", $user->id)->first();
+    if(!$user)
+      return redirect()->route('home');
+
+    $user_test = array(
+      'id' => $user->id,
+      'password' => $validated['password'],
+    );
+
+    if(!Auth::attempt($user_test))
+      return redirect()->route('home');
+
+    $user->name = $validated['name'];
+    $user->email = $validated['email'];      
+    $user->save();
+
+    return redirect()->route('my.account');
   }
 }

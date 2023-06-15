@@ -92,11 +92,13 @@ Route::prefix('/my')->group(function(){
     Route::name('editor.')->group(function(){
       Route::get('/stays/edit/{id}', [MyStaysController::class, 'editor'])->name('stay');
       Route::get('/projects/edit/{id}', [ProjectsController::class, 'editor'])->name('project');
+      Route::get('/account/edit/', [AccountController::class, 'editor'])->name('account');
     });
 
     Route::name('edit.')->group(function(){
       Route::put('/stays/edit/{id}', [MyStaysController::class, 'edit'])->name('stay');
       Route::put('/projects/edit/{id}', [ProjectsController::class, 'edit'])->name('project');
+      Route::put('/account/edit/', [AccountController::class, 'edit'])->name('account');
     });
 
     Route::name('creator.')->group(function(){
