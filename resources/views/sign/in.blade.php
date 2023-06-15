@@ -9,7 +9,7 @@
       <label for="email"><h2>@lang('Email')</h2></label>
       <input type="text" name="email" id="email"/>
       <label for="password"><h2>@lang('Password')</h2></label>
-      <input type="password" name="password" id="password"/>
+      <input type="password" name="password" id="password" minlength="{{$password_min_length}}" maxlength="{{$password_max_length}}"/>
       <input type="submit" class="btn-good" value="@lang('Sign in')"/>
     </form>
     <div class="p-4">

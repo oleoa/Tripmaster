@@ -11,9 +11,9 @@
       <label for="email"><h2>@lang('Email')</h2></label>
       <input type="text" name="email" id="email"/>
       <label for="password"><h2>@lang('Password')</h2></label>
-      <input type="password" name="password" id="password"/>
+      <input type="password" name="password" id="password" minlength="{{$password_min_length}}" maxlength="{{$password_max_length}}"/>
       <label for="password_confirmation"><h2>@lang('Confirm Password')</h2></label>
-      <input type="password" name="password_confirmation" id="password_confirmation"/>
+      <input type="password" name="password_confirmation" id="password_confirmation" minlength="{{$password_min_length}}" maxlength="{{$password_max_length}}"/>
       <input type="submit" class="btn-good" value="@lang('Sign up')"/>
     </form>
     <div class="p-4">

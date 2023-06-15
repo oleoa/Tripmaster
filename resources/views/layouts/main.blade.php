@@ -4,7 +4,6 @@
 <body class="dark">
 
   <nav class='h-full w-48 fixed left-0 flex flex-col justify-between bg-slate-950'>
-
     <div>
 
       <div class="flex flex-col items-center justify-start pt-2 pb-4">
@@ -47,7 +46,6 @@
       </div>
 
     </div>
-
   </nav>
 
   <div class='pl-52 p-4 min-h-screen w-full bg-white dark:bg-slate-800'>
@@ -55,35 +53,27 @@
   </div>
   
   @if($errors->any())
-    <div class="fixed top-0 w-full h-full bg-black/70 flex items-start justify-center p-6" id="errors">
-      <div class="bg-slate-700 py-4 px-8 rounded text-red-500 [&>ul>li]:py-2 ">
-        <h1>@lang('Errors:')</h1>
-        <ul>
-          @foreach ($errors->all() as $error)
-            <li class="text-2xl">@lang($error)</li>
-          @endforeach
-        </ul>
-        <button class="px-6 py-4 bg-slate-600 rounded hover:bg-slate-500 text-white">Okay</button>
-      </div>
-    </div>
-    <script>
-      document.querySelector("#errors").onclick = function(){this.style.display = "none"};
-    </script>
+    <div id="opc" class="fixed top-0 left-0 w-full h-full bg-slate-700/50"></div>
+    <dialog class="fixed top-0 bg-white rounded my-4" open>
+      <h1 class="dark:text-red-500">@lang('Alert'):</h1>
+      @foreach ($errors->all() as $error)
+        <p class="text-xl dark:text-red-500 py-4"><strong><code>@lang($error)<code><strong></p>
+      @endforeach  
+      <form method="dialog">
+        <button class="btn-danger text-white" onclick="document.querySelector('#opc').style.display = 'none'">OK</button>
+      </form>
+    </dialog>
   @endif
 
   @if (session('alert'))
-    <dialog class="bg-slate-700 px-8 rounded text-red-500 [&>*]:py-4" id="errors" open>
-      <h1>@lang('Alert'):</h1>
-      <p class="text-xl"><strong><code>@lang(session("alert"))<code><strong></p>
+    <div id="opc" class="fixed top-0 left-0 w-full h-full bg-slate-700/50"></div>
+    <dialog class="fixed top-0 bg-white rounded my-4" open>
+      <h1 class="dark:text-red-500">@lang('Alert'):</h1>
+      <p class="text-xl dark:text-red-500 py-4"><strong><code>@lang(session("alert"))<code><strong></p>
       <form method="dialog">
-        <button class="px-6 py-4 bg-slate-600 hover:bg-slate-500 text-white rounded">@lang('Okay')</button>
+        <button class="btn-danger text-white" onclick="document.querySelector('#opc').style.display = 'none'">OK</button>
       </form>
     </dialog>
-    <script>
-      document.querySelector("#errors")?.close();
-      document.querySelector("#errors")?.showModal();
-    </script>
   @endif
-
 </body>
 </html>
