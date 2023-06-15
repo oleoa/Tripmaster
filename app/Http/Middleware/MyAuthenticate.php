@@ -17,11 +17,11 @@ class MyAuthenticate
     public function handle(Request $request, Closure $next): Response
     {
       $currentRouteName = $request->route()->getName();
-      if($currentRouteName == "signin" || $currentRouteName == "signup" || $currentRouteName == "signout" || $currentRouteName == "signing-in" || $currentRouteName == "signing-up")
+      if($currentRouteName == "signin" || $currentRouteName == "signup" || $currentRouteName == "signout" || $currentRouteName == "signing-in" || $currentRouteName == "signing-up" || $currentRouteName == "home")
         return $next($request);
 
-      if (Auth::guest())
-        return redirect()->route('signin');
+      if(Auth::guest())
+        return redirect()->route('home');
 
       return $next($request);
     }

@@ -37,6 +37,7 @@ Route::get('/locale/{locale}', function($locale){
 
 // ------------------------------ ROUTES ------------------------------
 Route::get('/', [MainController::class, 'index'])->name('main');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::name('sign')->group(function(){
   
