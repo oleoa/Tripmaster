@@ -2,14 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\MainController;
-
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\Account;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 
-use App\Http\Controllers\ProjectsController;
+use App\Http\Controllers\Projects;
 use App\Http\Controllers\MyStaysController;
 use App\Http\Controllers\StaysController;
 
@@ -36,7 +34,7 @@ Route::get('/locale/{locale}', function($locale){
 
 // ------------------------------ ROUTES ------------------------------
 
-Route::get('/', [MainController::class, 'index'])->name('main');
+Route::get('/', [Projects::class, 'index'])->name('main');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/verify/{token}', [VerificationController::class, 'verify'])->name('verify');
@@ -65,7 +63,7 @@ Route::name('rent.')->group(function(){
 });
 
 Route::name('renting.')->group(function(){
-  Route::get('/renting/stay/{id}', [ProjectsController::class, 'rentStay'])->name('stay');
+  Route::get('/renting/stay/{id}', [Projects::class, 'rentStay'])->name('stay');
 });
 
 Route::prefix('/my')->group(function(){
@@ -73,15 +71,15 @@ Route::prefix('/my')->group(function(){
     
     Route::get('/account/recover/password', [Account::class, 'recover'])->name('password.recover');
     Route::get('/account', [Account::class, 'index'])->name('account');
-    Route::get('/set/project/{id}', [ProjectsController::class, 'set'])->name('set.project');
+    Route::get('/set/project/{id}', [Projects::class, 'set'])->name('set.project');
 
     Route::name('delete.')->group(function(){
-      Route::get('/project/delete/{id}', [ProjectsController::class, 'delete'])->name('project');
+      Route::get('/project/delete/{id}', [Projects::class, 'delete'])->name('project');
       Route::get('/stay/delete/{id}', [MyStaysController::class, 'delete'])->name('stay');
     });
 
     Route::name('remove.')->group(function(){
-      Route::get('/project/remove/stay/{id}', [ProjectsController::class, 'removeStay'])->name('stay');
+      Route::get('/project/remove/stay/{id}', [Projects::class, 'removeStay'])->name('stay');
     });
 
     Route::name('disable.')->group(function(){
@@ -94,28 +92,28 @@ Route::prefix('/my')->group(function(){
 
     Route::name('editor.')->group(function(){
       Route::get('/stays/edit/{id}', [MyStaysController::class, 'editor'])->name('stay');
-      Route::get('/projects/edit/{id}', [ProjectsController::class, 'editor'])->name('project');
+      Route::get('/projects/edit/{id}', [Projects::class, 'editor'])->name('project');
       Route::get('/account/edit/', [Account::class, 'editor'])->name('account');
     });
 
     Route::name('edit.')->group(function(){
       Route::put('/stays/edit/{id}', [MyStaysController::class, 'edit'])->name('stay');
-      Route::put('/projects/edit/{id}', [ProjectsController::class, 'edit'])->name('project');
+      Route::put('/projects/edit/{id}', [Projects::class, 'edit'])->name('project');
       Route::put('/account/edit/', [Account::class, 'edit'])->name('account');
     });
 
     Route::name('creator.')->group(function(){
       Route::get('/stays/create', [MyStaysController::class, 'creator'])->name('stay');
-      Route::get('/projects/create', [ProjectsController::class, 'creator'])->name('project');
+      Route::get('/projects/create', [Projects::class, 'creator'])->name('project');
     });
     
     Route::name('create.')->group(function(){
       Route::post('/stays/create', [MyStaysController::class, 'create'])->name('stay');
-      Route::post('/projects/create', [ProjectsController::class, 'create'])->name('project');
+      Route::post('/projects/create', [Projects::class, 'create'])->name('project');
     });
 
     Route::name('list.')->group(function(){
-      Route::get('/projects', [ProjectsController::class, 'index'])->name('projects');
+      Route::get('/projects', [Projects::class, 'list'])->name('projects');
       Route::get('/stays', [MyStaysController::class, 'index'])->name('stays');
     });
 
