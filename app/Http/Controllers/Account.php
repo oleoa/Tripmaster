@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Project;
@@ -15,29 +14,19 @@ use App\Models\User;
  */
 class Account extends Controller
 {
-  public function __construct()
-  {
-    parent::__construct();
-    
-    $this->error->message("not_logged_in", "You are not logged in");
-    $this->error->message("not_the_owner", "You are not the owner of that account");
-    $this->error->message("password_incorrect", "Password is incorrect");
-    
-    $this->error->redirect('editor', 'account.editor');
-    $this->error->redirect('signin', 'sign.in');
-  }
+  const NOT_LOGGED_IN = "You are not logged in";
+  const NOT_THE_OWNER = "You are not the owner of that account";
+  const PASSWORD_INCORRECT = "Password is incorrect";
 
   public function index()
   {
     $this->data->title('Account');
 
     if(!Auth::check()){
-      session()->flash('error', $this->error->message('not_logged_in'));
-      return redirect()->route($this->error->redirect("signin"));
+      session()->flash('error', $this::NOT_LOGGED_IN);
+      return redirect()->route("sign.in");
     }
-    
-    $stays = Stays::where("owner", Auth::id())->get()->toArray();
-    
+        
     $u = Auth::user();
     $this->data->set('id', $u->id);
     $this->data->set('name', $u->name);
@@ -46,28 +35,20 @@ class Account extends Controller
     $projects_count = Project::where('owner', Auth::id())->count();
     $this->data->set('projects_count', $projects_count);
 
-    /*
-      $created_at_date_time = Carbon::parse($u->created_at);
-      $current_date_time = Carbon::now();
-      $diff = $created_at_date_time->diff($current_date_time);
-      $this->data->set('utsc', $diff);
-    */
-
     return $this->view('account.show');
   }
   
   public function editor()
   {
-    $this->error->redirect('account.editor');
-
     $this->data->title('Edit account');
+
     $this->data->set("password_min_length", env('PASSWORD_MIN_LENGTH'));
     $this->data->set("password_max_length", env('PASSWORD_MAX_LENGTH'));
 
     $user = Auth::user();
     if(!$user){
-      session()->flash('error', $this->error->message('not_logged_in'));
-      return redirect()->route($this->error->redirect("signin"));
+      session()->flash('error', $this::NOT_LOGGED_IN);
+      return redirect()->route("signin");
     }
 
     $this->data->set("user", $user);
@@ -79,8 +60,8 @@ class Account extends Controller
     // Verify if the user is logged in
     $user = Auth::user();
     if(!$user){
-      session()->flash('error', $this->error->message('not_logged_in'));
-      return redirect()->route($this->error->redirect("signin"));
+      session()->flash('error', $this::NOT_LOGGED_IN);
+      return redirect()->route("sign.in");
     }
 
     // Get the user from the database to edit this user
@@ -94,15 +75,15 @@ class Account extends Controller
     
     // Verify if the user is the owner of the account
     if($user->id != $request->input('id')) {
-      session()->flash('error', $this->error->message('not_the_owner'));
-      return redirect()->route($this->error->redirect("editor"));
+      session()->flash('error', $this::NOT_THE_OWNER);
+      return redirect()->route("account.editor");
     }
 
     // Verify if the user id sent in the request exists
     $user_from_request = User::where("id", $request->input('id'))->first();
     if(!$user_from_request) {
-      session()->flash('error', $this->error->message('not_the_owner'));
-      return redirect()->route($this->error->redirect("editor"));
+      session()->flash('error', $this::NOT_THE_OWNER);
+      return redirect()->route("account.editor");
     }
 
     // Verify if the password is correct
@@ -111,8 +92,8 @@ class Account extends Controller
       'password' => $validated['password'],
     );
     if(!Auth::attempt($user_test)) {
-      session()->flash('error', $this->error->message('password_incorrect'));
-      return redirect()->route($this->error->redirect("editor"));
+      session()->flash('error', $this::PASSWORD_INCORRECT);
+      return redirect()->route("account.editor");
     }
 
     $user->name = $validated['name'];
@@ -126,19 +107,19 @@ class Account extends Controller
   {
     $user = Auth::user();
     if(!$user){
-      session()->flash('error', $this->error->message('not_logged_in'));
-      return redirect()->route($this->error->redirect("signin"));
+      session()->flash('error', $this::NOT_LOGGED_IN);
+      return redirect()->route("sign.in");
     }
 
     if($user->id != $id) {
-      session()->flash('error', $this->error->message('not_the_owner'));
-      return redirect()->route($this->error->redirect("editor"));
+      session()->flash('error', $this::NOT_THE_OWNER);
+      return redirect()->route("account.editor");
     }
 
     $user = User::where("id", $id)->first();
     if(!$user) {
-      session()->flash('error', $this->error->message('not_the_owner'));
-      return redirect()->route($this->error->redirect("editor"));
+      session()->flash('error', $this::NOT_THE_OWNER);
+      return redirect()->route("account.editor");
     }
 
     $user->delete();
