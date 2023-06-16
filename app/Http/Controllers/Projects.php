@@ -16,7 +16,7 @@ class Projects extends Controller
   {
     $this->data->title('Project');
 
-    $lastProjectOpened = User::where("id", Auth::id())->first()->lastProjectOpened ?? false;
+    $lastProjectOpened = $this->getLastProjectOpened(Auth::id());
     if(!$lastProjectOpened)
       return redirect()->route('projects.creator');
     
@@ -116,6 +116,7 @@ class Projects extends Controller
     $project = Project::find($id);
     if(!$project)
       return redirect()->route('projects.list');
+
     User::where("id", Auth::id())->update(['lastProjectOpened' => $id]);
     return redirect()->route("projects.index");
   }
@@ -138,7 +139,7 @@ class Projects extends Controller
       'headcount' => 'required',
     ]);
 
-    $lastProjectOpened = User::where("id", Auth::id())->first()->lastProjectOpened ?? false;
+    $lastProjectOpened = $this->getLastProjectOpened(Auth::id());
     if(!$lastProjectOpened)
       return redirect()->route('list.stays');
 
@@ -179,7 +180,7 @@ class Projects extends Controller
 
   public function removeStay(Request $request, $id)
   {
-    $lastProjectOpened = User::where("id", Auth::id())->first()->lastProjectOpened ?? false;
+    $lastProjectOpened = $this->getLastProjectOpened(Auth::id());
     if(!$lastProjectOpened)
       return redirect()->route('projects.index');
       

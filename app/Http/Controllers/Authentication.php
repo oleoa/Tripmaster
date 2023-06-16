@@ -87,11 +87,13 @@ class Authentication extends Controller
       return redirect()->route('signup');
     }
     
-    $verificationLink = route('validation.verify', ['token' => $verificationToken]);
+    $verificationLink = route('verification.verify', ['token' => $verificationToken]);
     Mail::to($request->email)->send(new VerificationEmail($verificationLink));
     
     Auth::attempt($login_user);
     $request->session()->regenerate();
+
+    session()->flash("info", "Account created successfully, a verification email has been sent to you");
 
     return redirect()->route('projects.index');
   }

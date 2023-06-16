@@ -15,7 +15,7 @@ class Stays extends Controller
   {
     $this->data->title('Stays');
 
-    $lastProjectOpened = User::where("id", Auth::id())->first()->lastProjectOpened ?? false;
+    $lastProjectOpened = $this->getLastProjectOpened(Auth::id());
     if(!$lastProjectOpened)
       return redirect()->route('projects.creator');
     
@@ -73,7 +73,7 @@ class Stays extends Controller
     if(!$stay)
       return redirect()->route('list.stays');
 
-    $lastProjectOpened = User::where("id", Auth::id())->first()->lastProjectOpened ?? false;
+    $lastProjectOpened = $this->getLastProjectOpened(Auth::id());
     if(!$lastProjectOpened)
       return redirect()->route('projects.creator');
     

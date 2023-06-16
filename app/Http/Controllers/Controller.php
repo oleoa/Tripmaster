@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Helpers\Countries;
 use App\Helpers\Image;
 use App\Helpers\Data;
+use App\Models\User;
 
 class Controller extends BaseController
 {
@@ -33,5 +34,15 @@ class Controller extends BaseController
     $this->data->current($page);
     
     return view($page, $this->data->get());
+  }
+
+  protected function getLastProjectOpened($userId)
+  {
+    $lastProjectOpened = User::where("id", $userId)->first()->lastProjectOpened ?? false;
+    if(!$lastProjectOpened) {
+      session()->reflash();
+      return false;
+    }
+    return $lastProjectOpened;
   }
 }
