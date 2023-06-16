@@ -84,12 +84,12 @@ class Account extends Controller
     $user->email = $validated['email'];      
     $user->save();
 
-    return redirect()->route('my.account');
+    return redirect()->route('account.index');
   }
 
   public function recover()
   {
     // Method to recover the password
-    return redirect()->route('my.account');
+    return redirect()->route('account.index');
   }
 }

@@ -4,10 +4,10 @@
   <div class="py-8 relative w-full flex items-center justify-center p-4">
     <h1>@lang('Create Project')</h1>
     <div class="absolute right-0 p-8">
-      <a href="{{route("my.list.projects")}}" class="btn-okay">@lang("List Projects")</a>
+      <a href="{{route("projects.list")}}" class="btn-okay">@lang("List Projects")</a>
     </div>
   </div>
-  <form action="{{route('my.create.project')}}" method="POST" class="grid grid-cols-2 gap-4">
+  <form action="{{route('projects.create')}}" method="POST" class="grid grid-cols-2 gap-4">
     @csrf
     <div class="grid grid-rows-1 gap-4">
       <h2>@lang('Start')</h2>

@@ -50,7 +50,7 @@ class Authentication extends Controller
       return redirect()->route('signin');
     
     $request->session()->regenerate();
-    return redirect()->route('main');
+    return redirect()->route('projects.index');
   }
   
   public function signing_up(Request $request)
@@ -94,6 +94,6 @@ class Authentication extends Controller
     Auth::attempt($login_user);
     $request->session()->regenerate();
 
-    return redirect()->route('main');
+    return redirect()->route('projects.index');
   }
 }

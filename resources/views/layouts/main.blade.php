@@ -15,8 +15,8 @@
 
       @if($isLogged)
         <div class="grid gap-6 px-4 justify-items-start [&>a]:text-2xl">
-          <a href="{{route('main')}}" class="@if($current['main']) underline @endif">@lang('Main')</a>
-          <a href="{{route('list.stays')}}" class="@if($current['stays']) underline @endif">@lang('Stays')</a>
+          <a href="{{route('projects.index')}}" class="@if($current['main']) underline @endif">@lang('Main')</a>
+          <a href="{{route('stays.index')}}" class="@if($current['stays']) underline @endif">@lang('Stays')</a>
         </div>
       @endif
 
@@ -26,7 +26,7 @@
 
       @if($isLogged)
         <div class="px-4 py-6 grid gap-6 [&>a]:text-2xl">
-          <a href="{{route('my.account')}}" class="@if($current['account']) underline @endif">@lang('Account')</a>
+          <a href="{{route('account.index')}}" class="@if($current['account']) underline @endif">@lang('Account')</a>
         </div>
       @endif
 

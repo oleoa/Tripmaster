@@ -7,7 +7,7 @@
     <div class="all-center relative">
       <h1 class="py-8">@lang('Projects')</h1>
       <div class="absolute right-0 px-4">
-        <a href="{{route('my.creator.project')}}" class="btn-good">@lang('Create Project')</a>
+        <a href="{{route('projects.creator')}}" class="btn-good">@lang('Create Project')</a>
       </div>
     </div>
 
@@ -27,8 +27,8 @@
             <h2>@lang('Start at') {{$project['start']}}</h2>
             <h2>@lang('Ends at') {{$project['end']}}</h2>
             <div class="w-full flex justify-end space-x-4">
-              <a href="{{route('my.delete.project', ['id' => $project['id']])}}" class="btn-danger">@lang('Delete')</a>
-              <a href="{{route('my.set.project', ['id' => $project['id']])}}" class="btn-okay">@lang('Check')</a>
+              <a href="{{route('projects.delete', ['id' => $project['id']])}}" class="btn-danger">@lang('Delete')</a>
+              <a href="{{route('projects.set', ['id' => $project['id']])}}" class="btn-okay">@lang('Check')</a>
             </div>
           </div>
 
@@ -43,7 +43,7 @@
         <h1>@lang('You have no projects')</h1>
       </div>
       <div class="absolute right-0 top-0 p-4 pt-8">
-        <a href="{{route('my.creator.project')}}" class="btn">@lang('Create Project')</a>
+        <a href="{{route('projects.creator')}}" class="btn">@lang('Create Project')</a>
       </div>
     </div>
 

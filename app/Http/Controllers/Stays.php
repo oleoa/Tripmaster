@@ -17,11 +17,11 @@ class Stays extends Controller
 
     $lastProjectOpened = User::where("id", Auth::id())->first()->lastProjectOpened ?? false;
     if(!$lastProjectOpened)
-      return redirect()->route('my.creator.project');
+      return redirect()->route('projects.creator');
     
     $project = Project::where("id", $lastProjectOpened)->first() ?? false;
     if(!$project)
-      return redirect()->route('my.creator.project');
+      return redirect()->route('projects.creator');
       
     $this->data->set('country', $project->country);
     
@@ -75,11 +75,11 @@ class Stays extends Controller
 
     $lastProjectOpened = User::where("id", Auth::id())->first()->lastProjectOpened ?? false;
     if(!$lastProjectOpened)
-      return redirect()->route('my.creator.project');
+      return redirect()->route('projects.creator');
     
     $project = Project::where("id", $lastProjectOpened)->first() ?? false;
     if(!$project)
-      return redirect()->route('my.creator.project');
+      return redirect()->route('projects.creator');
 
     $this->data->title('Rent');
     $this->data->set("stay", $stay);
@@ -180,7 +180,7 @@ class Stays extends Controller
     
     $saved_stay = StaysModel::where('id', $id)->update($validated);
     
-    return redirect()->route('my.list.stays');
+    return redirect()->route('stays.list');
   }
   
   public function create(Request $request)
@@ -208,7 +208,7 @@ class Stays extends Controller
         Stays_Images::create($image);
       }
     
-    return redirect()->route('my.list.stays');
+    return redirect()->route('stays.list');
   }
 
   /**

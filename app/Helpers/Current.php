@@ -32,7 +32,7 @@ class Current
     ),
     'signin' => 'sign.in',
     'signup' => 'sign.up',
-    'account' => 'my.account',
+    'account' => 'account.index',
     'myStays' => array(
       'my.stays.list',
       'my.stays.create_and_edit',

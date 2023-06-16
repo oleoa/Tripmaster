@@ -30,7 +30,7 @@
             <h4>{{$stay['price']}}€</h4>
             <h4>{{$stay['city']}}</h4>
             <div class="flex items-center justify-end space-x-4 col-span-2">
-              <a class="btn" href="{{route("show.stay", ['id' => $stay['id']])}}">@lang('View')</a>
+              <a class="btn" href="{{route("stays.show", ['id' => $stay['id']])}}">@lang('View')</a>
               <a class="btn-okay" href="{{route('my.editor.stay', ['id' => $stay['id']])}}">@lang('Edit')</a>
               @if ($stay['status'] == 'available')
                 <a class="btn-alert" href="{{route('my.disable.stay', ['id' => $stay['id']])}}">@lang('Disable')</a>

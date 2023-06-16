@@ -18,11 +18,11 @@ class Projects extends Controller
 
     $lastProjectOpened = User::where("id", Auth::id())->first()->lastProjectOpened ?? false;
     if(!$lastProjectOpened)
-      return redirect()->route('my.creator.project');
+      return redirect()->route('projects.creator');
     
     $project = Project::where("id", $lastProjectOpened)->first() ?? false;
     if(!$project)
-      return redirect()->route('my.creator.project');
+      return redirect()->route('projects.creator');
 
     $stay = Stays::where("id", $project->stay)->first() ?? false;
     if($stay) {
@@ -81,7 +81,7 @@ class Projects extends Controller
 
     session()->flash('status', true);
     session()->flash('message', 'Project created');
-    return redirect()->route('my.list.projects');
+    return redirect()->route('projects.list');
   }
   
   public function list()
@@ -115,9 +115,9 @@ class Projects extends Controller
   {
     $project = Project::find($id);
     if(!$project)
-      return redirect()->route('my.list.projects');
+      return redirect()->route('projects.list');
     User::where("id", Auth::id())->update(['lastProjectOpened' => $id]);
-    return redirect()->route("main");
+    return redirect()->route("projects.index");
   }
   
   public function delete(Request $request, $id)
@@ -174,18 +174,18 @@ class Projects extends Controller
 
     $rent = Rents::create($rent);
 
-    return redirect()->route("main");
+    return redirect()->route("projects.index");
   }
 
   public function removeStay(Request $request, $id)
   {
     $lastProjectOpened = User::where("id", Auth::id())->first()->lastProjectOpened ?? false;
     if(!$lastProjectOpened)
-      return redirect()->route('main');
+      return redirect()->route('projects.index');
       
     $project = Project::where("id", $lastProjectOpened)->first();
     if(!$project)
-      return redirect()->route('main');
+      return redirect()->route('projects.index');
 
     $attempt = $this->project_exists_and_ur_the_owner($request, $project->id);
     if(!is_array($attempt))
@@ -193,10 +193,10 @@ class Projects extends Controller
 
     $stay = Stays::find($id);
     if(!$stay)
-      return redirect()->route('main');
+      return redirect()->route('projects.index');
     
     if($stay->status != 'rented')
-      return redirect()->route('main');
+      return redirect()->route('projects.index');
 
     $stay->status = 'available';
     $stay->save();
@@ -204,7 +204,7 @@ class Projects extends Controller
     $project->stay = 0;
     $project->save();
 
-    return redirect()->route("main");
+    return redirect()->route("projects.index");
   }
 
   private function project_exists_and_ur_the_owner($request, $id)

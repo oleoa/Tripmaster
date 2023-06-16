@@ -4,7 +4,7 @@
     <div class="py-12">
       <h1>@lang('Edit Account')</h1>
     </div>
-    <form action="{{route('my.edit.account')}}" method="post" class="grid grid-cols-1 gap-4 w-1/3">
+    <form action="{{route('account.edit')}}" method="post" class="grid grid-cols-1 gap-4 w-1/3">
       @csrf
       @method('PUT')
       <input type="hidden" name="id" value="{{$user->id}}">
@@ -17,7 +17,7 @@
       <input type="submit" class="btn-good" value="@lang('Edit')"/>
     </form>
     <div class="p-4">
-      <h2 class="text-2xl dark:text-white">@lang("Forgot your password")? <a href="{{route('my.password.recover')}}" class="dark:text-blue-500">@lang('Recover it')</a>!</h2>
+      <h2 class="text-2xl dark:text-white">@lang("Forgot your password")? <a href="{{route('account.password.recover')}}" class="dark:text-blue-500">@lang('Recover it')</a>!</h2>
     </div>
     <div>
       <h1 class="text-xl text-white">{{session('message')}}</h1>

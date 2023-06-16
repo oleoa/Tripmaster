@@ -3,7 +3,7 @@
 <main>
   <div class="relative all-center">
     <div class="absolute right-0">
-      <a href="{{route('my.list.stays')}}" class="btn-okay">@lang('List Stay')</a>
+      <a href="{{route('stays.list')}}" class="btn-okay">@lang('List Stay')</a>
     </div>
     <h1 class="py-6">@lang($page_title)</h1>
   </div>

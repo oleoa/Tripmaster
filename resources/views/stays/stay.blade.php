@@ -20,7 +20,7 @@
     @if ($stay['status'] == 'rented')
       <a class="btn-disabled">@lang('Rent')</a>
     @else
-      <a href="{{route('rent.stay', ["id" => $stay['id']])}}" class="btn-good">@lang('Rent')</a>
+      <a href="{{route('stays.rent', ["id" => $stay['id']])}}" class="btn-good">@lang('Rent')</a>
     @endif
   </div>
 </main>
