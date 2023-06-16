@@ -33,7 +33,7 @@ class Controller extends BaseController
   const NO_PROJECTS_YET = "You need to create a project first";
   const PROJECT_CREATED = 'Project created';
   const PROJECT_404 = "Project not found";
-  const PROJECT_EDITED = 'Project edited';
+  const PROJECT_UPDATED = 'Project updated';
   
   // Stays
   const NOT_THE_STAY_OWNER = "You are not the owner of that stay";
@@ -43,7 +43,7 @@ class Controller extends BaseController
   const STAY_RENTED = 'Stay rented';
   const STAY_404 = 'Stay not found';
   const STAY_CREATED = 'Stay created';
-  const STAY_EDITED = 'Stay edited';
+  const STAY_UPDATED = 'Stay updated';
 
   protected Data $data;
   protected Image $image;

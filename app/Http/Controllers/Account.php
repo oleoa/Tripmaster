@@ -14,7 +14,7 @@ class Account extends Controller
     $this->data->title('Account');
 
     if(!Auth::check()){
-      session()->flash('error', $this::NOT_LOGGED);
+      session()->flash('alert', $this::NOT_LOGGED);
       return redirect()->route("sign.index");
     }
         
@@ -38,7 +38,7 @@ class Account extends Controller
 
     $user = Auth::user();
     if(!$user){
-      session()->flash('error', $this::NOT_LOGGED);
+      session()->flash('alert', $this::NOT_LOGGED);
       return redirect()->route("sign.index");
     }
 
@@ -51,7 +51,7 @@ class Account extends Controller
     // Verify if the user is logged in
     $user = Auth::user();
     if(!$user){
-      session()->flash('error', $this::NOT_LOGGED);
+      session()->flash('alert', $this::NOT_LOGGED);
       return redirect()->route("sign.index");
     }
 
@@ -66,14 +66,14 @@ class Account extends Controller
     
     // Verify if the user is the owner of the account
     if($user->id != $request->input('id')) {
-      session()->flash('error', $this::NOT_THE_ACCOUNT_OWNER);
+      session()->flash('alert', $this::NOT_THE_ACCOUNT_OWNER);
       return redirect()->route("account.editor");
     }
 
     // Verify if the user id sent in the request exists
     $user_from_request = User::where("id", $request->input('id'))->first();
     if(!$user_from_request) {
-      session()->flash('error', $this::NOT_THE_ACCOUNT_OWNER);
+      session()->flash('alert', $this::NOT_THE_ACCOUNT_OWNER);
       return redirect()->route("account.editor");
     }
 
@@ -83,7 +83,7 @@ class Account extends Controller
       'password' => $validated['password'],
     );
     if(!Auth::attempt($user_test)) {
-      session()->flash('error', $this::PASSWORD_INCORRECT);
+      session()->flash('alert', $this::PASSWORD_INCORRECT);
       return redirect()->route("account.editor");
     }
 
@@ -98,18 +98,18 @@ class Account extends Controller
   {
     $user = Auth::user();
     if(!$user){
-      session()->flash('error', $this::NOT_LOGGED);
+      session()->flash('alert', $this::NOT_LOGGED);
       return redirect()->route("sign.index");
     }
 
     if($user->id != $id) {
-      session()->flash('error', $this::NOT_THE_ACCOUNT_OWNER);
+      session()->flash('alert', $this::NOT_THE_ACCOUNT_OWNER);
       return redirect()->route("account.editor");
     }
 
     $user = User::where("id", $id)->first();
     if(!$user) {
-      session()->flash('error', $this::NOT_THE_ACCOUNT_OWNER);
+      session()->flash('alert', $this::NOT_THE_ACCOUNT_OWNER);
       return redirect()->route("account.editor");
     }
 

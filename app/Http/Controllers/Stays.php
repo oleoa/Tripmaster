@@ -22,7 +22,7 @@ class Stays extends Controller
     
     $project = Project::where("id", $lastProjectOpened)->first() ?? false;
     if(!$project){
-      session()->flash('error', $this::PROJECT_404);
+      session()->flash('alert', $this::PROJECT_404);
       return redirect()->route('projects.creator');
     }
       
@@ -82,13 +82,13 @@ class Stays extends Controller
 
     $lastProjectOpened = $this->getLastProjectOpened(Auth::id());
     if(!$lastProjectOpened){
-      session()->flash('error', $this::NO_PROJECTS_YET);
+      session()->flash('info', $this::NO_PROJECTS_YET);
       return redirect()->route('projects.creator');
     }
     
     $project = Project::where("id", $lastProjectOpened)->first() ?? false;
     if(!$project){
-      session()->flash('error', $this::PROJECT_404);
+      session()->flash('alert', $this::PROJECT_404);
       return redirect()->route('projects.creator');
     }
 
@@ -115,7 +115,7 @@ class Stays extends Controller
   {
     $attempt = $this->stay_exists_and_ur_the_owner($id);
     if(!$attempt){
-      session()->flash('error', $this::NOT_THE_STAY_OWNER);
+      session()->flash('alert', $this::NOT_THE_STAY_OWNER);
       return redirect()->route('stays.list');
     }
 
@@ -127,7 +127,7 @@ class Stays extends Controller
   {
     $attempt = $this->stay_exists_and_ur_the_owner($id);
     if(!$attempt){
-      session()->flash('error', $this::NOT_THE_STAY_OWNER);
+      session()->flash('alert', $this::NOT_THE_STAY_OWNER);
       return redirect()->route('stays.list');
     }
 
@@ -139,7 +139,7 @@ class Stays extends Controller
   {
     $attempt = $this->stay_exists_and_ur_the_owner($id);
     if(!$attempt){
-      session()->flash('error', $this::NOT_THE_STAY_OWNER);
+      session()->flash('alert', $this::NOT_THE_STAY_OWNER);
       return redirect()->route('stays.list');
     }
 
@@ -157,7 +157,7 @@ class Stays extends Controller
 
     $belongs = $this->stay_exists_and_ur_the_owner($id);
     if(!$belongs){
-      session()->flash('error', $this::NOT_THE_STAY_OWNER);
+      session()->flash('alert', $this::NOT_THE_STAY_OWNER);
       return redirect()->route('stays.list');
     }
       
@@ -190,12 +190,12 @@ class Stays extends Controller
   public function edit(Request $request, $id)
   {
     if(Auth::check()){
-      session()->flash('error', $this::NOT_LOGGED);
+      session()->flash('alert', $this::NOT_LOGGED);
       return redirect()->route('sign.index');
     }
 
     if(!$this->stay_exists_and_ur_the_owner($id)){
-      session()->flash('error', $this::NOT_THE_STAY_OWNER);
+      session()->flash('alert', $this::NOT_THE_STAY_OWNER);
       return redirect()->route('stays.list');
     }
 
@@ -210,7 +210,9 @@ class Stays extends Controller
       'city' => 'required'
     ]);
     
-    $saved_stay = StaysModel::where('id', $id)->update($validated);
+    StaysModel::where('id', $id)->update($validated);
+
+    session()->flash('success', $this::STAY_UPDATED);
     
     return redirect()->route('stays.list');
   }
@@ -243,6 +245,8 @@ class Stays extends Controller
         );
         Stays_Images::create($image);
       }
+
+    session()->flash('success', $this::STAY_CREATED);
     
     return redirect()->route('stays.list');
   }

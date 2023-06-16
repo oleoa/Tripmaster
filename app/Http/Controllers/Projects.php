@@ -24,7 +24,7 @@ class Projects extends Controller
     
     $project = Project::where("id", $lastProjectOpened)->first() ?? false;
     if(!$project){
-      session()->flash('error', $this::PROJECT_404);
+      session()->flash('alert', $this::PROJECT_404);
       return redirect()->route('projects.creator');
     }
 
@@ -44,7 +44,7 @@ class Projects extends Controller
     $this->data->title('Create Project');
 
     if(!Auth::check()){
-      session()->flash('error', $this::NOT_LOGGED);
+      session()->flash('alert', $this::NOT_LOGGED);
       return redirect()->route('sign.index');
     }
 
@@ -59,7 +59,7 @@ class Projects extends Controller
   public function create(Request $request)
   {
     if(!Auth::check()){
-      session()->flash('error', $this::NOT_LOGGED);
+      session()->flash('alert', $this::NOT_LOGGED);
       return redirect()->route('sign.index');
     }
 
@@ -89,7 +89,7 @@ class Projects extends Controller
       return redirect()->route('project.creator');
     }
 
-    session()->flash('message', $this::PROJECT_CREATED);
+    session()->flash('success', $this::PROJECT_CREATED);
     return redirect()->route('projects.list');
   }
   
@@ -98,7 +98,7 @@ class Projects extends Controller
     $this->data->title('Projects List');
 
     if(!Auth::check()){
-      session()->flash('error', $this::NOT_LOGGED);
+      session()->flash('alert', $this::NOT_LOGGED);
       return redirect()->route('sign.index');
     }
 
@@ -128,19 +128,19 @@ class Projects extends Controller
   public function set($id)
   {
     if(!Auth::check()){
-      session()->flash('error', $this::NOT_LOGGED);
+      session()->flash('alert', $this::NOT_LOGGED);
       return redirect()->route('sign.index');
     }
 
     $attempt = $this->project_exists_and_ur_the_owner($id);
     if(!$attempt){
-      session()->flash('error', $this::NOT_THE_PROJECT_OWNER);
+      session()->flash('alert', $this::NOT_THE_PROJECT_OWNER);
       return redirect()->route('projects.list');
     }
 
     $project = Project::find($id);
     if(!$project){
-      session()->flash('error', $this::PROJECT_404);
+      session()->flash('alert', $this::PROJECT_404);
       return redirect()->route('projects.list');
     }
 
@@ -151,13 +151,13 @@ class Projects extends Controller
   public function delete($id)
   {
     if(!Auth::check()){
-      session()->flash('error', $this::NOT_LOGGED);
+      session()->flash('alert', $this::NOT_LOGGED);
       return redirect()->route('sign.index');
     }
 
     $attempt = $this->project_exists_and_ur_the_owner($id);
     if(!$attempt){
-      session()->flash('error', $this::NOT_THE_PROJECT_OWNER);
+      session()->flash('alert', $this::NOT_THE_PROJECT_OWNER);
       return redirect()->route('projects.list');
     }
 
@@ -181,13 +181,13 @@ class Projects extends Controller
 
     $project = Project::where("id", $lastProjectOpened)->first();
     if(!$project){
-      session()->flash('error', $this::PROJECT_404);
+      session()->flash('alert', $this::PROJECT_404);
       return redirect()->route('list.stays');
     }
 
     $attempt = $this->project_exists_and_ur_the_owner($request, $project->id);
     if(!$attempt){
-      session()->flash('error', $this::NOT_THE_PROJECT_OWNER);
+      session()->flash('alert', $this::NOT_THE_PROJECT_OWNER);
       return $attempt;
     }
 
@@ -198,10 +198,10 @@ class Projects extends Controller
     }
 
     if($stay->status != 'available'){
-      session()->flash('error', $this::STAY_NOT_AVAILABLE);
+      session()->flash('alert', $this::STAY_NOT_AVAILABLE);
       return redirect()->route('list.stays');
     }
-      
+
     $stay->status = 'rented';
     $stay->save();
 
@@ -232,13 +232,13 @@ class Projects extends Controller
       
     $project = Project::where("id", $lastProjectOpened)->first();
     if(!$project){
-      session()->flash('error', $this::PROJECT_404);
+      session()->flash('alert', $this::PROJECT_404);
       return redirect()->route('projects.index');
     }
 
     $attempt = $this->project_exists_and_ur_the_owner($request, $project->id);
     if(!is_array($attempt)){
-      session()->flash('error', $this::NOT_THE_PROJECT_OWNER);
+      session()->flash('alert', $this::NOT_THE_PROJECT_OWNER);
       return $attempt;
     }
 
@@ -249,7 +249,7 @@ class Projects extends Controller
     }
     
     if($stay->status != 'rented'){
-      session()->flash('error', $this::STAY_NOT_RENTED);
+      session()->flash('alert', $this::STAY_NOT_RENTED);
       return redirect()->route('projects.index');
     }
 

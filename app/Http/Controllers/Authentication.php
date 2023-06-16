@@ -44,7 +44,7 @@ class Authentication extends Controller
     ]);
 
     if(!Auth::attempt($validated)) {
-      session()->flash("error", $this::INCORRECT_DATA);
+      session()->flash('alert', $this::INCORRECT_DATA);
       return redirect()->route('sign.in');
     }
     
@@ -93,7 +93,7 @@ class Authentication extends Controller
     Auth::attempt($login_user);    
     $request->session()->regenerate();
 
-    session()->flash("info", $this::ACCOUNT_CREATED);
+    session()->flash("success", $this::ACCOUNT_CREATED);
 
     return redirect()->route('projects.creator');
   }

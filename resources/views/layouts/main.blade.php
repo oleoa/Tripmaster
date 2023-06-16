@@ -65,6 +65,7 @@
     </dialog>
   @endif
 
+  <!-- Alerts are used when the user tried to make something he shouldn't -->
   @if(session('alert'))
     <div id="opc" class="fixed top-0 left-0 w-full h-full bg-slate-700/50"></div>
     <dialog class="fixed top-0 bg-white rounded my-4" open>
@@ -76,6 +77,7 @@
     </dialog>
   @endif
 
+  <!-- Errors are used when something shoulnd't happen -->
   @if(session('error'))
     <div id="opc" class="fixed top-0 left-0 w-full h-full bg-slate-700/50"></div>
     <dialog class="fixed top-0 bg-white rounded my-4" open>
@@ -87,6 +89,7 @@
     </dialog>
   @endif
 
+  <!-- Infos are used when the programmer has to say something to the client -->
   @if(session('info'))
     <div id="opc" class="fixed top-0 left-0 w-full h-full bg-slate-700/50"></div>
     <dialog class="fixed top-0 bg-white rounded my-4" open>
@@ -94,6 +97,18 @@
       <p class="text-xl dark:text-blue-500 py-4"><strong><code>@lang(session("info"))<code><strong></p>
       <form method="dialog">
         <button class="btn-okay text-white" onclick="document.querySelector('#opc').style.display = 'none'">OK</button>
+      </form>
+    </dialog>
+  @endif
+
+  <!-- Infos are used when the programmer has to say something to the client -->
+  @if(session('success'))
+    <div id="opc" class="fixed top-0 left-0 w-full h-full bg-slate-700/50"></div>
+    <dialog class="fixed top-0 bg-white rounded my-4" open>
+      <h1 class="dark:text-green-500">@lang('Success'):</h1>
+      <p class="text-xl dark:text-green-500 py-4"><strong><code>@lang(session("success"))<code><strong></p>
+      <form method="dialog">
+        <button class="btn-good text-white" onclick="document.querySelector('#opc').style.display = 'none'">OK</button>
       </form>
     </dialog>
   @endif
