@@ -7,12 +7,14 @@ use App\Models\User;
 
 class Verification extends Controller
 {
-  public function verify(Request $request, $token)
+  public function verify($token)
   {
     $user = User::where('verification_token', $token)->first();
 
-    if(!$user)
+    if(!$user){
+      session()->flash("error", $this::INVALID_TOKEN);
       return redirect()->route('validation.error');
+    }
 
     $user->email_verified_at = now();
     $user->verification_token = null;

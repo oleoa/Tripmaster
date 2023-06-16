@@ -34,10 +34,10 @@
 
       <div class="px-4 grid grid-cols-3 [&>a]:text-2xl space-y-6 py-6">
         @if ($isLogged)
-          <a class="col-span-2 flex items-end justify-start" href="{{route('signout')}}">@lang('Sign out')</a>
+          <a class="col-span-2 flex items-end justify-start" href="{{route('sign.out')}}">@lang('Sign out')</a>
         @else
-          <a href="{{route('signin')}}" class="col-span-3 @if($current['signin']) underline @endif">@lang('Sign in')</a>
-          <a href="{{route('signup')}}" class="col-span-2 @if($current['signup']) underline @endif">@lang('Sign up')</a>
+          <a href="{{route('sign.in')}}" class="col-span-3 @if($current['signin']) underline @endif">@lang('Sign in')</a>
+          <a href="{{route('sign.up')}}" class="col-span-2 @if($current['signup']) underline @endif">@lang('Sign up')</a>
         @endif
 
         @if(false)

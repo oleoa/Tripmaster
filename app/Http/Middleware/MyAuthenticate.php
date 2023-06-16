@@ -17,7 +17,7 @@ class MyAuthenticate
     public function handle(Request $request, Closure $next): Response
     {
       $currentRouteName = $request->route()->getName();
-      if($currentRouteName == "signin" || $currentRouteName == "signup" || $currentRouteName == "signout" || $currentRouteName == "signing-in" || $currentRouteName == "signing-up" || $currentRouteName == "home")
+      if($currentRouteName == "sign.in" || $currentRouteName == "sign.up" || $currentRouteName == "sign.out" || $currentRouteName == "sign.ing-in" || $currentRouteName == "sign.ing-up" || $currentRouteName == "home")
         return $next($request);
 
       if(Auth::guest())

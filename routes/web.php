@@ -26,11 +26,11 @@ Route::get('/home', [Home::class, 'index'])->name('home');
 
 Route::get('/locale/{locale}', [Localization::class, 'index'])->name('language');
 
-Route::name('sign')->group(function(){
+Route::name('sign.')->group(function(){
+  Route::get('/sign', [Authentication::class, 'index'])->name('index');
   Route::get('/signin', [Authentication::class, 'signin'])->name('in');
   Route::get('/signout', [Authentication::class, 'signout'])->name('out');
   Route::get('/signup', [Authentication::class, 'signup'])->name('up');
-
   Route::post('/signin', [Authentication::class, 'signing_in'])->name('ing-in');
   Route::post('/signup', [Authentication::class, 'signing_up'])->name('ing-up');
 });

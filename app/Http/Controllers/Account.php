@@ -5,26 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Project;
-use App\Models\Stays;
 use App\Models\User;
 
-/**
- * @group Account management
- * This controller is responsible for managing the user account.
- */
 class Account extends Controller
 {
-  const NOT_LOGGED_IN = "You are not logged in";
-  const NOT_THE_OWNER = "You are not the owner of that account";
-  const PASSWORD_INCORRECT = "Password is incorrect";
-
   public function index()
   {
     $this->data->title('Account');
 
     if(!Auth::check()){
-      session()->flash('error', $this::NOT_LOGGED_IN);
-      return redirect()->route("sign.in");
+      session()->flash('error', $this::NOT_LOGGED);
+      return redirect()->route("sign.index");
     }
         
     $u = Auth::user();
@@ -47,8 +38,8 @@ class Account extends Controller
 
     $user = Auth::user();
     if(!$user){
-      session()->flash('error', $this::NOT_LOGGED_IN);
-      return redirect()->route("signin");
+      session()->flash('error', $this::NOT_LOGGED);
+      return redirect()->route("sign.index");
     }
 
     $this->data->set("user", $user);
@@ -60,8 +51,8 @@ class Account extends Controller
     // Verify if the user is logged in
     $user = Auth::user();
     if(!$user){
-      session()->flash('error', $this::NOT_LOGGED_IN);
-      return redirect()->route("sign.in");
+      session()->flash('error', $this::NOT_LOGGED);
+      return redirect()->route("sign.index");
     }
 
     // Get the user from the database to edit this user
@@ -75,14 +66,14 @@ class Account extends Controller
     
     // Verify if the user is the owner of the account
     if($user->id != $request->input('id')) {
-      session()->flash('error', $this::NOT_THE_OWNER);
+      session()->flash('error', $this::NOT_THE_ACCOUNT_OWNER);
       return redirect()->route("account.editor");
     }
 
     // Verify if the user id sent in the request exists
     $user_from_request = User::where("id", $request->input('id'))->first();
     if(!$user_from_request) {
-      session()->flash('error', $this::NOT_THE_OWNER);
+      session()->flash('error', $this::NOT_THE_ACCOUNT_OWNER);
       return redirect()->route("account.editor");
     }
 
@@ -107,18 +98,18 @@ class Account extends Controller
   {
     $user = Auth::user();
     if(!$user){
-      session()->flash('error', $this::NOT_LOGGED_IN);
-      return redirect()->route("sign.in");
+      session()->flash('error', $this::NOT_LOGGED);
+      return redirect()->route("sign.index");
     }
 
     if($user->id != $id) {
-      session()->flash('error', $this::NOT_THE_OWNER);
+      session()->flash('error', $this::NOT_THE_ACCOUNT_OWNER);
       return redirect()->route("account.editor");
     }
 
     $user = User::where("id", $id)->first();
     if(!$user) {
-      session()->flash('error', $this::NOT_THE_OWNER);
+      session()->flash('error', $this::NOT_THE_ACCOUNT_OWNER);
       return redirect()->route("account.editor");
     }
 

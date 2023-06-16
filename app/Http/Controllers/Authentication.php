@@ -33,7 +33,7 @@ class Authentication extends Controller
   public function signout()
   {
     Session::flush();
-    return redirect()->route('signin');
+    return redirect()->route('sign.in');
   }
   
   public function signing_in(Request $request)
@@ -44,8 +44,8 @@ class Authentication extends Controller
     ]);
 
     if(!Auth::attempt($validated)) {
-      session()->flash("error", "Email or password incorrect");
-      return redirect()->route('signin');
+      session()->flash("error", $this::INCORRECT_DATA);
+      return redirect()->route('sign.in');
     }
     
     $request->session()->regenerate();
@@ -83,17 +83,17 @@ class Authentication extends Controller
     $login_user['password'] = $validated['password'];
 
     if(!$info) {
-      session()->flash("error", "Something went wrong, please try again");
-      return redirect()->route('signup');
+      session()->flash("error", $this::ERROR_500);
+      return redirect()->route('sign.up');
     }
     
     $verificationLink = route('verification.verify', ['token' => $verificationToken]);
     Mail::to($request->email)->send(new VerificationEmail($verificationLink));
     
-    Auth::attempt($login_user);
+    Auth::attempt($login_user);    
     $request->session()->regenerate();
 
-    session()->flash("info", "Account created successfully, a verification email has been sent to you");
+    session()->flash("info", $this::ACCOUNT_CREATED);
 
     return redirect()->route('projects.index');
   }

@@ -7,7 +7,6 @@ use App\Models\Stays as StaysModel;
 use Illuminate\Http\Request;
 use App\Models\Stays_Images;
 use App\Models\Project;
-use App\Models\User;
 
 class Stays extends Controller
 {
@@ -16,12 +15,16 @@ class Stays extends Controller
     $this->data->title('Stays');
 
     $lastProjectOpened = $this->getLastProjectOpened(Auth::id());
-    if(!$lastProjectOpened)
+    if(!$lastProjectOpened){
+      session()->flash('error', $this::NO_PROJECTS_YET);
       return redirect()->route('projects.creator');
+    }
     
     $project = Project::where("id", $lastProjectOpened)->first() ?? false;
-    if(!$project)
+    if(!$project){
+      session()->flash('error', $this::PROJECT_404);
       return redirect()->route('projects.creator');
+    }
       
     $this->data->set('country', $project->country);
     
@@ -44,8 +47,10 @@ class Stays extends Controller
     $this->data->title('Stay');
 
     $stay = StaysModel::where("id", $id)->first() ?? false;
-    if(!$stay)
-      return redirect()->route('list.stays');
+    if(!$stay){
+      session()->flash('error', $this::STAY_404);
+      return redirect()->route('stays.list');
+    }
     $stay->images = array();
     
     $images_path = Stays_Images::where("stay", $stay->id)->get()->toArray() ?? false;
@@ -70,16 +75,22 @@ class Stays extends Controller
   public function rent($id)
   {
     $stay = StaysModel::where("id", $id)->first() ?? false;
-    if(!$stay)
-      return redirect()->route('list.stays');
+    if(!$stay){
+      session()->flash('error', $this::STAY_404);
+      return redirect()->route('stays.list');
+    }
 
     $lastProjectOpened = $this->getLastProjectOpened(Auth::id());
-    if(!$lastProjectOpened)
+    if(!$lastProjectOpened){
+      session()->flash('error', $this::NO_PROJECTS_YET);
       return redirect()->route('projects.creator');
+    }
     
     $project = Project::where("id", $lastProjectOpened)->first() ?? false;
-    if(!$project)
+    if(!$project){
+      session()->flash('error', $this::PROJECT_404);
       return redirect()->route('projects.creator');
+    }
 
     $this->data->title('Rent');
     $this->data->set("stay", $stay);
@@ -89,9 +100,6 @@ class Stays extends Controller
 
     return $this->view('stays.rent');
   }
-
-  private $you_are_not_the_owner = "You are not the owner of that stay";
-  private $not_found = "Stay not found";
 
   public function list()
   {
@@ -103,41 +111,55 @@ class Stays extends Controller
     return $this->view('stays.list');
   }
 
-  public function enable(Request $request, $id)
+  public function enable($id)
   {
-    $attempt = $this->stay_exists_and_ur_the_owner($request, $id);
-    if(!is_array($attempt))
-      return $attempt;
+    $attempt = $this->stay_exists_and_ur_the_owner($id);
+    if(!$attempt){
+      session()->flash('error', $this::NOT_THE_STAY_OWNER);
+      return redirect()->route('stays.list');
+    }
 
     StaysModel::where("id", $id)->update(["status" => "available"]);
     return redirect()->back();
   }
 
-  public function disable(Request $request, $id)
+  public function disable($id)
   {
-    $attempt = $this->stay_exists_and_ur_the_owner($request, $id);
-    if(!is_array($attempt))
-      return $attempt;
+    $attempt = $this->stay_exists_and_ur_the_owner($id);
+    if(!$attempt){
+      session()->flash('error', $this::NOT_THE_STAY_OWNER);
+      return redirect()->route('stays.list');
+    }
 
     StaysModel::where("id", $id)->update(["status" => "disabled"]);
     return redirect()->back();
   }
 
-  public function delete(Request $request, $id)
+  public function delete($id)
   {
-    $attempt = $this->stay_exists_and_ur_the_owner($request, $id);
-    if(!is_array($attempt))
-      return $attempt;
+    $attempt = $this->stay_exists_and_ur_the_owner($id);
+    if(!$attempt){
+      session()->flash('error', $this::NOT_THE_STAY_OWNER);
+      return redirect()->route('stays.list');
+    }
 
     StaysModel::destroy($id);
     return redirect()->back();
   }
   
-  public function editor(Request $request, $id)
+  public function editor($id)
   {
-    $stay = $this->stay_exists_and_ur_the_owner($request, $id);
-    if(!is_array($stay))
-      return $stay;
+    $stay = StaysModel::where("id", $id)->first() ?? false;
+    if(!$stay){
+      session()->flash('error', $this::STAY_404);
+      return redirect()->route('stays.list');
+    }
+
+    $belongs = $this->stay_exists_and_ur_the_owner($id);
+    if(!$belongs){
+      session()->flash('error', $this::NOT_THE_STAY_OWNER);
+      return redirect()->route('stays.list');
+    }
       
     $this->data->title('Edit Stay');
     $this->data->set('owner', Auth::id());
@@ -167,6 +189,16 @@ class Stays extends Controller
   
   public function edit(Request $request, $id)
   {
+    if(Auth::check()){
+      session()->flash('error', $this::NOT_LOGGED);
+      return redirect()->route('sign.index');
+    }
+
+    if(!$this->stay_exists_and_ur_the_owner($id)){
+      session()->flash('error', $this::NOT_THE_STAY_OWNER);
+      return redirect()->route('stays.list');
+    }
+
     $validated = $request->validate([
       'owner' => 'required',
       'title' => 'required',
@@ -197,6 +229,10 @@ class Stays extends Controller
     ]);
     
     $stay = StaysModel::create($validated);
+    if(!$stay){
+      session()->flash('error', $this::ERROR_500);
+      return redirect()->route('stays.creator');
+    }
 
     $images = $request->file('images');
     if($images)
@@ -211,29 +247,15 @@ class Stays extends Controller
     return redirect()->route('stays.list');
   }
 
-  /**
-   * It verifies if the stay searched does
-   * exists and if the person who is trying to 
-   * edit/delete it is the owner.
-   * 
-   * This funcion only exists to save code.
-   */
-  private function stay_exists_and_ur_the_owner($request, $id)
+  private function stay_exists_and_ur_the_owner($id)
   {
     $stay_exists = StaysModel::find($id);
-    if(!$stay_exists){
-      $request->session()->flash('alert', $this->not_found);
-      return redirect()->back();    
-    }
+    if(!$stay_exists)
+      return false;
     
     $stay = $stay_exists->toArray();
     
     $belongs = $stay['owner'] == Auth::id();
-    if(!$belongs){
-      $request->session()->flash('alert', $this->you_are_not_the_owner);
-      return redirect()->back();      
-    }
-
-    return $stay;
+    return $belongs;
   }
 }
