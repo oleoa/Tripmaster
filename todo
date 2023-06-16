@@ -1,4 +1,6 @@
-user email validation
+user email validation pages
+redirects in errors
+fix the multiple emails error
 password recovery
 delete user
 project min date today
