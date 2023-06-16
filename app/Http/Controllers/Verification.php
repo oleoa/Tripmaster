@@ -11,23 +11,31 @@ class Verification extends Controller
   {
     $user = User::where('verification_token', $token)->first();
 
-    if (!$user)
+    if(!$user)
       return redirect()->route('validation.error');
 
     $user->email_verified_at = now();
     $user->verification_token = null;
     $user->save();
 
+    session()->flash("name", $user->name);
     return redirect()->route('validation.success');
   }
 
   public function success()
   {
-    return view('verification.success');
-  }
+    $this->data->title("Verification success");
 
+    $name = session()->get("name");
+    session()->flash("name", $name);
+    
+    $this->data->set("name", $name);
+    return $this->view('verification.success');
+  }
+  
   public function error()
   {
-    return view('verification.error');
+    $this->data->title("Verification error");
+    return $this->view('verification.error');
   }
 }

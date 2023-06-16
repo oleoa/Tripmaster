@@ -35,14 +35,15 @@ Route::name('sign')->group(function(){
   Route::post('/signup', [Authentication::class, 'signing_up'])->name('ing-up');
 });
 
-Route::name('validation.')->group(function(){
+Route::name('verification.')->group(function(){
 
   Route::get('/verify/{token}', [Verification::class, 'verify'])->name('verify');
-  Route::get('/validation/success', [Verification::class, 'success'])->name('success');
-  Route::get('/validation/error', [Verification::class, 'error'])->name('error');
+
+  Route::get('/verification/success', [Verification::class, 'success'])->name('success');
+  
+  Route::get('/verification/error', [Verification::class, 'error'])->name('error');
 
 });
-
 
 Route::name('projects.')->group(function(){
 
