@@ -36,7 +36,7 @@ class Account extends Controller
       $this->data->set('utsc', $diff);
     */
 
-    return $this->view('my.account.show');
+    return $this->view('account.show');
   }
   
   public function editor()
@@ -50,7 +50,7 @@ class Account extends Controller
       return redirect()->route('home');
 
     $this->data->set("user", $user);
-    return $this->view('my.account.edit');
+    return $this->view('account.edit');
   }
 
   public function edit(Request $request)

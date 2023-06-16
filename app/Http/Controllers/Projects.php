@@ -47,7 +47,7 @@ class Projects extends Controller
     $this->data->set('selected', "France");
     $this->data->set('countries', $countries);
 
-    return $this->view('my.projects.create');
+    return $this->view('projects.create');
   }
 
   public function create(Request $request)
@@ -108,7 +108,7 @@ class Projects extends Controller
 
     $this->data->set('projects', $projects);
 
-    return $this->view('my.projects.list');
+    return $this->view('projects.list');
   }
 
   public function set($id)

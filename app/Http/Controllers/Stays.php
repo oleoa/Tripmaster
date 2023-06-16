@@ -100,7 +100,7 @@ class Stays extends Controller
     $stays = StaysModel::where('owner', '=', Auth::id())->get()->toArray();
     $this->data->set('stays', $stays);
 
-    return $this->view('my.stays.list');
+    return $this->view('stays.list');
   }
 
   public function enable(Request $request, $id)
@@ -143,13 +143,13 @@ class Stays extends Controller
     $this->data->set('owner', Auth::id());
     $this->data->set('page_title', 'Edit Stay');
     $this->data->set('submit_button', 'Update');
-    $this->data->set('form_route', route('my.edit.stay', ['id' => $id]));
+    $this->data->set('form_route', route('stays.edit', ['id' => $id]));
     $this->data->set('editing_case', true);
     $countries = $this->countries->getAll();
     $this->data->set('possible_countries', $countries);
     $this->data->set('stay', $stay);
     
-    return $this->view('my.stays.create_and_edit');
+    return $this->view('stays.create_and_edit');
   }
   
   public function creator()
@@ -157,12 +157,12 @@ class Stays extends Controller
     $this->data->title('Create Stay');
     $this->data->set('owner', Auth::id());
     $this->data->set('editing_case', false);
-    $this->data->set('form_route', route('my.create.stay'));
+    $this->data->set('form_route', route('stays.create'));
     $this->data->set('submit_button', 'Create');
     $this->data->set('page_title', 'Create Stay');
     $countries = $this->countries->getAll();
     $this->data->set('possible_countries', $countries);
-    return $this->view('my.stays.create_and_edit');
+    return $this->view('stays.create_and_edit');
   }
   
   public function edit(Request $request, $id)
