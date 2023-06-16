@@ -65,15 +65,38 @@
     </dialog>
   @endif
 
-  @if (session('alert'))
+  @if(session('alert'))
     <div id="opc" class="fixed top-0 left-0 w-full h-full bg-slate-700/50"></div>
     <dialog class="fixed top-0 bg-white rounded my-4" open>
-      <h1 class="dark:text-red-500">@lang('Alert'):</h1>
-      <p class="text-xl dark:text-red-500 py-4"><strong><code>@lang(session("alert"))<code><strong></p>
+      <h1 class="dark:text-orange-500">@lang('Alert'):</h1>
+      <p class="text-xl dark:text-orange-500 py-4"><strong><code>@lang(session("alert"))<code><strong></p>
+      <form method="dialog">
+        <button class="btn-alert text-white" onclick="document.querySelector('#opc').style.display = 'none'">OK</button>
+      </form>
+    </dialog>
+  @endif
+
+  @if(session('error'))
+    <div id="opc" class="fixed top-0 left-0 w-full h-full bg-slate-700/50"></div>
+    <dialog class="fixed top-0 bg-white rounded my-4" open>
+      <h1 class="dark:text-red-500">@lang('Error'):</h1>
+      <p class="text-xl dark:text-red-500 py-4"><strong><code>@lang(session("error"))<code><strong></p>
       <form method="dialog">
         <button class="btn-danger text-white" onclick="document.querySelector('#opc').style.display = 'none'">OK</button>
       </form>
     </dialog>
   @endif
+
+  @if(session('info'))
+    <div id="opc" class="fixed top-0 left-0 w-full h-full bg-slate-700/50"></div>
+    <dialog class="fixed top-0 bg-white rounded my-4" open>
+      <h1 class="dark:text-blue-500">@lang('Info'):</h1>
+      <p class="text-xl dark:text-blue-500 py-4"><strong><code>@lang(session("info"))<code><strong></p>
+      <form method="dialog">
+        <button class="btn-okay text-white" onclick="document.querySelector('#opc').style.display = 'none'">OK</button>
+      </form>
+    </dialog>
+  @endif
+
 </body>
 </html>

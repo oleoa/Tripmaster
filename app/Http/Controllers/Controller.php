@@ -34,18 +34,4 @@ class Controller extends BaseController
     
     return view($page, $this->data->get());
   }
-
-  private array $message;
-  protected bool $status;
-  protected function messages($didnt, $worked = "")
-  {
-    $this->message[true] = $worked;
-    $this->message[false] = $didnt;
-  }
-  protected function attempt(Bool $attempt, $request)
-  {
-    $request->session()->flash('message', $this->message[$attempt]);
-    $request->session()->flash('status', $attempt);
-    $this->status = $attempt;
-  }
 }

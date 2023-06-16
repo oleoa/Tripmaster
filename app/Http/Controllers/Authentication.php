@@ -43,11 +43,10 @@ class Authentication extends Controller
       'password' => 'required'
     ]);
 
-    $this->messages("Email or password incorrect");
-    
-    $this->attempt(Auth::attempt($validated), $request);
-    if(!$this->status)
+    if(!Auth::attempt($validated)) {
+      session()->flash("error", "Email or password incorrect");
       return redirect()->route('signin');
+    }
     
     $request->session()->regenerate();
     return redirect()->route('projects.index');
@@ -83,10 +82,10 @@ class Authentication extends Controller
     $login_user = $new_user;
     $login_user['password'] = $validated['password'];
 
-    $this->messages("Something went wrong, please try again");
-    $this->attempt($info != false, $request);
-    if(!$this->status)
+    if(!$info) {
+      session()->flash("error", "Something went wrong, please try again");
       return redirect()->route('signup');
+    }
     
     $verificationLink = route('validation.verify', ['token' => $verificationToken]);
     Mail::to($request->email)->send(new VerificationEmail($verificationLink));
