@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use App\Mail\PasswordChangeVerificationEmail;
 use App\Models\Project;
 use App\Models\User;
 
@@ -59,13 +63,14 @@ class Account extends Controller
     $user = User::where("id", $user->id)->first();
   
     $validated = $request->validate([
+      'id' => 'required|integer',
       'name' => 'required|string|max:255',
       'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
       'password' => 'nullable|string|min:'.env('PASSWORD_MIN_LENGTH').'|max:'.env('PASSWORD_MAX_LENGTH'),
     ]);
     
     // Verify if the user is the owner of the account
-    if($user->id != $request->input('id')) {
+    if($user->id != $validated['id']) {
       session()->flash('alert', $this::NOT_THE_ACCOUNT_OWNER);
       return redirect()->route("account.editor");
     }
@@ -117,9 +122,69 @@ class Account extends Controller
     return redirect()->route('sign.out');
   }
 
-  public function recover()
+  public function password_editor()
   {
-    // Method to recover the password
+    $this->data->title('Change password');
+
+    $this->data->set("id", Auth::id());
+    $this->data->set("password_min_length", env('PASSWORD_MIN_LENGTH'));
+    $this->data->set("password_max_length", env('PASSWORD_MAX_LENGTH'));
+
+    return $this->view('account.password');
+  }
+
+  public function password_edit(Request $request)
+  {
+    // Verify if the user is logged in
+    $user = Auth::user();
+    if(!$user){
+      session()->flash('alert', $this::NOT_LOGGED);
+      return redirect()->route("home");
+    }
+
+    // Get the user from the database to edit this user
+    $user = User::where("id", $user->id)->first();
+  
+    $validated = $request->validate([
+      'id' => 'required|integer',
+      'password' => 'nullable|string|min:'.env('PASSWORD_MIN_LENGTH').'|max:'.env('PASSWORD_MAX_LENGTH').'|confirmed',
+    ]);
+    
+    // Verify if the user is the owner of the account
+    if($user->id != $validated['id']){
+      session()->flash('alert', $this::NOT_THE_ACCOUNT_OWNER);
+      return redirect()->route("account.editor");
+    }
+
+    // Verify if the user id sent in the request exists
+    $user_from_request = User::where("id", $validated['id'])->first();
+    if(!$user_from_request){
+      session()->flash('alert', $this::NOT_THE_ACCOUNT_OWNER);
+      return redirect()->route("account.editor");
+    }
+
+    $user->password = Hash::make($validated['password']);
+    $user->password_verification_token = null;
+    $user->save();
+
+    session()->flash('info', $this::PASSWORD_CHANGED);
+    return redirect()->route('account.index');
+  }
+
+  public function recover_password()
+  {
+    $verificationToken = Str::random(40);
+
+    $userId = Auth::id();
+
+    $user = User::where('id', $userId)->first();
+    $user->password_verification_token = $verificationToken;
+    $user->save();
+
+    $verificationLink = route('verification.password', ['token' => $verificationToken]);
+    Mail::to($user->email)->send(new PasswordChangeVerificationEmail($verificationLink));
+
+    session()->flash('info', $this::PASSWORD_RESET_EMAIL_SENT);
     return redirect()->route('account.index');
   }
 }

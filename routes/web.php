@@ -39,6 +39,8 @@ Route::name('verification.')->group(function(){
 
   Route::get('/verify/{token}', [Verification::class, 'verify'])->name('verify');
 
+  Route::get('/verify/password/{token}', [Verification::class, 'password'])->name('password');
+
   Route::get('/verification/success', [Verification::class, 'success'])->name('success');
   
   Route::get('/verification/error', [Verification::class, 'error'])->name('error');
@@ -100,10 +102,13 @@ Route::name('account.')->group(function(){
 
   Route::get('/account', [Account::class, 'index'])->name('index');
 
-  Route::get('/account/recover/password', [Account::class, 'recover'])->name('password.recover');
+  Route::get('/account/edit', [Account::class, 'editor'])->name('editor');
+  Route::put('/account/edit', [Account::class, 'edit'])->name('edit');
 
-  Route::get('/account/edit/', [Account::class, 'editor'])->name('editor');
-
-  Route::put('/account/edit/', [Account::class, 'edit'])->name('edit');
+  Route::name("password.")->group(function(){
+    Route::get('/account/recover/password', [Account::class, 'recover_password'])->name('recover');
+    Route::get('/account/edit/password', [Account::class, 'password_editor'])->name('editor');
+    Route::put('/account/edit/password', [Account::class, 'password_edit'])->name('edit');
+  });
 
 });

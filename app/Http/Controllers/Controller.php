@@ -24,6 +24,9 @@ class Controller extends BaseController
   const INCORRECT_DATA = "Email or password incorrect";
   const EMAIL_ALREADY_EXISTS = "The email has already been chosen";
   const ACCOUNT_CREATED = "Account created successfully, a verification email has been sent to you";
+  const PASSWORD_RESETED = "You can now change your password";
+  const PASSWORD_CHANGED = "Password changed successfully";
+  const PASSWORD_RESET_EMAIL_SENT = "An email was sent to you with instructions to recover your password";
 
   // Account
   const NOT_THE_ACCOUNT_OWNER = "You are not the owner of that account";

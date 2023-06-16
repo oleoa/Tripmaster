@@ -24,6 +24,23 @@ class Verification extends Controller
     return redirect()->route('verification.success');
   }
 
+  public function password($token)
+  {
+    $user = User::where('password_verification_token', $token)->first();
+
+    if(!$user){
+      session()->flash("error", $this::INVALID_TOKEN);
+      return redirect()->route('verification.error');
+    }
+
+    $user->email_verified_at = now();
+    $user->verification_token = null;
+    $user->save();
+    
+    session()->flash('success', $this::PASSWORD_RESETED);
+    return redirect()->route('account.password.editor');
+  }
+
   public function success()
   {
     $this->data->title("Verification success");
