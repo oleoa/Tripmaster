@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 
 use App\Http\Controllers\VerificationController;
-use App\Http\Controllers\AccountController;
+use App\Http\Controllers\Account;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 
@@ -71,8 +71,8 @@ Route::name('renting.')->group(function(){
 Route::prefix('/my')->group(function(){
   Route::name('my.')->group(function(){
     
-    Route::get('/account/recover/password', [AccountController::class, 'recover'])->name('password.recover');
-    Route::get('/account', [AccountController::class, 'index'])->name('account');
+    Route::get('/account/recover/password', [Account::class, 'recover'])->name('password.recover');
+    Route::get('/account', [Account::class, 'index'])->name('account');
     Route::get('/set/project/{id}', [ProjectsController::class, 'set'])->name('set.project');
 
     Route::name('delete.')->group(function(){
@@ -95,13 +95,13 @@ Route::prefix('/my')->group(function(){
     Route::name('editor.')->group(function(){
       Route::get('/stays/edit/{id}', [MyStaysController::class, 'editor'])->name('stay');
       Route::get('/projects/edit/{id}', [ProjectsController::class, 'editor'])->name('project');
-      Route::get('/account/edit/', [AccountController::class, 'editor'])->name('account');
+      Route::get('/account/edit/', [Account::class, 'editor'])->name('account');
     });
 
     Route::name('edit.')->group(function(){
       Route::put('/stays/edit/{id}', [MyStaysController::class, 'edit'])->name('stay');
       Route::put('/projects/edit/{id}', [ProjectsController::class, 'edit'])->name('project');
-      Route::put('/account/edit/', [AccountController::class, 'edit'])->name('account');
+      Route::put('/account/edit/', [Account::class, 'edit'])->name('account');
     });
 
     Route::name('creator.')->group(function(){
