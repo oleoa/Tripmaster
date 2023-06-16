@@ -8,8 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 
 use App\Http\Controllers\Projects;
-use App\Http\Controllers\MyStaysController;
-use App\Http\Controllers\StaysController;
+use App\Http\Controllers\Stays;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,15 +50,15 @@ Route::name('sign')->group(function(){
 });
 
 Route::name('list.')->group(function(){
-  Route::get('/stays', [StaysController::class, 'index'])->name('stays');
+  Route::get('/stays', [Stays::class, 'index'])->name('stays');
 });
 
 Route::name('show.')->group(function(){
-  Route::get('/stay/{id}', [StaysController::class, 'show'])->name('stay');
+  Route::get('/stay/{id}', [Stays::class, 'show'])->name('stay');
 });
 
 Route::name('rent.')->group(function(){
-  Route::get('/rent/stay/{id}', [StaysController::class, 'rent'])->name('stay');
+  Route::get('/rent/stay/{id}', [Stays::class, 'rent'])->name('stay');
 });
 
 Route::name('renting.')->group(function(){
@@ -75,7 +74,7 @@ Route::prefix('/my')->group(function(){
 
     Route::name('delete.')->group(function(){
       Route::get('/project/delete/{id}', [Projects::class, 'delete'])->name('project');
-      Route::get('/stay/delete/{id}', [MyStaysController::class, 'delete'])->name('stay');
+      Route::get('/stay/delete/{id}', [Stays::class, 'delete'])->name('stay');
     });
 
     Route::name('remove.')->group(function(){
@@ -83,38 +82,38 @@ Route::prefix('/my')->group(function(){
     });
 
     Route::name('disable.')->group(function(){
-      Route::get('/my/stays/disable/{id}', [MyStaysController::class, 'disable'])->name('stay');
+      Route::get('/my/stays/disable/{id}', [Stays::class, 'disable'])->name('stay');
     });
 
     Route::name('enable.')->group(function(){
-      Route::get('/my/stays/enable/{id}', [MyStaysController::class, 'enable'])->name('stay');
+      Route::get('/my/stays/enable/{id}', [Stays::class, 'enable'])->name('stay');
     });
 
     Route::name('editor.')->group(function(){
-      Route::get('/stays/edit/{id}', [MyStaysController::class, 'editor'])->name('stay');
+      Route::get('/stays/edit/{id}', [Stays::class, 'editor'])->name('stay');
       Route::get('/projects/edit/{id}', [Projects::class, 'editor'])->name('project');
       Route::get('/account/edit/', [Account::class, 'editor'])->name('account');
     });
 
     Route::name('edit.')->group(function(){
-      Route::put('/stays/edit/{id}', [MyStaysController::class, 'edit'])->name('stay');
+      Route::put('/stays/edit/{id}', [Stays::class, 'edit'])->name('stay');
       Route::put('/projects/edit/{id}', [Projects::class, 'edit'])->name('project');
       Route::put('/account/edit/', [Account::class, 'edit'])->name('account');
     });
 
     Route::name('creator.')->group(function(){
-      Route::get('/stays/create', [MyStaysController::class, 'creator'])->name('stay');
+      Route::get('/stays/create', [Stays::class, 'creator'])->name('stay');
       Route::get('/projects/create', [Projects::class, 'creator'])->name('project');
     });
     
     Route::name('create.')->group(function(){
-      Route::post('/stays/create', [MyStaysController::class, 'create'])->name('stay');
+      Route::post('/stays/create', [Stays::class, 'create'])->name('stay');
       Route::post('/projects/create', [Projects::class, 'create'])->name('project');
     });
 
     Route::name('list.')->group(function(){
       Route::get('/projects', [Projects::class, 'list'])->name('projects');
-      Route::get('/stays', [MyStaysController::class, 'index'])->name('stays');
+      Route::get('/stays', [Stays::class, 'list'])->name('stays');
     });
 
   });
