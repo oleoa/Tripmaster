@@ -1,17 +1,17 @@
 @extends('layouts.main')
 @section('body')
 <main>
-  @if (isset($stays) && !empty($stays))
 
-    <div class="all-center relative">
-      <div class="py-6">
-        <h1>@lang('Stays')</h1>
-      </div>
-      <div class="absolute right-0">
-        <a href="{{route('stays.creator')}}" class="btn-good">@lang('Create Stay')</a>
-      </div>
+  <div class="all-center relative">
+    <div class="py-6">
+      <h1>@lang('My Stays')</h1>
     </div>
-
+    <div class="absolute right-0">
+      <a href="{{route('stays.creator')}}" class="btn-good">@lang('Create Stay')</a>
+    </div>
+  </div>
+    
+  @if (isset($stays) && !empty($stays))
     <div>
       <div class="grid grid-cols-7 w-full bg-slate-600 p-4 rounded-t">
         <h6>Name</h6>
@@ -43,18 +43,7 @@
         @endforeach
       </div>
     </div>
-    
-  @else
-
-    <div class="flex items-center justify-center relative">
-      <div class="py-6">
-        <h1>@lang('You have no stays')</h1>
-      </div>
-      <div class="absolute right-0 top-0 p-4 pt-8">
-        <a href="{{route('stays.creator')}}" class="btn">@lang('Create Stay')</a>
-      </div>
-    </div>
-    
   @endif
+
 </main>
 @endsection

@@ -30,7 +30,7 @@ class Controller extends BaseController
   
   // Projects
   const NOT_THE_PROJECT_OWNER = "You are not the owner of that project";
-  const NO_PROJECTS_YET = "You have no project yet";
+  const NO_PROJECTS_YET = "You don't have a project yet";
   const PROJECT_CREATED = 'Project created';
   const PROJECT_404 = "Project not found";
   const PROJECT_EDITED = 'Project edited';
