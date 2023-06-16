@@ -2,11 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Validation;
-use App\Http\Controllers\Account;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\Authentication;
-
+use App\Http\Controllers\Localization;
+use App\Http\Controllers\Validation;
+use App\Http\Controllers\Account;
 use App\Http\Controllers\Projects;
 use App\Http\Controllers\Stays;
 
@@ -21,17 +21,7 @@ use App\Http\Controllers\Stays;
 |
 */
 
-// ------------------------------ LOCALE ------------------------------
-Route::get('/locale/{locale}', function($locale){
-  if (! in_array($locale, ['en', 'pt']))
-    abort(400);
-  app()->setLocale($locale);
-  session(['locale' => $locale]);
-  return redirect()->back();
-})->name('language');
-// ------------------------------ LOCALE ------------------------------
-
-// ------------------------------ ROUTES ------------------------------
+Route::get('/locale/{locale}', [Localization::class, 'index'])->name('language');
 
 Route::get('/', [Projects::class, 'index'])->name('main');
 Route::get('/home', [Home::class, 'index'])->name('home');
