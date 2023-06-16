@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 
 class Authentication extends Controller
-{
+{  
   public function signin()
   {
     $this->data->set("password_min_length", env('PASSWORD_MIN_LENGTH'));

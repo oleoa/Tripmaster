@@ -191,7 +191,7 @@ class Stays extends Controller
   {
     if(Auth::check()){
       session()->flash('alert', $this::NOT_LOGGED);
-      return redirect()->route('sign.index');
+      return redirect()->route('home');
     }
 
     if(!$this->stay_exists_and_ur_the_owner($id)){

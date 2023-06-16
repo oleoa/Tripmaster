@@ -15,7 +15,7 @@ class Account extends Controller
 
     if(!Auth::check()){
       session()->flash('alert', $this::NOT_LOGGED);
-      return redirect()->route("sign.index");
+      return redirect()->route("home");
     }
         
     $u = Auth::user();
@@ -39,7 +39,7 @@ class Account extends Controller
     $user = Auth::user();
     if(!$user){
       session()->flash('alert', $this::NOT_LOGGED);
-      return redirect()->route("sign.index");
+      return redirect()->route("home");
     }
 
     $this->data->set("user", $user);
@@ -52,7 +52,7 @@ class Account extends Controller
     $user = Auth::user();
     if(!$user){
       session()->flash('alert', $this::NOT_LOGGED);
-      return redirect()->route("sign.index");
+      return redirect()->route("home");
     }
 
     // Get the user from the database to edit this user
@@ -99,7 +99,7 @@ class Account extends Controller
     $user = Auth::user();
     if(!$user){
       session()->flash('alert', $this::NOT_LOGGED);
-      return redirect()->route("sign.index");
+      return redirect()->route("home");
     }
 
     if($user->id != $id) {

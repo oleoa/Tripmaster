@@ -45,7 +45,7 @@ class Projects extends Controller
 
     if(!Auth::check()){
       session()->flash('alert', $this::NOT_LOGGED);
-      return redirect()->route('sign.index');
+      return redirect()->route('home');
     }
 
     $countries = $this->countries->getAll();
@@ -60,7 +60,7 @@ class Projects extends Controller
   {
     if(!Auth::check()){
       session()->flash('alert', $this::NOT_LOGGED);
-      return redirect()->route('sign.index');
+      return redirect()->route('home');
     }
 
     $valideted = $request->validate([
@@ -99,7 +99,7 @@ class Projects extends Controller
 
     if(!Auth::check()){
       session()->flash('alert', $this::NOT_LOGGED);
-      return redirect()->route('sign.index');
+      return redirect()->route('home');
     }
 
     $user_projects = Project::where('owner', Auth::id())->get();
@@ -129,7 +129,7 @@ class Projects extends Controller
   {
     if(!Auth::check()){
       session()->flash('alert', $this::NOT_LOGGED);
-      return redirect()->route('sign.index');
+      return redirect()->route('home');
     }
 
     $attempt = $this->project_exists_and_ur_the_owner($id);
@@ -152,7 +152,7 @@ class Projects extends Controller
   {
     if(!Auth::check()){
       session()->flash('alert', $this::NOT_LOGGED);
-      return redirect()->route('sign.index');
+      return redirect()->route('home');
     }
 
     $attempt = $this->project_exists_and_ur_the_owner($id);
