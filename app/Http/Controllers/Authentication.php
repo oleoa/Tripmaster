@@ -95,6 +95,6 @@ class Authentication extends Controller
 
     session()->flash("info", $this::ACCOUNT_CREATED);
 
-    return redirect()->route('projects.index');
+    return redirect()->route('projects.creator');
   }
 }
