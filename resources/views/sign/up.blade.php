@@ -7,9 +7,9 @@
     <form action="{{route('sign.ing-up')}}" method="post" class="grid grid-cols-1 gap-4 w-1/3">
       @csrf
       <label for="name"><h2>@lang('Name')</h2></label>
-      <input type="text" name="name" id="name"/>
+      <input type="text" name="name" id="name" value="{{old('name')}}"/>
       <label for="email"><h2>@lang('Email')</h2></label>
-      <input type="text" name="email" id="email"/>
+      <input type="text" name="email" id="email" value="{{old('email')}}"/>
       <label for="password"><h2>@lang('Password')</h2></label>
       <input type="password" name="password" id="password" minlength="{{$password_min_length}}" maxlength="{{$password_max_length}}"/>
       <label for="password_confirmation"><h2>@lang('Confirm Password')</h2></label>

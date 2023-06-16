@@ -22,6 +22,7 @@ class Controller extends BaseController
   // Authentification
   const NOT_LOGGED = "You are not logged in";
   const INCORRECT_DATA = "Email or password incorrect";
+  const EMAIL_ALREADY_EXISTS = "The email has already been chosen";
   const ACCOUNT_CREATED = "Account created successfully, a verification email has been sent to you";
 
   // Account

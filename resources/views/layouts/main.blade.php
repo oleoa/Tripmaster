@@ -55,12 +55,12 @@
   @if($errors->any())
     <div id="opc" class="fixed top-0 left-0 w-full h-full bg-slate-700/50"></div>
     <dialog class="fixed top-0 bg-white rounded my-4" open>
-      <h1 class="dark:text-red-500">@lang('Alert'):</h1>
+      <h1 class="dark:text-yellow-500">@lang('Alert'):</h1>
       @foreach ($errors->all() as $error)
-        <p class="text-xl dark:text-red-500 py-4"><strong><code>@lang($error)<code><strong></p>
+        <p class="text-xl dark:text-yellow-500 py-4"><strong><code>@lang($error)<code><strong></p>
       @endforeach  
       <form method="dialog">
-        <button class="btn-danger text-white" onclick="document.querySelector('#opc').style.display = 'none'">OK</button>
+        <button class="btn-error text-white" onclick="document.querySelector('#opc').style.display = 'none'">OK</button>
       </form>
     </dialog>
   @endif

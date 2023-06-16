@@ -13,7 +13,7 @@ class Verification extends Controller
 
     if(!$user){
       session()->flash("error", $this::INVALID_TOKEN);
-      return redirect()->route('validation.error');
+      return redirect()->route('verification.error');
     }
 
     $user->email_verified_at = now();
@@ -21,7 +21,7 @@ class Verification extends Controller
     $user->save();
 
     session()->flash("name", $user->name);
-    return redirect()->route('validation.success');
+    return redirect()->route('verification.success');
   }
 
   public function success()
