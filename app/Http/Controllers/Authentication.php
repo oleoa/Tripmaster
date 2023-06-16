@@ -88,7 +88,7 @@ class Authentication extends Controller
     if(!$this->status)
       return redirect()->route('signup');
     
-    $verificationLink = route('verify', ['token' => $verificationToken]);
+    $verificationLink = route('validation.verify', ['token' => $verificationToken]);
     Mail::to($request->email)->send(new VerificationEmail($verificationLink));
     
     Auth::attempt($login_user);

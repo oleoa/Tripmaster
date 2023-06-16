@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\Authentication;
 use App\Http\Controllers\Localization;
-use App\Http\Controllers\Validation;
+use App\Http\Controllers\Verification;
 use App\Http\Controllers\Account;
 use App\Http\Controllers\Projects;
 use App\Http\Controllers\Stays;
@@ -35,7 +35,14 @@ Route::name('sign')->group(function(){
   Route::post('/signup', [Authentication::class, 'signing_up'])->name('ing-up');
 });
 
-Route::get('/verify/{token}', [Validation::class, 'verify'])->name('verify');
+Route::name('validation.')->group(function(){
+
+  Route::get('/verify/{token}', [Verification::class, 'verify'])->name('verify');
+  Route::get('/validation/success', [Verification::class, 'success'])->name('success');
+  Route::get('/validation/error', [Verification::class, 'error'])->name('error');
+
+});
+
 
 Route::name('projects.')->group(function(){
 
