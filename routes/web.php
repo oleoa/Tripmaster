@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\VerificationController;
+use App\Http\Controllers\Validation;
 use App\Http\Controllers\Account;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\Authentication;
@@ -36,7 +36,7 @@ Route::get('/locale/{locale}', function($locale){
 Route::get('/', [Projects::class, 'index'])->name('main');
 Route::get('/home', [Home::class, 'index'])->name('home');
 
-Route::get('/verify/{token}', [VerificationController::class, 'verify'])->name('verify');
+Route::get('/verify/{token}', [Validation::class, 'verify'])->name('verify');
 
 Route::name('sign')->group(function(){
   
