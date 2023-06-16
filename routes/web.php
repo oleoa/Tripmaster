@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\Account;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Home;
+use App\Http\Controllers\Authentication;
 
 use App\Http\Controllers\Projects;
 use App\Http\Controllers\Stays;
@@ -34,18 +34,18 @@ Route::get('/locale/{locale}', function($locale){
 // ------------------------------ ROUTES ------------------------------
 
 Route::get('/', [Projects::class, 'index'])->name('main');
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [Home::class, 'index'])->name('home');
 
 Route::get('/verify/{token}', [VerificationController::class, 'verify'])->name('verify');
 
 Route::name('sign')->group(function(){
   
-  Route::get('/signin', [UserController::class, 'signin'])->name('in');
-  Route::get('/signout', [UserController::class, 'signout'])->name('out');
-  Route::get('/signup', [UserController::class, 'signup'])->name('up');
+  Route::get('/signin', [Authentication::class, 'signin'])->name('in');
+  Route::get('/signout', [Authentication::class, 'signout'])->name('out');
+  Route::get('/signup', [Authentication::class, 'signup'])->name('up');
   
-  Route::post('/signin', [UserController::class, 'signing_in'])->name('ing-in');
-  Route::post('/signup', [UserController::class, 'signing_up'])->name('ing-up');
+  Route::post('/signin', [Authentication::class, 'signing_in'])->name('ing-in');
+  Route::post('/signup', [Authentication::class, 'signing_up'])->name('ing-up');
   
 });
 
