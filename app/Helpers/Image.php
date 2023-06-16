@@ -26,7 +26,7 @@ class Image
     if(Storage::disk('public')->exists($path) && $path[strlen($path)-1] != '/')
       return asset('storage/'.$path);
     else
-      return $default ? $defualt : Image::NO_IMAGE;
+      return $default ? $default : Image::NO_IMAGE;
   }
 
   public function set($path, $file)

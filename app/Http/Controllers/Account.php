@@ -15,9 +15,26 @@ use App\Models\User;
  */
 class Account extends Controller
 {
+  public function __construct()
+  {
+    parent::__construct();
+    
+    $this->error->message("not_logged_in", "You are not logged in");
+    $this->error->message("not_the_owner", "You are not the owner of that account");
+    $this->error->message("password_incorrect", "Password is incorrect");
+    
+    $this->error->redirect('editor', 'account.editor');
+    $this->error->redirect('signin', 'sign.in');
+  }
+
   public function index()
   {
     $this->data->title('Account');
+
+    if(!Auth::check()){
+      session()->flash('error', $this->error->message('not_logged_in'));
+      return redirect()->route($this->error->redirect("signin"));
+    }
     
     $stays = Stays::where("owner", Auth::id())->get()->toArray();
     
@@ -41,13 +58,17 @@ class Account extends Controller
   
   public function editor()
   {
+    $this->error->redirect('account.editor');
+
     $this->data->title('Edit account');
     $this->data->set("password_min_length", env('PASSWORD_MIN_LENGTH'));
     $this->data->set("password_max_length", env('PASSWORD_MAX_LENGTH'));
 
     $user = Auth::user();
-    if(!$user)
-      return redirect()->route('home');
+    if(!$user){
+      session()->flash('error', $this->error->message('not_logged_in'));
+      return redirect()->route($this->error->redirect("signin"));
+    }
 
     $this->data->set("user", $user);
     return $this->view('account.edit');
@@ -55,9 +76,15 @@ class Account extends Controller
 
   public function edit(Request $request)
   {
+    // Verify if the user is logged in
     $user = Auth::user();
-    if(!$user)
-      return redirect()->route('home');
+    if(!$user){
+      session()->flash('error', $this->error->message('not_logged_in'));
+      return redirect()->route($this->error->redirect("signin"));
+    }
+
+    // Get the user from the database to edit this user
+    $user = User::where("id", $user->id)->first();
   
     $validated = $request->validate([
       'name' => 'required|string|max:255',
@@ -65,26 +92,57 @@ class Account extends Controller
       'password' => 'nullable|string|min:'.env('PASSWORD_MIN_LENGTH').'|max:'.env('PASSWORD_MAX_LENGTH'),
     ]);
     
-    if($user->id != $request->input('id'))
-      return redirect()->route('home');
+    // Verify if the user is the owner of the account
+    if($user->id != $request->input('id')) {
+      session()->flash('error', $this->error->message('not_the_owner'));
+      return redirect()->route($this->error->redirect("editor"));
+    }
 
-    $user = User::where("id", $user->id)->first();
-    if(!$user)
-      return redirect()->route('home');
+    // Verify if the user id sent in the request exists
+    $user_from_request = User::where("id", $request->input('id'))->first();
+    if(!$user_from_request) {
+      session()->flash('error', $this->error->message('not_the_owner'));
+      return redirect()->route($this->error->redirect("editor"));
+    }
 
+    // Verify if the password is correct
     $user_test = array(
       'id' => $user->id,
       'password' => $validated['password'],
     );
-
-    if(!Auth::attempt($user_test))
-      return redirect()->route('home');
+    if(!Auth::attempt($user_test)) {
+      session()->flash('error', $this->error->message('password_incorrect'));
+      return redirect()->route($this->error->redirect("editor"));
+    }
 
     $user->name = $validated['name'];
     $user->email = $validated['email'];      
     $user->save();
 
     return redirect()->route('account.index');
+  }
+
+  public function delete($id)
+  {
+    $user = Auth::user();
+    if(!$user){
+      session()->flash('error', $this->error->message('not_logged_in'));
+      return redirect()->route($this->error->redirect("signin"));
+    }
+
+    if($user->id != $id) {
+      session()->flash('error', $this->error->message('not_the_owner'));
+      return redirect()->route($this->error->redirect("editor"));
+    }
+
+    $user = User::where("id", $id)->first();
+    if(!$user) {
+      session()->flash('error', $this->error->message('not_the_owner'));
+      return redirect()->route($this->error->redirect("editor"));
+    }
+
+    $user->delete();
+    return redirect()->route('sign.out');
   }
 
   public function recover()
