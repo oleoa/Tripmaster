@@ -11,7 +11,7 @@
     </div>
   </div>
     
-  @if (isset($stays) && !empty($stays))
+  @if(isset($stays) && !empty($stays))
     <div>
       <div class="grid grid-cols-7 w-full bg-slate-600 p-4 rounded-t">
         <h6>Name</h6>

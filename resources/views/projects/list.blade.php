@@ -8,7 +8,8 @@
         <a href="{{route('projects.creator')}}" class="btn-good">@lang('Create Project')</a>
       </div>
     </div>
-    @if (isset($projects) && !empty($projects))
+    
+    @if(isset($projects) && !empty($projects))
       <div class="grid gap-4 grid-cols-2">
         @foreach ($projects as $project)
           <article class="flex flex-col rounded">

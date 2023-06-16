@@ -16,7 +16,7 @@ class Stays extends Controller
 
     $lastProjectOpened = $this->getLastProjectOpened(Auth::id());
     if(!$lastProjectOpened){
-      session()->flash('error', $this::NO_PROJECTS_YET);
+      session()->flash('info', $this::NO_PROJECTS_YET);
       return redirect()->route('projects.creator');
     }
     
