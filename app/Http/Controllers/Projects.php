@@ -192,6 +192,13 @@ class Projects extends Controller
       'headcount' => 'required',
     ]);
 
+    $start = Carbon::parse($valideted['start_date']);
+    $end = Carbon::parse($valideted['end_date']);
+    if($start->greaterThan($end)){
+      session()->flash('alert', $this::START_DATE_AFTER_END_DATE);
+      return redirect()->back();
+    }
+
     $lastProjectOpened = $this->getLastProjectOpened(Auth::id());
     if(!$lastProjectOpened){
       session()->flash('info', $this::NO_PROJECTS_YET);

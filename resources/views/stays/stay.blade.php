@@ -17,11 +17,7 @@
   </div>
   <div class="flex justify-end w-full p-6 space-x-4">
     <a href="{{$backHref}}" class="btn-okay">@lang('Back')</a>
-    @if ($stay['status'] == 'rented')
-      <a class="btn-disabled">@lang('Rent')</a>
-    @else
-      <a href="{{route('stays.rent', ["id" => $stay['id']])}}" class="btn-good">@lang('Rent')</a>
-    @endif
+    <a href="{{route('stays.rent', ["id" => $stay['id']])}}" class="btn-good">@lang('Rent')</a>
   </div>
 </main>
 @endsection
