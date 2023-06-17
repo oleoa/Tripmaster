@@ -29,10 +29,19 @@ class Projects extends Controller
       return redirect()->route('projects.creator');
     }
 
-    $stay = Stays::where("id", $project->stay)->first() ?? false;
-    if($stay) {
-      $stay->image = Stays_Images::where("stay", $stay->id)->first()->image_path ?? false;
-      $project->stay = $stay;
+    $rents = Rents::where("project", $project->id)->get() ?? false;
+    $project->stays = array();
+    if($rents){
+      $stays = array();
+      foreach($rents as $rent){
+        $stay = Stays::where("id", $rent->stay)->first() ?? false;
+
+        $img_path = Stays_Images::where("stay", $stay->id)->first()->image_path ?? false;
+        $stay->image = $this->image->get('stays/'.$img_path);
+
+        $stays[] = $stay;
+      }
+      $project->stays = $stays;
     }
 
     $this->data->set("project", $project);
@@ -235,13 +244,13 @@ class Projects extends Controller
     $lastProjectOpened = $this->getLastProjectOpened(Auth::id());
     if(!$lastProjectOpened){
       session()->flash('info', $this::NO_PROJECTS_YET);
-      return redirect()->route('list.stays');
+      return redirect()->route('stays.list');
     }
 
     $project = Project::where("id", $lastProjectOpened)->first();
     if(!$project){
       session()->flash('alert', $this::PROJECT_404);
-      return redirect()->route('list.stays');
+      return redirect()->route('stays.list');
     }
 
     if($valideted['headcount'] > $project->headcount){
@@ -258,19 +267,16 @@ class Projects extends Controller
     $stay = Stays::find($id);
     if(!$stay){
       session()->flash('error', $this::STAY_404);
-      return redirect()->route('list.stays');
+      return redirect()->route('stays.list');
     }
 
     if($stay->status != 'available'){
       session()->flash('alert', $this::STAY_NOT_AVAILABLE);
-      return redirect()->route('list.stays');
+      return redirect()->route('stays.list');
     }
 
     $stay->status = 'rented';
     $stay->save();
-
-    $project->stay = $stay->id;
-    $project->save();
     
     $rent = array(
       'project' => $project->id,
@@ -319,9 +325,6 @@ class Projects extends Controller
 
     $stay->status = 'available';
     $stay->save();
-
-    $project->stay = 0;
-    $project->save();
 
     return redirect()->route("projects.index");
   }

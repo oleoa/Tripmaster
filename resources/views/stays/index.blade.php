@@ -2,11 +2,6 @@
 @section('body')
   <div class="p-6 grid">
     <div class="all-center relative">
-      @if($staySelected)
-        <div class="absolute left-0 p-4">
-          <p class="dark:text-red-500">@lang('You have already selected a stay')</p>
-        </div>
-      @endif
       <h1 class="text-center">Stays for {{$country}}</h1>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-4">

@@ -36,8 +36,6 @@ class Stays extends Controller
       $stays[$i]->image = $this->image->get('stays/'.$img_path);
     }
 
-    $this->data->set('staySelected', $project->stay);
-
     $this->data->set('stays', $stays);
 
     return $this->view('stays.index');

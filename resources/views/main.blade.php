@@ -7,7 +7,9 @@
     </article>
     <div class="grid gap-4">
       <h2>@lang('Selected stays')</h2>
-      <x-mini-stay :stay="$project->stay"/>
+      @foreach ($project->stays as $stay)  
+        <x-mini-stay :stay="$stay"/>
+      @endforeach
     </div>
     <footer class="col-span-2">
       <p class="text-xl">
