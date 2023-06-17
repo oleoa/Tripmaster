@@ -17,7 +17,7 @@
         <h6>Name</h6>
         <h6>Status</h6>
         <h6>Capacity</h6>
-        <h6>Price</h6>
+        <h6>Price per day</h6>
         <h6>City</h6>
         <h6 class="text-end col-span-2">Actions</h6>
       </div>

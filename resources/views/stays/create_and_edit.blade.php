@@ -32,7 +32,7 @@
     </div>
 
     <div>
-      <h2>@lang('Price per month')</h2>
+      <h2>@lang('Price per day')</h2>
       <input type="number" name="price" value="{{$editing_case ? $stay['price'] : old('price')}}"/>
     </div>
 
