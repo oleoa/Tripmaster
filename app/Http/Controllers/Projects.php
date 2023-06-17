@@ -52,6 +52,41 @@ class Projects extends Controller
 
     return $this->view('main');
   }
+
+  public function close($id)
+  {
+    $project = Project::where("id", $id)->first() ?? false;
+    if(!$project){
+      session()->flash('alert', $this::PROJECT_404);
+      return redirect()->route('projects.creator');
+    }
+
+    $belongs = $this->project_exists_and_ur_the_owner($id);
+    if(!$belongs){
+      session()->flash('alert', $this::NOT_THE_PROJECT_OWNER);
+      return redirect()->route('projects.index');
+    }
+
+    $user = User::where("id", Auth::id())->first() ?? false;
+    if(!$user){
+      session()->flash('alert', $this::NOT_LOGGED);
+      return redirect()->route('projects.creator');
+    }
+
+    if($user->money < $project->cost){
+      session()->flash('alert', $this::NOT_ENOUGH_MONEY);
+      return redirect()->route('projects.payment');
+    }
+
+    $user->money -= $project->cost;
+    $user->save();
+
+    $project->closed = true;
+    $project->save();
+
+    session()->flash('success', $this::PROJECT_CLOSED);
+    return redirect()->route('projects.list');
+  }
   
   public function payment()
   {
@@ -81,7 +116,9 @@ class Projects extends Controller
       $project->stay = $stay;
     }
 
+    $this->data->set("user", Auth::user());
     $this->data->set("project", $project);
+    $this->data->set("remaining", Auth::user()->money - $project->cost);
 
     return $this->view('projects.payment');
   }

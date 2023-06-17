@@ -32,12 +32,14 @@ class Controller extends BaseController
   const NOT_THE_ACCOUNT_OWNER = "You are not the owner of that account";
   const PASSWORD_INCORRECT = "Password is incorrect";
   const ACCOUNT_DELETED = "Your account has been deleted";
+  const NOT_ENOUGH_MONEY = "You don't have enough money";
   
   // Projects
   const NOT_THE_PROJECT_OWNER = "You are not the owner of that project";
   const NO_PROJECTS_YET = "You need to create a project first";
   const PROJECT_CREATED = 'Project created';
   const PROJECT_404 = "Project not found";
+  const PROJECT_CLOSED = "Your project was payed and closed";
   const PROJECT_UPDATED = 'Project updated';
   const PROJECT_DELETED = 'Project deleted';
   const STAY_HEADCOUNT_GREATER_THAN_PROJECT_HEADCOUNT = 'You are trying to set a stay headcount greater than the project headcount';

@@ -52,7 +52,7 @@ class DatabaseSeeder extends Seeder
           'description' => "Apartamento completo com vista à torre",
           'capacity' => "2",
           'bedrooms' => "1",
-          'price' => "20000",
+          'price' => "250",
           'country' => "France",
           'city' => "Paris",
           "status" => "available"
