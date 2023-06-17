@@ -58,7 +58,7 @@
         <h1 class="dark:text-yellow-500">@lang('Alert'):</h1>
         @foreach ($errors->all() as $error)
           <p class="text-xl dark:text-yellow-500 py-4"><strong><code>@lang($error)<code><strong></p>
-        @endforeach  
+        @endforeach
         <form method="dialog">
           <button class="btn-error text-white" onclick="document.querySelector('#opc').style.display = 'none'">OK</button>
         </form>
