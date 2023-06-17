@@ -299,7 +299,7 @@ class Projects extends Controller
     if(!$project->exists())
       return false;
 
-    $owner = $project->first()->owner;
+    $owner = $project->owner;
     return $owner == Auth::id();
   }
 }

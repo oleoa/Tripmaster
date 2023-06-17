@@ -258,8 +258,8 @@ class Stays extends Controller
     $stay_exists = StaysModel::find($id);
     if(!$stay_exists)
       return false;
-    
-    $stay = $stay_exists->first()->toArray();
+      
+    $stay = $stay_exists->toArray();
     
     $belongs = $stay['owner'] == Auth::id();
     return $belongs;
