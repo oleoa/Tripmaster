@@ -32,7 +32,10 @@ class Authentication extends Controller
   
   public function signout()
   {
+    $info = session("info");
+    Auth::logout();
     Session::flush();
+    session()->flash("info", $info);
     return redirect()->route('sign.in');
   }
   

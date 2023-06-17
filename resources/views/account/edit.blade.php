@@ -19,8 +19,10 @@
     <div class="p-4">
       <h2 class="text-2xl dark:text-white">@lang("Forgot your password")? <a href="{{route('account.password.recover')}}" class="dark:text-blue-500">@lang('Recover it')</a>!</h2>
     </div>
-    <div>
-      <h1 class="text-xl text-white">{{session('message')}}</h1>
-    </div>
+    <form action="{{ route('account.delete', ['id' => $user->id]) }}" method="POST" class="p-4">
+      @csrf
+      @method('delete')
+      <button type="submit" class="btn-danger">Delete Account</button>
+    </form>
   </div>
 @endsection

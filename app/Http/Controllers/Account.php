@@ -112,13 +112,15 @@ class Account extends Controller
       return redirect()->route("account.editor");
     }
 
-    $user = User::where("id", $id)->first();
+    $user = User::where("id", $user->id)->first();
     if(!$user) {
       session()->flash('alert', $this::NOT_THE_ACCOUNT_OWNER);
       return redirect()->route("account.editor");
     }
 
     $user->delete();
+    
+    session()->flash('info', $this::ACCOUNT_DELETED);
     return redirect()->route('sign.out');
   }
 

@@ -31,6 +31,7 @@ class Controller extends BaseController
   // Account
   const NOT_THE_ACCOUNT_OWNER = "You are not the owner of that account";
   const PASSWORD_INCORRECT = "Password is incorrect";
+  const ACCOUNT_DELETED = "Your account has been deleted";
   
   // Projects
   const NOT_THE_PROJECT_OWNER = "You are not the owner of that project";

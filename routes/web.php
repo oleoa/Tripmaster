@@ -66,8 +66,11 @@ Route::name('projects.')->group(function(){
   Route::get('/projects/list', [Projects::class, 'list'])->name('list');
   
   Route::name('stay.')->group(function(){
+
     Route::get('/renting/stay/{id}', [Projects::class, 'rentStay'])->name('rent');
+
     Route::get('/project/remove/stay/{id}', [Projects::class, 'removeStay'])->name('remove');
+
   });
 
 });
@@ -102,13 +105,20 @@ Route::name('account.')->group(function(){
 
   Route::get('/account', [Account::class, 'index'])->name('index');
 
+  Route::delete('/account/delete/{id}', [Account::class, 'delete'])->name('delete');
+
   Route::get('/account/edit', [Account::class, 'editor'])->name('editor');
+
   Route::put('/account/edit', [Account::class, 'edit'])->name('edit');
 
   Route::name("password.")->group(function(){
+
     Route::get('/account/recover/password', [Account::class, 'recover_password'])->name('recover');
+
     Route::get('/account/edit/password', [Account::class, 'password_editor'])->name('editor');
+
     Route::put('/account/edit/password', [Account::class, 'password_edit'])->name('edit');
+
   });
 
 });
