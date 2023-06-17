@@ -79,6 +79,8 @@ Route::name('stays.')->group(function(){
 
   Route::get('/stays', [Stays::class, 'index'])->name('index');
 
+  Route::get('/stays/dashboard/{id}', [Stays::class, 'dashboard'])->name('dashboard');
+
   Route::get('/stay/{id}', [Stays::class, 'show'])->name('show');
 
   Route::get('/stay/rent/{id}', [Stays::class, 'rent'])->name('rent');

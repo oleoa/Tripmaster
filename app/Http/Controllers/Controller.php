@@ -51,6 +51,7 @@ class Controller extends BaseController
   const STAY_404 = 'Stay not found';
   const STAY_CREATED = 'Stay created';
   const STAY_UPDATED = 'Stay updated';
+  const STAY_DELETED = 'Stay deleted';
 
   // Dates
   const START_DATE_AFTER_END_DATE = "Start date must be before end date";

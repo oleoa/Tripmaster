@@ -7,6 +7,7 @@ use App\Models\Stays as StaysModel;
 use Illuminate\Http\Request;
 use App\Models\Stays_Images;
 use App\Models\Project;
+use App\Models\Rents;
 
 class Stays extends Controller
 {
@@ -70,6 +71,24 @@ class Stays extends Controller
     $this->data->set('backHref', url()->previous());
 
     return $this->view('stays.stay');
+  }
+
+  public function dashboard($id)
+  {
+    $this->data->title('Stay dashboard');
+
+    $stay = StaysModel::where("id", $id)->first() ?? false;
+    if(!$stay){
+      session()->flash('error', $this::STAY_404);
+      return redirect()->route('stays.list');
+    }
+
+    $rents = Rents::where("stay", $stay->id)->get()->toArray() ?? false;
+    $this->data->set('rents', $rents);
+
+    $this->data->set('stay', $stay);
+
+    return $this->view('stays.dashboard');
   }
   
   public function rent($id)
@@ -146,6 +165,7 @@ class Stays extends Controller
     }
 
     StaysModel::destroy($id);
+    session()->flash('info', $this::STAY_DELETED);
     return redirect()->back();
   }
   

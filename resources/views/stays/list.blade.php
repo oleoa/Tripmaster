@@ -25,12 +25,13 @@
         @foreach ($stays as $stay)
           <div class="dark:bg-slate-700 bg-turquoise-100 [&>h4]:flex [&>h4]:items-center text-white p-4 grid grid-cols-7 w-full @if($loop->last) rounded-b @else border-b-2 @endif">
             <h4 class="pr-8">{{$stay['title']}}</h4>
-            <h4>{{$stay['status']}}</h4>
+            <h4>{{ucfirst($stay['status']);}}</h4>
             <h4>{{$stay['capacity']}}</h4>
             <h4>{{$stay['price']}}€</h4>
             <h4>{{$stay['city']}}</h4>
             <div class="flex items-center justify-end space-x-4 col-span-2">
-              <a class="btn" href="{{route("stays.show", ['id' => $stay['id']])}}">@lang('View')</a>
+              <a class="btn good" href="{{route("stays.dashboard", ['id' => $stay['id']])}}">@lang('Check')</a>
+              <a class="btn default" href="{{route("stays.show", ['id' => $stay['id']])}}">@lang('View')</a>
               <a class="btn okay" href="{{route('stays.editor', ['id' => $stay['id']])}}">@lang('Edit')</a>
               @if ($stay['status'] == 'available')
                 <a class="btn alert" href="{{route('stays.disable', ['id' => $stay['id']])}}">@lang('Disable')</a>
