@@ -9,6 +9,7 @@ use App\Models\Project;
 use App\Models\Stays;
 use App\Models\Rents;
 use App\Models\User;
+use Carbon\Carbon;
 
 class Projects extends Controller
 {
@@ -51,6 +52,8 @@ class Projects extends Controller
     $countries = $this->countries->getAll();
     
     $this->data->set('selected', "France");
+    $this->data->set('minStart', now()->format('Y-m-d'));
+    $this->data->set('minEnd', Carbon::parse(now()->format('Y-m-d'))->addDays(1)->format('Y-m-d'));
     $this->data->set('countries', $countries);
 
     return $this->view('projects.create');
@@ -65,11 +68,26 @@ class Projects extends Controller
 
     $valideted = $request->validate([
       'country' => 'required',
-      'start' => 'required',
-      'end' => 'required',
+      'start' => array(
+        'required',
+        'date',
+        'after_or_equal:'.now()->format('Y-m-d')
+      ),
+      'end' => array(
+        'required',
+        'date',
+        'after_or_equal:'.now()->format('Y-m-d')
+      ),
       'adults' => 'required',
       'children' => 'required',
     ]);
+
+    $start = Carbon::parse($valideted['start']);
+    $end = Carbon::parse($valideted['end']);
+    if($start->greaterThan($end)){
+      session()->flash('alert', $this::START_DATE_AFTER_END_DATE);
+      return redirect()->route('projects.creator');
+    }
 
     $project = array(
       'country' => $valideted['country'],
@@ -162,6 +180,7 @@ class Projects extends Controller
     }
 
     Project::destroy($id);
+    session()->flash('info', $this::PROJECT_DELETED);
     return redirect()->back();
   }
 

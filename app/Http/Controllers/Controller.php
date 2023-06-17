@@ -39,6 +39,7 @@ class Controller extends BaseController
   const PROJECT_CREATED = 'Project created';
   const PROJECT_404 = "Project not found";
   const PROJECT_UPDATED = 'Project updated';
+  const PROJECT_DELETED = 'Project deleted';
   
   // Stays
   const NOT_THE_STAY_OWNER = "You are not the owner of that stay";
@@ -49,6 +50,9 @@ class Controller extends BaseController
   const STAY_404 = 'Stay not found';
   const STAY_CREATED = 'Stay created';
   const STAY_UPDATED = 'Stay updated';
+
+  // Dates
+  const START_DATE_AFTER_END_DATE = "Start date must be before end date";
 
   protected Data $data;
   protected Image $image;

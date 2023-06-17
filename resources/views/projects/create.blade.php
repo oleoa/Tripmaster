@@ -11,11 +11,11 @@
     @csrf
     <div class="grid grid-rows-1 gap-4">
       <h2>@lang('Start')</h2>
-      <input type="date" name="start"/>
+      <input type="date" name="start" min="{{$minStart}}"/>
     </div>
     <div class="grid grid-rows-1 gap-4">
       <h2>@lang('End')</h2>
-      <input type="date" name="end"/>
+      <input type="date" name="end" min="{{$minEnd}}"/>
     </div>
     <div class="grid grid-rows-1 gap-4">
       <h2>@lang('How many adults will participate?')</h2>
