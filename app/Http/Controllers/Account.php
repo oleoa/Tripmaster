@@ -23,9 +23,7 @@ class Account extends Controller
     }
         
     $u = Auth::user();
-    $this->data->set('id', $u->id);
-    $this->data->set('name', $u->name);
-    $this->data->set('email', $u->email);
+    $this->data->set('user', $u);
 
     $projects_count = Project::where('owner', Auth::id())->count();
     $this->data->set('projects_count', $projects_count);

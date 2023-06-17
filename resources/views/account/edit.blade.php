@@ -16,6 +16,6 @@
       <input type="password" name="password" id="password" minlength="{{$password_min_length}}" maxlength="{{$password_max_length}}"/>
       <button type="submit" class="btn good">@lang('Edit')</button>
     </form>
-    <a href="{{route('account.manage')}}" class="p-4"><button class="btn okay">Go back</button></a>
+    <a href="{{route('account.manage.index')}}" class="p-4"><button class="btn okay">Go back</button></a>
   </div>
 @endsection

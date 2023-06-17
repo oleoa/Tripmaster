@@ -9,6 +9,7 @@ use App\Http\Controllers\Verification;
 use App\Http\Controllers\Account;
 use App\Http\Controllers\Projects;
 use App\Http\Controllers\Stays;
+use App\Http\Controllers\Money;
 
 /** 
  *  Naming conventions:
@@ -113,7 +114,25 @@ Route::name('account.')->group(function(){
 
   Route::delete('/account/delete/{id}', [Account::class, 'delete'])->name('delete');
 
-  Route::get('/account/manage', [Account::class, 'manage'])->name('manage');
+  Route::name('manage.')->group(function(){
+    
+    Route::get('/account/manage', [Account::class, 'manage'])->name('index');
+
+    Route::get('/account/manage/money', [Money::class, 'manage'])->name('money');
+    
+  });
+  
+  Route::name('money.')->group(function(){
+
+    Route::get('/account/money/add', [Money::class, 'adder'])->name('adder');
+
+    Route::get('/account/money/remove', [Money::class, 'remover'])->name('remover');
+
+    Route::put('/account/money/add', [Money::class, 'add'])->name('add');
+
+    Route::put('/account/money/remove', [Money::class, 'remove'])->name('remove');
+
+  });
 
   Route::get('/account/edit', [Account::class, 'editor'])->name('editor');
 
