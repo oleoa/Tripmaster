@@ -94,10 +94,12 @@ class Stays extends Controller
 
     $this->data->title('Rent');
     $this->data->set("stay", $stay);
+
     $this->data->set("minDate", $project->start);
     $this->data->set("maxDate", $project->end);
-    $this->data->set("maxHeadcount", $project->headcount);
 
+    $this->data->set("maxHeadcount", $project->headcount > $stay->capacity ? $stay->capacity : $project->headcount);
+    
     return $this->view('stays.rent');
   }
 
@@ -174,22 +176,9 @@ class Stays extends Controller
     return $this->view('stays.create_and_edit');
   }
   
-  public function creator()
-  {
-    $this->data->title('Create Stay');
-    $this->data->set('owner', Auth::id());
-    $this->data->set('editing_case', false);
-    $this->data->set('form_route', route('stays.create'));
-    $this->data->set('submit_button', 'Create');
-    $this->data->set('page_title', 'Create Stay');
-    $countries = $this->countries->getAll();
-    $this->data->set('possible_countries', $countries);
-    return $this->view('stays.create_and_edit');
-  }
-  
   public function edit(Request $request, $id)
   {
-    if(Auth::check()){
+    if(!Auth::check()){
       session()->flash('alert', $this::NOT_LOGGED);
       return redirect()->route('home');
     }
@@ -215,6 +204,19 @@ class Stays extends Controller
     session()->flash('success', $this::STAY_UPDATED);
     
     return redirect()->route('stays.list');
+  }
+  
+  public function creator()
+  {
+    $this->data->title('Create Stay');
+    $this->data->set('owner', Auth::id());
+    $this->data->set('editing_case', false);
+    $this->data->set('form_route', route('stays.create'));
+    $this->data->set('submit_button', 'Create');
+    $this->data->set('page_title', 'Create Stay');
+    $countries = $this->countries->getAll();
+    $this->data->set('possible_countries', $countries);
+    return $this->view('stays.create_and_edit');
   }
   
   public function create(Request $request)

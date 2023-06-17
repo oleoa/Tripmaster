@@ -189,7 +189,7 @@ class Projects extends Controller
     $valideted = $request->validate([
       'start_date' => 'required',
       'end_date' => 'required',
-      'headcount' => 'required',
+      'headcount' => 'required|numeric|min:1|max:'.Stays::find($id)->capacity,
     ]);
 
     $start = Carbon::parse($valideted['start_date']);
@@ -209,6 +209,11 @@ class Projects extends Controller
     if(!$project){
       session()->flash('alert', $this::PROJECT_404);
       return redirect()->route('list.stays');
+    }
+
+    if($valideted['headcount'] > $project->headcount){
+      session()->flash('alert', $this::STAY_HEADCOUNT_GREATER_THAN_PROJECT_HEADCOUNT);
+      return redirect()->back();
     }
 
     $attempt = $this->project_exists_and_ur_the_owner($project->id);

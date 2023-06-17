@@ -40,6 +40,7 @@ class Controller extends BaseController
   const PROJECT_404 = "Project not found";
   const PROJECT_UPDATED = 'Project updated';
   const PROJECT_DELETED = 'Project deleted';
+  const STAY_HEADCOUNT_GREATER_THAN_PROJECT_HEADCOUNT = 'You are trying to set a stay headcount greater than the project headcount';
   
   // Stays
   const NOT_THE_STAY_OWNER = "You are not the owner of that stay";
