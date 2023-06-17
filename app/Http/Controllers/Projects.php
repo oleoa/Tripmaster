@@ -28,7 +28,8 @@ class Projects extends Controller
       session()->flash('alert', $this::PROJECT_404);
       return redirect()->route('projects.creator');
     }
-
+    
+    $cost = 0;
     $rents = Rents::where("project", $project->id)->get() ?? false;
     $project->stays = array();
     if($rents){
@@ -39,12 +40,19 @@ class Projects extends Controller
         $img_path = Stays_Images::where("stay", $stay->id)->first()->image_path ?? false;
         $stay->image = $this->image->get('stays/'.$img_path);
 
+        $stay->start = $rent->start_date;
+        $stay->end = $rent->end_date;
+        $stay->headcount = $rent->headcount;
+        $days = Carbon::parse($stay->start)->diffInDays(Carbon::parse($stay->end));
+        $cost += $stay->price * $days;
         $stays[] = $stay;
       }
-      $project->stays = $stays;
+      $project->rents = $stays;
     }
-
+    
     $this->data->set("project", $project);
+    
+    $this->data->set("cost", $cost);
 
     return $this->view('main');
   }
@@ -317,11 +325,19 @@ class Projects extends Controller
       session()->flash('error', $this::STAY_404);
       return redirect()->route('projects.index');
     }
+
+    $rent = Rents::where("stay", $stay->id)->first();
+    if(!$rent){
+      session()->flash('alert', $this::RENT_404);
+      return redirect()->route('projects.index');
+    }
     
     if($stay->status != 'rented'){
       session()->flash('alert', $this::STAY_NOT_RENTED);
       return redirect()->route('projects.index');
     }
+
+    $rent->delete();
 
     $stay->status = 'available';
     $stay->save();

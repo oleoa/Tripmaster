@@ -3,13 +3,15 @@
   <main class="grid-cols-2">
     <article class="space-y-4">
       <h1 class="text-start">{{$project->country}} @lang('project')</h1>
-      <h2>Dates</h2>
+      <h2>Start at {{$project->start}}</h2>
+      <h2>Ends at {{$project->end}}</h2>
     </article>
     <div class="grid gap-4">
       <h2>@lang('Selected stays')</h2>
-      @foreach ($project->stays as $stay)  
+      @foreach ($project->rents as $stay)  
         <x-mini-stay :stay="$stay"/>
       @endforeach
+      <h3>Total cost: {{$cost}}€</h3>
     </div>
     <footer class="col-span-2">
       <p class="text-xl">

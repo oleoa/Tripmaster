@@ -53,6 +53,9 @@ class Controller extends BaseController
   const STAY_UPDATED = 'Stay updated';
   const STAY_DELETED = 'Stay deleted';
 
+  // Rents
+  const RENT_404 = 'Rent not found';
+
   // Dates
   const START_DATE_AFTER_END_DATE = "Start date must be before end date";
 
