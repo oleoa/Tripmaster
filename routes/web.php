@@ -65,7 +65,7 @@ Route::name('projects.')->group(function(){
 
   Route::get('/projects/list', [Projects::class, 'list'])->name('list');
   
-  Route::name('stay.')->group(function(){
+  Route::name('stays.')->group(function(){
 
     Route::get('/renting/stay/{id}', [Projects::class, 'rentStay'])->name('rent');
 
@@ -81,7 +81,7 @@ Route::name('stays.')->group(function(){
 
   Route::get('/stay/{id}', [Stays::class, 'show'])->name('show');
 
-  Route::get('/rent/stay/{id}', [Stays::class, 'rent'])->name('rent');
+  Route::get('/stay/rent/{id}', [Stays::class, 'rent'])->name('rent');
 
   Route::get('/stay/delete/{id}', [Stays::class, 'delete'])->name('delete');
 

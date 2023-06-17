@@ -14,7 +14,7 @@
       <input type="password" name="password" id="password" minlength="{{$password_min_length}}" maxlength="{{$password_max_length}}"/>
       <label for="password_confirmation"><h2>@lang('Confirm Password')</h2></label>
       <input type="password" name="password_confirmation" id="password_confirmation" minlength="{{$password_min_length}}" maxlength="{{$password_max_length}}"/>
-      <input type="submit" class="btn-good" value="@lang('Sign up')"/>
+      <button type="submit" class="btn-good">@lang('Sign up')</button>
     </form>
     <div class="p-4">
       <h2 class="text-2xl">@lang('Have an account?') <a class="dark:text-blue-500" href="{{route('sign.in')}}">@lang('Sign in')</a>!</h2>

@@ -31,10 +31,10 @@ class Projects extends Controller
     $stay = Stays::where("id", $project->stay)->first() ?? false;
     if($stay) {
       $stay->image = Stays_Images::where("stay", $stay->id)->first()->image_path ?? false;
-      $project['stay'] = $stay;
+      $this->data->set("stay", $stay);
     }
 
-    $this->data->set("p", $project);
+    $this->data->set("project", $project);
 
     return $this->view('main');
   }
@@ -185,10 +185,10 @@ class Projects extends Controller
       return redirect()->route('list.stays');
     }
 
-    $attempt = $this->project_exists_and_ur_the_owner($request, $project->id);
+    $attempt = $this->project_exists_and_ur_the_owner($project->id);
     if(!$attempt){
       session()->flash('alert', $this::NOT_THE_PROJECT_OWNER);
-      return $attempt;
+      return redirect()->route('projects.index');
     }
 
     $stay = Stays::find($id);
@@ -222,7 +222,7 @@ class Projects extends Controller
     return redirect()->route("projects.index");
   }
 
-  public function removeStay(Request $request, $id)
+  public function removeStay($id)
   {
     $lastProjectOpened = $this->getLastProjectOpened(Auth::id());
     if(!$lastProjectOpened){
@@ -236,10 +236,10 @@ class Projects extends Controller
       return redirect()->route('projects.index');
     }
 
-    $attempt = $this->project_exists_and_ur_the_owner($request, $project->id);
-    if(!is_array($attempt)){
+    $attempt = $this->project_exists_and_ur_the_owner($project->id);
+    if(!$attempt){
       session()->flash('alert', $this::NOT_THE_PROJECT_OWNER);
-      return $attempt;
+      return redirect()->route('projects.index');
     }
 
     $stay = Stays::find($id);
@@ -264,14 +264,11 @@ class Projects extends Controller
 
   private function project_exists_and_ur_the_owner($id)
   {
-    $project_exists = Project::find($id);
-    if(!$project_exists)
+    $project = Project::where("id", $id);
+    if(!$project->exists())
       return false;
 
-    $project = $project_exists->toArray();
-
-    $belongs = $project['owner'] == Auth::id();
-
-    return $belongs;
+    $owner = $project->first()->owner;
+    return $owner == Auth::id();
   }
 }

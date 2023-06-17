@@ -1,5 +1,5 @@
 .btn {
-  @apply bg-slate-500 hover:bg-slate-400 font-semibold px-4 py-2 rounded hover:no-underline select-none !important;
+  @apply border-2 border-slate-400 text-slate-400 hover:bg-slate-400 hover:text-white font-semibold px-4 py-2 rounded hover:no-underline select-none !important;
 }
 
 .btn-danger {
@@ -7,19 +7,19 @@
 }
 
 .btn-alert {
-  @apply bg-orange-600 hover:bg-orange-500 font-semibold px-4 py-2 rounded hover:no-underline select-none !important;
+  @apply border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-semibold px-4 py-2 rounded hover:no-underline select-none !important;
 }
 
 .btn-okay {
-  @apply bg-blue-600 hover:bg-blue-500 font-semibold px-4 py-2 rounded hover:no-underline select-none !important;
+  @apply border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white font-semibold px-4 py-2 rounded hover:no-underline select-none !important;
 }
 
 .btn-good {
-  @apply bg-green-600 hover:bg-green-500 font-semibold px-4 py-2 rounded hover:no-underline select-none !important;  
+  @apply border-2 border-green-500 text-green-500 hover:bg-green-500 hover:text-white font-semibold px-4 py-2 rounded hover:no-underline select-none !important;  
 }
 
 .btn-error {
-  @apply bg-yellow-600 hover:bg-yellow-500 font-semibold px-4 py-2 rounded hover:no-underline select-none !important;  
+  @apply border-2 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white font-semibold px-4 py-2 rounded hover:no-underline select-none !important;  
 }
 
 .btn-disabled {

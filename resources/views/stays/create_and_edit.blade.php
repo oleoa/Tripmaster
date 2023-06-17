@@ -58,7 +58,7 @@
     @endif
 
     <div class="col-span-3">
-      <input type="submit" value="@lang($submit_button)" class="btn-good"/>
+      <button type="submit" class="btn-good w-full">@lang($submit_button)</button>
     </div>
   </form>
 </main>

@@ -33,7 +33,7 @@
         @endforeach
       </select>
     </div>
-    <input type="submit" value="@lang('Create')" class="col-span-2 btn-good">
+    <button type="submit" class="btn-good col-span-2">@lang('Create')</button>
   </form>
 </div>
 @endsection

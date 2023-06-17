@@ -10,7 +10,7 @@
       <input type="text" name="email" id="email"/>
       <label for="password"><h2>@lang('Password')</h2></label>
       <input type="password" name="password" id="password" minlength="{{$password_min_length}}" maxlength="{{$password_max_length}}"/>
-      <input type="submit" class="btn-good" value="@lang('Sign in')"/>
+      <button type="submit" class="btn-good">@lang('Sign in')</button>
     </form>
     <div class="p-4">
       <h2 class="text-2xl dark:text-white">@lang("Don't have an account")? <a href="{{route('sign.up')}}" class="dark:text-blue-500">@lang('Create one')</a>!</h2>
