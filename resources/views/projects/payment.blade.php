@@ -1,6 +1,7 @@
 @extends('layouts.main')
 @section('body')
-  <main class="grid-cols-2">
-    <h1 class="text-start">@lang('Payment Method')</h1>
+  <main class="">
+    <h1 class="text-start">@lang('Payment')</h1>
+    <h2>@lang('Total to pay'): </h2>
   </main>
 @endsection

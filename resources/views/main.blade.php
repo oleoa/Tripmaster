@@ -11,7 +11,7 @@
       @foreach ($project->rents as $stay)  
         <x-mini-stay :stay="$stay"/>
       @endforeach
-      <h3>Total cost: {{$cost}}€</h3>
+      <h3>Total cost: {{$project->cost}}€</h3>
     </div>
     <footer class="col-span-2">
       <p class="text-xl">

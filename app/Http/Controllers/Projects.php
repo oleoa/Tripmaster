@@ -29,7 +29,6 @@ class Projects extends Controller
       return redirect()->route('projects.creator');
     }
     
-    $cost = 0;
     $rents = Rents::where("project", $project->id)->get() ?? false;
     $project->stays = array();
     if($rents){
@@ -43,16 +42,13 @@ class Projects extends Controller
         $stay->start = $rent->start_date;
         $stay->end = $rent->end_date;
         $stay->headcount = $rent->headcount;
-        $days = Carbon::parse($stay->start)->diffInDays(Carbon::parse($stay->end));
-        $cost += $stay->price * $days;
+        
         $stays[] = $stay;
       }
       $project->rents = $stays;
     }
     
     $this->data->set("project", $project);
-    
-    $this->data->set("cost", $cost);
 
     return $this->view('main');
   }
@@ -283,6 +279,11 @@ class Projects extends Controller
       return redirect()->route('stays.list');
     }
 
+    $days = Carbon::parse($valideted['start_date'])->diffInDays(Carbon::parse($valideted['end_date']));
+    $cost = $stay->price * $days;
+    $project->cost += $cost;
+    $project->save();
+
     $stay->status = 'rented';
     $stay->save();
     
@@ -336,6 +337,11 @@ class Projects extends Controller
       session()->flash('alert', $this::STAY_NOT_RENTED);
       return redirect()->route('projects.index');
     }
+    
+    $days = Carbon::parse($rent->start_date)->diffInDays(Carbon::parse($rent->end_date));
+    $cost = $stay->price * $days;
+    $project->cost -= $cost;
+    $project->save();
 
     $rent->delete();
 

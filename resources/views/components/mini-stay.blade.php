@@ -11,7 +11,8 @@
       </div>
     </div>
     <div class="text-center">
-      <h3>{{$stay->start}} - {{$stay->end}}</h3>
+      <h3>{{$stay->start}}</h3>
+      <h3>{{$stay->end}}</h3>
     </div>
   </div>
 @endif
