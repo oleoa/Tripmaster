@@ -60,15 +60,15 @@
           <p class="text-xl dark:text-yellow-500 py-4"><strong><code>@lang($error)<code><strong></p>
         @endforeach
         <form method="dialog">
-          <button class="btn-error text-white" onclick="document.querySelector('#opc').style.display = 'none'">OK</button>
+          <button class="btn error text-white" onclick="document.querySelector('#opc').style.display = 'none'">OK</button>
         </form>
       </dialog>
     @endif
 
-    <x-message :message="session('alert')" :color="'orange-500'" :title="'Alert'" :btn="'alert'"/>
-    <x-message :message="session('error')" :color="'red-500'" :title="'Error'" :btn="'danger'"/>
-    <x-message :message="session('info')" :color="'blue-500'" :title="'Info'" :btn="'okay'"/>
-    <x-message :message="session('success')" :color="'green-500'" :title="'Success'" :btn="'good'"/>
+    <x-message :message="session('alert')" :title="'Alert'" :type="'alert'"/>
+    <x-message :message="session('error')" :title="'Error'" :type="'danger'"/>
+    <x-message :message="session('info')" :title="'Info'" :type="'okay'"/>
+    <x-message :message="session('success')" :title="'Success'" :type="'good'"/>
 
   </body>
 </html>

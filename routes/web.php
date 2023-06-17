@@ -107,6 +107,8 @@ Route::name('account.')->group(function(){
 
   Route::delete('/account/delete/{id}', [Account::class, 'delete'])->name('delete');
 
+  Route::get('/account/manage', [Account::class, 'manage'])->name('manage');
+
   Route::get('/account/edit', [Account::class, 'editor'])->name('editor');
 
   Route::put('/account/edit', [Account::class, 'edit'])->name('edit');

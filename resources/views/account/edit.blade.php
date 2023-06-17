@@ -14,15 +14,8 @@
       <input type="text" name="email" id="email" value="{{$user->email}}"/>
       <label for="password"><h2>@lang('Password')</h2></label>
       <input type="password" name="password" id="password" minlength="{{$password_min_length}}" maxlength="{{$password_max_length}}"/>
-      <button type="submit" class="btn-good">@lang('Edit')</button>
+      <button type="submit" class="btn good">@lang('Edit')</button>
     </form>
-    <div class="p-4">
-      <h2 class="text-2xl dark:text-white">@lang("Forgot your password")? <a href="{{route('account.password.recover')}}" class="dark:text-blue-500">@lang('Recover it')</a>!</h2>
-    </div>
-    <form action="{{ route('account.delete', ['id' => $user->id]) }}" method="POST" class="p-4">
-      @csrf
-      @method('delete')
-      <button type="submit" class="btn-danger">Delete Account</button>
-    </form>
+    <a href="{{route('account.manage')}}" class="p-4"><button class="btn okay">Go back</button></a>
   </div>
 @endsection

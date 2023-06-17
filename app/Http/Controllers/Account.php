@@ -33,6 +33,20 @@ class Account extends Controller
     return $this->view('account.show');
   }
   
+  public function manage()
+  {
+    $this->data->title('Manage account');
+
+    $user = Auth::user();
+    if(!$user){
+      session()->flash('alert', $this::NOT_LOGGED);
+      return redirect()->route("home");
+    }
+
+    $this->data->set("user", $user);
+    return $this->view('account.manage');
+  }
+
   public function editor()
   {
     $this->data->title('Edit account');

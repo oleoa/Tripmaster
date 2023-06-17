@@ -7,7 +7,7 @@
       <h1>@lang('My Stays')</h1>
     </div>
     <div class="absolute right-0">
-      <a href="{{route('stays.creator')}}" class="btn-good">@lang('Create Stay')</a>
+      <a href="{{route('stays.creator')}}" class="btn good">@lang('Create Stay')</a>
     </div>
   </div>
     
@@ -31,13 +31,13 @@
             <h4>{{$stay['city']}}</h4>
             <div class="flex items-center justify-end space-x-4 col-span-2">
               <a class="btn" href="{{route("stays.show", ['id' => $stay['id']])}}">@lang('View')</a>
-              <a class="btn-okay" href="{{route('stays.editor', ['id' => $stay['id']])}}">@lang('Edit')</a>
+              <a class="btn okay" href="{{route('stays.editor', ['id' => $stay['id']])}}">@lang('Edit')</a>
               @if ($stay['status'] == 'available')
-                <a class="btn-alert" href="{{route('stays.disable', ['id' => $stay['id']])}}">@lang('Disable')</a>
+                <a class="btn alert" href="{{route('stays.disable', ['id' => $stay['id']])}}">@lang('Disable')</a>
               @else
-                <a class="btn-good" href="{{route('stays.enable', ['id' => $stay['id']])}}">@lang('Enable')</a>  
+                <a class="btn good" href="{{route('stays.enable', ['id' => $stay['id']])}}">@lang('Enable')</a>  
               @endif
-              <a class="btn-danger" href="{{route('stays.delete', ['id' => $stay['id']])}}">@lang('Delete')</a>
+              <a class="btn danger" href="{{route('stays.delete', ['id' => $stay['id']])}}">@lang('Delete')</a>
             </div>
           </div>
         @endforeach

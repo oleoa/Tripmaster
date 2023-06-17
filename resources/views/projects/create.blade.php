@@ -4,7 +4,7 @@
   <div class="py-8 relative w-full flex items-center justify-center p-4">
     <h1>@lang('Create Project')</h1>
     <div class="absolute right-0 p-8">
-      <a href="{{route("projects.list")}}" class="btn-okay">@lang("List Projects")</a>
+      <a href="{{route("projects.list")}}" class="btn okay">@lang("List Projects")</a>
     </div>
   </div>
   <form action="{{route('projects.create')}}" method="POST" class="grid grid-cols-2 gap-4">
@@ -33,7 +33,7 @@
         @endforeach
       </select>
     </div>
-    <button type="submit" class="btn-good col-span-2">@lang('Create')</button>
+    <button type="submit" class="btn good col-span-2">@lang('Create')</button>
   </form>
 </div>
 @endsection

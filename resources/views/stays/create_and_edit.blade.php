@@ -3,7 +3,7 @@
 <main>
   <div class="relative all-center">
     <div class="absolute right-0">
-      <a href="{{route('stays.list')}}" class="btn-okay">@lang('List Stay')</a>
+      <a href="{{route('stays.list')}}" class="btn okay">@lang('List Stay')</a>
     </div>
     <h1 class="py-6">@lang($page_title)</h1>
   </div>
@@ -58,7 +58,7 @@
     @endif
 
     <div class="col-span-3">
-      <button type="submit" class="btn-good w-full">@lang($submit_button)</button>
+      <button type="submit" class="btn good w-full">@lang($submit_button)</button>
     </div>
   </form>
 </main>

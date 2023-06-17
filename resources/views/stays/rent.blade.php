@@ -14,7 +14,7 @@
       </div>
       <h2><label for="headcount">@lang('How many people will use this stay')?</label></h2>
       <input type="number" name="headcount" id="headcount" min="1" max="{{$maxHeadcount}}">
-      <button type="submit" class="btn-good">@lang('Rent it')</button>
+      <button type="submit" class="btn good">@lang('Rent it')</button>
     </form>
   </main>
 @endsection
