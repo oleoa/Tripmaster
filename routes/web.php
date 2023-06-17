@@ -51,6 +51,10 @@ Route::name('projects.')->group(function(){
 
   Route::get('/', [Projects::class, 'index'])->name('index');
 
+  Route::get('/project/close/{id}', [Projects::class, 'close'])->name('close');
+
+  Route::get('/project/payment/', [Projects::class, 'payment'])->name('payment');
+
   Route::get('/project/set/{id}', [Projects::class, 'set'])->name('set');
   
   Route::get('/project/delete/{id}', [Projects::class, 'delete'])->name('delete');

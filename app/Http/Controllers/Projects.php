@@ -32,12 +32,45 @@ class Projects extends Controller
     $stay = Stays::where("id", $project->stay)->first() ?? false;
     if($stay) {
       $stay->image = Stays_Images::where("stay", $stay->id)->first()->image_path ?? false;
-      $this->data->set("stay", $stay);
+      $project->stay = $stay;
     }
 
     $this->data->set("project", $project);
 
     return $this->view('main');
+  }
+  
+  public function payment()
+  {
+    $this->data->title('Project Payment');
+
+    $lastProjectOpened = $this->getLastProjectOpened(Auth::id());
+    if(!$lastProjectOpened){
+      session()->flash('info', $this::NO_PROJECTS_YET);
+      return redirect()->route('projects.creator');
+    }
+    
+    $project = Project::where("id", $lastProjectOpened)->first() ?? false;
+    if(!$project){
+      session()->flash('alert', $this::PROJECT_404);
+      return redirect()->route('projects.creator');
+    }
+
+    $belongs = $this->project_exists_and_ur_the_owner($lastProjectOpened);
+    if(!$belongs){
+      session()->flash('alert', $this::NOT_THE_PROJECT_OWNER);
+      return redirect()->route('projects.index');
+    }
+
+    $stay = Stays::where("id", $project->stay)->first() ?? false;
+    if($stay) {
+      $stay->image = Stays_Images::where("stay", $stay->id)->first()->image_path ?? false;
+      $project->stay = $stay;
+    }
+
+    $this->data->set("project", $project);
+
+    return $this->view('projects.payment');
   }
 
   public function creator()
@@ -299,7 +332,8 @@ class Projects extends Controller
     if(!$project->exists())
       return false;
 
-    $owner = $project->owner;
+    $owner = $project->first()->owner;
+
     return $owner == Auth::id();
   }
 }
