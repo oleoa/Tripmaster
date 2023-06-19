@@ -61,6 +61,9 @@ class Controller extends BaseController
   // Dates
   const START_DATE_AFTER_END_DATE = "Start date must be before end date";
 
+  // Notifications
+  const YOUR_STAY_WAS_RENTED = "Your stay was rented";
+
   protected Data $data;
   protected Image $image;
   protected Countries $countries;

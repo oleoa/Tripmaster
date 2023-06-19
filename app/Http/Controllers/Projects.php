@@ -9,6 +9,7 @@ use App\Models\Project;
 use App\Models\Stays;
 use App\Models\Rents;
 use App\Models\User;
+use App\Models\Notifications;
 use Carbon\Carbon;
 
 class Projects extends Controller
@@ -359,6 +360,17 @@ class Projects extends Controller
 
     $stay->status = 'rented';
     $stay->save();
+
+    $user = User::find(Auth::id());
+
+    $notification = array(
+      'user' => $stay->owner,
+      'title' => $this::YOUR_STAY_WAS_RENTED,
+      'body' => "Your stay '".$stay->title."' was rented by '".$user->name."' from ".$valideted['start_date']." to ".$valideted['end_date'].".",
+      'date' => Carbon::now(),
+    );
+
+    Notifications::create($notification);
     
     $rent = array(
       'project' => $project->id,
