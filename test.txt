@@ -1,0 +1,4 @@
+SELECT * FROM `rents`
+WHERE `start_date` BETWEEN $start AND $end
+OR
+WHERE `end_date` BETWEEN $start AND $end

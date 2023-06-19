@@ -31,7 +31,7 @@ class Projects extends Controller
     
     if($project->closed){
       session()->flash('alert', $this::PROJECT_CLOSED);
-      return redirect()->route('projects.list');
+      return redirect()->route('projects.create');
     }
     
     $rents = Rents::where("project", $project->id)->get() ?? false;
@@ -84,6 +84,7 @@ class Projects extends Controller
     }
 
     $user->money -= $project->cost;
+    $user->lastProjectOpened = null;
     $user->save();
 
     $project->closed = true;
@@ -339,7 +340,13 @@ class Projects extends Controller
       return redirect()->route('stays.index');
     }
 
-    $rent = Rents::where("stay", $stay->id)->where("start_date", ">=", $valideted['start_date'])->where("end_date", "<=", $valideted['end_date'])->first();
+    $start = $valideted['start_date'];
+    $end = $valideted['end_date'];
+    
+    $rent = Rents::where(function ($query) use ($start, $end) {
+      $query->whereBetween('start_date', [$start, $end])->orWhereBetween('end_date', [$start, $end]);
+    })->first();
+
     if($rent != null){
       session()->flash('alert', $this::STAY_NOT_AVAILABLE);
       return redirect()->route('stays.index');
@@ -398,7 +405,7 @@ class Projects extends Controller
       return redirect()->route('projects.index');
     }
 
-    $rent = Rents::where("stay", $stay->id)->first();
+    $rent = Rents::where("stay", $stay->id)->where("project", $project->id)->first();
     if(!$rent){
       session()->flash('alert', $this::RENT_404);
       return redirect()->route('projects.index');
