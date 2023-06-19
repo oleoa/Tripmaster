@@ -29,6 +29,11 @@ class Projects extends Controller
       return redirect()->route('projects.creator');
     }
     
+    if($project->closed){
+      session()->flash('alert', $this::PROJECT_CLOSED);
+      return redirect()->route('projects.list');
+    }
+    
     $rents = Rents::where("project", $project->id)->get() ?? false;
     $project->stays = array();
     if($rents){
@@ -216,6 +221,8 @@ class Projects extends Controller
         'end' => date("F", mktime(0, 0, 0, explode('-', $project_data['end'])[1], 1)).' '.explode('-', $project_data['end'])[2],
         'image' => $project_data['image'],
         'headcount' => $project_data['headcount'],
+        'closed' => $project_data['closed'],
+        'cost' => $project_data['cost'],
         'people' => $project_data['headcount'] == 1 ? 'person' : 'people',
       );
       $projects[] = $project;
@@ -243,6 +250,11 @@ class Projects extends Controller
     if(!$project){
       session()->flash('alert', $this::PROJECT_404);
       return redirect()->route('projects.list');
+    }    
+    
+    if($project->closed){
+      session()->flash('alert', $this::PROJECT_CLOSED);
+      return redirect()->route('projects.list');
     }
 
     User::where("id", Auth::id())->update(['lastProjectOpened' => $id]);
@@ -259,6 +271,17 @@ class Projects extends Controller
     $attempt = $this->project_exists_and_ur_the_owner($id);
     if(!$attempt){
       session()->flash('alert', $this::NOT_THE_PROJECT_OWNER);
+      return redirect()->route('projects.list');
+    }
+
+    $project = Project::where("id", $id)->first();
+    if(!$project){
+      session()->flash('alert', $this::PROJECT_404);
+      return redirect()->route('projects.list');
+    }
+
+    if($project->closed){
+      session()->flash('alert', $this::PROJECT_CLOSED);
       return redirect()->route('projects.list');
     }
 
@@ -292,6 +315,11 @@ class Projects extends Controller
     if(!$project){
       session()->flash('alert', $this::PROJECT_404);
       return redirect()->route('stays.list');
+    }    
+    
+    if($project->closed){
+      session()->flash('alert', $this::PROJECT_CLOSED);
+      return redirect()->route('projects.list');
     }
 
     if($valideted['headcount'] > $project->headcount){
@@ -350,6 +378,11 @@ class Projects extends Controller
     if(!$project){
       session()->flash('alert', $this::PROJECT_404);
       return redirect()->route('projects.index');
+    }
+
+    if($project->closed){
+      session()->flash('alert', $this::PROJECT_CLOSED);
+      return redirect()->route('projects.list');
     }
 
     $attempt = $this->project_exists_and_ur_the_owner($project->id);
