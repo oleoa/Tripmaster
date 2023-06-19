@@ -315,7 +315,7 @@ class Projects extends Controller
     if(!$project){
       session()->flash('alert', $this::PROJECT_404);
       return redirect()->route('stays.list');
-    }    
+    }
     
     if($project->closed){
       session()->flash('alert', $this::PROJECT_CLOSED);
@@ -336,12 +336,13 @@ class Projects extends Controller
     $stay = Stays::find($id);
     if(!$stay){
       session()->flash('error', $this::STAY_404);
-      return redirect()->route('stays.list');
+      return redirect()->route('stays.index');
     }
 
-    if($stay->status != 'available'){
+    $rent = Rents::where("stay", $stay->id)->where("start_date", ">=", $valideted['start_date'])->where("end_date", "<=", $valideted['end_date'])->first();
+    if($rent != null){
       session()->flash('alert', $this::STAY_NOT_AVAILABLE);
-      return redirect()->route('stays.list');
+      return redirect()->route('stays.index');
     }
 
     $days = Carbon::parse($valideted['start_date'])->diffInDays(Carbon::parse($valideted['end_date']));

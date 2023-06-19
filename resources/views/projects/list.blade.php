@@ -14,8 +14,8 @@
         @foreach ($projects as $project)
           <article class="flex flex-col rounded">
 
-            <div class="grid grid-cols-2 bg-slate-700 rounded-t p-4">
-              <div class="grid grid-cols-2">
+            <div class="grid grid-cols-3 bg-slate-700 rounded-t p-4">
+              <div class="grid grid-cols-3 col-span-2">
                 <h2 class="py-4">{{$project['country']}}</h2>
                 <h2 class="py-4">{{$project['cost']}}€</h2>
                 @if($project['closed'] == true)
