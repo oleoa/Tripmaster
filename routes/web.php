@@ -10,6 +10,7 @@ use App\Http\Controllers\Account;
 use App\Http\Controllers\Projects;
 use App\Http\Controllers\Stays;
 use App\Http\Controllers\Money;
+use App\Http\Controllers\Notifications;
 
 /** 
  *  Naming conventions:
@@ -111,6 +112,15 @@ Route::name('stays.')->group(function(){
 Route::name('account.')->group(function(){
 
   Route::get('/account', [Account::class, 'index'])->name('index');
+
+  Route::name('notifications.')->group(function(){
+
+    Route::get('/account/notifications', [Notifications::class, 'index'])->name('list');
+
+    Route::get('/account/notifications/delete/{id}', [Notifications::class, 'delete'])->name('delete');
+    Route::get('/account/notifications/delete', [Notifications::class, 'deleteAll'])->name('deleteAll');
+
+  });
 
   Route::delete('/account/delete/{id}', [Account::class, 'delete'])->name('delete');
 

@@ -6,8 +6,9 @@
         <div class="w-24">
           <img src="https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg" alt="User Image" class="rounded-full"/>
         </div>
-        <div class="absolute right-0 top-0">
-          <a href="{{route('account.manage.index')}}"><img src="{{asset('images/config.png')}}" alt="Config" class="object-fill w-8"></a>
+        <div class="absolute right-0 top-0 flex space-x-4">
+          <a href="{{route('account.notifications.list')}}"><img src="{{asset('images/notifications.png')}}" alt="Config" class="object-fill w-8"></a>
+          <a href="{{route('account.manage.index')}}"><img src="{{asset('images/gear.png')}}" alt="Config" class="object-fill w-8"></a>
         </div>
       </div>
       <div class="grid grid-cols-2 p-4 py-8 gap-4">

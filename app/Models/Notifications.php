@@ -9,7 +9,7 @@ class Notifications extends Model
 {
   use HasFactory; 
   
-  protected $table = 'projects';
+  protected $table = 'notifications';
 
   protected $fillable = [
     'id',
