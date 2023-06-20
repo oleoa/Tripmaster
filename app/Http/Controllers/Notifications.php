@@ -9,10 +9,14 @@ use Illuminate\Support\Facades\Auth;
 
 class Notifications extends Controller
 {
-  public function index(Request $request)
+  public function index()
   {
     $this->data->title("User Notifications");
     $notifications = NotificationsModel::where('user', Auth::id())->get();
+    foreach($notifications as $notification){
+      $notification->seen = true;
+      $notification->save();
+    }
     $this->data->set('notifications', $notifications);
     return $this->view('account.notifications');
   }

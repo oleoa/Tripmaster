@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Mail\PasswordChangeVerificationEmail;
+use App\Models\Notifications;
 use App\Models\Project;
 use App\Models\User;
 
@@ -27,6 +28,10 @@ class Account extends Controller
 
     $projects_count = Project::where('owner', Auth::id())->count();
     $this->data->set('projects_count', $projects_count);
+
+    $notifications = Notifications::where('user', Auth::id())->where("seen", false)->get();
+    $this->data->set("hasNewNotifications", $notifications != null && count($notifications) > 0);
+    $this->data->set("newNotificationsCount", count($notifications));
 
     return $this->view('account.show');
   }
