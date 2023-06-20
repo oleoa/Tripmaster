@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Notifications;
+use Illuminate\Http\Request;
 use App\Models\Stays_Images;
 use App\Models\Project;
 use App\Models\Stays;
 use App\Models\Rents;
 use App\Models\User;
-use App\Models\Notifications;
 use Carbon\Carbon;
 
 class Projects extends Controller
