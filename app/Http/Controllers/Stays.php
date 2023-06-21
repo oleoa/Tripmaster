@@ -119,14 +119,16 @@ class Stays extends Controller
 
     $this->data->set("maxHeadcount", $project->headcount > $stay->capacity ? $stay->capacity : $project->headcount);
 
-    $period = CarbonPeriod::create($project->start, $project->end);
-    $this->data->set("period", $period);
+    $startDate = Carbon::parse($project->start);
+    $endDate = Carbon::parse($project->end);
+    if ($endDate->day < $startDate->day)
+      $endDate->addMonth();
 
-    $period = CarbonPeriod::create($project->start, '1 month', $project->end);
+    $period = CarbonPeriod::create($startDate, '1 month', $endDate);
     $months = [];
-    foreach ($period as $date) {
+    foreach ($period as $date)
       $months[] = $date;
-    }
+    
     $this->data->set("months", $months);
 
     $rents = Rents::where("stay", $stay->id)->where("start_date", ">=", $project->start)->where("end_date", "<=", $project->end)->get()->toArray() ?? false;
