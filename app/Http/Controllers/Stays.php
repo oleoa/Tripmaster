@@ -6,8 +6,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Stays as StaysModel;
 use Illuminate\Http\Request;
 use App\Models\Stays_Images;
+use Carbon\CarbonPeriod;
 use App\Models\Project;
 use App\Models\Rents;
+use Carbon\Carbon;
 
 class Stays extends Controller
 {
@@ -116,7 +118,26 @@ class Stays extends Controller
     $this->data->set("maxDate", $project->end);
 
     $this->data->set("maxHeadcount", $project->headcount > $stay->capacity ? $stay->capacity : $project->headcount);
-    
+
+    $period = CarbonPeriod::create($project->start, $project->end);
+    $this->data->set("period", $period);
+
+    $period = CarbonPeriod::create($project->start, '1 month', $project->end);
+    $months = [];
+    foreach ($period as $date) {
+      $months[] = $date;
+    }
+    $this->data->set("months", $months);
+
+    $rents = Rents::where("stay", $stay->id)->where("start_date", ">=", $project->start)->where("end_date", "<=", $project->end)->get()->toArray() ?? false;
+    $myRents = array();
+    foreach($rents as $rent){
+      $period = CarbonPeriod::create($rent['start_date'], $rent['end_date']);
+      foreach($period as $date)
+        $myRents[] = $date->format('Y-m-d');
+    }
+    $this->data->set("rents", $myRents);
+
     return $this->view('stays.rent');
   }
 
