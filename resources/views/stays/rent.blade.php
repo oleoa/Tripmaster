@@ -5,6 +5,7 @@
 
       <div id="calendars" class="grid gap-4 grid-cols-4">
 
+        <h1 class="col-span-4 text-center p-4">@lang('This stay is rented days in the following days')</h1>
         @foreach($months as $month)
           <div class="bg-slate-600 pb-4 px-3 rounded">
             <h1 class="text-center p-4">@lang($month->format('F'))</h1>
