@@ -14,12 +14,12 @@
   @if(isset($stays) && !empty($stays))
     <div>
       <div class="grid grid-cols-7 w-full bg-slate-600 p-4 rounded-t">
-        <h6>Name</h6>
-        <h6>Status</h6>
-        <h6>Capacity</h6>
-        <h6>Price per day</h6>
-        <h6>City</h6>
-        <h6 class="text-end col-span-2">Actions</h6>
+        <h6>@lang('Name')</h6>
+        <h6>@lang('Status')</h6>
+        <h6>@lang('Capacity')</h6>
+        <h6>@lang('Price per day')</h6>
+        <h6>@lang('Country')</h6>
+        <h6 class="text-end col-span-2">@lang('Actions')</h6>
       </div>
       <div class="grid grid-cols-1">
         @foreach ($stays as $stay)
@@ -28,7 +28,7 @@
             <h4>{{ucfirst($stay['status']);}}</h4>
             <h4>{{$stay['capacity']}}</h4>
             <h4>{{$stay['price']}}€</h4>
-            <h4>{{$stay['city']}}</h4>
+            <h4>{{$stay['country']}}</h4>
             <div class="flex items-center justify-end space-x-4 col-span-2">
               <a class="btn good" href="{{route("stays.dashboard", ['id' => $stay['id']])}}">@lang('Check')</a>
               <a class="btn default" href="{{route("stays.show", ['id' => $stay['id']])}}">@lang('View')</a>

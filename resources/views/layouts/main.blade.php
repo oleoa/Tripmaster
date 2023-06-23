@@ -34,7 +34,12 @@
 
         <div class="px-4 grid grid-cols-3 [&>a]:text-2xl space-y-6 py-6">
           @if ($isLogged)
-            <a class="col-span-2 flex items-end justify-start" href="{{route('sign.out')}}">@lang('Sign out')</a>
+            <a class="col-span-3 flex items-end justify-start" href="{{route('sign.out')}}">@lang('Sign out')</a>
+            <details class="col-span-2 text-white text-2xl">
+              <summary>@lang('Langs')</summary>
+              <a href="{{route('language', ['locale' => 'pt'])}}">@lang('Portuguese')</a>
+              <a href="{{route('language', ['locale' => 'en'])}}">@lang('English')</a>
+            </details>
           @else
             <a href="{{route('sign.in')}}" class="col-span-3 @if($current['signin']) underline @endif">@lang('Sign in')</a>
             <a href="{{route('sign.up')}}" class="col-span-2 @if($current['signup']) underline @endif">@lang('Sign up')</a>

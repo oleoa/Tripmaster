@@ -19,7 +19,7 @@
                 <h2 class="py-4">{{$project['country']}}</h2>
                 <h2 class="py-4">{{$project['cost']}}€</h2>
                 @if($project['closed'] == true)
-                  <h2 class="py-4 dark:text-yellow-500">Closed</h2>
+                  <h2 class="py-4 dark:text-yellow-500">@lang('Closed')</h2>
                 @endif
               </div>
               <div class="w-full grid justify-items-end">
@@ -28,8 +28,8 @@
             </div>
 
             <div class="p-4 rounded-b bg-slate-600">
-              <h2>{{$project['headcount']}} @lang($project['people']) goes</h2>
-              <h2>@lang('Start at') {{$project['start']}}</h2>
+              <h2>{{$project['headcount']}} @lang($project['people'])</h2>
+              <h2>@lang('Starts at') {{$project['start']}}</h2>
               <h2>@lang('Ends at') {{$project['end']}}</h2>
               <div class="w-full flex justify-end space-x-4">
                 @if($project['closed'] == false)

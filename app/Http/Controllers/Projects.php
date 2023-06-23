@@ -225,7 +225,7 @@ class Projects extends Controller
         'headcount' => $project_data['headcount'],
         'closed' => $project_data['closed'],
         'cost' => $project_data['cost'],
-        'people' => $project_data['headcount'] == 1 ? 'person' : 'people',
+        'people' => $project_data['headcount'] == 1 ? 'person goes' : 'people goes',
       );
       $projects[] = $project;
     }

@@ -21,9 +21,9 @@
       <div class="grid grid-cols-2 p-4 py-8 gap-4">
         <h1>@lang('Name')</h1>
         <h1>{{$user->name}}</h1>
-        <h2>@lang('Email:')</h2>
+        <h2>@lang('Email'):</h2>
         <h2>{{$user->email}}</h2>
-        <h2>@lang('Money:')</h2>
+        <h2>@lang('Money'):</h2>
         <h2>{{$user->money}}€</h2>
         <a href="{{route('projects.list')}}" class="btn okay">@lang('My Projects')</a>
         <a href="{{route('stays.list')}}" class="btn okay">@lang('My stays')</a>

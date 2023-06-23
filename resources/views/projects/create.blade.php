@@ -18,11 +18,11 @@
       <input type="date" name="end" min="{{$minEnd}}"/>
     </div>
     <div class="grid grid-rows-1 gap-4">
-      <h2>@lang('How many adults will participate?')</h2>
+      <h2>@lang('How many adults will participate')?</h2>
       <input type="number" name="adults" value="0"/>
     </div>
     <div class="grid grid-rows-1 gap-4">
-      <h2>@lang('How many children will participate?')</h2>
+      <h2>@lang('How many children will participate')?</h2>
       <input type="number" name="children" value="0"/>
     </div>
     <div class="grid grid-rows-1 gap-4 col-span-2">
