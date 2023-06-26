@@ -51,3 +51,12 @@
   }
 
 }
+
+.default a {
+  all: initial;
+}
+
+.default {
+  @apply dark:text-white;
+  all: initial;
+}
