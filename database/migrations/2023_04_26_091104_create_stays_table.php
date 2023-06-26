@@ -11,22 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stays', function (Blueprint $table) {
-          $table->id();
-          $table->unsignedBigInteger('owner');
-          $table->foreign('owner')->references('id')->on('users');
-          $table->string('title');
-          $table->text('description');
-          $table->integer('capacity');
-          $table->integer('bedrooms');
-          $table->float('price');
-          $table->string('country');
-          $table->string('city');
-          $table->double('lat', 16, 14)->nullable();
-          $table->double('lon', 17, 14)->nullable();
-          $table->string('status')->default('available');
-          $table->timestamps();
-        });
+      Schema::create('stays', function (Blueprint $table) {
+        $table->id();
+        $table->unsignedBigInteger('owner');
+        $table->foreign('owner')->references('id')->on('users');
+        $table->string('title');
+        $table->text('description');
+        $table->text('address');
+        $table->integer('capacity');
+        $table->integer('bedrooms');
+        $table->float('price');
+        $table->string('country');
+        $table->string('city');
+        $table->double('lat', 16, 14)->nullable();
+        $table->double('lon', 17, 14)->nullable();
+        $table->string('status')->default('available');
+        $table->timestamps();
+      });
     }
 
     /**

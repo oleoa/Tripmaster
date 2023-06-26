@@ -67,7 +67,7 @@ class Stays extends Controller
     }
 
     $this->data->set('stay', $stay);
-
+    
     $this->data->set('backHref', url()->previous());
 
     return $this->view('stays.stay');
@@ -269,10 +269,11 @@ class Stays extends Controller
       'capacity' => 'required',
       'bedrooms' => 'required',
       'price' => 'required',
+      'address' => 'required',
       'country' => 'required',
       'city' => 'required'
     ]);
-    
+
     $stay = StaysModel::create($validated);
     if(!$stay){
       session()->flash('error', $this::ERROR_500);

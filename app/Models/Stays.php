@@ -18,6 +18,7 @@ class Stays extends Model
     'capacity',
     'bedrooms',
     'price',
+    'address',
     'country',
     'city',
     'lat',

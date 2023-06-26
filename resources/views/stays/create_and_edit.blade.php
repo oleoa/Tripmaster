@@ -17,9 +17,15 @@
       <h2>@lang('Title')</h2>
       <input type="text" name="title" value="{{$editing_case ? $stay['title'] : old('title') }}"/>
     </div>
-    <div class="col-span-2">
+
+    <div class="">
       <h2>@lang('Description')</h2>
       <textarea name="description" class="bg-slate-600 rounded w-full text-white p-2">{{$editing_case ? $stay['description'] : old('description')}}</textarea>
+    </div>
+    
+    <div class="">
+      <h2>@lang('Address')</h2>
+      <input type="text" name="address" value="{{$editing_case ? $stay['address'] : old('address')}}"/>
     </div>
 
     <div>

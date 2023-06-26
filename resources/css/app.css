@@ -52,11 +52,11 @@
 
 }
 
-.default a {
+.default-div a {
   all: initial;
 }
 
-.default {
+.default-div {
   @apply dark:text-white;
   all: initial;
 }
