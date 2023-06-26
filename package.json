@@ -15,6 +15,7 @@
     "dependencies": {
         "@fullcalendar/core": "^6.1.8",
         "@fullcalendar/multimonth": "^6.1.8",
+        "@glidejs/glide": "^3.6.0",
         "fullcalendar": "^6.1.8"
     }
 }
