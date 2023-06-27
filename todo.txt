@@ -1,0 +1,22 @@
+stay history in rented dates for admin
+stay review
+make the owner of the say receive the money
+stay carousel
+stay address
+stay map
+edit project
+stay owner can accept or decline the rent
+stay owner can see the rent history
+create all time button to the stay rent
+set all people on the stay rent headcount
+air planes travels API
+planes for the project
+multi language sets (almost made)
+save the flag locally for fast access
+contact us form
+report bug form
+report user button
+recover password in signin page
+backoffice for contacts and reports
+password requirements alert the user
+AI
