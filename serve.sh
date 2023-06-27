@@ -3,6 +3,7 @@
 if [ "$1" = "--init" ]; then
   git pull
   cp .env.example .env
+  mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS tripmaster;"
   composer i && npm i
   #rm -rf public/storage
   #rm -rf storage/app/public/*
