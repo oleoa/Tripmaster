@@ -31,7 +31,7 @@ class Stays extends Controller
       
     $this->data->set('country', $project->country);
     
-    $stays = StaysModel::where("country", $project->country)->get();
+    $stays = StaysModel::where("country", $project->country)->where('status', 'available')->get();
     for($i = 0; $i < count($stays); $i++)
     {
       $img_path = Stays_Images::where("stay", $stays[$i]->id)->first()->image_path ?? false;
@@ -52,6 +52,7 @@ class Stays extends Controller
       session()->flash('error', $this::STAY_404);
       return redirect()->route('stays.list');
     }
+
     $stay->images = array();
     
     $images_path = Stays_Images::where("stay", $stay->id)->get()->toArray() ?? false;
@@ -93,7 +94,7 @@ class Stays extends Controller
   
   public function rent($id)
   {
-    $stay = StaysModel::where("id", $id)->first() ?? false;
+    $stay = StaysModel::where("id", $id)->where('status', 'available')->first() ?? false;
     if(!$stay){
       session()->flash('error', $this::STAY_404);
       return redirect()->route('stays.list');
@@ -185,6 +186,12 @@ class Stays extends Controller
       return redirect()->route('stays.list');
     }
 
+    $stay = StaysModel::where("id", $id)->where('status', '!=', 'rented')->first() ?? false;
+    if(!$stay){
+      session()->flash('alert', $this::STAY_RENTED);
+      return redirect()->route('stays.list');
+    }
+
     StaysModel::destroy($id);
     session()->flash('info', $this::STAY_DELETED);
     return redirect()->back();
@@ -195,6 +202,10 @@ class Stays extends Controller
     $stay = StaysModel::where("id", $id)->first() ?? false;
     if(!$stay){
       session()->flash('error', $this::STAY_404);
+      return redirect()->route('stays.list');
+    }
+    if($stay->status == 'rented'){
+      session()->flash('alert', $this::STAY_RENTED);
       return redirect()->route('stays.list');
     }
 
@@ -226,6 +237,16 @@ class Stays extends Controller
 
     if(!$this->stay_exists_and_ur_the_owner($id)){
       session()->flash('alert', $this::NOT_THE_STAY_OWNER);
+      return redirect()->route('stays.list');
+    }
+
+    $stay = StaysModel::where("id", $id)->first() ?? false;
+    if(!$stay){
+      session()->flash('error', $this::STAY_404);
+      return redirect()->route('stays.list');
+    }
+    if($stay->status == 'rented'){
+      session()->flash('alert', $this::STAY_RENTED);
       return redirect()->route('stays.list');
     }
 
