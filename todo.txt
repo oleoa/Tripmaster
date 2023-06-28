@@ -1,5 +1,5 @@
 stay history in rented dates for admin
-stay review
+add main image for stays
 make the owner of the say receive the money
 stay carousel
 stay address

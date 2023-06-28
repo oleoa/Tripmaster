@@ -92,6 +92,10 @@ Route::name('stays.')->group(function(){
 
   Route::get('/stays', [Stays::class, 'index'])->name('index');
 
+  Route::get('/stay/review/{id}', [Stays::class, 'reviewer'])->name('reviewer');
+
+  Route::post('/stay/review/{id}', [Stays::class, 'review'])->name('review');
+
   Route::get('/stays/dashboard/{id}', [Stays::class, 'dashboard'])->name('dashboard');
 
   Route::get('/stay/{id}', [Stays::class, 'show'])->name('show');

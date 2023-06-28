@@ -42,6 +42,30 @@ class Stays extends Controller
 
     return $this->view('stays.index');
   }
+  
+  public function reviewer($id)
+  {
+    $this->data->title('Stay Review');
+
+    $stay = StaysModel::where("id", $id)->first() ?? false;
+    if(!$stay){
+      session()->flash('error', $this::STAY_404);
+      return redirect()->route('stays.list');
+    }
+
+    $this->data->set('stay', $stay);
+
+    return $this->view('stays.reviewer');
+  }
+
+  public function review(Request $request, $id)
+  {
+    $validated = $request->validate([
+      'title' => 'required',
+      'description' => 'required',
+      'rating' => 'required|numeric|min:1|max:5'
+    ]);
+  }
 
   public function show($id)
   {

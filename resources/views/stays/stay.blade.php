@@ -15,11 +15,16 @@
     <p class="text-2xl">@lang('City'): {{$stay['city']}}</p>
     <p class="text-2xl">@lang('Country'): {{$stay['country']}}</p>
   </div>
-  <div class="flex justify-end w-full p-6 space-x-4">
-    <a href="{{$backHref}}" class="btn okay">@lang('Back')</a>
-    @if($stay->status == 'available')
-      <a href="{{route('stays.rent', ["id" => $stay['id']])}}" class="btn good">@lang('Rent')</a>
-    @endif
+  <div class="flex justify-between w-full p-6 space-x-4">
+    <div>
+      <a href="{{route('stays.reviewer', ['id' => $stay['id']])}}" class="btn okay">@lang('Review')</a>
+    </div>
+    <div>
+      <a href="{{$backHref}}" class="btn okay">@lang('Back')</a>
+      @if($stay->status == 'available')
+        <a href="{{route('stays.rent', ["id" => $stay['id']])}}" class="btn good">@lang('Rent')</a>
+      @endif
+    </div>
   </div>
 </main>
 @endsection

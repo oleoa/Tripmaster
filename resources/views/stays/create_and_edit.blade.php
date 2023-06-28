@@ -20,7 +20,7 @@
 
     <div class="">
       <h2>@lang('Description')</h2>
-      <textarea name="description" class="bg-slate-600 rounded w-full text-white p-2">{{$editing_case ? $stay['description'] : old('description')}}</textarea>
+      <textarea name="description">{{$editing_case ? $stay['description'] : old('description')}}</textarea>
     </div>
     
     <div class="">
