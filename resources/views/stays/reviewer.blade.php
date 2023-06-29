@@ -10,8 +10,7 @@
         <label for="description">@lang('Description')</label>
         <textarea type="text" name="description" id="description"></textarea>
         <label for="rating">@lang('Rating')</label>
-        <x-rating />
-        <input type="text" name="rating" id="rating">
+        <x-rating/>
         <button class="btn good" type="submit">@lang('Review')</button>
       </form>
       <div class="space-y-4 p-4">
