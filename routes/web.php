@@ -28,6 +28,8 @@ Route::get('/home', [Home::class, 'index'])->name('home');
 
 Route::get('/locale/{locale}', [Localization::class, 'index'])->name('language');
 
+Route::get('/contact-us', [Contact::class, 'index'])->name('contact');
+
 Route::name('sign.')->group(function(){
 
   Route::get('/sign', [Authentication::class, 'index'])->name('index');
