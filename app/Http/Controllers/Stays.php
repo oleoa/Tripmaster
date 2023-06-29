@@ -115,6 +115,9 @@ class Stays extends Controller
       $stay->images = $images;
     }
 
+    $reviews = Stay_Reviews::where("stay", $stay->id)->get()->toArray() ?? false;
+    $stay->reviews = $reviews;
+
     $this->data->set('stay', $stay);
     
     $this->data->set('backHref', url()->previous());

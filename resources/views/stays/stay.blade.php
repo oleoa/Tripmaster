@@ -26,5 +26,27 @@
       @endif
     </div>
   </div>
+  <div class="space-y-4">
+    <h2 class="text-center">@lang('Reviews')</h2>
+    @if (count($stay->reviews) > 0)
+      <div class="grid grid-cols-1 gap-4 px-6">
+        @foreach ($stay->reviews as $review)
+          <div class="flex flex-col p-4 space-y-2 bg-slate-700 rounded-md">
+            <div class="flex justify-between">
+              <h2>{{$review['title']}}</h2>
+              <div>
+                @for($i = 0; $i < $review['rating']; $i++)
+                  <span class="text-white">★</span> 
+                @endfor
+              </div>
+            </div>
+            <p>{{$review['comment']}}</p>
+          </div>
+        @endforeach
+      </div>
+    @else
+      <p class="text-center">@lang('No reviews yet')</p>
+    @endif
+  </div>
 </main>
 @endsection
