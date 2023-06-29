@@ -1,4 +1,4 @@
-@vite('resources/css/rating.css')
+@vite({'resources/css/rating.css', 'resources/js/rating.js'})
 <div class="rating">
   <label>
     <input type="radio" name="stars" value="1" />
