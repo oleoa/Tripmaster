@@ -34,10 +34,7 @@ class Stays extends Controller
     
     $stays = StaysModel::where("country", $project->country)->where('status', 'available')->get();
     for($i = 0; $i < count($stays); $i++)
-    {
-      $img_path = Stays_Images::where("stay", $stays[$i]->id)->first()->image_path ?? false;
-      $stays[$i]->image = $this->image->get('stays/'.$img_path);
-    }
+      $stays[$i]->image = $this->image->get('stays/'.$stays[$i]->image);
 
     $this->data->set('stays', $stays);
 
@@ -49,6 +46,7 @@ class Stays extends Controller
     $this->data->title('Stay Review');
 
     $stay = StaysModel::where("id", $id)->first() ?? false;
+    $stay->image = $this->image->get('stays/'.$stay->image);
     if(!$stay){
       session()->flash('error', $this::STAY_404);
       return redirect()->route('stays.list');
@@ -199,7 +197,10 @@ class Stays extends Controller
   {
     $this->data->title('Listing my Stays');
 
-    $stays = StaysModel::where('owner', '=', Auth::id())->get()->toArray();
+    $stays = StaysModel::where('owner', '=', Auth::id())->get();
+    for($i = 0; $i < count($stays); $i++)
+      $stays[$i]['image'] = $this->image->get('stays/'.$stays[$i]['image']);
+
     $this->data->set('stays', $stays);
 
     return $this->view('stays.list');
@@ -347,23 +348,20 @@ class Stays extends Controller
     ]);
 
     $stay = StaysModel::create($validated);
-    if(!$stay){
-      session()->flash('error', $this::ERROR_500);
-      return redirect()->route('stays.creator');
-    }
 
     $images = $request->file('images');
     if($images)
-      foreach($images as $img) {
-        $image = array(
-          'image_path' => $this->image->set('stays', $img),
-          'stay' => $stay['id']
-        );
-        Stays_Images::create($image);
-      }
+    foreach($images as $img) {
+      $image = array(
+        'image_path' => $this->image->set('stays', $img),
+        'stay' => $stay['id']
+      );
+      $stay->image = $image['image_path'];
+      $stay->save();
+      Stays_Images::create($image);
+    }
 
     session()->flash('success', $this::STAY_CREATED);
-    
     return redirect()->route('stays.list');
   }
 

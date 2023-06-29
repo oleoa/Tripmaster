@@ -20,6 +20,7 @@ class Stays extends Model
     'price',
     'address',
     'country',
+    'image',
     'city',
     'lat',
     'lon'

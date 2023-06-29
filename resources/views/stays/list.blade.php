@@ -14,21 +14,21 @@
   @if(isset($stays) && !empty($stays))
     <div>
       <div class="grid grid-cols-7 w-full bg-slate-600 p-4 rounded-t">
+        <h6>@lang('Image')</h6>
         <h6>@lang('Name')</h6>
         <h6>@lang('Status')</h6>
         <h6>@lang('Capacity')</h6>
         <h6>@lang('Price per day')</h6>
-        <h6>@lang('Country')</h6>
         <h6 class="text-end col-span-2">@lang('Actions')</h6>
       </div>
       <div class="grid grid-cols-1">
         @foreach ($stays as $stay)
           <div class="dark:bg-slate-700 bg-turquoise-100 [&>h4]:flex [&>h4]:items-center text-white p-4 grid grid-cols-7 w-full @if($loop->last) rounded-b @else border-b-2 @endif">
+            <img src="{{$stay->image}}" alt="Stay Image" class="w-24">
             <h4 class="pr-8">{{$stay['title']}}</h4>
             <h4>{{ucfirst($stay['status']);}}</h4>
             <h4>{{$stay['capacity']}}</h4>
             <h4>{{$stay['price']}}€</h4>
-            <h4>{{$stay['country']}}</h4>
             <div class="flex items-center justify-end space-x-4 col-span-2">
               <a class="btn good" href="{{route("stays.dashboard", ['id' => $stay['id']])}}">@lang('Check')</a>
               <a class="btn default" href="{{route("stays.show", ['id' => $stay['id']])}}">@lang('View')</a>
