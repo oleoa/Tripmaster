@@ -50,6 +50,13 @@ class Account extends Controller
     return $this->view('account.manage');
   }
 
+  public function recover_password_anonymously()
+  {
+    $this->data->title('Recover password');
+
+    return $this->view('account.recover_password_anonymously');
+  }
+
   public function editor()
   {
     $this->data->title('Edit account');

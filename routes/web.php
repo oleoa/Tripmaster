@@ -30,6 +30,8 @@ Route::get('/locale/{locale}', [Localization::class, 'index'])->name('language')
 
 Route::get('/contact-us', [Contact::class, 'index'])->name('contact');
 
+Route::get('/recover/password', [Account::class, 'recover_password_anonymously'])->name('recover_password_anonymously');
+
 Route::name('sign.')->group(function(){
 
   Route::get('/sign', [Authentication::class, 'index'])->name('index');

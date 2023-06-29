@@ -17,7 +17,16 @@ class MyAuthenticate
     public function handle(Request $request, Closure $next): Response
     {
       $currentRouteName = $request->route()->getName();
-      if($currentRouteName == "sign.in" || $currentRouteName == "sign.up" || $currentRouteName == "sign.out" || $currentRouteName == "sign.ing-in" || $currentRouteName == "sign.ing-up" || $currentRouteName == "home")
+      $allowedNotAuthRoutes = [
+        "sign.in",
+        "sign.up",
+        "sign.out",
+        "sign.ing-in",
+        "sign.ing-up",
+        "recover_password_anonymously",
+        "home"
+      ];
+      if(in_array($currentRouteName, $allowedNotAuthRoutes))      
         return $next($request);
 
       if(Auth::guest())
