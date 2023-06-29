@@ -63,8 +63,9 @@ class Stays extends Controller
     $validated = $request->validate([
       'title' => 'required',
       'description' => 'required',
-      'rating' => 'required|numeric|min:1|max:5'
+      'rating' => 'required'
     ]);
+    dd($validated);
   }
 
   public function show($id)

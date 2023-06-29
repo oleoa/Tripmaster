@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(':radio').forEach(function(radio) {
+  document.querySelectorAll('input[type="radio"]').forEach(function(radio) {
     radio.addEventListener('change', function() {
-      console.log('New star rating: ' + this.value);
+      document.querySelector("#stars").setAttribute("value", this.value);
     });
   });
 });

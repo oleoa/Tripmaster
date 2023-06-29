@@ -1,6 +1,7 @@
 @extends('layouts.main')
 @section('body')
   <main>
+    
     <form action="{{route("projects.stays.rent", ['id' => $stay->id])}}" class="grid gap-4">
 
       <div id="calendars" class="grid gap-4 grid-cols-4">
