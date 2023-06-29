@@ -7,8 +7,8 @@
         @csrf
         <label for="title">@lang('Title')</label>
         <input type="text" name="title" id="title">
-        <label for="description">@lang('Description')</label>
-        <textarea type="text" name="description" id="description"></textarea>
+        <label for="comment">@lang('Comment')</label>
+        <textarea type="text" name="comment" id="comment"></textarea>
         <label for="rating">@lang('Rating')</label>
         <x-rating/>
         <button class="btn good" type="submit">@lang('Review')</button>

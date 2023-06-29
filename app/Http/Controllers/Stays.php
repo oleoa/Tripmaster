@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Stays as StaysModel;
 use Illuminate\Http\Request;
 use App\Models\Stays_Images;
+use App\Models\Stay_Reviews;
 use Carbon\CarbonPeriod;
 use App\Models\Project;
 use App\Models\Rents;
@@ -62,10 +63,32 @@ class Stays extends Controller
   {
     $validated = $request->validate([
       'title' => 'required',
-      'description' => 'required',
+      'comment' => 'required',
       'rating' => 'required'
     ]);
-    dd($validated);
+
+    $stay = StaysModel::where("id", $id)->first() ?? false;
+    if(!$stay){
+      session()->flash('error', $this::STAY_404);
+      return redirect()->route('stays.list');
+    }
+
+    if(!in_array($validated['rating'], array(1, 2, 3, 4, 5))){
+      session()->flash('error', $this::INVALID_RATING);
+      return redirect()->route('stays.reviewer', $id);
+    }
+    
+    $review = new Stay_Reviews;
+    $review->title = $validated['title'];
+    $review->comment = $validated['comment'];
+    $review->rating = $validated['rating'];
+    $review->date = Carbon::now();
+    $review->stay = $id;
+    $review->user = Auth::id();
+    $review->save();
+
+    session()->flash('success', $this::REVIEW_SUCCESS);
+    return redirect()->route('stays.index');
   }
 
   public function show($id)

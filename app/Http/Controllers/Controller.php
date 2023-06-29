@@ -55,6 +55,10 @@ class Controller extends BaseController
   const STAY_UPDATED = 'Stay updated';
   const STAY_DELETED = 'Stay deleted';
 
+  // Stay reviews
+  const INVALID_RATING = 'Invalid rating';
+  const REVIEW_SUCCESS = 'Review success';
+
   // Rents
   const RENT_404 = 'Rent not found';
 
