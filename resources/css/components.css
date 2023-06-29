@@ -1,5 +1,5 @@
 .btn {
-  @apply border-2 hover:text-white font-semibold px-4 py-2 rounded hover:no-underline select-none text-center !important;
+  @apply border-2 hover:text-white cursor-pointer font-semibold px-4 py-2 rounded hover:no-underline select-none text-center !important;
 }
 
 .btn.danger {
