@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 use App\Mail\ContactUsEmail;
 use Illuminate\Http\Request;
 use App\Models\Contact_us;
@@ -12,6 +13,8 @@ class Contact extends Controller
   public function index()
   {
     $this->data->title('Contact us');
+    $user = Auth::user();
+    $this->data->set('user', $user);
     return $this->view('contact');
   }
 
@@ -21,7 +24,6 @@ class Contact extends Controller
       'name' => 'required',
       'email' => 'required|email',
       'subject' => 'required',
-      'phone' => 'required|numeric',
       'message' => 'required',
     ]);
 

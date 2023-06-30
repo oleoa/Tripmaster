@@ -6,15 +6,11 @@
       @csrf
       <div>
         <label for="name">@lang('Name')</label>
-        <input type="text" name="name" id="name" value="{{old('name')}}">
+        <input type="text" name="name" id="name" value="{{$user? $user->name : old('name')}}">
       </div>
       <div>
-        <label for="phone">@lang('Phone number')</label>
-        <input type="number" id="phone" name="phone" value="{{old('phone')}}">
-      </div>
-      <div class="col-span-2">
         <label for="email">@lang('Email')</label>
-        <input type="text" id="email" name="email" value="{{old('email')}}">
+        <input type="text" id="email" name="email" value="{{$user? $user->email : old('email')}}">
       </div>
       <div class="col-span-2">
         <label for="subject">@lang('Subject')</label>
