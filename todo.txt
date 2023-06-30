@@ -6,8 +6,8 @@ stay owner can see the rent history
 set all people on the stay rent headcount
 air planes travels API
 planes for the project
+
 save the flag locally for fast access
-recover password in signin page
-backoffice for contacts and reports
+
 password requirements alert the user
 AI

@@ -13,6 +13,7 @@ return new class extends Migration
   {
     Schema::create('reports', function (Blueprint $table) {
       $table->id();
+      $table->enum('type', ['stay', 'review']);
       $table->unsignedBigInteger('user');
       $table->foreign('user')->references('id')->on('users')->onDelete('no action');
       $table->unsignedBigInteger('review')->nullable();

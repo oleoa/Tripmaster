@@ -12,6 +12,7 @@ class Report extends Controller
   {
     $report = new Reports;
     $report->user = auth()->user()->id;
+    $report->type = 'review';
     $report->review = $id;
     $report->date = date('Y-m-d');
     $report->save();
