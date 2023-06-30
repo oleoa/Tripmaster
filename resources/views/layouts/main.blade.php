@@ -29,6 +29,7 @@
             <a href="{{route('contact')}}" class="@if($current['contact']) underline @endif">@lang('Contact us')</a>
           </div>
         @endif
+        
         @if($isLogged)
           <div class="px-4 py-6 grid gap-6 [&>a]:text-2xl">
             <a href="{{route('contact')}}" class="@if($current['contact']) underline @endif">@lang('Contact us')</a>
@@ -64,16 +65,21 @@
     </div>
     
     @if($errors->any())
-      <div id="opc" class="fixed top-0 left-0 w-full h-full bg-slate-700/50"></div>
-      <dialog class="fixed top-0 bg-white rounded my-4" open>
-        <h1 class="dark:text-yellow-500">@lang('Alert'):</h1>
-        @foreach ($errors->all() as $error)
-          <p class="text-xl dark:text-yellow-500 py-4"><strong><code>@lang($error)<code><strong></p>
-        @endforeach
-        <form method="dialog">
-          <button class="btn error text-white" onclick="document.querySelector('#opc').style.display = 'none'">OK</button>
-        </form>
-      </dialog>
+      <div id="opc" class="fixed top-0 right-0 w-full bg-slate-700/50 h-full">
+        <dialog class="bg-slate-950 rounded my-4 w-1/2" open>
+          <h1 class="message alert">@lang('Alert'):</h1>
+          @foreach ($errors->all() as $error)
+            @if($error == 'The password field format is invalid.')
+              <p class="text-xl dark:text-yellow-500 py-4"><strong><code>@lang('The password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character from the set [@ $ ! % * # ? &] to meet the minimum security requirements.')<code><strong></p>
+            @else
+              <p class="text-xl dark:text-yellow-500 py-4"><strong><code>@lang($error)<code><strong></p>
+            @endif
+          @endforeach
+          <form method="dialog" class="text-end">
+            <button class="btn alert text-white" onclick="document.querySelector('#opc').style.display = 'none'">OK</button>
+          </form>
+        </dialog>
+      </div>
     @endif
 
     <x-message :message="session('alert')" :title="'Alert'" :type="'alert'"/>

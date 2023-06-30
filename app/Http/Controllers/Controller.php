@@ -27,6 +27,7 @@ class Controller extends BaseController
   const PASSWORD_RESETED = "You can now change your password";
   const PASSWORD_CHANGED = "Password changed successfully";
   const PASSWORD_RESET_EMAIL_SENT = "An email was sent to you with instructions to recover your password";
+  const PASSWORD_MIN_REQUIREMENTS = "The password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character from the set [@ $ ! % * # ? &] to meet the minimum security requirements.";
 
   // Account
   const NOT_THE_ACCOUNT_OWNER = "You are not the owner of that account";

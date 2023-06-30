@@ -78,9 +78,4 @@ class Countries
     $data = json_decode($response, true);
     return $data;
   }
-
-  private function format($path)
-  {
-    return str_replace('storage/', '', $path);
-  }
 }
