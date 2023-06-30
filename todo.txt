@@ -5,5 +5,3 @@ air planes travels API
 planes for the project
 IMAGE PARA O RUI SILVA
 AI
-
-set all people on the stay rent headcount

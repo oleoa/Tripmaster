@@ -44,6 +44,7 @@
       <div class="grid gap-4" style="grid-template-columns: 45% 45% 10%">
         <input type="hidden" id="min_date" value="{{$minDate}}">
         <input type="hidden" id="max_date" value="{{$maxDate}}">
+        <input type="hidden" id="max_headcount" value="{{$maxHeadcount}}">
         <div class="grid gap-4">
           <h2><label for="start_date">@lang('Start date')</label></h2>
           <input type="date" name="start_date" id="start_date" min="{{$minDate}}" max="{{$maxDate}}">
@@ -53,13 +54,19 @@
           <input type="date" name="end_date" id="end_date" min="{{$minDate}}" max="{{$maxDate}}">
         </div>
         <div class="flex items-end">
-          <span class="btn okay" id="selectAllButton">Select All</span>
+          <span class="btn okay" id="selectAllDatesButton">@lang('Select All')</span>
         </div>
-      </div>
-      <h2><label for="headcount">@lang('How many people will use this stay')?</label></h2>
-      <input type="number" name="headcount" id="headcount" min="1" max="{{$maxHeadcount}}">
+        <div class="col-span-2 grid gap-4">
+          <h2><label for="headcount">@lang('How many people will use this stay')?</label></h2>
+          <input type="number" name="headcount" id="headcount" min="1" max="{{$maxHeadcount}}">
+        </div>
+        <div class="flex items-end">
+          <span class="btn okay" id="selectAllPeopleButton">@lang('Select All')</span>
+        </div>
+      </div>     
 
       <button type="submit" class="btn good">@lang('Rent it')</button>
+
     </form>
   </main>
 @endsection
