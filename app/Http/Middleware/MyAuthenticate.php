@@ -23,6 +23,7 @@ class MyAuthenticate
         "sign.out",
         "sign.ing-in",
         "sign.ing-up",
+        "contact",
         "recover.password.anonymously",
         "verification.password.anonymously",
         "account.password.editor.anonymously",

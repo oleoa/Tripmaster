@@ -31,8 +31,7 @@ class Contact extends Controller
       'name' => $validated['name'],
       'email' => $validated['email'],
       'message' => $validated['message'],
-      'subject' => $validated['subject'],
-      'phone' => $validated['phone']
+      'subject' => $validated['subject']
     );
 
     Contact_us::create($data);
