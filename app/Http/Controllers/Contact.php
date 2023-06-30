@@ -38,6 +38,6 @@ class Contact extends Controller
 
     Mail::to($data['email'])->send(new ContactUsEmail($data['name']));
 
-    return redirect()->route('home')->with('success', 'Thank you for your message. We will get back to you soon.');
+    return redirect()->route('home')->with('success', $this::CONTACT_US_SUCCESS_MESSAGE);
   }
 }

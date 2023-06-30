@@ -70,6 +70,9 @@ class Controller extends BaseController
   // Notifications
   const YOUR_STAY_WAS_RENTED = "Your stay was rented";
 
+  // Contact us
+  const CONTACT_US_SUCCESS_MESSAGE = "Your message has been sent successfully";
+
   protected Data $data;
   protected Image $image;
   protected Countries $countries;
