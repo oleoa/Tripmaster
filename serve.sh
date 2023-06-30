@@ -1,5 +1,16 @@
 #!/bin/sh
 
+if [ "$1" = "--server" ]; then
+
+  composer i && npm i
+  php artisan storage:link
+  php artisan migrate:fresh --seed
+  exec php "$folder"/artisan serve --host=0.0.0.0 --port=80 & exec npm run build &
+  trap stop_commands INT
+  exit
+
+fi
+
 if [ "$1" = "--init" ]; then
   git pull
   cp .env.example .env
