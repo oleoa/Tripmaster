@@ -65,9 +65,9 @@
     </div>
     
     @if($errors->any())
-      <div id="opc" class="fixed top-0 right-0 w-full bg-slate-700/50 h-full">
-        <dialog class="bg-slate-950 rounded my-4 w-1/2" open>
-          <h1 class="message alert">@lang('Alert'):</h1>
+      <div id="opc" class="fixed top-0 right-0 w-full bg-slate-700/50 h-full z-40">
+        <dialog class="bg-slate-950 rounded my-4 w-1/2 z-50" open>
+          <h1 class="dark:text-yellow-500">@lang('Alert'):</h1>
           @foreach ($errors->all() as $error)
             @if($error == 'The password field format is invalid.')
               <p class="text-xl dark:text-yellow-500 py-4"><strong><code>@lang('The password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character from the set [@ $ ! % * # ? &] to meet the minimum security requirements.')<code><strong></p>
@@ -76,7 +76,7 @@
             @endif
           @endforeach
           <form method="dialog" class="text-end">
-            <button class="btn alert text-white" onclick="document.querySelector('#opc').style.display = 'none'">OK</button>
+            <button class="btn alert text-white z-50" onclick="document.querySelector('#opc').style.display = 'none'">OK</button>
           </form>
         </dialog>
       </div>

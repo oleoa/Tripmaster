@@ -99,6 +99,8 @@ class Stays extends Controller
       session()->flash('error', $this::STAY_404);
       return redirect()->route('stays.list');
     }
+    
+    $stay->image = $this->image->get('stays/'.$stay->image);
 
     $stay->images = array();
     
@@ -351,6 +353,8 @@ class Stays extends Controller
       'price' => 'required|numeric',
       'address' => 'required',
       'country' => 'required',
+      'lat' => 'required',
+      'lon' => 'required',
       'city' => 'required'
     ]);
 
