@@ -142,11 +142,14 @@ class Projects extends Controller
     $countries = $this->countries->getAll();
     
     $this->data->set('selected', "France");
+    $this->data->set('pageTitle', "Create Project");
+    $this->data->set('pageActionButton', "Create");
     $this->data->set('minStart', now()->format('Y-m-d'));
     $this->data->set('minEnd', Carbon::parse(now()->format('Y-m-d'))->addDays(1)->format('Y-m-d'));
+    $this->data->set('route', route('projects.create'));
     $this->data->set('countries', $countries);
 
-    return $this->view('projects.create');
+    return $this->view('projects.create_and_edit');
   }
 
   public function create(Request $request)
@@ -473,5 +476,88 @@ class Projects extends Controller
     $owner = $project->first()->owner;
 
     return $owner == Auth::id();
+  }
+
+  public function editor($id)
+  {
+    $this->data->title('Project Editor');
+    
+    $project = Project::where("id", $id)->where('owner', Auth::id())->first() ?? false;
+    if(!$project){
+      session()->flash('alert', $this::NOT_THE_PROJECT_OWNER);
+      return redirect()->route('projects.list');
+    }
+    
+    $countries = $this->countries->getAll();
+    $this->data->set('countries', $countries);
+    $this->data->set('selected', $project->country);
+
+    $this->data->set('project', $project);
+
+    $this->data->set('route', route('projects.edit', ['id' => $id]));
+    
+    $this->data->set('minStart', now()->format('Y-m-d'));
+    $this->data->set('minEnd', Carbon::parse(now()->format('Y-m-d'))->addDays(1)->format('Y-m-d'));
+
+    $this->data->set('pageTitle', "Edit Project");
+    $this->data->set('pageActionButton', "Update");
+
+    return $this->view('projects.create_and_edit');
+  }
+
+  public function edit(Request $request, $id)
+  {
+    $valideted = $request->validate([
+      'country' => 'required',
+      'start' => array(
+        'required',
+        'date',
+        'after_or_equal:'.now()->format('Y-m-d')
+      ),
+      'end' => array(
+        'required',
+        'date',
+        'after_or_equal:'.now()->format('Y-m-d')
+      ),
+      'adults' => 'required|numeric|min:0',
+      'children' => 'required|numeric|min:0',
+    ]);
+
+    $project = Project::where("id", $id)->where('owner', Auth::id())->first() ?? false;
+    if(!$project){
+      session()->flash('alert', $this::NOT_THE_PROJECT_OWNER);
+      return redirect()->route('projects.list');
+    }
+
+    // The FullCalendar API is returning one more day after the end for some reason, so we have to substract one day
+    // If they correct this, we have to remove this line
+    $valideted['end'] = Carbon::parse($valideted['end'])->subDays(1)->format('Y-m-d');
+
+    if($valideted['adults'] == 0 && $valideted['children'] == 0){
+      session()->flash('alert', $this::NO_PEOPLE);
+      return redirect()->route('projects.creator');
+    }
+
+    $start = Carbon::parse($valideted['start']);
+    $end = Carbon::parse($valideted['end']);
+    if($start->greaterThan($end)){
+      session()->flash('alert', $this::START_DATE_AFTER_END_DATE);
+      return redirect()->route('projects.creator');
+    }
+
+    // Save the image or get it from the storage
+    $image = $this->countries->getFlag($valideted['country']);
+    
+    $project->country = $valideted['country'];
+    $project->start = $valideted['start'];
+    $project->end = $valideted['end'];
+    $project->adults = $valideted['adults'];
+    $project->children = $valideted['children'];
+    $project->headcount = $valideted['adults'] + $valideted['children'];
+    $project->image = $image;
+    $project->save();
+
+    session()->flash('success', $this::PROJECT_UPDATED);
+    return redirect()->route('projects.list');
   }
 }
