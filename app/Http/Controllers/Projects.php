@@ -215,23 +215,40 @@ class Projects extends Controller
     }
 
     $user_projects = Project::where('owner', Auth::id())->get();
+    foreach($user_projects as $p)
+    {
+      if(!$p->finished && $p->closed == true && $p->end <= now()->format('Y-m-d')){
+        $p->finished = true;
+        $p->save();
+        $rents = Rents::where("project", $p->id)->get();
+        foreach($rents as $r){
+          $r->status = 'finished';
+          $r->save();
+          $stay = Stays::where("id", $r->stay)->first();
+          $stay->status = 'finished';
+          $stay->save();
+        }
+      }
+    }
 
-    $projects = array();
-    
+    $projects = array();    
     foreach($user_projects as $project_data)
     {
-      $project = Project::where('id', $project_data['id'])->first();
-      $project->start = date("F", mktime(0, 0, 0, explode('-', $project_data['start'])[1], 1)).' '.explode('-', $project_data['start'])[2];
-      $project->end = date("F", mktime(0, 0, 0, explode('-', $project_data['end'])[1], 1)).' '.explode('-', $project_data['end'])[2];
-      
-      if($project->closed == true && $project_data['end'] == now()->format('Y-m-d')){
-        $project->finished = true;
-        $project->save();
-      }
+      $project = array(
+        'id' => $project_data['id'],
+        'country' => $project_data['country'],
+        'start' => date("F", mktime(0, 0, 0, explode('-', $project_data['start'])[1], 1)).' '.explode('-', $project_data['start'])[2],
+        'end' => date("F", mktime(0, 0, 0, explode('-', $project_data['end'])[1], 1)).' '.explode('-', $project_data['end'])[2],
+        'image' => $project_data['image'],
+        'headcount' => $project_data['headcount'],
+        'closed' => $project_data['closed'],
+        'finished' => $project_data['finished'],
+        'cost' => $project_data['cost'],
+        'people' => $project_data['headcount'] == 1 ? 'person goes' : 'people goes',
+      );
 
       $projects[] = $project;
     }
-
     $this->data->set('projects', $projects);
 
     return $this->view('projects.list');

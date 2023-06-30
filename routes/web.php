@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\Authentication;
 use App\Http\Controllers\Contact;
+use App\Http\Controllers\Report;
 use App\Http\Controllers\Localization;
 use App\Http\Controllers\Verification;
 use App\Http\Controllers\Account;
@@ -32,6 +33,13 @@ Route::get('/locale/{locale}', [Localization::class, 'index'])->name('language')
 Route::get('/contact-us', [Contact::class, 'index'])->name('contact');
 
 Route::post('/contact-us', [Contact::class, 'store'])->name('contact');
+
+
+Route::name('report.')->group(function(){
+
+  Route::get('/report/review/{id}', [Report::class, 'review'])->name('review');
+
+});
 
 Route::get('/recover/password', [Account::class, 'recover_password_anonymously'])->name('recover.password.anonymously');
 

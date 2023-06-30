@@ -73,6 +73,9 @@ class Controller extends BaseController
   // Contact us
   const CONTACT_US_SUCCESS_MESSAGE = "Your message has been sent successfully";
 
+  // Reports
+  const VIEW_REPORTED = "Review reported successfully";
+
   protected Data $data;
   protected Image $image;
   protected Countries $countries;

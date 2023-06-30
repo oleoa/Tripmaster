@@ -34,16 +34,15 @@
       <h2 class="text-center">@lang('Reviews')</h2>
       <div class="grid grid-cols-1 gap-4 px-6">
         @foreach ($stay->reviews as $review)
-          <div class="flex flex-col p-4 space-y-2 bg-slate-700 rounded-md">
-            <div class="flex justify-between">
-              <h2>{{$review['title']}}</h2>
-              <div>
-                @for($i = 0; $i < $review['rating']; $i++)
-                  <span class="text-white">★</span> 
-                @endfor
-              </div>
+          <div class="grid gap-4 grid-cols-2 bg-slate-700 rounded p-4">
+            <h2>{{$review['title']}}</h2>
+            <div class="text-end">
+              @for($i = 0; $i < $review['rating']; $i++)
+                <span class="text-white">★</span> 
+              @endfor
             </div>
-            <p>{{$review['comment']}}</p>
+            <p class="flex items-center">{{$review['comment']}}</p>
+            <h3 class="text-end">{{$review['user']}}<a href="{{route('report.review', ['id' => $review['id']])}}" class="dark:text-red-500 text-sm pl-4">Report</a></h3>
           </div>
         @endforeach
       </div>

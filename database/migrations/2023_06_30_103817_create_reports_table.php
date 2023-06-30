@@ -11,18 +11,14 @@ return new class extends Migration
    */
   public function up(): void
   {
-    Schema::create('stay_reviews', function (Blueprint $table) {
+    Schema::create('reports', function (Blueprint $table) {
       $table->id();
-      $table->timestamps();
-      $table->unsignedBigInteger('stay');
-      $table->foreign('stay')->references('id')->on('stays')->onDelete('cascade');
       $table->unsignedBigInteger('user');
       $table->foreign('user')->references('id')->on('users')->onDelete('no action');
+      $table->unsignedBigInteger('review')->nullable();
+      $table->foreign('review')->references('id')->on('stay_reviews')->onDelete('no action');
       $table->date('date');
-      $table->integer('rating');
-      $table->text('comment');
-      $table->text('title');
-      $table->boolean('avaiable')->default(true);
+      $table->timestamps();
     });
   }
 
@@ -31,6 +27,6 @@ return new class extends Migration
    */
   public function down(): void
   {
-    Schema::dropIfExists('stay_reviews');
+    Schema::dropIfExists('reports');
   }
 };

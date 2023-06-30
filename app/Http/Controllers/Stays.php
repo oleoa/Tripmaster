@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Stays as StaysModel;
 use Illuminate\Http\Request;
-use App\Models\Stays_Images;
 use App\Models\Stay_Reviews;
+use App\Models\Stays_Images;
+use App\Models\User;
 use Carbon\CarbonPeriod;
 use App\Models\Project;
 use App\Models\Rents;
@@ -113,7 +114,10 @@ class Stays extends Controller
       $stay->images = $images;
     }
 
-    $reviews = Stay_Reviews::where("stay", $stay->id)->get()->toArray() ?? false;
+    $reviews = Stay_Reviews::where("stay", $stay->id)->where('avaiable', true)->get()->toArray() ?? false;
+    for($i = 0; $i < count($reviews); $i++)
+      $reviews[$i]['user'] = User::where('id', $reviews[$i]['user'])->first()->toArray()['name'] ?? false;
+    
     $stay->reviews = $reviews;
 
     $this->data->set('stay', $stay);

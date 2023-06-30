@@ -1,10 +1,6 @@
 stay history in rented dates for admin
 make the owner of the say receive the money
 stay map
-
-stay review system
-report user button
-
 edit project
 stay owner can see the rent history
 set all people on the stay rent headcount
