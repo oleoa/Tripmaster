@@ -40,6 +40,24 @@ class Verification extends Controller
     session()->flash('success', $this::PASSWORD_RESETED);
     return redirect()->route('account.password.editor');
   }
+  
+  public function password_anonymously($token)
+  {
+    $user = User::where('password_verification_token', $token)->first();
+    
+    if(!$user){
+      session()->flash("error", $this::INVALID_TOKEN);
+      return redirect()->route('verification.error');
+    }
+    
+    $user->password_verification_token = null;
+    $user->save();
+    
+    session()->flash('success', $this::PASSWORD_RESETED);
+    session()->put('user', $user);
+
+    return redirect()->route('account.password.editor.anonymously');
+  }
 
   public function success()
   {

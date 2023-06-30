@@ -57,6 +57,29 @@ class Account extends Controller
     return $this->view('account.recover_password_anonymously');
   }
 
+  public function recover_password_anonymously_send(Request $request)
+  {
+    $validated = $request->validate([
+      'email' => 'required|string|email|max:255',
+    ]);
+
+    $user = User::where('email', $validated['email'])->first();
+    if(!$user){
+      session()->flash('alert', $this::EMAIL_NOT_FOUND);
+      return redirect()->route("account.recover_password_anonymously");
+    }
+
+    $verificationToken = Str::random(40);
+    $user->password_verification_token = $verificationToken;
+    $user->save();
+
+    $verificationLink = route('verification.password.anonymously', ['token' => $verificationToken]);
+    Mail::to($user->email)->send(new PasswordChangeVerificationEmail($verificationLink));
+
+    session()->flash('info', $this::PASSWORD_RESET_EMAIL_SENT);
+    return redirect()->route('home');
+  }
+
   public function editor()
   {
     $this->data->title('Edit account');
@@ -157,6 +180,41 @@ class Account extends Controller
     $this->data->set("password_max_length", env('PASSWORD_MAX_LENGTH'));
 
     return $this->view('account.password');
+  }
+
+  public function password_editor_anonymously()
+  {
+    $this->data->title('Change password');
+
+    $user = session()->get('user');
+    $this->data->set("id", $user->id);
+
+    $this->data->set("password_min_length", env('PASSWORD_MIN_LENGTH'));
+    $this->data->set("password_max_length", env('PASSWORD_MAX_LENGTH'));
+
+    return $this->view('account.password_anonymously');
+  }
+
+  public function password_edit_anonymously(Request $request)
+  {
+    $validated = $request->validate([
+      'id' => 'required|integer',
+      'password' => 'nullable|string|min:'.env('PASSWORD_MIN_LENGTH').'|max:'.env('PASSWORD_MAX_LENGTH').'|confirmed',
+    ]);
+
+    // Get the user from the database to edit this user
+    $user = User::where("id", $validated['id'])->first();
+    if(!$user){
+      session()->flash('alert', $this::NOT_THE_ACCOUNT_OWNER);
+      return redirect()->route("account.editor");
+    }
+
+    $user->password = Hash::make($validated['password']);
+    $user->password_verification_token = null;
+    $user->save();
+
+    session()->flash('info', $this::PASSWORD_CHANGED);
+    return redirect()->route('account.index');
   }
 
   public function password_edit(Request $request)

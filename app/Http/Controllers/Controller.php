@@ -33,6 +33,7 @@ class Controller extends BaseController
   const PASSWORD_INCORRECT = "Password is incorrect";
   const ACCOUNT_DELETED = "Your account has been deleted";
   const NOT_ENOUGH_MONEY = "You don't have enough money";
+  const EMAIL_NOT_FOUND = "Email not found";
   
   // Projects
   const NOT_THE_PROJECT_OWNER = "You are not the owner of that project";

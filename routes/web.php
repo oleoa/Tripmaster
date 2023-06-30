@@ -30,7 +30,9 @@ Route::get('/locale/{locale}', [Localization::class, 'index'])->name('language')
 
 Route::get('/contact-us', [Contact::class, 'index'])->name('contact');
 
-Route::get('/recover/password', [Account::class, 'recover_password_anonymously'])->name('recover_password_anonymously');
+Route::get('/recover/password', [Account::class, 'recover_password_anonymously'])->name('recover.password.anonymously');
+
+Route::post('/recover/password', [Account::class, 'recover_password_anonymously_send'])->name('recover.password.anonymously');
 
 Route::name('sign.')->group(function(){
 
@@ -53,6 +55,8 @@ Route::name('verification.')->group(function(){
   Route::get('/verify/{token}', [Verification::class, 'verify'])->name('verify');
 
   Route::get('/verify/password/{token}', [Verification::class, 'password'])->name('password');
+
+  Route::get('/verify/password/anonymously/{token}', [Verification::class, 'password_anonymously'])->name('password.anonymously');
 
   Route::get('/verification/success', [Verification::class, 'success'])->name('success');
   
@@ -169,7 +173,11 @@ Route::name('account.')->group(function(){
 
     Route::get('/account/edit/password', [Account::class, 'password_editor'])->name('editor');
 
+    Route::get('/account/edit/password/anonymously', [Account::class, 'password_editor_anonymously'])->name('editor.anonymously');
+
     Route::put('/account/edit/password', [Account::class, 'password_edit'])->name('edit');
+
+    Route::put('/account/edit/password/anonymously', [Account::class, 'password_edit_anonymously'])->name('edit.anonymously');
 
   });
 

@@ -93,7 +93,7 @@ class Authentication extends Controller
     $verificationLink = route('verification.verify', ['token' => $verificationToken]);
     Mail::to($request->email)->send(new VerificationEmail($verificationLink));
     
-    Auth::attempt($login_user);    
+    Auth::attempt($login_user);
     $request->session()->regenerate();
 
     session()->flash("success", $this::ACCOUNT_CREATED);

@@ -23,7 +23,10 @@ class MyAuthenticate
         "sign.out",
         "sign.ing-in",
         "sign.ing-up",
-        "recover_password_anonymously",
+        "recover.password.anonymously",
+        "verification.password.anonymously",
+        "account.password.editor.anonymously",
+        "account.password.edit.anonymously",
         "home"
       ];
       if(in_array($currentRouteName, $allowedNotAuthRoutes))      
