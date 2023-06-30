@@ -1,9 +1,10 @@
 stay history in rented dates for admin
 make the owner of the say receive the money
-stay map
-edit project
 stay owner can see the rent history
-set all people on the stay rent headcount
 air planes travels API
 planes for the project
 AI
+
+stay map
+edit project
+set all people on the stay rent headcount
