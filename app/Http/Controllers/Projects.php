@@ -183,6 +183,9 @@ class Projects extends Controller
       return redirect()->route('projects.creator');
     }
 
+    // Save the image or get it from the storage
+    $image = $this->countries->getFlag($valideted['country']);
+
     $project = array(
       'country' => $valideted['country'],
       'start' => $valideted['start'],
@@ -190,7 +193,7 @@ class Projects extends Controller
       'adults' => $valideted['adults'],
       'children' => $valideted['children'],
       'headcount' => $valideted['adults'] + $valideted['children'],
-      'image' => $this->countries->getFlag($valideted['country']),
+      'image' => $image,
       'owner' => Auth::id()
     );
     
@@ -249,6 +252,7 @@ class Projects extends Controller
 
       $projects[] = $project;
     }
+    
     $this->data->set('projects', $projects);
 
     return $this->view('projects.list');

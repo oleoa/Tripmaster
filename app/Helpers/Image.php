@@ -38,6 +38,8 @@ class Image
     } catch (\Throwable $th) {
       return false;
     }
+    if($response === true)
+      return true;
     return explode('/', $response)[$pathCount];
   }
 
