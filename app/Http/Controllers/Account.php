@@ -66,7 +66,7 @@ class Account extends Controller
     $user = User::where('email', $validated['email'])->first();
     if(!$user){
       session()->flash('alert', $this::EMAIL_NOT_FOUND);
-      return redirect()->route("account.recover_password_anonymously");
+      return redirect()->route("recover.password.anonymously");
     }
 
     $verificationToken = Str::random(40);
