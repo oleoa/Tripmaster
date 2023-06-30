@@ -37,6 +37,7 @@ class Current
       'my.stays.list',
       'my.stays.create_and_edit',
     ),
+    'contact' => 'contact',
   );
 
   public function get($correctPage)

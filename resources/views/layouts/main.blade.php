@@ -26,6 +26,7 @@
 
         @if($isLogged)
           <div class="px-4 py-6 grid gap-6 [&>a]:text-2xl">
+            <a href="{{route('contact')}}" class="@if($current['contact']) underline @endif">@lang('Contact us')</a>
             <a href="{{route('account.index')}}" class="@if($current['account']) underline @endif">@lang('Account')</a>
           </div>
         @endif
