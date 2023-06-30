@@ -15,11 +15,11 @@
     <div class="flex flex-col space-y-4">
       <div class="grid grid-rows-1 gap-4">
         <h2>@lang('How many adults will participate')?</h2>
-        <input type="number" name="adults" value="0"/>
+        <input type="number" name="adults" value="0" min="0"/>
       </div>
       <div class="grid grid-rows-1 gap-4">
         <h2>@lang('How many children will participate')?</h2>
-        <input type="number" name="children" value="0"/>
+        <input type="number" name="children" value="0" min="0"/>
       </div>
       <div class="grid grid-rows-1 gap-4">
         <h2>@lang('Country')</h2>

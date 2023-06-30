@@ -151,11 +151,6 @@ class Projects extends Controller
 
   public function create(Request $request)
   {
-    if(!Auth::check()){
-      session()->flash('alert', $this::NOT_LOGGED);
-      return redirect()->route('home');
-    }
-
     $valideted = $request->validate([
       'country' => 'required',
       'start' => array(
@@ -168,9 +163,14 @@ class Projects extends Controller
         'date',
         'after_or_equal:'.now()->format('Y-m-d')
       ),
-      'adults' => 'required',
-      'children' => 'required',
+      'adults' => 'required|numeric|min:0',
+      'children' => 'required|numeric|min:0',
     ]);
+
+    if($valideted['adults'] == 0 && $valideted['children'] == 0){
+      session()->flash('alert', $this::NO_PEOPLE);
+      return redirect()->route('projects.creator');
+    }
 
     $start = Carbon::parse($valideted['start']);
     $end = Carbon::parse($valideted['end']);
