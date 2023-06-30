@@ -167,6 +167,10 @@ class Projects extends Controller
       'children' => 'required|numeric|min:0',
     ]);
 
+    // The FullCalendar API is returning one more day after the end for some reason, so we have to substract one day
+    // If they correct this, we have to remove this line
+    $valideted['end'] = Carbon::parse($valideted['end'])->subDays(1)->format('Y-m-d');
+
     if($valideted['adults'] == 0 && $valideted['children'] == 0){
       session()->flash('alert', $this::NO_PEOPLE);
       return redirect()->route('projects.creator');
