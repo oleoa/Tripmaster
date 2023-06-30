@@ -17,7 +17,9 @@
   </div>
   <div class="flex justify-between w-full p-6 space-x-4">
     <div>
-      <a href="{{route('stays.reviewer', ['id' => $stay['id']])}}" class="btn okay">@lang('Review')</a>
+      @if($canReview)
+        <a href="{{route('stays.reviewer', ['id' => $stay['id']])}}" class="btn okay">@lang('Review')</a>
+      @endif
     </div>
     <div>
       <a href="{{$backHref}}" class="btn okay">@lang('Back')</a>
@@ -26,9 +28,10 @@
       @endif
     </div>
   </div>
-  <div class="space-y-4">
-    <h2 class="text-center">@lang('Reviews')</h2>
-    @if (count($stay->reviews) > 0)
+
+  @if(count($stay->reviews) > 0)
+    <div class="space-y-4">
+      <h2 class="text-center">@lang('Reviews')</h2>
       <div class="grid grid-cols-1 gap-4 px-6">
         @foreach ($stay->reviews as $review)
           <div class="flex flex-col p-4 space-y-2 bg-slate-700 rounded-md">
@@ -44,9 +47,7 @@
           </div>
         @endforeach
       </div>
-    @else
-      <p class="text-center">@lang('No reviews yet')</p>
-    @endif
-  </div>
+    </div>
+  @endif
 </main>
 @endsection

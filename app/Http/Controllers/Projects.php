@@ -220,17 +220,15 @@ class Projects extends Controller
     
     foreach($user_projects as $project_data)
     {
-      $project = array(
-        'id' => $project_data['id'],
-        'country' => $project_data['country'],
-        'start' => date("F", mktime(0, 0, 0, explode('-', $project_data['start'])[1], 1)).' '.explode('-', $project_data['start'])[2],
-        'end' => date("F", mktime(0, 0, 0, explode('-', $project_data['end'])[1], 1)).' '.explode('-', $project_data['end'])[2],
-        'image' => $project_data['image'],
-        'headcount' => $project_data['headcount'],
-        'closed' => $project_data['closed'],
-        'cost' => $project_data['cost'],
-        'people' => $project_data['headcount'] == 1 ? 'person goes' : 'people goes',
-      );
+      $project = Project::where('id', $project_data['id'])->first();
+      $project->start = date("F", mktime(0, 0, 0, explode('-', $project_data['start'])[1], 1)).' '.explode('-', $project_data['start'])[2];
+      $project->end = date("F", mktime(0, 0, 0, explode('-', $project_data['end'])[1], 1)).' '.explode('-', $project_data['end'])[2];
+      
+      if($project->closed == true && $project_data['end'] == now()->format('Y-m-d')){
+        $project->finished = true;
+        $project->save();
+      }
+
       $projects[] = $project;
     }
 

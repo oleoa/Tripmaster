@@ -117,6 +117,9 @@ class Stays extends Controller
     $stay->reviews = $reviews;
 
     $this->data->set('stay', $stay);
+
+    $canReview = Rents::where("stay", $stay->id)->where("user", Auth::id())->where("status", "finished")->first() ? true : false;
+    $this->data->set('canReview', $canReview);
     
     $this->data->set('backHref', url()->previous());
 

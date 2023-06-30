@@ -22,6 +22,7 @@ return new class extends Migration
       $table->integer('children')->nullable();
       $table->float('cost')->default(0);
       $table->boolean('closed')->default(false);
+      $table->boolean('finished')->default(false);
       $table->unsignedBigInteger('owner');
       $table->foreign('owner')->references('id')->on('users');
       $table->timestamps();
