@@ -303,12 +303,12 @@ class Stays extends Controller
     }
 
     $validated = $request->validate([
-      'owner' => 'required',
-      'title' => 'required',
+      'owner' => 'required|exists:users,id',
+      'title' => 'required|max:255',
       'description' => 'required',
-      'capacity' => 'required',
-      'bedrooms' => 'required',
-      'price' => 'required',
+      'capacity' => 'required|numeric|min:1',
+      'bedrooms' => 'required|numeric|min:1',
+      'price' => 'required|numeric',
       'country' => 'required',
       'city' => 'required'
     ]);
@@ -336,12 +336,12 @@ class Stays extends Controller
   public function create(Request $request)
   {
     $validated = $request->validate([
-      'owner' => 'required',
-      'title' => 'required',
+      'owner' => 'required|exists:users,id',
+      'title' => 'required|max:255',
       'description' => 'required',
-      'capacity' => 'required',
-      'bedrooms' => 'required',
-      'price' => 'required',
+      'capacity' => 'required|numeric|min:1',
+      'bedrooms' => 'required|numeric|min:1',
+      'price' => 'required|numeric',
       'address' => 'required',
       'country' => 'required',
       'city' => 'required'

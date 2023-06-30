@@ -30,11 +30,11 @@
 
     <div>
       <h2>@lang('Capacity')</h2>
-      <input type="number" name="capacity" value="{{$editing_case ? $stay['capacity'] : old('capacity')}}"/>
+      <input type="number" name="capacity" value="{{$editing_case ? $stay['capacity'] : old('capacity')}}" min="1"/>
     </div>
     <div>
       <h2>@lang('Bedrooms')</h2>
-      <input type="number" name="bedrooms" value="{{$editing_case ? $stay['bedrooms'] : old('bedrooms')}}"/>
+      <input type="number" name="bedrooms" value="{{$editing_case ? $stay['bedrooms'] : old('bedrooms')}}" min="1"/>
     </div>
 
     <div>
