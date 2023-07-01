@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <x-head :title="$title"/>
+
   <body class="">
 
-    <nav class='h-full w-48 fixed left-0 flex flex-col justify-between bg-slate-950'>
+    <nav class='h-full w-16 lg:w-48 fixed left-0 top-0 flex flex-col justify-between bg-slate-950'>
+
       <div>
 
-        <div class="flex flex-col items-center justify-start pt-2 pb-4">
+        <div class="flex-col items-center justify-start pt-2 pb-4 flex">
           <div class="py-6">
-            <a class="no-underline" href="{{route('home')}}"><h1>@lang('Tripmaster')</h1></a>
+            <a class="no-underline" href="{{route('home')}}"><h1 class="text-sm lg:text-4xl">@lang('Tripmaster')</h1></a>
           </div>
           <div class="h-0.5 w-full bg-slate-300"></div>
         </div>
@@ -26,7 +28,12 @@
 
         @if (!$isLogged)
           <div class="px-4 py-6 grid gap-6 [&>a]:text-2xl">
-            <a href="{{route('contact')}}" class="@if($current['contact']) underline @endif">@lang('Contact us')</a>
+            <a href="{{route('contact')}}" class="@if($current['contact']) underline @endif flex justify-between">
+              <span class="hidden lg:block pr-2">
+                @lang('Contact us')
+              </span>
+              <img src="{{asset('images/contact.png')}}" alt="Contact Us" class="w-8 bg-white">
+            </a>
           </div>
         @endif
         
@@ -48,8 +55,18 @@
               <a href="{{route('language', ['locale' => 'en'])}}">@lang('English')</a>
             </details>
           @else
-            <a href="{{route('sign.in')}}" class="col-span-3 @if($current['signin']) underline @endif">@lang('Sign in')</a>
-            <a href="{{route('sign.up')}}" class="col-span-2 @if($current['signup']) underline @endif">@lang('Sign up')</a>
+            <a href="{{route('sign.in')}}" class="col-span-3 @if($current['signin']) underline @endif flex justify-between">
+              <span class="hidden lg:block pr-2">
+                @lang('Sign in')
+              </span>
+              <img src="{{asset('images/signin.jpg')}}" alt="Contact Us" class="w-8 bg-white">
+            </a>
+            <a href="{{route('sign.up')}}" class="col-span-3 @if($current['signup']) underline @endif flex justify-between">
+              <span class="hidden lg:block pr-2">
+                @lang('Sign up')
+              </span>
+              <img src="{{asset('images/signup.jpg')}}" alt="Contact Us" class="w-8 bg-white">
+            </a>
           @endif
           
         </div>
@@ -57,7 +74,7 @@
       </div>
     </nav>
 
-    <div class='pl-52 p-4 min-h-screen w-full bg-slate-800'>
+    <div class='pl-20 lg:pl-52 p-4 min-h-screen w-full bg-slate-800'>
       @yield('body')
     </div>
     
