@@ -1,9 +1,9 @@
 @extends('layouts.main')
 @section('body')
-  <main class="font-mono grid-cols-5">
+  <main class="font-mono lg:grid-cols-5">
     <article class="space-y-4 col-span-2 p-4">
-      <h1 class="">Organize and plan <br><span class="text-5xl">Your trip</span></h1>
-      <p class="text-xl">
+      <h1 class="text-center lg:text-start">Organize and plan <br><span class="text-5xl">Your trip</span></h1>
+      <p class="text-xl text-center lg:text-start">
         Welcome to our comprehensive trip planning website! 
         Whether you're a seasoned globetrotter or a first-time traveler, 
         we are here to assist you in creating the perfect itinerary for your next adventure. 
