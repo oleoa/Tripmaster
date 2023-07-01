@@ -39,7 +39,7 @@ main {
 }
 
 select {
-  @apply p-4 rounded bg-slate-400 dark:bg-slate-600 dark:text-white border-transparent w-full;
+  @apply p-4 rounded bg-slate-600 text-white border-transparent w-full;
 }
 
 .message.error {
@@ -47,13 +47,13 @@ select {
 }
 
 .message.good {
-  @apply dark:text-green-500;
+  @apply text-green-500;
 }
 
 .message.okay {
-  @apply dark:text-blue-500;
+  @apply text-blue-500;
 }
 
 .message.alert {
-  @apply dark:text-orange-500;
+  @apply text-orange-500;
 }

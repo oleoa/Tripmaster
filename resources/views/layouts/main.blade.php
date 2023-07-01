@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <x-head :title="$title"/>
-  <body class="dark">
+  <body class="">
 
     <nav class='h-full w-48 fixed left-0 flex flex-col justify-between bg-slate-950'>
       <div>
@@ -10,7 +10,7 @@
           <div class="py-6">
             <a class="no-underline" href="{{route('home')}}"><h1>@lang('Tripmaster')</h1></a>
           </div>
-          <div class="h-0.5 w-full dark:bg-slate-300 bg-slate-800"></div>
+          <div class="h-0.5 w-full bg-slate-300"></div>
         </div>
 
         @if($isLogged)
@@ -37,7 +37,7 @@
           </div>
         @endif
 
-        <div class="h-0.5 w-full dark:bg-slate-300 bg-slate-800"></div>
+        <div class="h-0.5 w-full bg-slate-300"></div>
 
         <div class="px-4 grid grid-cols-3 [&>a]:text-2xl space-y-6 py-6">
           @if ($isLogged)
@@ -51,28 +51,25 @@
             <a href="{{route('sign.in')}}" class="col-span-3 @if($current['signin']) underline @endif">@lang('Sign in')</a>
             <a href="{{route('sign.up')}}" class="col-span-2 @if($current['signup']) underline @endif">@lang('Sign up')</a>
           @endif
-
-          @if(false)
-            <button class="w-8" onclick="document.querySelector('body').classList.toggle('dark')"><img src="{{asset('images/darkmode.svg')}}" alt="Darkmode"></button>
-          @endif
+          
         </div>
 
       </div>
     </nav>
 
-    <div class='pl-52 p-4 min-h-screen w-full bg-white dark:bg-slate-800'>
+    <div class='pl-52 p-4 min-h-screen w-full bg-slate-800'>
       @yield('body')
     </div>
     
     @if($errors->any())
       <div id="opc" class="fixed top-0 right-0 w-full bg-slate-700/50 h-full z-40">
         <dialog class="bg-slate-950 rounded my-4 w-1/2 z-50" open>
-          <h1 class="dark:text-yellow-500">@lang('Alert'):</h1>
+          <h1 class="text-yellow-500">@lang('Alert'):</h1>
           @foreach ($errors->all() as $error)
             @if($error == 'The password field format is invalid.')
-              <p class="text-xl dark:text-yellow-500 py-4"><strong><code>@lang('The password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character from the set [@ $ ! % * # ? &] to meet the minimum security requirements.')<code><strong></p>
+              <p class="text-xl text-yellow-500 py-4"><strong><code>@lang('The password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character from the set [@ $ ! % * # ? &] to meet the minimum security requirements.')<code><strong></p>
             @else
-              <p class="text-xl dark:text-yellow-500 py-4"><strong><code>@lang($error)<code><strong></p>
+              <p class="text-xl text-yellow-500 py-4"><strong><code>@lang($error)<code><strong></p>
             @endif
           @endforeach
           <form method="dialog" class="text-end">

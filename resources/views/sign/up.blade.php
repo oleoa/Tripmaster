@@ -17,7 +17,7 @@
       <button type="submit" class="btn good">@lang('Sign up')</button>
     </form>
     <div class="p-4">
-      <h2 class="text-2xl">@lang('Have an account?') <a class="dark:text-blue-500" href="{{route('sign.in')}}">@lang('Sign in')</a>!</h2>
+      <h2 class="text-2xl">@lang('Have an account?') <a class="text-blue-500" href="{{route('sign.in')}}">@lang('Sign in')</a>!</h2>
     </div>
   </div>
 @endsection

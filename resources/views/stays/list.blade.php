@@ -23,7 +23,7 @@
       </div>
       <div class="grid grid-cols-1">
         @foreach ($stays as $stay)
-          <div class="dark:bg-slate-700 bg-turquoise-100 [&>h4]:flex [&>h4]:items-center text-white p-4 grid grid-cols-7 w-full @if($loop->last) rounded-b @else border-b-2 @endif">
+          <div class="bg-slate-700 [&>h4]:flex [&>h4]:items-center text-white p-4 grid grid-cols-7 w-full @if($loop->last) rounded-b @else border-b-2 @endif">
             <img src="{{$stay->image}}" alt="Stay Image" class="w-24">
             <h4 class="pr-8">{{$stay['title']}}</h4>
             <h4>{{ucfirst($stay['status']);}}</h4>

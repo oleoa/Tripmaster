@@ -19,9 +19,9 @@
                 <h2 class="py-4 col-span-2">{{$project['country']}}</h2>
                 <h2 class="py-4">{{$project['cost']}}€</h2>
                 @if($project['closed'] == true && $project['finished'] == false)
-                  <h2 class="py-4 dark:text-yellow-500">@lang('Closed')</h2>
+                  <h2 class="py-4 text-yellow-500">@lang('Closed')</h2>
                 @elseif($project['closed'] == true && $project['finished'] == true)
-                  <h2 class="py-4 dark:text-red-500">@lang('Finished')</h2>
+                  <h2 class="py-4 text-red-500">@lang('Finished')</h2>
                 @endif
               </div>
               <div class="w-full grid justify-items-end">

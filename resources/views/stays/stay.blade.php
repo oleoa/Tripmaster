@@ -51,7 +51,7 @@
                 @endfor
               </div>
               <p class="flex items-center">{{$review['comment']}}</p>
-              <h3 class="text-end">{{$review['user']}}<a href="{{route('report.review', ['id' => $review['id']])}}" class="dark:text-red-500 text-sm pl-4">Report</a></h3>
+              <h3 class="text-end">{{$review['user']}}<a href="{{route('report.review', ['id' => $review['id']])}}" class="text-red-500 text-sm pl-4">Report</a></h3>
             </div>
           @endforeach
         </div>

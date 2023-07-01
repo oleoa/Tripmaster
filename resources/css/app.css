@@ -7,35 +7,35 @@
 @layer base {
 
   h1 {
-    @apply text-4xl text-black dark:text-white;
+    @apply text-4xl text-white;
   }
 
   h2 {
-    @apply text-3xl text-black dark:text-white;
+    @apply text-3xl text-white;
   }
 
   h3 {
-    @apply text-2xl text-black dark:text-white;
+    @apply text-2xl text-white;
   }
 
   h4 {
-    @apply text-xl text-black dark:text-white;
+    @apply text-xl text-white;
   }
 
   h5 {
-    @apply text-lg text-black dark:text-white;
+    @apply text-lg text-white;
   }
 
   h6 {
-    @apply text-base text-black dark:text-white;
+    @apply text-base text-white;
   }
 
   a {
-    @apply cursor-pointer hover:underline dark:text-white;
+    @apply cursor-pointer hover:underline text-white;
   }
 
   p {
-    @apply dark:text-white;
+    @apply text-white;
   }
 
   img {
@@ -43,11 +43,11 @@
   }
 
   input {
-    @apply px-4 py-2 rounded w-full border-2 border-black dark:border-0 dark:bg-slate-600 dark:text-white;
+    @apply px-4 py-2 rounded w-full border-black border-0 bg-slate-600 text-white;
   }
 
   select {
-    @apply px-4 py-2 rounded w-full border-2 border-black dark:border-0 dark:bg-slate-600 dark:text-white;
+    @apply px-4 py-2 rounded w-full border-black border-0 bg-slate-600 text-white;
   }
 
   textarea {
@@ -55,7 +55,7 @@
   }
 
   label {
-    @apply text-black dark:text-white text-2xl;
+    @apply text-white text-2xl;
   }
 
 }
@@ -65,6 +65,6 @@
 }
 
 .default-div {
-  @apply dark:text-white;
+  @apply text-white;
   all: initial;
 }

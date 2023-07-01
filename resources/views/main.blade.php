@@ -10,7 +10,7 @@
       <h2>@lang('Selected stays')</h2>
       @if(count($project->rents) == 0)
         <h3>@lang('No stays selected')</h3>
-        <h4><a href="{{route('stays.index')}}" class="dark:text-blue-500">@lang('Select one')</a>!</h4>
+        <h4><a href="{{route('stays.index')}}" class="text-blue-500">@lang('Select one')</a>!</h4>
       @else
         @foreach ($project->rents as $stay)  
           <x-mini-stay :stay="$stay"/>
