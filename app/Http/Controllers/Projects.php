@@ -10,10 +10,13 @@ use App\Models\Project;
 use App\Models\Stays;
 use App\Models\Rents;
 use App\Models\User;
+use App\Helpers\Renter;
 use Carbon\Carbon;
 
 class Projects extends Controller
 {
+  private $renter;
+
   public function index()
   {
     $this->data->title('Project');
@@ -377,11 +380,19 @@ class Projects extends Controller
     $start = $valideted['start_date'];
     $end = $valideted['end_date'];
     
-    $rent = Rents::where(function ($query) use ($start, $end) {
-      $query->whereBetween('start_date', [$start, $end])->orWhereBetween('end_date', [$start, $end]);
-    })->first();
+    $this->renter = new Renter();
 
-    if($rent != null){
+    $rents = Rents::where("stay", $stay->id)->get()->toArray() ?? false;
+
+    $this->renter->dbRents($rents);
+
+    $this->renter->projectStart($project->start);
+    $this->renter->projectEnd($project->end);
+
+    $canRent = $this->renter->canRent();
+    dd($canRent);
+    
+    if(!$canRent){
       session()->flash('alert', $this::STAY_NOT_AVAILABLE);
       return redirect()->route('stays.index');
     }

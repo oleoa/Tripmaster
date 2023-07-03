@@ -190,13 +190,14 @@ class Stays extends Controller
     
     $this->data->set("months", $months);
 
-    $rents = Rents::where("stay", $stay->id)->where("start_date", ">=", $project->start)->where("end_date", "<=", $project->end)->get()->toArray() ?? false;
+    $rents = Rents::where("stay", $stay->id)->get()->toArray() ?? false;
     $myRents = array();
     foreach($rents as $rent){
       $period = CarbonPeriod::create($rent['start_date'], $rent['end_date']);
       foreach($period as $date)
         $myRents[] = $date->format('Y-m-d');
     }
+    
     $this->data->set("rents", $myRents);
 
     return $this->view('stays.rent');
