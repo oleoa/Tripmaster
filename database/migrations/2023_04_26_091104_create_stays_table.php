@@ -26,7 +26,7 @@ return new class extends Migration
         $table->string('image')->default('default.jpg');
         $table->double('lat', 16, 14)->nullable();
         $table->double('lon', 17, 14)->nullable();
-        $table->string('status')->default('available');
+        $table->enum('status', ['enabled', 'disabled'])->default('available');
         $table->timestamps();
       });
     }

@@ -12,33 +12,33 @@ use Illuminate\Support\Facades\Schema;
  */
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-      Schema::create('rents', function (Blueprint $table) {
-        $table->id();
-        $table->unsignedBigInteger('project');
-        $table->foreign('project')->references('id')->on('projects')->onDelete('cascade');
-        $table->unsignedBigInteger('stay');
-        $table->foreign('stay')->references('id')->on('stays')->onDelete('cascade');
-        $table->unsignedBigInteger('user');
-        $table->foreign('user')->references('id')->on('users')->onDelete('no action');
-        $table->date('start_date');
-        $table->date('end_date');
-        $table->decimal('price', 8, 2);
-        $table->text('status')->default('pending');
-        $table->integer('headcount');
-        $table->timestamps();
-      });
-    }
+  /**
+   * Run the migrations.
+   */
+  public function up(): void
+  {
+    Schema::create('rents', function (Blueprint $table) {
+      $table->id();
+      $table->unsignedBigInteger('project');
+      $table->foreign('project')->references('id')->on('projects')->onDelete('cascade');
+      $table->unsignedBigInteger('stay');
+      $table->foreign('stay')->references('id')->on('stays')->onDelete('cascade');
+      $table->unsignedBigInteger('user');
+      $table->foreign('user')->references('id')->on('users')->onDelete('no action');
+      $table->date('start_date');
+      $table->date('end_date');
+      $table->decimal('price', 8, 2);
+      $table->enum('status', ['pending', 'accepted', 'rejected', 'closed', 'finished'])->default('pending');
+      $table->integer('headcount');
+      $table->timestamps();
+    });
+  }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('rents');
-    }
+  /**
+   * Reverse the migrations.
+   */
+  public function down(): void
+  {
+    Schema::dropIfExists('rents');
+  }
 };

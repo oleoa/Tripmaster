@@ -86,7 +86,7 @@ class Projects extends Controller
 
     $rents = Rents::where("project", $project->id)->get();
     foreach($rents as $r){
-      $r->status = 'payed';
+      $r->status = 'closed';
       $r->save();
       $stay_owner = Stays::where("id", $r->stay)->first()->toArray()['owner'] ?? false;
       $owner_user = User::where("id", $stay_owner)->first() ?? false;
@@ -409,6 +409,7 @@ class Projects extends Controller
       'user' => Auth::id(),
       'start_date' => $valideted['start_date'],
       'end_date' => $valideted['end_date'],
+      'status' => 'pending', // 'pending', 'accepted', 'rejected', 'closed', 'finished
       'price' => $cost,
       'headcount' => $valideted['headcount']
     );

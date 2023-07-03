@@ -19,6 +19,7 @@ class Rents extends Model
     'end_date',
     'user',
     'price',
+    'status',
     'headcount'
   ];
 }
