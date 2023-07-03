@@ -59,7 +59,7 @@
     </div>
 
     <div>
-      <x-map/>
+      <x-map :editable="true"/>
       <input type="hidden" name="lat">
       <input type="hidden" name="lon">
     </div>
