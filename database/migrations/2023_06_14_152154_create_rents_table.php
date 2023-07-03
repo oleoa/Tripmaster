@@ -27,6 +27,7 @@ return new class extends Migration
         $table->foreign('user')->references('id')->on('users')->onDelete('no action');
         $table->date('start_date');
         $table->date('end_date');
+        $table->decimal('price', 8, 2);
         $table->text('status')->default('pending');
         $table->integer('headcount');
         $table->timestamps();

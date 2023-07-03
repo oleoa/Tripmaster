@@ -84,6 +84,16 @@ class Projects extends Controller
       return redirect()->route('projects.payment');
     }
 
+    $rents = Rents::where("project", $project->id)->get();
+    foreach($rents as $r){
+      $r->status = 'payed';
+      $r->save();
+      $stay_owner = Stays::where("id", $r->stay)->first()->toArray()['owner'] ?? false;
+      $owner_user = User::where("id", $stay_owner)->first() ?? false;
+      $owner_user->money += $r->price;
+      $owner_user->save();
+    }
+
     $user->money -= $project->cost;
     $user->lastProjectOpened = null;
     $user->save();
@@ -230,9 +240,6 @@ class Projects extends Controller
         foreach($rents as $r){
           $r->status = 'finished';
           $r->save();
-          $stay = Stays::where("id", $r->stay)->first();
-          $stay->status = 'finished';
-          $stay->save();
         }
       }
     }
@@ -381,11 +388,9 @@ class Projects extends Controller
 
     $days = Carbon::parse($valideted['start_date'])->diffInDays(Carbon::parse($valideted['end_date']));
     $cost = $stay->price * $days;
+
     $project->cost += $cost;
     $project->save();
-
-    $stay->status = 'rented';
-    $stay->save();
 
     $user = User::find(Auth::id());
 
@@ -404,6 +409,7 @@ class Projects extends Controller
       'user' => Auth::id(),
       'start_date' => $valideted['start_date'],
       'end_date' => $valideted['end_date'],
+      'price' => $cost,
       'headcount' => $valideted['headcount']
     );
 

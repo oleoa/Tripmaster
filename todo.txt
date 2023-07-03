@@ -1,7 +1,5 @@
-stay history in rented dates for admin
 make the owner of the say receive the money
-stay owner can see the rent history
-air planes travels API
-planes for the project
+dashboard
+airplanes
 IMAGE PARA O RUI SILVA
 AI
