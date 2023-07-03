@@ -57,3 +57,7 @@ select {
 .message.alert {
   @apply text-orange-500;
 }
+
+.a-nav {
+  @apply flex flex-row w-full justify-between items-center;
+}

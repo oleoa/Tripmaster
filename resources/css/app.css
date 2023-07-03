@@ -58,6 +58,10 @@
     @apply text-white text-2xl;
   }
 
+  i {
+    @apply text-white no-underline !important;
+  }
+
 }
 
 .default-div a {
