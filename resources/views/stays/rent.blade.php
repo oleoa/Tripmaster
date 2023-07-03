@@ -5,7 +5,7 @@
     
     <form action="{{route("projects.stays.rent", ['id' => $stay->id])}}" class="grid gap-4">
 
-      <div id="calendars" class="grid gap-4 grid-cols-4">
+      <div id="calendars" class="grid gap-4 grid-cols-2 lg:grid-cols-4">
 
         <h1 class="col-span-4 text-center p-4">@lang('This stay is rented in the following days')</h1>
         @foreach($months as $month)

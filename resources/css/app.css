@@ -59,7 +59,7 @@
   }
 
   i {
-    @apply text-white no-underline !important;
+    @apply text-white no-underline w-full lg:w-auto text-center !important;
   }
 
 }

@@ -376,23 +376,36 @@ class Projects extends Controller
       session()->flash('error', $this::STAY_404);
       return redirect()->route('stays.index');
     }
-
-    $start = $valideted['start_date'];
-    $end = $valideted['end_date'];
     
-    $this->renter = new Renter();
-
     $rents = Rents::where("stay", $stay->id)->get()->toArray() ?? false;
 
-    $this->renter->dbRents($rents);
+    // Gets all the days that the stay is already rented
+    $using_days = array();
+    foreach($rents as $rent){
 
-    $this->renter->projectStart($project->start);
-    $this->renter->projectEnd($project->end);
+      $start_rent = Carbon::parse($rent['start_date']);
+      $end_rent = Carbon::parse($rent['end_date']);
+      
+      $currentDay = $start_rent->copy();
+      while ($currentDay->lte($end_rent)) {
+        $using_days[] = $currentDay->format('Y-m-d');
+        $currentDay->addDay();
+      }
+    }
 
-    $canRent = $this->renter->canRent();
-    dd($canRent);
+    // Compare these days with the days that the user wants to rent the stay
+    $start = Carbon::parse($valideted['start_date']);
+    $end = Carbon::parse($valideted['end_date']);
+    $currentDay = $start->copy();
+    while ($currentDay->lte($end)) {
+      if(in_array($currentDay->format('Y-m-d'), $using_days)){
+        session()->flash('alert', $this::STAY_NOT_AVAILABLE);
+        return redirect()->route('stays.index');
+      }
+      $currentDay->addDay();
+    }
     
-    if(!$canRent){
+    if(!$rents){
       session()->flash('alert', $this::STAY_NOT_AVAILABLE);
       return redirect()->route('stays.index');
     }

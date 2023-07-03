@@ -7,7 +7,7 @@
       <a href="{{route("projects.list")}}" class="btn okay">@lang("List Projects")</a>
     </div>
   </div>
-  <form action="{{$route}}" method="POST" class="grid grid-cols-2 gap-4">
+  <form action="{{$route}}" method="POST" class="grid lg:grid-cols-2 gap-4">
     @csrf
     @if(isset($project))
       @method('PUT')
