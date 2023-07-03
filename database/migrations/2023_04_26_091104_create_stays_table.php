@@ -6,36 +6,36 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-      Schema::create('stays', function (Blueprint $table) {
-        $table->id();
-        $table->unsignedBigInteger('owner');
-        $table->foreign('owner')->references('id')->on('users');
-        $table->string('title');
-        $table->text('description');
-        $table->text('address');
-        $table->integer('capacity');
-        $table->integer('bedrooms');
-        $table->float('price');
-        $table->string('country');
-        $table->string('city');
-        $table->string('image')->default('default.jpg');
-        $table->double('lat', 16, 14)->nullable();
-        $table->double('lon', 17, 14)->nullable();
-        $table->enum('status', ['enabled', 'disabled'])->default('available');
-        $table->timestamps();
-      });
-    }
+  /**
+   * Run the migrations.
+   */
+  public function up(): void
+  {
+    Schema::create('stays', function (Blueprint $table) {
+      $table->id();
+      $table->unsignedBigInteger('owner');
+      $table->foreign('owner')->references('id')->on('users');
+      $table->string('title');
+      $table->text('description');
+      $table->text('address');
+      $table->integer('capacity');
+      $table->integer('bedrooms');
+      $table->float('price');
+      $table->string('country');
+      $table->string('city');
+      $table->string('image')->default('default.jpg');
+      $table->double('lat', 16, 14)->nullable();
+      $table->double('lon', 17, 14)->nullable();
+      $table->enum('status', ['enabled', 'disabled'])->default('enabled');
+      $table->timestamps();
+    });
+  }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('stays');
-    }
+  /**
+   * Reverse the migrations.
+   */
+  public function down(): void
+  {
+    Schema::dropIfExists('stays');
+  }
 };

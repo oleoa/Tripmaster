@@ -50,8 +50,7 @@ class DatabaseSeeder extends Seeder
       'country' => "France",
       'city' => "Paris",
       'lat' => 44.762914,
-      'lon' => 4.258786,
-      'status' => 'available'
+      'lon' => 4.258786
     ]);
     
     DB::table("stays_images")->insert([

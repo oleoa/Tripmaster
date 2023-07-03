@@ -33,7 +33,7 @@ class Stays extends Controller
       
     $this->data->set('country', $project->country);
     
-    $stays = StaysModel::where("country", $project->country)->where('status', 'available')->get();
+    $stays = StaysModel::where("country", $project->country)->where('status', 'enabled')->get();
     for($i = 0; $i < count($stays); $i++)
       $stays[$i]->image = $this->image->get('stays/'.$stays[$i]->image);
 
@@ -152,7 +152,7 @@ class Stays extends Controller
   
   public function rent($id)
   {
-    $stay = StaysModel::where("id", $id)->where('status', 'available')->first() ?? false;
+    $stay = StaysModel::where("id", $id)->where('status', 'enabled')->first() ?? false;
     if(!$stay){
       session()->flash('error', $this::STAY_404);
       return redirect()->route('stays.list');

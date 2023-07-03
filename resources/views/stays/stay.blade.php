@@ -32,9 +32,7 @@
       </div>
       <div>
         <a href="{{$backHref}}" class="btn okay">@lang('Back')</a>
-        @if($stay->status == 'available')
-          <a href="{{route('stays.rent', ["id" => $stay['id']])}}" class="btn good">@lang('Rent')</a>
-        @endif
+        <a href="{{route('stays.rent', ["id" => $stay['id']])}}" class="btn good">@lang('Rent')</a>
       </div>
     </div>
 
