@@ -376,6 +376,11 @@ class Projects extends Controller
       session()->flash('error', $this::STAY_404);
       return redirect()->route('stays.index');
     }
+
+    if($stay->owner == Auth::id()){
+      session()->flash('alert', $this::CANT_RENT_UR_OWN_STAY);
+      return redirect()->route('stays.index');
+    }
     
     $rents = Rents::where("stay", $stay->id)->get()->toArray() ?? false;
 
@@ -403,11 +408,6 @@ class Projects extends Controller
         return redirect()->route('stays.index');
       }
       $currentDay->addDay();
-    }
-    
-    if(!$rents){
-      session()->flash('alert', $this::STAY_NOT_AVAILABLE);
-      return redirect()->route('stays.index');
     }
 
     $days = Carbon::parse($valideted['start_date'])->diffInDays(Carbon::parse($valideted['end_date']));
@@ -480,20 +480,12 @@ class Projects extends Controller
       return redirect()->route('projects.index');
     }
     
-    if($stay->status != 'rented'){
-      session()->flash('alert', $this::STAY_NOT_RENTED);
-      return redirect()->route('projects.index');
-    }
-    
     $days = Carbon::parse($rent->start_date)->diffInDays(Carbon::parse($rent->end_date));
     $cost = $stay->price * $days;
     $project->cost -= $cost;
     $project->save();
 
     $rent->delete();
-
-    $stay->status = 'available';
-    $stay->save();
 
     return redirect()->route("projects.index");
   }

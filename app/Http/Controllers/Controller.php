@@ -57,6 +57,8 @@ class Controller extends BaseController
   const STAY_CREATED = 'Stay created';
   const STAY_UPDATED = 'Stay updated';
   const STAY_DELETED = 'Stay deleted';
+  const STAY_ALREADY_RENTED = 'Stay already rented';
+  const CANT_RENT_UR_OWN_STAY = "You can't rent your own stay";
 
   // Stay reviews
   const INVALID_RATING = 'Invalid rating';
