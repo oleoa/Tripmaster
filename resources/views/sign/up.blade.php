@@ -10,14 +10,11 @@
       <input type="text" name="name" id="name" value="{{old('name')}}"/>
       <label for="email"><h2>@lang('Email')</h2></label>
       <input type="text" name="email" id="email" value="{{old('email')}}"/>
-      <label for="password"><h2>@lang('Password')</h2></label>
-      <input type="password" name="password" id="password" minlength="{{$password_min_length}}" maxlength="{{$password_max_length}}"/>
+      <x-password :min="$password_min_length" :max="$password_max_length"/>
       <label for="password_confirmation"><h2>@lang('Confirm Password')</h2></label>
       <input type="password" name="password_confirmation" id="password_confirmation" minlength="{{$password_min_length}}" maxlength="{{$password_max_length}}"/>
       <button type="submit" class="btn good">@lang('Sign up')</button>
     </form>
-    <div class="p-0 lg:p-4">
-      <h2 class="text-2xl">@lang('Have an account?') <a class="text-blue-500" href="{{route('sign.in')}}">@lang('Sign in')</a>!</h2>
-    </div>
+    <h2 class="text-2xl">@lang('Have an account?') <a class="text-blue-500" href="{{route('sign.in')}}">@lang('Sign in')</a>!</h2>
   </div>
 @endsection

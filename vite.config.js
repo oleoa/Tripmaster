@@ -10,6 +10,7 @@ export default defineConfig({
               'resources/css/rating.css',
               'resources/css/toggle.css',
               'resources/js/app.js',
+              'resources/js/password.js',
               'resources/js/carousel.js',
               'resources/js/calendar.js',
               'resources/js/rating.js',
