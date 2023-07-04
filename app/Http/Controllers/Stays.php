@@ -7,6 +7,7 @@ use App\Models\Stays as StaysModel;
 use Illuminate\Http\Request;
 use App\Models\Stay_Reviews;
 use App\Models\Stays_Images;
+use App\Models\StaysViews;
 use App\Models\User;
 use Carbon\CarbonPeriod;
 use App\Models\Project;
@@ -99,6 +100,14 @@ class Stays extends Controller
       session()->flash('error', $this::STAY_404);
       return redirect()->route('stays.list');
     }
+
+    if($stay->owner != Auth::id()){
+      $view = new StaysViews();
+      $view->user = Auth::id();
+      $view->stay = $id;
+      $view->time = Carbon::now()->format('Y-m-d H:i:s');
+      $view->save();
+    }
     
     $stay->image = $this->image->get('stays/'.$stay->image);
 
@@ -143,8 +152,18 @@ class Stays extends Controller
     }
     $this->data->set('stay', $stay);
 
-    $rents = Rents::where("stay", $stay->id)->get()->toArray() ?? false;
+    $views = StaysViews::where("stay", $stay->id)->get()->toArray() ?? false;
+    $this->data->set('views', $views);
+    $this->data->set('totalViews', count($views));
+
+    $rents = Rents::where("stay", $stay->id)->where("status", "closed")->get()->toArray() ?? false;
     $this->data->set('rents', $rents);
+    $this->data->set('totalRents', count($rents));
+
+    $totalEarning = 0;
+    foreach($rents as $rent)
+      $totalEarning += $rent['price'];
+    $this->data->set('totalEarnings', $totalEarning);
 
     return $this->view('stays.dashboard');
   }
@@ -154,6 +173,11 @@ class Stays extends Controller
     $stay = StaysModel::where("id", $id)->where('status', 'enabled')->first() ?? false;
     if(!$stay){
       session()->flash('error', $this::STAY_404);
+      return redirect()->route('stays.list');
+    }
+
+    if($stay->owner == Auth::id()){
+      session()->flash('error', $this::CANT_RENT_UR_OWN_STAY);
       return redirect()->route('stays.list');
     }
 
