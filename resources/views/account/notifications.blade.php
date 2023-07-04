@@ -4,7 +4,7 @@
     <h1>@lang('Notifications')</h1>
     <div class="grid grid-cols-2">
       <p>@lang('Here you can see all your notifications').</p>
-      @if(count($notifications) == 0)
+      @if(count($notifications) > 0)
         <a href="{{route('account.notifications.deleteAll')}}" class="text-end"><button class="btn danger">@lang('Delete All')</button></a>
       @endif
     </div>
