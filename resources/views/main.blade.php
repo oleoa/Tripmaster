@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('body')
-  <main class="grid-cols-3">
+  <main class="lg:grid-cols-3">
     <article class="space-y-4">
       <h1 class="text-start">{{$project->country}}</h1>
       <h2>@lang('Starts at') {{$project->start}}</h2>

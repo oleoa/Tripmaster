@@ -4,18 +4,21 @@
 
     <div class="all-center relative">
       <h1 class="py-8">@lang('My Projects')</h1>
-      <div class="absolute right-0 px-4">
+      <div class="lg:absolute lg:right-0 px-4">
         <a href="{{route('projects.creator')}}" class="btn good">@lang('Create Project')</a>
       </div>
     </div>
     
     @if(isset($projects) && !empty($projects))
-      <div class="grid gap-4 grid-cols-1 xl:grid-cols-2">
+
+      <div class="grid gap-4 grid-cols-1 xl:grid-cols-2 py-4">
+
         @foreach ($projects as $project)
+
           <article class="flex flex-col rounded">
 
             <div class="grid grid-cols-3 bg-slate-700 rounded-t p-4">
-              <div class="grid grid-cols-4 col-span-2">
+              <div class="grid lg:grid-cols-4 col-span-2">
                 <h2 class="py-4 col-span-2">{{$project['country']}}</h2>
                 <h2 class="py-4">{{$project['cost']}}€</h2>
                 @if($project['closed'] == true && $project['finished'] == false)
@@ -29,11 +32,11 @@
               </div>
             </div>
 
-            <div class="p-4 rounded-b bg-slate-600">
+            <div class="p-4 rounded-b bg-slate-600 space-y-4">
               <h2>{{$project['headcount']}} @lang($project['people'])</h2>
               <h2>@lang('Starts at') {{$project['start']}}</h2>
               <h2>@lang('Ends at') {{$project['end']}}</h2>
-              <div class="w-full flex justify-end space-x-4">
+              <div class="w-full flex justify-end space-x-1 lg:space-x-4">
                 @if($project['closed'] == false)
                   <a href="{{route('projects.delete', ['id' => $project['id']])}}" class="btn danger">@lang('Delete')</a>
                   <a href="{{route('projects.editor', ['id' => $project['id']])}}" class="btn okay">@lang('Edit')</a>

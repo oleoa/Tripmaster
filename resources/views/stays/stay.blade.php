@@ -4,26 +4,20 @@
     
     <h1 class="text-center">{{$stay['title']}}</h1>
 
-    <div class="grid grid-cols-2 gap-4">
-      <!-- Carousel
-        @if($stay->images)
-          <div class="overflow-hidden">
-            <x-carousel :images="$stay->images"/>
-          </div>
-        @endif
-      -->
+    <div class="grid lg:grid-cols-2 gap-4">
       <img src="{{$stay->image}}" alt="Stay Image"/>
       <x-map lat="{{$stay->lat}}" lon="{{$stay->lon}}"/>
     </div>
 
-    <div class="grid grid-cols-2 px-6 space-y-4">
+    <div class="grid lg:grid-cols-2 px-6 space-y-4">
       <p class="text-2xl">{{$stay['description']}}</p>
-      <p class="text-2xl text-end">{{$stay['price']}}€</p>
+      <p class="text-2xl lg:text-end">{{$stay['price']}}€</p>
       <p class="text-2xl">@lang('Capacity'): {{$stay['capacity']}}</p>
       <p class="text-2xl">@lang('Address'): {{$stay['address']}}</p>
       <p class="text-2xl">@lang('City'): {{$stay['city']}}</p>
       <p class="text-2xl">@lang('Country'): {{$stay['country']}}</p>
     </div>
+
     <div class="flex justify-between w-full p-6 space-x-4">
       <div>
         @if($canReview)
