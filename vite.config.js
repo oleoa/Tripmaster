@@ -12,7 +12,7 @@ export default defineConfig({
               'resources/js/app.js',
               'resources/js/password.js',
               'resources/js/carousel.js',
-              'resources/js/calendar.js',
+              'resources/js/project_calendar.js',
               'resources/js/rating.js',
               'resources/js/selectAll.js'
             ],
