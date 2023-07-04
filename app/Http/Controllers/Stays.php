@@ -400,6 +400,87 @@ class Stays extends Controller
     return redirect()->route('stays.list');
   }
 
+  public function images_editor($id)
+  {
+    $this->data->title('Edit Stay Images');
+
+    $stay = StaysModel::where("id", $id)->first() ?? false;
+    if(!$stay){
+      session()->flash('error', $this::STAY_404);
+      return redirect()->route('stays.list');
+    }
+
+    $belongs = $this->stay_exists_and_ur_the_owner($id);
+    if(!$belongs){
+      session()->flash('alert', $this::NOT_THE_STAY_OWNER);
+      return redirect()->route('stays.list');
+    }
+
+    $images = Stays_Images::where('stay', $id)->get();
+    $this->data->set('images', $images);
+
+    $this->data->set('stayId', $id);
+
+    return $this->view('stays.images_editor');
+  }
+
+  public function image_add(Request $request)
+  {
+    $validated = $request->validate([
+      'stay' => 'required|exists:stays,id',
+      'image' => 'required|image'
+    ]);
+
+    $stay = StaysModel::find($validated['stay']);
+    if(!$stay){
+      session()->flash('error', $this::STAY_404);
+      return redirect()->route('stays.list');
+    }
+
+    $belongs = $this->stay_exists_and_ur_the_owner($stay->id);
+    if(!$belongs){
+      session()->flash('alert', $this::NOT_THE_STAY_OWNER);
+      return redirect()->route('stays.list');
+    }
+
+    $image = array(
+      'image_path' => $this->image->set('stays', $validated['image']),
+      'stay' => $stay->id
+    );
+
+    $stay->image = $image['image_path'];
+    $stay->save();
+    Stays_Images::create($image);
+
+    session()->flash('success', $this::IMAGE_ADDED);
+    return redirect()->back();
+  }
+
+  public function image_destroy($id)
+  {
+    $image = Stays_Images::find($id);
+    if(!$image){
+      session()->flash('error', $this::IMAGE_404);
+      return redirect()->route('stays.list');
+    }
+
+    $stay = StaysModel::find($image->stay);
+    if(!$stay){
+      session()->flash('error', $this::STAY_404);
+      return redirect()->route('stays.list');
+    }
+
+    $belongs = $this->stay_exists_and_ur_the_owner($stay->id);
+    if(!$belongs){
+      session()->flash('alert', $this::NOT_THE_STAY_OWNER);
+      return redirect()->route('stays.list');
+    }
+
+    $image->delete();
+    session()->flash('info', $this::IMAGE_DELETED);
+    return redirect()->back();
+  }
+
   private function stay_exists_and_ur_the_owner($id)
   {
     $stay_exists = StaysModel::find($id);

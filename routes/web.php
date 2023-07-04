@@ -123,13 +123,23 @@ Route::name('stays.')->group(function(){
 
   Route::get('/stay/delete/{id}', [Stays::class, 'delete'])->name('delete');
 
-  Route::get('/my/stays/disable/{id}', [Stays::class, 'disable'])->name('disable');
+  Route::get('/stays/disable/{id}', [Stays::class, 'disable'])->name('disable');
 
-  Route::get('/my/stays/enable/{id}', [Stays::class, 'enable'])->name('enable');
+  Route::get('/stays/enable/{id}', [Stays::class, 'enable'])->name('enable');
 
   Route::get('/stays/edit/{id}', [Stays::class, 'editor'])->name('editor');
 
   Route::put('/stays/edit/{id}', [Stays::class, 'edit'])->name('edit');
+
+  Route::name('images.')->group(function(){
+
+    Route::get('/stays/edit/images/{id}', [Stays::class, 'images_editor'])->name('editor');
+  
+    Route::post('/stays/edit/images/add', [Stays::class, 'image_add'])->name('add');
+  
+    Route::delete('/stays/edit/images/destroy/{id}', [Stays::class, 'image_destroy'])->name('destroy');
+
+  });
 
   Route::get('/stays/create', [Stays::class, 'creator'])->name('creator');
 

@@ -60,6 +60,10 @@ class Controller extends BaseController
   const STAY_ALREADY_RENTED = 'Stay already rented';
   const CANT_RENT_UR_OWN_STAY = "You can't rent your own stay";
   
+  // Images
+  const IMAGE_404 = 'Image not found';
+  const IMAGE_DELETED = 'Image deleted';
+  const IMAGE_ADDED = 'Image added';
 
   // Stay reviews
   const INVALID_RATING = 'Invalid rating';
