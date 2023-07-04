@@ -137,6 +137,8 @@ Route::name('stays.')->group(function(){
   
     Route::post('/stays/edit/images/add', [Stays::class, 'image_add'])->name('add');
   
+    Route::put('/stays/edit/images/set/main', [Stays::class, 'image_main'])->name('main');
+  
     Route::delete('/stays/edit/images/destroy/{id}', [Stays::class, 'image_destroy'])->name('destroy');
 
   });

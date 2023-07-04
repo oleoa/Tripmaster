@@ -64,6 +64,7 @@ class Controller extends BaseController
   const IMAGE_404 = 'Image not found';
   const IMAGE_DELETED = 'Image deleted';
   const IMAGE_ADDED = 'Image added';
+  const IMAGE_UPDATED = 'Image updated';  
 
   // Stay reviews
   const INVALID_RATING = 'Invalid rating';

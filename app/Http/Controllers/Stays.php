@@ -428,7 +428,7 @@ class Stays extends Controller
   {
     $validated = $request->validate([
       'stay' => 'required|exists:stays,id',
-      'image' => 'required|image'
+      'image' => 'required'
     ]);
 
     $stay = StaysModel::find($validated['stay']);
@@ -443,14 +443,13 @@ class Stays extends Controller
       return redirect()->route('stays.list');
     }
 
-    $image = array(
-      'image_path' => $this->image->set('stays', $validated['image']),
-      'stay' => $stay->id
-    );
-
-    $stay->image = $image['image_path'];
-    $stay->save();
-    Stays_Images::create($image);
+    foreach($validated['image'] as $img) {
+      $image = array(
+        'image_path' => $this->image->set('stays', $img),
+        'stay' => $stay->id
+      );
+      Stays_Images::create($image);
+    }
 
     session()->flash('success', $this::IMAGE_ADDED);
     return redirect()->back();
@@ -476,8 +475,40 @@ class Stays extends Controller
       return redirect()->route('stays.list');
     }
 
+    if($stay->image == $image->image_path){
+      $stay->image = null;
+      $stay->save();
+    }
+
     $image->delete();
+
     session()->flash('info', $this::IMAGE_DELETED);
+    return redirect()->back();
+  }
+
+  public function image_main(Request $request)
+  {
+    $validated = $request->validate([
+      'stay' => 'required|exists:stays,id',
+      'image' => 'required'
+    ]);
+    
+    $stay = StaysModel::find($validated['stay']);
+    if(!$stay){
+      session()->flash('error', $this::STAY_404);
+      return redirect()->route('stays.list');
+    }
+
+    $belongs = $this->stay_exists_and_ur_the_owner($stay->id);
+    if(!$belongs){
+      session()->flash('alert', $this::NOT_THE_STAY_OWNER);
+      return redirect()->route('stays.list');
+    }
+
+    $stay->image = $validated['image'];
+    $stay->save();
+
+    session()->flash('success', $this::IMAGE_UPDATED);
     return redirect()->back();
   }
 
