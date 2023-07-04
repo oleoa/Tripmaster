@@ -141,11 +141,10 @@ class Stays extends Controller
       session()->flash('error', $this::STAY_404);
       return redirect()->route('stays.list');
     }
+    $this->data->set('stay', $stay);
 
     $rents = Rents::where("stay", $stay->id)->get()->toArray() ?? false;
     $this->data->set('rents', $rents);
-
-    $this->data->set('stay', $stay);
 
     return $this->view('stays.dashboard');
   }

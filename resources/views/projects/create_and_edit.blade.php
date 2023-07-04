@@ -1,3 +1,4 @@
+@vite('resources/js/project_calendar.js')
 @extends('layouts.main')
 @section('body')
 <main>
@@ -13,7 +14,7 @@
       @method('PUT')
     @endif
     <div>
-      <x-full-calendar/>
+      <div id="calendar"></div>
     </div>
     <div class="flex flex-col space-y-4">
       <div class="grid grid-rows-1 gap-4">
