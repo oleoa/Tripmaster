@@ -10,13 +10,10 @@ use App\Models\Project;
 use App\Models\Stays;
 use App\Models\Rents;
 use App\Models\User;
-use App\Helpers\Renter;
 use Carbon\Carbon;
 
 class Projects extends Controller
 {
-  private $renter;
-
   public function index()
   {
     $this->data->title('Project');
