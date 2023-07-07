@@ -10,21 +10,35 @@
     </div>
     <div>
       @if(count($notifications) > 0)
-        <div class="grid grid-cols-6 p-4 [&>p]:text-xl bg-slate-600 border-b rounded-t">
-          <p>@lang('Title')</p>
-          <p class="col-span-3">@lang('Body')</p>
-          <p class="text-end">@lang('At')</p>
-          <p class="text-end">@lang('Actions')</p>
+        <div class="hidden lg:block">
+          <div class="grid grid-cols-6 p-4 [&>p]:text-xl bg-slate-600 border-b rounded-t">
+            <p>@lang('Title')</p>
+            <p class="col-span-3">@lang('Body')</p>
+            <p class="text-end">@lang('At')</p>
+            <p class="text-end">@lang('Actions')</p>
+          </div>
+          <div class="grid grid-cols-1 rounded-b">
+            @foreach ($notifications as $notification)
+              <div class="bg-slate-700 grid gap-4 grid-cols-6 p-4 [&>p]:text-2xl @if($loop->last) rounded-b @else border-b-2 @endif">
+                <p class="flex items-center">{{ $notification->title }}</h2>
+                <p class="col-span-3 flex justify-center items-center">{{ $notification->body }}</p>
+                <p class="text-end">{{ $notification->created_at }}</p>
+                <div class="w-full flex items-center justify-end"><a href="{{route('account.notifications.delete', ['id' => $notification->id])}}" class="flex items-center justify-end"><button class="btn danger">@lang('Delete')</button></a></div>
+              </div>
+            @endforeach
+          </div>
         </div>
-        <div class="grid grid-cols-1 rounded-b">
-          @foreach ($notifications as $notification)
-            <div class="bg-slate-700 grid grid-cols-6 p-4 [&>p]:text-2xl @if($loop->last) rounded-b @else border-b-2 @endif">
-              <p class="flex items-center">{{ $notification->title }}</h2>
-              <p class="col-span-3 flex justify-center items-center">{{ $notification->body }}</p>
-              <p class="flex items-center justify-end">{{ $notification->created_at }}</p>
-              <div class="w-full flex items-center justify-end"><a href="{{route('account.notifications.delete', ['id' => $notification->id])}}" class="flex items-center justify-end"><button class="btn danger">@lang('Delete')</button></a></div>
-            </div>
-          @endforeach
+        <div class="block lg:hidden">
+          <div class="grid grid-cols-1 rounded">
+            @foreach ($notifications as $notification)
+              <div class="bg-slate-700 grid [&>p]:p-4 [&>p]:text-2xl @if($loop->last) rounded-b @else border-b-2 @endif">
+                <p class="flex items-center bg-slate-600 rounded-t">{{ $notification->title }}</h2>
+                <p class="flex justify-center items-center">{{ $notification->body }}</p>
+                <p class="flex items-center">{{ $notification->created_at }}</p>
+                <div class="w-full flex items-center justify-end p-4"><a href="{{route('account.notifications.delete', ['id' => $notification->id])}}" class="flex items-center justify-end"><button class="btn danger">@lang('Delete')</button></a></div>
+              </div>
+            @endforeach
+          </div>
         </div>
       @else
         <h1>@lang('You have no notifications').</h1>
