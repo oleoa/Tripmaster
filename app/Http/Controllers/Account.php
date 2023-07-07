@@ -252,7 +252,7 @@ class Account extends Controller
     $user->save();
 
     session()->flash('info', $this::PASSWORD_CHANGED);
-    return redirect()->route('account.index');
+    return redirect()->route('sign.out');
   }
 
   public function recover_password()
