@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="grid lg:grid-cols-2 p-4 py-8 gap-4">
-        <h1 class="hidden lg:block">@lang('Name')</h1>
+        <h1 class="hidden lg:block">@lang('Name'):</h1>
         <h1>{{$user->name}}</h1>
         <h2 class="hidden lg:block">@lang('Email'):</h2>
         <h2>{{$user->email}}</h2>
