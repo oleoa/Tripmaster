@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Notifications;
 
 class Verification extends Controller
 {
@@ -19,6 +20,13 @@ class Verification extends Controller
     $user->email_verified_at = now();
     $user->verification_token = null;
     $user->save();
+
+    $notification = new Notifications();
+    $notification->user = $user->id;
+    $notification->date = now();
+    $notification->title = "Your account has been verified.";
+    $notification->body = "Your account has been verified successfully. You can now use all the features of the website.";
+    $notification->save();
 
     session()->flash("name", $user->name);
     return redirect()->route('verification.success');

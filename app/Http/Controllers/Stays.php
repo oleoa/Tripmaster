@@ -11,6 +11,7 @@ use App\Models\StaysViews;
 use App\Models\User;
 use Carbon\CarbonPeriod;
 use App\Models\Project;
+use App\Models\Notifications;
 use App\Models\Rents;
 use Carbon\Carbon;
 
@@ -86,6 +87,13 @@ class Stays extends Controller
     $review->stay = $id;
     $review->user = Auth::id();
     $review->save();
+
+    $notification = new Notifications();
+    $notification->user = $stay->owner;
+    $notification->date = now();
+    $notification->title = "New review on your stay.";
+    $notification->body = "A new review has been posted on your stay '".$stay->title."'.";
+    $notification->save();
 
     session()->flash('success', $this::REVIEW_SUCCESS);
     return redirect()->route('stays.index');

@@ -59,6 +59,8 @@ class Controller extends BaseController
   const STAY_DELETED = 'Stay deleted';
   const STAY_ALREADY_RENTED = 'Stay already rented';
   const CANT_RENT_UR_OWN_STAY = "You can't rent your own stay";
+  const STAY_REMOVED = "Stay removed from project";
+  const YOUR_STAY_WAS_REMOVED = "Your stay was removed from the project";
   
   // Images
   const IMAGE_404 = 'Image not found';

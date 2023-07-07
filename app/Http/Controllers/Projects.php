@@ -484,6 +484,16 @@ class Projects extends Controller
 
     $rent->delete();
 
+    $notification = array(
+      'user' => $stay->owner,
+      'title' => $this::YOUR_STAY_WAS_REMOVED,
+      'body' => "Your stay '".$stay->title."' was removed from a project.",
+      'date' => Carbon::now(),
+    );
+
+    Notifications::create($notification);
+
+    session()->flash('info', $this::STAY_REMOVED);
     return redirect()->route("projects.index");
   }
 
