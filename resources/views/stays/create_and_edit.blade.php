@@ -68,7 +68,9 @@
       <button type="submit" class="btn good w-full">@lang($submit_button)</button>
     </div>
 
-    <a class="col-span-2 btn okay" href="{{route('stays.images.editor', ['id' => $stay['id']])}}">@lang('Edit Images')</a>
+    @if($editing_case)
+      <a class="col-span-2 btn okay" href="{{route('stays.images.editor', ['id' => $stay['id']])}}">@lang('Edit Images')</a>
+    @endif
 
   </form>
 </main>

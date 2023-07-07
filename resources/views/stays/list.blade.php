@@ -10,8 +10,8 @@
       <a href="{{route('stays.creator')}}" class="btn good">@lang('Create Stay')</a>
     </div>
   </div>
-    
-  @if(isset($stays) && !empty($stays))
+  
+  @if(isset($stays) && !empty($stays) && count($stays) > 0)
     <div>
       <div class="grid grid-cols-7 w-full bg-slate-600 p-4 rounded-t">
         <h6>@lang('Image')</h6>
@@ -43,6 +43,10 @@
           </div>
         @endforeach
       </div>
+    </div>
+  @else
+    <div class="bg-slate-700 p-4 rounded">
+      <h4 class="text-center">@lang('No stays yet')</h4>
     </div>
   @endif
 
