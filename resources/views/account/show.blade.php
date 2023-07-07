@@ -10,7 +10,8 @@
           <a href="{{route('account.notifications.list')}}" class="flex text-4xl">
             <i class="fa-solid fa-bell"></i>
             @if($hasNewNotifications)
-              <div class="w-4 h-4 bg-red-500 rounded-full flex items-center justify-center">
+              <div class="w-4 h-4 bg-red-500 rounded-full flex items-center justify-center relative">
+                <div class="w-full h-full bg-red-400 animate-ping absolute rounded-full"></div>
                 <span class="text-xs">{{$newNotificationsCount}}</span>
               </div>
             @endif
