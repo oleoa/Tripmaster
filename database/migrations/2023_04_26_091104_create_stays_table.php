@@ -23,7 +23,7 @@ return new class extends Migration
       $table->float('price');
       $table->string('country');
       $table->string('city');
-      $table->string('image')->default('default.jpg');
+      $table->string('image')->nullable();
       $table->double('lat', 16, 14)->nullable();
       $table->double('lon', 17, 14)->nullable();
       $table->enum('status', ['enabled', 'disabled'])->default('enabled');
