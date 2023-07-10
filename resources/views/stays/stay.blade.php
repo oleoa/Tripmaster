@@ -5,7 +5,7 @@
     <h1 class="text-center">{{$stay['title']}}</h1>
 
     <div class="grid lg:grid-cols-2 gap-4">
-      <img src="{{$stay->image}}" alt="Stay Image"/>
+      <x-swiper :images="$stay->images"/>
       <x-map lat="{{$stay->lat}}" lon="{{$stay->lon}}"/>
     </div>
 
