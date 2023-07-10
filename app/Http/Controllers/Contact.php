@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\ContactUsEmailAdmin;
 use App\Mail\ContactUsEmail;
 use Illuminate\Http\Request;
 use App\Models\Contact_us;
@@ -37,6 +38,8 @@ class Contact extends Controller
     Contact_us::create($data);
 
     Mail::to($data['email'])->send(new ContactUsEmail($data['name']));
+
+    Mail::to(env('ADMIN_EMAIL'))->send(new ContactUsEmailAdmin($data['name'], $data['email'], $data['message'], $data['subject']));
 
     return redirect()->route('home')->with('success', $this::CONTACT_US_SUCCESS_MESSAGE);
   }
