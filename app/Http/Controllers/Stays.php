@@ -255,7 +255,7 @@ class Stays extends Controller
       return redirect()->route('stays.list');
     }
 
-    StaysModel::where("id", $id)->update(["status" => "available"]);
+    StaysModel::where("id", $id)->update(["status" => "enabled"]);
     return redirect()->back();
   }
 

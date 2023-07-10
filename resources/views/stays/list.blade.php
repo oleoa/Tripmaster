@@ -33,10 +33,10 @@
               <a class="btn good" href="{{route("stays.dashboard", ['id' => $stay['id']])}}">@lang('Check')</a>
               <a class="btn default" href="{{route("stays.show", ['id' => $stay['id']])}}">@lang('View')</a>
               <a class="btn okay" href="{{route('stays.editor', ['id' => $stay['id']])}}">@lang('Edit')</a>
-              @if ($stay['status'] == 'available')
+              @if ($stay['status'] == 'enabled')
                 <a class="btn alert" href="{{route('stays.disable', ['id' => $stay['id']])}}">@lang('Disable')</a>
               @else
-                <a class="btn good" href="{{route('stays.enable', ['id' => $stay['id']])}}">@lang('Enable')</a>  
+                <a class="btn good" href="{{route('stays.enable', ['id' => $stay['id']])}}">@lang('Enable')</a>
               @endif
               <a class="btn danger" href="{{route('stays.delete', ['id' => $stay['id']])}}">@lang('Delete')</a>
             </div>
