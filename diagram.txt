@@ -1,0 +1,116 @@
+Table users {
+  id integer [primary key]
+  email varchar
+  email_verified_at timestamp
+  password varchar
+  money float
+  verification_token varchar
+  password_verification_token varchar
+  lastProjectOpened integer
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table projects {
+  id integer [primary key]
+  owner integer [ref: > users.id]
+  country varchar
+  start date
+  end date
+  headcount integer
+  adults integer
+  children integer
+  cost float
+  closed boolean
+  finished boolean
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table stays {
+  id integer [primary key]
+  owner integer [ref: > users.id]
+  title varchar
+  description varchar
+  country varchar
+  city varchar
+  address varchar
+  capacity integer
+  lat double
+  lon double
+  status varchar
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table stays_images {
+  id integer [primary key]
+  stay integer [ref: > stays.id]
+  image_path varchar
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table rents {
+  id integer [primary key]
+  user integer [ref: > users.id]
+  stay integer [ref: > stays.id]
+  start date
+  end date
+  status varchar
+  price float
+  headcount integer
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table notifications {
+  id integer [primary key]
+  user integer [ref: > users.id]
+  title varchar
+  body varchar
+  seen boolean
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table stay_reviews {
+  id integer [primary key]
+  user integer [ref: > users.id]
+  stay integer [ref: > stays.id]
+  title varchar
+  comment varchar
+  rating integer
+  avaiable boolean
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table contact_us {
+  id integer [primary key]
+  name varchar
+  email varchar
+  subject varchar
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table reports {
+  id integer [primary key]
+  user integer [ref: > users.id]
+  review integer [ref: > stay_reviews.id]
+  stay integer [ref: > stays.id]
+  type enum
+  date date
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table stays_views {
+  id integer [primary key]
+  user integer [ref: > users.id]
+  stay integer [ref: > stays.id]
+  time dateTime
+  created_at timestamp
+  updated_at timestamp
+}
