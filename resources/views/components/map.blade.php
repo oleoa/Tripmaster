@@ -1,7 +1,9 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
-<div id="map" class="rounded z-30 min-h-full h-96"></div>
+<div class="relative w-full h-full">
+  <div id="map" class="rounded z-30 absolute top-0 bottom-0 w-full"></div>
+</div>
 
 <script>
 
@@ -21,6 +23,5 @@
       document.querySelector('input[name="lon"]').value = e.latlng.lng;
     });
   @endif
-
 
 </script>
