@@ -4,10 +4,13 @@
     <div class="py-12">
       <h1>@lang('Edit Account')</h1>
     </div>
-    <form action="{{route('account.edit')}}" method="post" class="grid grid-cols-1 gap-4 w-1/3">
+    <form action="{{route('account.edit')}}" method="post" class="grid grid-cols-1 gap-4 w-1/3" enctype="multipart/form-data">
       @csrf
       @method('PUT')
       <input type="hidden" name="id" value="{{$user->id}}">
+      <label for="image">@lang('Image')</label>
+      <img src="{{$user->image}}" alt="User Image" class="w-48">
+      <input type="file" name="image" id="image">
       <label for="name"><h2>@lang('Name')</h2></label>
       <input type="text" name="name" id="name" value="{{$user->name}}"/>
       <label for="email"><h2>@lang('Email')</h2></label>

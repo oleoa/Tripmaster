@@ -24,6 +24,7 @@ class Account extends Controller
     }
         
     $u = Auth::user();
+    $u->image = $this->image->get('users/'.$u->image);
     $this->data->set('user', $u);
 
     $projects_count = Project::where('owner', Auth::id())->count();
@@ -93,7 +94,10 @@ class Account extends Controller
       return redirect()->route("home");
     }
 
+    $user->image = $this->image->get('users/'.$user->image);
+
     $this->data->set("user", $user);
+
     return $this->view('account.edit');
   }
 
@@ -112,6 +116,7 @@ class Account extends Controller
     $validated = $request->validate([
       'id' => 'required|integer',
       'name' => 'required|string|max:255',
+      'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
       'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
       'password' => 'nullable|string|min:'.env('PASSWORD_MIN_LENGTH').'|max:'.env('PASSWORD_MAX_LENGTH'),
     ]);
@@ -140,7 +145,8 @@ class Account extends Controller
     }
 
     $user->name = $validated['name'];
-    $user->email = $validated['email'];      
+    $user->email = $validated['email'];
+    $user->image = $validated['image'] ? $this->image->set('users', $validated['image']) : $user->image;
     $user->save();
 
     return redirect()->route('account.index');

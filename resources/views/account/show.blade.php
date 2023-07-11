@@ -3,8 +3,8 @@
   <main class="grid justify-items-center">
     <div class="lg:w-1/2">
       <div class="all-center relative w-full">
-        <div class="lg:w-24 w-12">
-          <img src="https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg" alt="User Image" class="rounded-full"/>
+        <div class="w-48">
+          <img src="{{$user->image}}" alt="User Image" class="rounded-full"/>
         </div>
         <div class="absolute right-0 top-0 flex space-x-4">
           <a href="{{route('account.notifications.list')}}" class="flex text-4xl">
