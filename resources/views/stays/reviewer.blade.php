@@ -3,10 +3,12 @@
   <main>
     <h1 class="text-center">@lang('Stay Review')</h1>
     <div class="grid grid-cols-2">
-      <div class="space-y-4 p-4 grid gap-4">
+      <div class="space-y-4 p-4">
         <h1>{{$stay->title}}</h1>
         <p>{{$stay->description}}</p>
-        <img src="{{$stay->image}}" alt="Stay Image" class="w-96">
+        <div class="w-96">
+          <x-swiper :images="$stay->images"/>
+        </div>
       </div>
       <form action="{{route("stays.review", ['id' => $stay->id])}}" method="POST" class="grid gap-4">
         @csrf

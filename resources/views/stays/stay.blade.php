@@ -36,14 +36,30 @@
         <div class="grid grid-cols-1 gap-4 px-6">
           @foreach ($stay->reviews as $review)
             <div class="grid gap-4 grid-cols-2 bg-slate-700 rounded p-4">
-              <h2>{{$review['title']}}</h2>
+              <h2 class="@if(!$review['avaiable']) blur-lg select-none @endif">
+                @if(!$review['avaiable'])
+                  @lang('This review has been reported')
+                @else
+                  {{$review['title']}}
+                @endif
+              </h2>
               <div class="text-end">
                 @for($i = 0; $i < $review['rating']; $i++)
                   <span class="text-white">★</span> 
                 @endfor
               </div>
-              <p class="flex items-center">{{$review['comment']}}</p>
-              <h3 class="text-end">{{$review['user']}}<a href="{{route('report.review', ['id' => $review['id']])}}" class="text-red-500 text-sm pl-4">Report</a></h3>
+              <p class="flex items-center @if(!$review['avaiable']) blur-xl select-none @endif">
+                @if(!$review['avaiable'])
+                  @lang('This review has been reported')
+                @else
+                  {{$review['comment']}}
+                @endif
+              </p>
+              @if(!$review['avaiable'])
+                <h3 class="text-end">{{$review['user']}}<span class="text-red-500 text-sm pl-4 cursor-default">Reported</span></h3>
+              @else
+                <h3 class="text-end">{{$review['user']}}<a href="{{route('report.review', ['id' => $review['id']])}}" class="text-red-500 text-sm pl-4">Report</a></h3>
+              @endif
             </div>
           @endforeach
         </div>

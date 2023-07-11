@@ -55,6 +55,19 @@ class Stays extends Controller
       return redirect()->route('stays.list');
     }
 
+    $stay->images = array();
+    $images_path = Stays_Images::where("stay", $stay->id)->get()->toArray() ?? false;
+    if($images_path) {
+      $images = array();
+      foreach($images_path as $image)
+        $images[] = $this->image->get('stays/'.$image['image_path']);
+      $stay->images = $images;
+    } else {
+      $images = array();
+      $images[] = $this->image->default();
+      $stay->images = $images;
+    }
+
     $this->data->set('stay', $stay);
 
     return $this->view('stays.reviewer');
@@ -96,7 +109,7 @@ class Stays extends Controller
     $notification->save();
 
     session()->flash('success', $this::REVIEW_SUCCESS);
-    return redirect()->route('stays.index');
+    return redirect()->back();
   }
 
   public function show($id)
@@ -133,7 +146,7 @@ class Stays extends Controller
       $stay->images = $images;
     }
 
-    $reviews = Stay_Reviews::where("stay", $stay->id)->where('avaiable', true)->get()->toArray() ?? false;
+    $reviews = Stay_Reviews::where("stay", $stay->id)->get()->toArray() ?? false;
     for($i = 0; $i < count($reviews); $i++)
       $reviews[$i]['user'] = User::where('id', $reviews[$i]['user'])->first()->toArray()['name'] ?? false;
     
