@@ -12,12 +12,17 @@ php artisan key:generate
 # Asks for the name, email and password for the admin user
 echo "What is the name of the admin user?"
 read admin_name
+admin_name=${admin_name:-Admin}
 sed -i "s/^ADMIN_NAME=.*/ADMIN_NAME=$admin_name/" .env
+
 echo "What is the email of the admin user?"
 read admin_email
+admin_email=${admin_email:-admin@localhost}
 sed -i "s/^ADMIN_EMAIL=.*/ADMIN_EMAIL=$admin_email/" .env
+
 echo "What is the password of the admin user?"
 read admin_password
+admin_password=${admin_password:-admin123}
 sed -i "s/^ADMIN_PASSWORD=.*/ADMIN_PASSWORD=$admin_password/" .env
 
 # Asks if wants the DEBUG mode on or off
