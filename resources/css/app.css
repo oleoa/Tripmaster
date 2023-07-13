@@ -39,7 +39,7 @@
   }
 
   img {
-    @apply rounded max-w-full h-auto !important;
+    @apply rounded max-w-full h-auto;
   }
 
   input {
@@ -59,7 +59,7 @@
   }
 
   i {
-    @apply text-white no-underline w-full lg:w-auto text-center !important;
+    @apply text-white no-underline w-full lg:w-auto text-center;
   }
 
 }

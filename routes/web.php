@@ -34,7 +34,6 @@ Route::get('/contact-us', [Contact::class, 'index'])->name('contact');
 
 Route::post('/contact-us', [Contact::class, 'store'])->name('contact');
 
-
 Route::name('report.')->group(function(){
 
   Route::get('/report/review/{id}', [Report::class, 'review'])->name('review');

@@ -41,6 +41,6 @@ class Contact extends Controller
 
     Mail::to(env('ADMIN_EMAIL'))->send(new ContactUsEmailAdmin($data['name'], $data['email'], $data['message'], $data['subject']));
 
-    return redirect()->route('home')->with('success', $this::CONTACT_US_SUCCESS_MESSAGE);
+    return redirect()->route('contact')->with('success', $this::CONTACT_US_SUCCESS_MESSAGE);
   }
 }

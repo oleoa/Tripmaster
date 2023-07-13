@@ -3,9 +3,7 @@
   <main class="grid justify-items-center">
     <div class="lg:w-1/2">
       <div class="all-center relative w-full">
-        <div class="w-48">
-          <img src="{{$user->image}}" alt="User Image" class="rounded-full"/>
-        </div>
+        <img src="{{$user->image}}" alt="User Image" class="rounded-full w-28 h-28 object-cover"/>
         <div class="absolute right-0 top-0 flex space-x-4">
           <a href="{{route('account.notifications.list')}}" class="flex text-4xl">
             <i class="fa-solid fa-bell"></i>

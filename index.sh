@@ -13,22 +13,30 @@ php artisan key:generate
 echo "What is the name of the admin user?"
 read admin_name
 admin_name=${admin_name:-Admin}
+echo "Admin name: $admin_name"
 sed -i "s/^ADMIN_NAME=.*/ADMIN_NAME=$admin_name/" .env
 
 echo "What is the email of the admin user?"
 read admin_email
 admin_email=${admin_email:-admin@localhost}
+echo "Admin email: $admin_email"
 sed -i "s/^ADMIN_EMAIL=.*/ADMIN_EMAIL=$admin_email/" .env
 
 echo "What is the password of the admin user?"
 read admin_password
 admin_password=${admin_password:-admin123}
+echo "Admin password: $admin_password"
 sed -i "s/^ADMIN_PASSWORD=.*/ADMIN_PASSWORD=$admin_password/" .env
 
 # Asks if wants the DEBUG mode on or off
 echo "Do you want the DEBUG mode on? [y/N]"
 read debug_mode
 debug_mode=${debug_mode:-N}
+if [[ $debug_mode =~ ^[Yy]$ ]]; then
+  echo "Debug mode"
+else
+  echo "No debug mode"
+fi
 
 # Check the user's choice
 if [[ $debug_mode =~ ^[Yy]$ ]]; then
@@ -56,6 +64,11 @@ php artisan migrate:fresh --seed
 echo "Do you want the production environment? [Y/n]"
 read environment
 environment=${environment:-Y}
+if [[ $environment =~ ^[Yy]$ ]]; then
+  echo "Production environment"
+else
+  echo "Local environment"
+fi
 
 # Get the current folder
 folder=$(git rev-parse --show-toplevel)
@@ -79,13 +92,12 @@ fi
 # Check the user's choice
 if [[ $environment =~ ^[Nn]$ ]]; then
   sed -i "s/^APP_ENV=.*/APP_ENV=local/" .env
-  npm run dev
+  exec php "$folder"/artisan serve --host=0.0.0.0 --port=$port & npm run dev &
 else
   sed -i "s/^APP_ENV=.*/APP_ENV=production/" .env
   npm run build
+  exec php "$folder"/artisan serve --host=0.0.0.0 --port=$port &
 fi
 
-# Starts the application
-exec php "$folder"/artisan serve --host=0.0.0.0 --port=$port & 
 trap stop_commands INT
 wait
