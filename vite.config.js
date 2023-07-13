@@ -10,6 +10,7 @@ export default defineConfig({
               'resources/css/toggle.css',
               'resources/js/app.js',
               'resources/js/swiper.js',
+              'resources/js/dashboard.js',
               'resources/js/password.js',
               'resources/js/project_calendar.js',
               'resources/js/rating.js',
