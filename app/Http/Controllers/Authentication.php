@@ -52,7 +52,7 @@ class Authentication extends Controller
     }
     
     $request->session()->regenerate();
-    return redirect()->route('projects.index');
+    return redirect()->route('account.index');
   }
   
   public function signing_up(Request $request)
@@ -98,6 +98,6 @@ class Authentication extends Controller
 
     session()->flash("success", $this::ACCOUNT_CREATED);
 
-    return redirect()->route('projects.creator');
+    return redirect()->route('account.index');
   }
 }

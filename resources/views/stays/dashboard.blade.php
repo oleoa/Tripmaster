@@ -3,7 +3,10 @@
 @section('body')
   <input type="hidden" id="rents" value={{json_encode($rents)}}>
   <main class="grid grid-cols-2">
-    <h1 class="col-span-2">{{$stay->title}}</h1>
+    <h1 class="">{{$stay->title}}</h1>
+    <div class="text-end">
+      <a class="btn okay" href="{{route('stays.list')}}">@lang('My Stays')</a>
+    </div>
     <div id='calendar'></div>
     <div>
       <h2>@lang('Total Views'): {{$totalViews}}</h2>
