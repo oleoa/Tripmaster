@@ -533,6 +533,40 @@ class Stays extends Controller
     return redirect()->back();
   }
 
+  public function contactor($id)
+  {
+    $this->data->title('Contact Stay Owner');
+    $this->data->set('form_route', route('stays.contact', ['id' => $id]));
+    $this->data->set('go_back', route('stays.show', ['id' => $id]));
+    return $this->view('stays.contact');
+  }
+
+  public function contact(Request $request, $id)
+  {
+    $validated = $request->validate([
+      'subject' => 'required',
+      'message' => 'required'
+    ]);
+
+    $stay = StaysModel::find($id);
+    if(!$stay){
+      session()->flash('error', $this::STAY_404);
+      return redirect()->route('stays.list');
+    }
+
+    $user = Auth::user();
+
+    $notification = new Notifications();
+    $notification->user = $stay->owner;
+    $notification->date = now();
+    $notification->title = "New message from ".$user->name.".";
+    $notification->body = $validated['message'];
+    $notification->save();
+
+    session()->flash('success', $this::MESSAGE_SENT);
+    return redirect()->back();
+  }
+
   private function stay_exists_and_ur_the_owner($id)
   {
     $stay_exists = StaysModel::find($id);

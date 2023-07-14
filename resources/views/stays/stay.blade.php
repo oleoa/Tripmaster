@@ -26,6 +26,7 @@
       </div>
       <div>
         <a href="{{$backHref}}" class="btn okay">@lang('Back')</a>
+        <a href="{{route('stays.contactor', ['id' => $stay['id']])}}" class="btn okay">@lang('Contact')</a>
         <a href="{{route('stays.rent', ["id" => $stay['id']])}}" class="btn good">@lang('Rent')</a>
       </div>
     </div>

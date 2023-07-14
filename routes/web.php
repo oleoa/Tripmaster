@@ -130,6 +130,10 @@ Route::name('stays.')->group(function(){
 
   Route::put('/stays/edit/{id}', [Stays::class, 'edit'])->name('edit');
 
+  Route::get('/stays/contact/{id}', [Stays::class, 'contactor'])->name('contactor');
+
+  Route::post('/stays/contact/{id}', [Stays::class, 'contact'])->name('contact');
+
   Route::name('images.')->group(function(){
 
     Route::get('/stays/edit/images/{id}', [Stays::class, 'images_editor'])->name('editor');

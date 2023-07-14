@@ -83,6 +83,7 @@ class Controller extends BaseController
 
   // Contact us
   const CONTACT_US_SUCCESS_MESSAGE = "Your message has been sent successfully";
+  const MESSAGE_SENT = "Message sent successfully";
 
   // Reports
   const VIEW_REPORTED = "Review reported successfully";
